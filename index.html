@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panel Bot WA - Node.js & Unlimited RAM</title>
+<title>Panel Bot WA - Node.js v1 & v2 Unlimited RAM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -60,10 +60,10 @@
     justify-content: center;
   }
 
-  /* === BAGIAN KIRI (Info) === */
+  /* === BAGIAN KIRI (Info & Copywriting) === */
   .info-section {
     flex: 1;
-    max-width: 500px;
+    max-width: 520px;
     animation: slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   .badge {
@@ -71,32 +71,46 @@
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--neon);
     background: var(--neon-soft);
-    border: 1px solid rgba(0, 210, 255, 0.2);
-    padding: 6px 14px;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 7px 16px;
     border-radius: 99px;
     margin-bottom: 24px;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulseBadge 2s infinite;
   }
+  @keyframes pulseBadge {
+    0% { box-shadow: 0 0 15px rgba(0, 210, 255, 0.15); }
+    50% { box-shadow: 0 0 25px rgba(0, 210, 255, 0.4); }
+    100% { box-shadow: 0 0 15px rgba(0, 210, 255, 0.15); }
+  }
+
   .info-section h1 {
-    font-size: 46px;
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -1px;
-    margin-bottom: 16px;
+    font-size: 54px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 20px;
   }
   .info-section h1 span {
     color: var(--neon);
-    text-shadow: 0 0 25px var(--neon-glow);
+    text-shadow: 0 0 30px var(--neon-glow);
   }
-  .info-section p {
-    font-size: 16px;
-    color: var(--muted);
+  .info-section .subheadline {
+    font-size: 17px;
+    color: #a0aec0;
     line-height: 1.6;
     margin-bottom: 32px;
   }
+  .info-section .subheadline strong {
+    color: #fff;
+    font-weight: 600;
+  }
+  
   .features {
     display: flex;
     flex-direction: column;
@@ -105,15 +119,17 @@
   .feature-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    color: #b0bbd4;
+    gap: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #cbd5e1;
   }
   .feature-item svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     color: var(--neon);
     flex-shrink: 0;
+    filter: drop-shadow(0 0 8px var(--neon-glow));
   }
 
   /* === BAGIAN KANAN (Form) === */
@@ -125,7 +141,7 @@
     border-radius: 20px;
     padding: 36px 32px;
     box-shadow: 
-      0 25px 50px -12px rgba(0, 0, 0, 0.7),
+      0 25px 50px -12px rgba(0, 0, 0, 0.8),
       0 0 0 1px rgba(0, 210, 255, 0.05);
     position: relative;
     animation: slideLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -140,14 +156,27 @@
     to { opacity: 1; transform: translateX(0); }
   }
 
-  .form-header { margin-bottom: 24px; }
+  /* Mini Promo Banner di atas Form */
+  .promo-banner {
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent);
+    border-left: 3px solid var(--neon);
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #e2e8f0;
+  }
+  .promo-banner strong { color: var(--neon); }
+
+  .form-header { margin-bottom: 20px; }
   .form-header h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
   .form-header p { font-size: 13px; color: var(--muted); }
 
   .field { margin-bottom: 20px; }
   .field > label {
     display: block;
-    font-size: 12.5px; font-weight: 500; color: var(--muted);
+    font-size: 12.5px; font-weight: 600; color: var(--muted);
     margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
   }
 
@@ -233,15 +262,16 @@
   button {
     width: 100%; margin-top: 20px; padding: 15px;
     background: var(--neon); color: #001a1f;
-    font-weight: 700; font-size: 15px; font-family: inherit;
+    font-weight: 800; font-size: 15px; font-family: inherit;
     border: none; border-radius: 10px; cursor: pointer;
     transition: all 0.2s; letter-spacing: 0.3px;
     box-shadow: 0 0 20px -5px var(--neon-glow);
     position: relative; overflow: hidden;
+    text-transform: uppercase;
   }
   button:hover {
     background: var(--neon-hover);
-    box-shadow: 0 0 30px -5px rgba(0, 210, 255, 0.4);
+    box-shadow: 0 0 30px -5px rgba(0, 210, 255, 0.5);
     transform: translateY(-1px);
   }
   button:active { transform: scale(0.98); }
@@ -256,13 +286,28 @@
   button .ripple { background: rgba(255,255,255,0.4); }
   @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
 
-  /* === SECTION TESTIMONI === */
-  .testimonial-section {
-    width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 20px 80px;
+  /* === SECTION KENAPA PILIH KAMI (BARU) === */
+  .why-section {
+    width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 20px;
     border-top: 1px solid var(--border);
   }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .why-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 24px; border-radius: 16px; text-align: center;
+  }
+  .why-icon { font-size: 28px; margin-bottom: 12px; }
+  .why-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .why-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* === SECTION TESTIMONI === */
+  .testimonial-section {
+    width: 100%; max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px;
+  }
   .section-title { text-align: center; margin-bottom: 40px; }
-  .section-title h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+  .section-title h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; }
   .section-title p { font-size: 14px; color: var(--muted); }
   
   .testimonial-grid {
@@ -310,14 +355,13 @@
     .wrapper { flex-direction: column; gap: 40px; }
     
     .info-section { text-align: center; max-width: 100%; }
-    .info-section h1 { font-size: 34px; }
-    .info-section p { font-size: 14.5px; margin: 0 auto 24px auto; max-width: 90%; }
+    .info-section h1 { font-size: 38px; }
+    .info-section .subheadline { font-size: 15px; margin: 0 auto 24px auto; max-width: 90%; }
     .features { display: none; }
     
     .form-section { width: 100%; padding: 28px 20px; }
     
-    .testimonial-section { padding: 40px 16px 60px; }
-    .testimonial-grid { grid-template-columns: 1fr; }
+    .why-grid, .testimonial-grid { grid-template-columns: 1fr; }
     .section-title h2 { font-size: 22px; }
   }
 
@@ -333,32 +377,40 @@
   <div class="main-container">
     <div class="wrapper">
       
-      <!-- KIRI: Info Produk -->
+      <!-- KIRI: Info Produk & Copywriting -->
       <div class="info-section">
-        <div class="badge">UNLIMITED CUMA RP 2.000</div>
-        <h1>Panel Bot WA <br><span>Super Cepat.</span></h1>
-        <p>Layanan hosting bot WhatsApp otomatis dengan performa tinggi. Pilih versi Node.js dan kapasitas RAM sesuai kebutuhan Anda.</p>
+        <div class="badge">Promo Unlimited Cuma Rp 2.000</div>
+        <h1>Bikin Bot WA <br><span>Ngebut Tanpa Mikir.</span></h1>
+        <p class="subheadline">
+          Gak perlu jago coding buat punya bot WA yang anti lag. <strong>Pilih paketmu, bayar pakai receh, dan biarkan bot bekerja 24 jam nonstop.</strong>
+        </p>
         
         <div class="features">
           <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            <span>Node.js v1 & v2 tersedia</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>Support Node.js v1 & v2 (Paling Stabil)</span>
           </div>
           <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            <span>Harga mulai Rp 300 saja</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <span>Harga Mulai Rp 300 (Lebih Murah dari Kopi)</span>
           </div>
           <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-            <span>Aktivasi instan via WhatsApp</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            <span>Aktivasi Instan, Langsung Bisa Dipakai</span>
           </div>
         </div>
       </div>
 
       <!-- KANAN: Form Pemesanan -->
       <div class="form-section">
+        
+        <!-- Mini Promo Banner -->
+        <div class="promo-banner">
+          <strong>Diskon Spesial!</strong> Dapetin RAM <strong>Unlimited</strong> cuma dengan Rp 2.000 aja. Slot terbatas!
+        </div>
+
         <div class="form-header">
-          <h2>Buat Pesanan</h2>
+          <h2>Amankan Slotmu Sekarang</h2>
           <p>Isi data di bawah, pesanan langsung diteruskan ke admin.</p>
         </div>
 
@@ -369,7 +421,7 @@
           </div>
 
           <div class="field">
-            <label>Versi Node.js</label>
+            <label>Pilih Versi Node.js</label>
             <div class="node-group">
               <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
               <label><input type="radio" name="node" value="Node.js v2">Node.js v2</label>
@@ -401,10 +453,35 @@
             <div class="total-price" id="totalText">Rp 300</div>
           </div>
 
-          <button type="submit" id="submitBtn">Pesan via WhatsApp</button>
+          <button type="submit" id="submitBtn">Ambil Panel Sekarang</button>
         </form>
       </div>
 
+    </div>
+  </div>
+
+  <!-- SECTION KENAPA HARUS PILIH KAMI -->
+  <div class="why-section">
+    <div class="section-title">
+      <h2>Kenapa Harus Di Sini?</h2>
+      <p>Bukan cuma murah, tapi kualitasnya gak main-main.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h3>Anti Lag & Down</h3>
+        <p>Server kami dioptimalkan khusus buat bot WhatsApp. Gak gampang down meski dipakai 24 jam.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <h3>Aman & Privasi Terjaga</h3>
+        <p>Data kamu 100% aman. Gak ada namanya bot mati tiba-tiba atau data disalahgunakan.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <h3>Admin Fast Respon</h3>
+        <p>Bingung cara settingnya? Chat admin aja. Kami siap bantu sampai bot kamu jalan.</p>
+      </div>
     </div>
   </div>
 
@@ -537,7 +614,7 @@
 
   updateTotal(false);
 
-  // --- SUBMIT KE WA (FORMAT BARU PROFESIONAL) ---
+  // --- SUBMIT KE WA (INVOICE STYLE) ---
   form.addEventListener("submit", e => {
     e.preventDefault();
     const nama = document.getElementById("nama").value.trim();
@@ -563,7 +640,7 @@ Halo Admin, saya ingin memesan panel dengan detail sebagai berikut:
 Mohon dibantu untuk proses aktivasi panelnya ya Admin. Terima kasih!`;
 
     submitBtn.classList.add("loading");
-    submitBtn.textContent = "Mengarahkan...";
+    submitBtn.textContent = "Memproses...";
     showToast("Membuka WhatsApp");
 
     const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
@@ -571,7 +648,7 @@ Mohon dibantu untuk proses aktivasi panelnya ya Admin. Terima kasih!`;
     setTimeout(() => {
       window.open(url, "_blank");
       submitBtn.classList.remove("loading");
-      submitBtn.textContent = "Pesan via WhatsApp";
+      submitBtn.textContent = "Ambil Panel Sekarang";
     }, 400);
   });
 </script>
