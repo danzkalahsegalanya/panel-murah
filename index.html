@@ -6,122 +6,214 @@
 <title>Panel Bot WA</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0d10;
+    --card: #14171c;
+    --border: #232830;
+    --text: #e6e8eb;
+    --muted: #8a919c;
+    --accent: #25d366;
+    --accent-dark: #1da851;
+  }
   body {
-    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
-    background: #0f0f12; color: #e8e8ea;
-    min-height: 100vh; display: flex; justify-content: center;
-    padding: 24px 16px;
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: radial-gradient(ellipse at top, #12161b 0%, var(--bg) 70%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex; justify-content: center; align-items: flex-start;
+    padding: 32px 16px;
+    -webkit-font-smoothing: antialiased;
   }
   .card {
-    width: 100%; max-width: 460px;
-    background: #1a1a1f; border: 1px solid #2a2a33;
-    border-radius: 14px; padding: 24px;
+    width: 100%; max-width: 480px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px 24px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,.6);
   }
-  h1 { font-size: 20px; margin-bottom: 4px; }
-  .sub { font-size: 13px; color: #888; margin-bottom: 20px; }
 
-  label.field { display: block; font-size: 13px; margin: 16px 0 6px; color: #bbb; }
-  input, select {
-    width: 100%; padding: 11px 12px; font-size: 14px;
-    background: #0f0f12; border: 1px solid #2a2a33;
-    border-radius: 8px; color: #e8e8ea; outline: none;
+  /* Header */
+  .head { text-align: center; margin-bottom: 24px; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    color: var(--accent); background: rgba(37,211,102,.1);
+    border: 1px solid rgba(37,211,102,.25);
+    padding: 4px 10px; border-radius: 999px; margin-bottom: 12px;
+    letter-spacing: .3px;
   }
-  input:focus, select:focus { border-color: #4ade80; }
+  .head h1 { font-size: 22px; font-weight: 700; letter-spacing: -.3px; }
+  .head p { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
-  .node-group { display: flex; gap: 10px; margin-top: 6px; }
+  /* Field */
+  .field { margin-top: 18px; }
+  .field > label {
+    display: block; font-size: 12.5px; font-weight: 500;
+    color: var(--muted); margin-bottom: 8px; letter-spacing: .2px;
+  }
+  input[type="text"], input[type="tel"], select {
+    width: 100%; padding: 12px 14px; font-size: 14px;
+    background: #0f1216; color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px;
+    outline: none; transition: border-color .15s, box-shadow .15s;
+    font-family: inherit;
+  }
+  input:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37,211,102,.12);
+  }
+  input::placeholder { color: #4a515c; }
+
+  /* Node toggle */
+  .node-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .node-group label {
-    flex: 1; padding: 11px; text-align: center; font-size: 13px;
-    background: #0f0f12; border: 1px solid #2a2a33; border-radius: 8px;
-    cursor: pointer; transition: .15s;
+    position: relative; padding: 12px; text-align: center;
+    font-size: 13.5px; font-weight: 500;
+    background: #0f1216; border: 1px solid var(--border);
+    border-radius: 10px; cursor: pointer;
+    transition: all .15s; color: var(--muted);
   }
-  .node-group input { display: none; }
-  .node-group input:checked + span { color: #4ade80; }
-  .node-group label:has(input:checked) { border-color: #4ade80; background: #14251a; }
+  .node-group input { position: absolute; opacity: 0; pointer-events: none; }
+  .node-group label:hover { border-color: #2f3641; }
+  .node-group label:has(input:checked) {
+    border-color: var(--accent);
+    background: rgba(37,211,102,.08);
+    color: var(--text);
+  }
+  .node-group label:has(input:checked)::after {
+    content: "✓"; position: absolute; top: 8px; right: 10px;
+    font-size: 12px; color: var(--accent); font-weight: 700;
+  }
 
+  /* Total */
   .total {
-    margin-top: 20px; padding: 14px;
-    background: #0f0f12; border-radius: 8px;
+    margin-top: 22px; padding: 16px 18px;
+    background: linear-gradient(135deg, #0f1216, #12161b);
+    border: 1px solid var(--border);
+    border-radius: 12px;
     display: flex; justify-content: space-between; align-items: center;
   }
-  .total span:first-child { font-size: 13px; color: #888; }
-  .total span:last-child { font-size: 20px; font-weight: 700; color: #4ade80; }
-
-  button {
-    width: 100%; margin-top: 16px; padding: 13px;
-    background: #4ade80; color: #0f0f12; font-weight: 700; font-size: 15px;
-    border: none; border-radius: 8px; cursor: pointer; transition: .15s;
+  .total-label { font-size: 12.5px; color: var(--muted); }
+  .total-ram { font-size: 11.5px; color: #5a6169; margin-top: 3px; }
+  .total-price {
+    font-size: 22px; font-weight: 700; color: var(--accent);
+    letter-spacing: -.5px;
   }
-  button:hover { background: #22c55e; }
-  button:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+  /* Button */
+  button {
+    width: 100%; margin-top: 18px; padding: 14px;
+    background: var(--accent); color: #06210f;
+    font-weight: 700; font-size: 15px; font-family: inherit;
+    border: none; border-radius: 10px; cursor: pointer;
+    transition: background .15s, transform .05s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  button:hover { background: #2ee06f; }
+  button:active { transform: scale(.98); }
+  button svg { width: 18px; height: 18px; }
+
+  .foot {
+    text-align: center; font-size: 11.5px; color: #5a6169;
+    margin-top: 14px;
+  }
+
+  /* Mobile */
+  @media (max-width: 420px) {
+    .card { padding: 22px 18px 20px; }
+    .head h1 { font-size: 20px; }
+  }
 </style>
 </head>
 <body>
+
 <form class="card" id="orderForm">
-  <h1>Panel Bot WhatsApp</h1>
-  <p class="sub">Isi data, pesanan otomatis dikirim ke WhatsApp admin.</p>
-
-  <label class="field">Nama / Username</label>
-  <input type="text" id="nama" placeholder="contoh: budi123" required>
-
-  <label class="field">Nomor WhatsApp</label>
-  <input type="tel" id="wa" placeholder="08xxxxxxxxxx" required>
-
-  <label class="field">Pilih Node.js</label>
-  <div class="node-group">
-    <label><input type="radio" name="node" value="Node.js v1" checked><span>Node.js v1</span></label>
-    <label><input type="radio" name="node" value="Node.js v2"><span>Node.js v2</span></label>
+  <div class="head">
+    <span class="badge">⚡ Unlimited cuma Rp 2.000</span>
+    <h1>Panel Bot WhatsApp</h1>
+    <p>Isi data, pesanan langsung dikirim ke admin.</p>
   </div>
 
-  <label class="field">Pilih RAM</label>
-  <select id="ram" required>
-    <option value="1GB" data-harga="1000">1 GB — Rp 1.000</option>
-    <option value="2GB" data-harga="1500">2 GB — Rp 1.500</option>
-    <option value="3GB" data-harga="2000">3 GB — Rp 2.000</option>
-    <option value="4GB" data-harga="2500">4 GB — Rp 2.500</option>
-    <option value="5GB" data-harga="3000">5 GB — Rp 3.000</option>
-    <option value="6GB" data-harga="3500">6 GB — Rp 3.500</option>
-    <option value="7GB" data-harga="4000">7 GB — Rp 4.000</option>
-    <option value="8GB" data-harga="4500">8 GB — Rp 4.500</option>
-    <option value="9GB" data-harga="5000">9 GB — Rp 5.000</option>
-    <option value="10GB" data-harga="5500">10 GB — Rp 5.500</option>
-    <option value="Unlimited" data-harga="2000">Unlimited — Rp 2.000 ⚡</option>
-  </select>
+  <div class="field">
+    <label>Nama / Username</label>
+    <input type="text" id="nama" placeholder="contoh: budi123" required>
+  </div>
+
+  <div class="field">
+    <label>Nomor WhatsApp</label>
+    <input type="tel" id="wa" placeholder="08xxxxxxxxxx" required>
+  </div>
+
+  <div class="field">
+    <label>Versi Node.js</label>
+    <div class="node-group">
+      <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
+      <label><input type="radio" name="node" value="Node.js v2">Node.js v2</label>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Pilih RAM</label>
+    <select id="ram" required>
+      <option value="1GB"  data-harga="300">1 GB — Rp 300</option>
+      <option value="2GB"  data-harga="450">2 GB — Rp 450</option>
+      <option value="3GB"  data-harga="600">3 GB — Rp 600</option>
+      <option value="4GB"  data-harga="750">4 GB — Rp 750</option>
+      <option value="5GB"  data-harga="900">5 GB — Rp 900</option>
+      <option value="6GB"  data-harga="1050">6 GB — Rp 1.050</option>
+      <option value="7GB"  data-harga="1200">7 GB — Rp 1.200</option>
+      <option value="8GB"  data-harga="1350">8 GB — Rp 1.350</option>
+      <option value="9GB"  data-harga="1500">9 GB — Rp 1.500</option>
+      <option value="10GB" data-harga="1700">10 GB — Rp 1.700</option>
+      <option value="Unlimited" data-harga="2000">Unlimited — Rp 2.000 ⚡</option>
+    </select>
+  </div>
 
   <div class="total">
-    <span>Total Bayar</span>
-    <span id="totalText">Rp 1.000</span>
+    <div>
+      <div class="total-label">Total Bayar</div>
+      <div class="total-ram" id="ramInfo">RAM 1 GB · Node.js v1</div>
+    </div>
+    <div class="total-price" id="totalText">Rp 300</div>
   </div>
 
-  <button type="submit">Pesan via WhatsApp</button>
+  <button type="submit">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.4 4.7 2.6 1.1 3.2.9 3.8.8.6-.1 1.9-.8 2.1-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.7 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+    Pesan via WhatsApp
+  </button>
+
+  <p class="foot">Pesanan otomatis terkirim ke admin · Bayar setelah konfirmasi</p>
 </form>
 
 <script>
   const ADMIN_WA = "6288906198025";
-  const form = document.getElementById("orderForm");
+  const form   = document.getElementById("orderForm");
   const ramSel = document.getElementById("ram");
   const totalText = document.getElementById("totalText");
+  const ramInfo   = document.getElementById("ramInfo");
 
-  function rupiah(n) {
-    return "Rp " + n.toLocaleString("id-ID");
-  }
+  const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 
   function hitungTotal() {
     const opt = ramSel.selectedOptions[0];
     const harga = parseInt(opt.dataset.harga, 10);
+    const node  = form.querySelector('input[name="node"]:checked').value;
     totalText.textContent = rupiah(harga);
-    return { ram: opt.value, harga };
+    ramInfo.textContent = `RAM ${opt.value} · ${node}`;
+    return { ram: opt.value, harga, node };
   }
 
   ramSel.addEventListener("change", hitungTotal);
+  form.querySelectorAll('input[name="node"]').forEach(r =>
+    r.addEventListener("change", hitungTotal)
+  );
   hitungTotal();
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", e => {
     e.preventDefault();
-
     const nama = document.getElementById("nama").value.trim();
-    const wa = document.getElementById("wa").value.trim();
-    const node = form.querySelector('input[name="node"]:checked').value;
-    const { ram, harga } = hitungTotal();
+    const wa   = document.getElementById("wa").value.trim();
+    const { ram, harga, node } = hitungTotal();
 
     if (!nama || !wa) {
       alert("Nama dan nomor WhatsApp wajib diisi.");
@@ -131,12 +223,12 @@
     const pesan =
 `Halo Admin, saya mau order Panel Bot WA.
 
-📋 *DETAIL PESANAN*
-• Nama      : ${nama}
-• No. WA    : ${wa}
-• Node      : ${node}
-• RAM       : ${ram}
-• Total     : ${rupiah(harga)}
+📋 DETAIL PESANAN
+• Nama    : ${nama}
+• No. WA  : ${wa}
+• Node    : ${node}
+• RAM     : ${ram}
+• Total   : ${rupiah(harga)}
 
 Mohon diproses ya. Terima kasih.`;
 
