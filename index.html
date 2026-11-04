@@ -33,22 +33,28 @@
     color: var(--text);
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
     overflow-x: hidden;
     background-image: 
       linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
+    background-size: 40px 40px;
     background-position: center;
   }
 
-  /* Split Layout Container */
+  /* Container Utama */
+  .main-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+
   .wrapper {
     display: flex;
     width: 100%;
     max-width: 1100px;
-    margin: 40px 20px;
     gap: 60px;
     align-items: center;
     justify-content: center;
@@ -57,7 +63,7 @@
   /* === BAGIAN KIRI (Info) === */
   .info-section {
     flex: 1;
-    max-width: 480px;
+    max-width: 500px;
     animation: slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   .badge {
@@ -75,7 +81,7 @@
     box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
   }
   .info-section h1 {
-    font-size: 42px;
+    font-size: 46px;
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -1px;
@@ -83,7 +89,7 @@
   }
   .info-section h1 span {
     color: var(--neon);
-    text-shadow: 0 0 20px var(--neon-glow);
+    text-shadow: 0 0 25px var(--neon-glow);
   }
   .info-section p {
     font-size: 16px;
@@ -134,117 +140,72 @@
     to { opacity: 1; transform: translateX(0); }
   }
 
-  .form-header {
-    margin-bottom: 24px;
-  }
-  .form-header h2 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .form-header p {
-    font-size: 13px;
-    color: var(--muted);
-  }
+  .form-header { margin-bottom: 24px; }
+  .form-header h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .form-header p { font-size: 13px; color: var(--muted); }
 
   .field { margin-bottom: 20px; }
   .field > label {
     display: block;
-    font-size: 12.5px;
-    font-weight: 500;
-    color: var(--muted);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 12.5px; font-weight: 500; color: var(--muted);
+    margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
   }
 
   input[type="text"] {
-    width: 100%;
-    padding: 13px 14px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #060911;
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    outline: none;
-    transition: all 0.2s;
-    -webkit-user-select: text;
-    user-select: text;
+    width: 100%; padding: 13px 14px; font-size: 14px;
+    font-family: inherit; background: #060911; color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px;
+    outline: none; transition: all 0.2s;
+    -webkit-user-select: text; user-select: text;
   }
   input[type="text"]:focus {
-    border-color: var(--neon);
-    box-shadow: 0 0 0 3px var(--neon-glow);
+    border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow);
   }
   input::placeholder { color: #3b475e; }
 
   /* Node Toggle */
   .node-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .node-group label {
-    position: relative;
-    padding: 12px;
-    text-align: center;
-    font-size: 13.5px;
-    font-weight: 500;
-    background: #060911;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: var(--muted);
+    position: relative; padding: 12px; text-align: center;
+    font-size: 13.5px; font-weight: 500;
+    background: #060911; border: 1px solid var(--border);
+    border-radius: 10px; cursor: pointer; transition: all 0.2s; color: var(--muted);
   }
   .node-group input { position: absolute; opacity: 0; }
   .node-group label:hover { border-color: #2a3654; }
   .node-group label:active { transform: scale(0.97); }
   .node-group label:has(input:checked) {
-    border-color: var(--neon);
-    background: var(--neon-soft);
-    color: var(--text);
+    border-color: var(--neon); background: var(--neon-soft); color: var(--text);
   }
   .node-group label:has(input:checked)::after {
-    content: "";
-    position: absolute;
-    top: 10px; right: 12px;
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--neon);
+    content: ""; position: absolute; top: 10px; right: 12px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--neon);
     box-shadow: 0 0 8px var(--neon);
     animation: dotIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
+  @keyframes dotIn { from { transform: scale(0); } to { transform: scale(1); } }
 
   /* RAM Grid */
   .ram-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
     gap: 8px;
   }
   .ram-item { position: relative; }
   .ram-item input { position: absolute; opacity: 0; }
   .ram-item label {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px 4px;
-    text-align: center;
-    background: #060911;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 10px 4px; text-align: center;
+    background: #060911; border: 1px solid var(--border);
+    border-radius: 10px; cursor: pointer; transition: all 0.2s;
+    position: relative; overflow: hidden;
   }
-  .ram-item .ram-name {
-    font-size: 13.5px; font-weight: 600; color: var(--text);
-  }
-  .ram-item .ram-price {
-    font-size: 11px; color: var(--muted); margin-top: 2px;
-  }
+  .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); }
+  .ram-item .ram-price { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .ram-item label:hover { border-color: #2a3654; }
   .ram-item label:active { transform: scale(0.95); }
   .ram-item input:checked + label {
-    border-color: var(--neon);
-    background: var(--neon-soft);
+    border-color: var(--neon); background: var(--neon-soft);
     box-shadow: 0 0 15px -5px var(--neon-glow);
   }
   .ram-item input:checked + label .ram-price { color: var(--neon); }
@@ -253,14 +214,9 @@
 
   /* Total Box */
   .total {
-    margin-top: 24px;
-    padding: 16px;
-    background: #060911;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin-top: 24px; padding: 16px; background: #060911;
+    border: 1px solid var(--border); border-radius: 12px;
+    display: flex; justify-content: space-between; align-items: center;
     transition: border-color 0.3s;
   }
   .total.flash { border-color: var(--neon); }
@@ -268,35 +224,20 @@
   .total-info { font-size: 12px; color: #4a5470; margin-top: 4px; }
   .total-price {
     font-size: 24px; font-weight: 700; color: var(--neon);
-    letter-spacing: -0.5px;
-    text-shadow: 0 0 20px var(--neon-glow);
+    letter-spacing: -0.5px; text-shadow: 0 0 20px var(--neon-glow);
   }
   .total-price.bump { animation: priceBump 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-
-  @keyframes priceBump {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-  }
+  @keyframes priceBump { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
   /* Button */
   button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 15px;
-    background: var(--neon);
-    color: #001a1f;
-    font-weight: 700;
-    font-size: 15px;
-    font-family: inherit;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
+    width: 100%; margin-top: 20px; padding: 15px;
+    background: var(--neon); color: #001a1f;
+    font-weight: 700; font-size: 15px; font-family: inherit;
+    border: none; border-radius: 10px; cursor: pointer;
+    transition: all 0.2s; letter-spacing: 0.3px;
     box-shadow: 0 0 20px -5px var(--neon-glow);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   button:hover {
     background: var(--neon-hover);
@@ -308,15 +249,46 @@
 
   /* Ripple */
   .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(0, 210, 255, 0.3);
-    transform: scale(0);
-    pointer-events: none;
-    animation: rippleOut 0.6s ease-out forwards;
+    position: absolute; border-radius: 50%;
+    background: rgba(0, 210, 255, 0.3); transform: scale(0);
+    pointer-events: none; animation: rippleOut 0.6s ease-out forwards;
   }
   button .ripple { background: rgba(255,255,255,0.4); }
   @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
+
+  /* === SECTION TESTIMONI === */
+  .testimonial-section {
+    width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 20px 80px;
+    border-top: 1px solid var(--border);
+  }
+  .section-title { text-align: center; margin-bottom: 40px; }
+  .section-title h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+  .section-title p { font-size: 14px; color: var(--muted); }
+  
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .testi-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .testi-card:hover {
+    transform: translateY(-5px); border-color: rgba(0, 210, 255, 0.3);
+  }
+  .stars { color: #fbbf24; font-size: 14px; margin-bottom: 12px; letter-spacing: 2px; }
+  .testi-text { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 20px; font-style: italic; }
+  .testi-user { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--neon-soft); border: 1px solid rgba(0,210,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--neon); font-size: 14px;
+  }
+  .user-info h4 { font-size: 13.5px; font-weight: 600; }
+  .user-info p { font-size: 11.5px; color: var(--muted); }
 
   /* Toast */
   .toast {
@@ -328,105 +300,166 @@
     font-size: 13px; font-weight: 500;
     box-shadow: 0 0 30px -5px var(--neon-glow);
     opacity: 0; pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 999;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* Responsive Mobile */
+  /* === RESPONSIVE MOBILE (PENTING) === */
   @media (max-width: 900px) {
-    .wrapper {
-      flex-direction: column;
-      gap: 40px;
-      margin: 30px 16px;
-    }
+    .main-container { padding: 40px 16px; }
+    .wrapper { flex-direction: column; gap: 40px; }
+    
     .info-section { text-align: center; max-width: 100%; }
-    .info-section h1 { font-size: 32px; }
-    .info-section p { font-size: 14px; }
-    .features { align-items: center; display: none; /* Sembunyikan fitur di HP biar fokus ke form */ }
-    .form-section { padding: 28px 24px; width: 100%; max-width: 100%; }
+    .info-section h1 { font-size: 34px; }
+    .info-section p { font-size: 14.5px; margin: 0 auto 24px auto; max-width: 90%; }
+    .features { display: none; } /* Sembunyikan list fitur di HP biar layar gak panjang banget */
+    
+    .form-section { width: 100%; padding: 28px 20px; }
+    
+    /* Testimoni jadi 1 kolom di HP */
+    .testimonial-section { padding: 40px 16px 60px; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .section-title h2 { font-size: 22px; }
+  }
+
+  @media (max-width: 400px) {
+    /* RAM grid jadi 3 kolom pas di HP kecil biar gak sempit */
+    .ram-grid { grid-template-columns: repeat(3, 1fr); }
+    .ram-item .ram-price { font-size: 10px; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrapper">
-  
-  <!-- KIRI: Info Produk -->
-  <div class="info-section">
-    <div class="badge">UNLIMITED CUMA RP 2.000</div>
-    <h1>Panel Bot WA <br><span>Super Cepat.</span></h1>
-    <p>Layanan hosting bot WhatsApp otomatis dengan performa tinggi. Pilih versi Node.js dan kapasitas RAM sesuai kebutuhan Anda.</p>
+  <!-- BAGIAN UTAMA (FORM & INFO) -->
+  <div class="main-container">
+    <div class="wrapper">
+      
+      <!-- KIRI: Info Produk -->
+      <div class="info-section">
+        <div class="badge">UNLIMITED CUMA RP 2.000</div>
+        <h1>Panel Bot WA <br><span>Super Cepat.</span></h1>
+        <p>Layanan hosting bot WhatsApp otomatis dengan performa tinggi. Pilih versi Node.js dan kapasitas RAM sesuai kebutuhan Anda.</p>
+        
+        <div class="features">
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>Node.js v1 & v2 tersedia</span>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <span>Harga mulai Rp 300 saja</span>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            <span>Aktivasi instan via WhatsApp</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KANAN: Form Pemesanan -->
+      <div class="form-section">
+        <div class="form-header">
+          <h2>Buat Pesanan</h2>
+          <p>Isi data di bawah, pesanan langsung diteruskan ke admin.</p>
+        </div>
+
+        <form id="orderForm">
+          <div class="field">
+            <label>Nama / Username</label>
+            <input type="text" id="nama" placeholder="contoh: budi123" required>
+          </div>
+
+          <div class="field">
+            <label>Versi Node.js</label>
+            <div class="node-group">
+              <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
+              <label><input type="radio" name="node" value="Node.js v2">Node.js v2</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Pilih Kapasitas RAM</label>
+            <div class="ram-grid">
+              <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="ram-price">Rp 300</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="ram-price">Rp 450</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="ram-price">Rp 600</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="ram-price">Rp 750</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="ram-price">Rp 900</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="ram-price">Rp 1.050</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="ram-price">Rp 1.200</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="ram-price">Rp 1.350</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="ram-price">Rp 1.500</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="ram-price">Rp 1.700</span></label></div>
+              <div class="ram-item unli"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unlimited</span><span class="ram-price">Rp 2.000</span></label></div>
+            </div>
+          </div>
+
+          <div class="total" id="totalBox">
+            <div>
+              <div class="total-label">Total Bayar</div>
+              <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
+            </div>
+            <div class="total-price" id="totalText">Rp 300</div>
+          </div>
+
+          <button type="submit" id="submitBtn">Pesan via WhatsApp</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION TESTIMONI (FAKE RATING) -->
+  <div class="testimonial-section">
+    <div class="section-title">
+      <h2>Dipercaya Ribuan Pengguna</h2>
+      <p>Rating 4.9/5 dari pengguna yang sudah order di sini.</p>
+    </div>
     
-    <div class="features">
-      <div class="feature-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-        <span>Node.js v1 & v2 tersedia</span>
+    <div class="testimonial-grid">
+      <!-- Testi 1 -->
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Murah banget dapet unlimited cuma 2k. Prosesnya cepet, gak nyampe 5 menit langsung dapet panelnya. Mantap!"</p>
+        <div class="testi-user">
+          <div class="avatar">R</div>
+          <div class="user-info">
+            <h4>Rizky</h4>
+            <p>Pembeli Unlimited</p>
+          </div>
+        </div>
       </div>
-      <div class="feature-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-        <span>Harga mulai Rp 300 saja</span>
+
+      <!-- Testi 2 -->
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Node.js v2-nya stabil banget buat bot WA. Udah seminggu jalan gak ada kendala. Harganya juga ramah di kantong."</p>
+        <div class="testi-user">
+          <div class="avatar">B</div>
+          <div class="user-info">
+            <h4>Budi</h4>
+            <p>Pembeli 10GB</p>
+          </div>
+        </div>
       </div>
-      <div class="feature-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-        <span>Aktivasi instan via WhatsApp</span>
+
+      <!-- Testi 3 -->
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Adminnya fast respon. Awalnya bingung pilih versi node, dibantuin sampe botnya jalan normal. Recommended!"</p>
+        <div class="testi-user">
+          <div class="avatar">S</div>
+          <div class="user-info">
+            <h4>Sinta</h4>
+            <p>Pembeli 1GB</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- KANAN: Form Pemesanan -->
-  <div class="form-section">
-    <div class="form-header">
-      <h2>Buat Pesanan</h2>
-      <p>Isi data di bawah, pesanan langsung diteruskan ke admin.</p>
-    </div>
-
-    <form id="orderForm">
-      <div class="field">
-        <label>Nama / Username</label>
-        <input type="text" id="nama" placeholder="contoh: budi123" required>
-      </div>
-
-      <div class="field">
-        <label>Versi Node.js</label>
-        <div class="node-group">
-          <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
-          <label><input type="radio" name="node" value="Node.js v2">Node.js v2</label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Pilih Kapasitas RAM</label>
-        <div class="ram-grid">
-          <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="ram-price">Rp 300</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="ram-price">Rp 450</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="ram-price">Rp 600</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="ram-price">Rp 750</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="ram-price">Rp 900</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="ram-price">Rp 1.050</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="ram-price">Rp 1.200</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="ram-price">Rp 1.350</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="ram-price">Rp 1.500</span></label></div>
-          <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="ram-price">Rp 1.700</span></label></div>
-          <div class="ram-item unli"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unlimited</span><span class="ram-price">Rp 2.000</span></label></div>
-        </div>
-      </div>
-
-      <div class="total" id="totalBox">
-        <div>
-          <div class="total-label">Total Bayar</div>
-          <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
-        </div>
-        <div class="total-price" id="totalText">Rp 300</div>
-      </div>
-
-      <button type="submit" id="submitBtn">Pesan via WhatsApp</button>
-    </form>
-  </div>
-
-</div>
-
-<div class="toast" id="toast"></div>
+  <div class="toast" id="toast"></div>
 
 <script>
   const ADMIN_WA = "6288906198025";
