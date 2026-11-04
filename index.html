@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panel Bot WA</title>
+<title>Panel Bot WA - Node.js & Unlimited RAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #06080f;
-    --card: #0d1220;
-    --border: #1c2540;
-    --text: #e6ecf7;
-    --muted: #6e7a94;
-    --neon: #00e5ff;
-    --neon-glow: rgba(0, 229, 255, .18);
-    --neon-soft: rgba(0, 229, 255, .08);
+    --bg: #05080f;
+    --card: #0b101c;
+    --border: #1a2338;
+    --text: #f0f4f8;
+    --muted: #8492b0;
+    --neon: #00d2ff;
+    --neon-hover: #33ddff;
+    --neon-glow: rgba(0, 210, 255, 0.15);
+    --neon-soft: rgba(0, 210, 255, 0.08);
   }
+
   html, body {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -23,75 +28,147 @@
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
-  }
-  body {
-    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
-    background:
-      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,229,255,.08) 0%, transparent 60%),
-      var(--bg);
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    display: flex; justify-content: center; align-items: flex-start;
-    padding: 32px 16px;
-    -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    background-image: 
+      linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: center;
   }
-  .card {
-    width: 100%; max-width: 500px;
+
+  /* Split Layout Container */
+  .wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    margin: 40px 20px;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* === BAGIAN KIRI (Info) === */
+  .info-section {
+    flex: 1;
+    max-width: 480px;
+    animation: slideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--neon);
+    background: var(--neon-soft);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 99px;
+    margin-bottom: 24px;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
+  }
+  .info-section h1 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .info-section h1 span {
+    color: var(--neon);
+    text-shadow: 0 0 20px var(--neon-glow);
+  }
+  .info-section p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #b0bbd4;
+  }
+  .feature-item svg {
+    width: 20px;
+    height: 20px;
+    color: var(--neon);
+    flex-shrink: 0;
+  }
+
+  /* === BAGIAN KANAN (Form) === */
+  .form-section {
+    flex: 1;
+    max-width: 460px;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px 24px 24px;
-    box-shadow: 0 0 0 1px rgba(0,229,255,.03), 0 20px 50px -20px rgba(0,0,0,.8);
-    animation: cardIn .5s cubic-bezier(.2,.8,.2,1) both;
-  }
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Field enter animation */
-  .field {
-    margin-top: 20px;
-    animation: fieldIn .45s cubic-bezier(.2,.8,.2,1) both;
-  }
-  .field:nth-of-type(1) { animation-delay: .08s; }
-  .field:nth-of-type(2) { animation-delay: .16s; }
-  .field:nth-of-type(3) { animation-delay: .24s; }
-  .field:nth-of-type(4) { animation-delay: .32s; }
-  @keyframes fieldIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(0, 210, 255, 0.05);
+    position: relative;
+    animation: slideLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  /* Header */
-  .head { text-align: center; margin-bottom: 22px; }
-  .badge {
-    display: inline-block; font-size: 11px; font-weight: 600;
-    color: var(--neon); background: var(--neon-soft);
-    border: 1px solid rgba(0,229,255,.3);
-    padding: 5px 12px; border-radius: 999px; margin-bottom: 14px;
-    letter-spacing: .4px;
-    box-shadow: 0 0 20px -4px var(--neon-glow);
-    animation: badgePulse 3s ease-in-out infinite;
+  @keyframes slideRight {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
   }
-  @keyframes badgePulse {
-    0%, 100% { box-shadow: 0 0 20px -4px var(--neon-glow); }
-    50%      { box-shadow: 0 0 28px -2px rgba(0,229,255,.35); }
+  @keyframes slideLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
   }
-  .head h1 { font-size: 23px; font-weight: 700; letter-spacing: -.4px; }
-  .head p { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
+  .form-header {
+    margin-bottom: 24px;
+  }
+  .form-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .form-header p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .field { margin-bottom: 20px; }
   .field > label {
-    display: block; font-size: 12.5px; font-weight: 500;
-    color: var(--muted); margin-bottom: 9px; letter-spacing: .3px;
+    display: block;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 8px;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
+
   input[type="text"] {
-    width: 100%; padding: 13px 14px; font-size: 14px;
-    background: #080b14; color: var(--text);
-    border: 1px solid var(--border); border-radius: 10px;
-    outline: none; transition: border-color .15s, box-shadow .15s;
+    width: 100%;
+    padding: 13px 14px;
+    font-size: 14px;
     font-family: inherit;
+    background: #060911;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.2s;
     -webkit-user-select: text;
     user-select: text;
   }
@@ -99,301 +176,311 @@
     border-color: var(--neon);
     box-shadow: 0 0 0 3px var(--neon-glow);
   }
-  input::placeholder { color: #3d4659; }
+  input::placeholder { color: #3b475e; }
 
-  /* Node toggle */
+  /* Node Toggle */
   .node-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .node-group label {
-    position: relative; padding: 13px; text-align: center;
-    font-size: 13.5px; font-weight: 500;
-    background: #080b14; border: 1px solid var(--border);
-    border-radius: 10px; cursor: pointer;
-    transition: all .2s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+    padding: 12px;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 500;
+    background: #060911;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
     color: var(--muted);
   }
-  .node-group input { position: absolute; opacity: 0; pointer-events: none; }
+  .node-group input { position: absolute; opacity: 0; }
   .node-group label:hover { border-color: #2a3654; }
-  .node-group label:active { transform: scale(.97); }
+  .node-group label:active { transform: scale(0.97); }
   .node-group label:has(input:checked) {
     border-color: var(--neon);
     background: var(--neon-soft);
     color: var(--text);
-    box-shadow: 0 0 20px -6px var(--neon-glow);
-    transform: translateY(-1px);
   }
   .node-group label:has(input:checked)::after {
-    content: ""; position: absolute; top: 9px; right: 11px;
-    width: 7px; height: 7px; border-radius: 50%;
+    content: "";
+    position: absolute;
+    top: 10px; right: 12px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
     background: var(--neon);
     box-shadow: 0 0 8px var(--neon);
-    animation: dotIn .3s cubic-bezier(.2,.8,.2,1) both;
-  }
-  @keyframes dotIn {
-    from { transform: scale(0); opacity: 0; }
-    to   { transform: scale(1); opacity: 1; }
+    animation: dotIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   /* RAM Grid */
   .ram-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
-    gap: 9px;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 8px;
   }
   .ram-item { position: relative; }
-  .ram-item input {
-    position: absolute; opacity: 0; pointer-events: none;
-  }
+  .ram-item input { position: absolute; opacity: 0; }
   .ram-item label {
-    display: block; padding: 12px 6px; text-align: center;
-    background: #080b14; border: 1px solid var(--border);
-    border-radius: 10px; cursor: pointer;
-    transition: all .22s cubic-bezier(.2,.8,.2,1);
-    position: relative; overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 4px;
+    text-align: center;
+    background: #060911;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
   }
   .ram-item .ram-name {
-    display: block; font-size: 13.5px; font-weight: 600;
-    color: var(--text); letter-spacing: -.2px;
-    transition: color .2s;
+    font-size: 13.5px; font-weight: 600; color: var(--text);
   }
   .ram-item .ram-price {
-    display: block; font-size: 11px; color: var(--muted);
-    margin-top: 3px; transition: color .2s;
+    font-size: 11px; color: var(--muted); margin-top: 2px;
   }
-  .ram-item label:hover { border-color: #2a3654; transform: translateY(-1px); }
-  .ram-item label:active { transform: scale(.96); }
+  .ram-item label:hover { border-color: #2a3654; }
+  .ram-item label:active { transform: scale(0.95); }
   .ram-item input:checked + label {
     border-color: var(--neon);
     background: var(--neon-soft);
-    box-shadow: 0 0 20px -6px var(--neon-glow);
-    transform: translateY(-2px);
+    box-shadow: 0 0 15px -5px var(--neon-glow);
   }
   .ram-item input:checked + label .ram-price { color: var(--neon); }
-  .ram-item.unli label { border-color: rgba(0,229,255,.25); }
+  .ram-item.unli label { border-color: rgba(0, 210, 255, 0.2); }
   .ram-item.unli .ram-name { color: var(--neon); }
 
-  /* Ripple feedback */
-  .ram-item label .ripple,
-  .node-group label .ripple {
-    position: absolute; border-radius: 50%;
-    background: rgba(0,229,255,.35);
-    transform: scale(0); pointer-events: none;
-    animation: rippleOut .55s ease-out forwards;
-  }
-  @keyframes rippleOut {
-    to { transform: scale(3.5); opacity: 0; }
-  }
-
-  /* Total */
+  /* Total Box */
   .total {
-    margin-top: 22px; padding: 16px 18px;
-    background: linear-gradient(135deg, #080b14, #0b101e);
+    margin-top: 24px;
+    padding: 16px;
+    background: #060911;
     border: 1px solid var(--border);
     border-radius: 12px;
-    display: flex; justify-content: space-between; align-items: center;
-    transition: border-color .25s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.3s;
   }
   .total.flash { border-color: var(--neon); }
-  .total-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .3px; }
-  .total-info { font-size: 11.5px; color: #4a5470; margin-top: 4px; transition: color .25s; }
+  .total-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;}
+  .total-info { font-size: 12px; color: #4a5470; margin-top: 4px; }
   .total-price {
-    font-size: 22px; font-weight: 700; color: var(--neon);
-    letter-spacing: -.5px;
+    font-size: 24px; font-weight: 700; color: var(--neon);
+    letter-spacing: -0.5px;
     text-shadow: 0 0 20px var(--neon-glow);
-    transition: transform .25s cubic-bezier(.2,.8,.2,1);
   }
-  .total-price.bump { animation: priceBump .35s cubic-bezier(.2,.8,.2,1); }
+  .total-price.bump { animation: priceBump 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
   @keyframes priceBump {
-    0%   { transform: scale(1); }
-    45%  { transform: scale(1.12); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
     100% { transform: scale(1); }
   }
 
   /* Button */
   button {
-    width: 100%; margin-top: 18px; padding: 14px;
-    background: var(--neon); color: #001a1f;
-    font-weight: 700; font-size: 15px; font-family: inherit;
-    border: none; border-radius: 10px; cursor: pointer;
-    transition: all .2s cubic-bezier(.2,.8,.2,1);
-    letter-spacing: .3px;
-    box-shadow: 0 0 24px -6px var(--neon-glow);
-    position: relative; overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--neon);
+    color: #001a1f;
+    font-weight: 700;
+    font-size: 15px;
+    font-family: inherit;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+    box-shadow: 0 0 20px -5px var(--neon-glow);
+    position: relative;
+    overflow: hidden;
   }
   button:hover {
-    background: #33ebff;
-    box-shadow: 0 0 32px -4px rgba(0,229,255,.4);
+    background: var(--neon-hover);
+    box-shadow: 0 0 30px -5px rgba(0, 210, 255, 0.4);
     transform: translateY(-1px);
   }
-  button:active { transform: scale(.975); }
-  button.loading { pointer-events: none; opacity: .85; }
-  button .ripple {
-    position: absolute; border-radius: 50%;
-    background: rgba(255,255,255,.5);
-    transform: scale(0); pointer-events: none;
-    animation: rippleOut .55s ease-out forwards;
-  }
+  button:active { transform: scale(0.98); }
+  button.loading { pointer-events: none; opacity: 0.8; }
 
-  .foot {
-    text-align: center; font-size: 11.5px; color: #4a5470;
-    margin-top: 14px;
+  /* Ripple */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 210, 255, 0.3);
+    transform: scale(0);
+    pointer-events: none;
+    animation: rippleOut 0.6s ease-out forwards;
   }
+  button .ripple { background: rgba(255,255,255,0.4); }
+  @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
 
-  @media (max-width: 420px) {
-    .card { padding: 22px 18px 20px; }
-    .head h1 { font-size: 20px; }
-    .ram-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  /* Toast feedback */
+  /* Toast */
   .toast {
-    position: fixed; bottom: 24px; left: 50%;
+    position: fixed; bottom: 30px; left: 50%;
     transform: translateX(-50%) translateY(20px);
-    background: #0d1220; color: var(--neon);
-    border: 1px solid rgba(0,229,255,.3);
-    padding: 11px 18px; border-radius: 10px;
+    background: #0b101c; color: var(--neon);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 12px 20px; border-radius: 10px;
     font-size: 13px; font-weight: 500;
-    box-shadow: 0 0 30px -6px var(--neon-glow);
+    box-shadow: 0 0 30px -5px var(--neon-glow);
     opacity: 0; pointer-events: none;
-    transition: opacity .25s, transform .25s;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 999;
   }
-  .toast.show {
-    opacity: 1; transform: translateX(-50%) translateY(0);
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Responsive Mobile */
+  @media (max-width: 900px) {
+    .wrapper {
+      flex-direction: column;
+      gap: 40px;
+      margin: 30px 16px;
+    }
+    .info-section { text-align: center; max-width: 100%; }
+    .info-section h1 { font-size: 32px; }
+    .info-section p { font-size: 14px; }
+    .features { align-items: center; display: none; /* Sembunyikan fitur di HP biar fokus ke form */ }
+    .form-section { padding: 28px 24px; width: 100%; max-width: 100%; }
   }
 </style>
 </head>
 <body>
 
-<form class="card" id="orderForm">
-  <div class="head">
-    <span class="badge">UNLIMITED CUMA RP 2.000</span>
-    <h1>Panel Bot WhatsApp</h1>
-    <p>Isi data, pesanan langsung dikirim ke admin.</p>
-  </div>
-
-  <div class="field">
-    <label>Nama / Username</label>
-    <input type="text" id="nama" placeholder="contoh: budi123" required>
-  </div>
-
-  <div class="field">
-    <label>Versi Node.js</label>
-    <div class="node-group">
-      <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
-      <label><input type="radio" name="node" value="Node.js v2">Node.js v2</label>
+<div class="wrapper">
+  
+  <!-- KIRI: Info Produk -->
+  <div class="info-section">
+    <div class="badge">UNLIMITED CUMA RP 2.000</div>
+    <h1>Panel Bot WA <br><span>Super Cepat.</span></h1>
+    <p>Layanan hosting bot WhatsApp otomatis dengan performa tinggi. Pilih versi Node.js dan kapasitas RAM sesuai kebutuhan Anda.</p>
+    
+    <div class="features">
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span>Node.js v1 & v2 tersedia</span>
+      </div>
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <span>Harga mulai Rp 300 saja</span>
+      </div>
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        <span>Aktivasi instan via WhatsApp</span>
+      </div>
     </div>
   </div>
 
-  <div class="field">
-    <label>Pilih RAM</label>
-    <div class="ram-grid" id="ramGrid">
-      <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="ram-price">Rp 300</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="ram-price">Rp 450</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="ram-price">Rp 600</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="ram-price">Rp 750</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="ram-price">Rp 900</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="ram-price">Rp 1.050</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="ram-price">Rp 1.200</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="ram-price">Rp 1.350</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="ram-price">Rp 1.500</span></label></div>
-      <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="ram-price">Rp 1.700</span></label></div>
-      <div class="ram-item unli"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unlimited</span><span class="ram-price">Rp 2.000</span></label></div>
+  <!-- KANAN: Form Pemesanan -->
+  <div class="form-section">
+    <div class="form-header">
+      <h2>Buat Pesanan</h2>
+      <p>Isi data di bawah, pesanan langsung diteruskan ke admin.</p>
     </div>
+
+    <form id="orderForm">
+      <div class="field">
+        <label>Nama / Username</label>
+        <input type="text" id="nama" placeholder="contoh: budi123" required>
+      </div>
+
+      <div class="field">
+        <label>Versi Node.js</label>
+        <div class="node-group">
+          <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
+          <label><input type="radio" name="node" value="Node.js v2">Node.js v2</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Pilih Kapasitas RAM</label>
+        <div class="ram-grid">
+          <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="ram-price">Rp 300</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="ram-price">Rp 450</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="ram-price">Rp 600</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="ram-price">Rp 750</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="ram-price">Rp 900</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="ram-price">Rp 1.050</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="ram-price">Rp 1.200</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="ram-price">Rp 1.350</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="ram-price">Rp 1.500</span></label></div>
+          <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="ram-price">Rp 1.700</span></label></div>
+          <div class="ram-item unli"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unlimited</span><span class="ram-price">Rp 2.000</span></label></div>
+        </div>
+      </div>
+
+      <div class="total" id="totalBox">
+        <div>
+          <div class="total-label">Total Bayar</div>
+          <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
+        </div>
+        <div class="total-price" id="totalText">Rp 300</div>
+      </div>
+
+      <button type="submit" id="submitBtn">Pesan via WhatsApp</button>
+    </form>
   </div>
 
-  <div class="total" id="totalBox">
-    <div>
-      <div class="total-label">Total Bayar</div>
-      <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
-    </div>
-    <div class="total-price" id="totalText">Rp 300</div>
-  </div>
-
-  <button type="submit" id="submitBtn">Pesan via WhatsApp</button>
-
-  <p class="foot">Pesanan otomatis terkirim ke admin. Bayar setelah konfirmasi.</p>
-</form>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
   const ADMIN_WA = "6288906198025";
-  const form     = document.getElementById("orderForm");
+  const form = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
   const orderInfo = document.getElementById("orderInfo");
-  const totalBox  = document.getElementById("totalBox");
+  const totalBox = document.getElementById("totalBox");
   const submitBtn = document.getElementById("submitBtn");
-  const toast     = document.getElementById("toast");
+  const toast = document.getElementById("toast");
 
-  /* =========================================================
-     PROTEKSI: anti klik kanan, anti copy/cut, anti drag, anti devtools shortcut
-     ========================================================= */
+  // --- PROTEKSI ---
   document.addEventListener("contextmenu", e => e.preventDefault());
-  document.addEventListener("copy",  e => e.preventDefault());
-  document.addEventListener("cut",   e => e.preventDefault());
+  document.addEventListener("copy", e => e.preventDefault());
+  document.addEventListener("cut", e => e.preventDefault());
   document.addEventListener("dragstart", e => e.preventDefault());
-
-  // Blokir shortcut inspect & view-source
   document.addEventListener("keydown", e => {
     const k = e.key.toLowerCase();
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k)) ||
-      (e.ctrlKey && k === "u") ||
-      (e.ctrlKey && k === "s")
-    ) {
+    if (e.key === "F12" || (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k)) || (e.ctrlKey && (k === "u" || k === "s"))) {
       e.preventDefault();
       showToast("Aksi diblokir");
     }
   });
 
-  // Klik kiri biasa tetap boleh (form harus bisa diisi)
-  // Yang diblokir: klik kanan, copy, cut, drag, shortcut devtools.
-
-  /* =========================================================
-     TOAST FEEDBACK
-     ========================================================= */
+  // --- TOAST ---
   let toastTimer;
   function showToast(msg) {
     toast.textContent = msg;
     toast.classList.add("show");
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1500);
   }
 
-  /* =========================================================
-     RIPPLE FEEDBACK pada klik kotak RAM / node / tombol
-     ========================================================= */
-  function attachRipple(el) {
+  // --- RIPPLE ---
+  document.querySelectorAll(".ram-item label, .node-group label, #submitBtn").forEach(el => {
     el.addEventListener("pointerdown", e => {
       const rect = el.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
       const ripple = document.createElement("span");
       ripple.className = "ripple";
-      ripple.style.width  = ripple.style.height = size + "px";
-      ripple.style.left   = (e.clientX - rect.left - size / 2) + "px";
-      ripple.style.top    = (e.clientY - rect.top  - size / 2) + "px";
+      ripple.style.width = ripple.style.height = size + "px";
+      ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
+      ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
       el.appendChild(ripple);
       setTimeout(() => ripple.remove(), 600);
     });
-  }
-  document.querySelectorAll(
-    ".ram-item label, .node-group label, #submitBtn"
-  ).forEach(attachRipple);
+  });
 
-  /* =========================================================
-     ORDER + TOTAL + ANIMASI PINDAH KOTAK
-     ========================================================= */
+  // --- LOGIC HARGA ---
   const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 
   function getOrder() {
-    const ramEl  = form.querySelector('input[name="ram"]:checked');
+    const ramEl = form.querySelector('input[name="ram"]:checked');
     const nodeEl = form.querySelector('input[name="node"]:checked');
-    return {
-      ram: ramEl.value,
-      harga: parseInt(ramEl.dataset.harga, 10),
-      node: nodeEl.value
-    };
+    return { ram: ramEl.value, harga: parseInt(ramEl.dataset.harga, 10), node: nodeEl.value };
   }
 
   function updateTotal(animate = true) {
@@ -402,37 +489,26 @@
     orderInfo.textContent = `RAM ${ram} / ${node}`;
 
     if (animate) {
-      // bump harga
       totalText.classList.remove("bump");
-      void totalText.offsetWidth; // reflow supaya animasi restart
+      void totalText.offsetWidth; 
       totalText.classList.add("bump");
-
-      // flash border box total
       totalBox.classList.add("flash");
-      setTimeout(() => totalBox.classList.remove("flash"), 350);
+      setTimeout(() => totalBox.classList.remove("flash"), 300);
     }
   }
 
   form.addEventListener("change", e => {
     if (e.target.name === "ram" || e.target.name === "node") {
       updateTotal(true);
-      // feedback kecil sesuai pilihan
-      if (e.target.name === "ram") {
-        showToast(`${e.target.value} dipilih`);
-      } else {
-        showToast(`${e.target.value} dipilih`);
-      }
+      showToast(`${e.target.value} dipilih`);
     }
   });
 
-  updateTotal(false); // initial, tanpa animasi
+  updateTotal(false);
 
-  /* =========================================================
-     SUBMIT -> WhatsApp
-     ========================================================= */
+  // --- SUBMIT KE WA ---
   form.addEventListener("submit", e => {
     e.preventDefault();
-
     const nama = document.getElementById("nama").value.trim();
     if (!nama) {
       showToast("Nama wajib diisi");
@@ -441,21 +517,10 @@
     }
 
     const { ram, harga, node } = getOrder();
+    const pesan = `Halo Admin, saya mau order Panel Bot WA.\n\nDETAIL PESANAN\n- Nama  : ${nama}\n- Node  : ${node}\n- RAM   : ${ram}\n- Total : ${rupiah(harga)}\n\nMohon diproses ya. Terima kasih.`;
 
-    const pesan =
-`Halo Admin, saya mau order Panel Bot WA.
-
-DETAIL PESANAN
-- Nama  : ${nama}
-- Node  : ${node}
-- RAM   : ${ram}
-- Total : ${rupiah(harga)}
-
-Mohon diproses ya. Terima kasih.`;
-
-    // feedback tombol
     submitBtn.classList.add("loading");
-    submitBtn.textContent = "Mengarahkan ke WhatsApp...";
+    submitBtn.textContent = "Mengarahkan...";
     showToast("Membuka WhatsApp");
 
     const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
