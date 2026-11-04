@@ -304,7 +304,7 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* === RESPONSIVE MOBILE (PENTING) === */
+  /* === RESPONSIVE MOBILE === */
   @media (max-width: 900px) {
     .main-container { padding: 40px 16px; }
     .wrapper { flex-direction: column; gap: 40px; }
@@ -312,18 +312,16 @@
     .info-section { text-align: center; max-width: 100%; }
     .info-section h1 { font-size: 34px; }
     .info-section p { font-size: 14.5px; margin: 0 auto 24px auto; max-width: 90%; }
-    .features { display: none; } /* Sembunyikan list fitur di HP biar layar gak panjang banget */
+    .features { display: none; }
     
     .form-section { width: 100%; padding: 28px 20px; }
     
-    /* Testimoni jadi 1 kolom di HP */
     .testimonial-section { padding: 40px 16px 60px; }
     .testimonial-grid { grid-template-columns: 1fr; }
     .section-title h2 { font-size: 22px; }
   }
 
   @media (max-width: 400px) {
-    /* RAM grid jadi 3 kolom pas di HP kecil biar gak sempit */
     .ram-grid { grid-template-columns: repeat(3, 1fr); }
     .ram-item .ram-price { font-size: 10px; }
   }
@@ -539,7 +537,7 @@
 
   updateTotal(false);
 
-  // --- SUBMIT KE WA ---
+  // --- SUBMIT KE WA (FORMAT BARU PROFESIONAL) ---
   form.addEventListener("submit", e => {
     e.preventDefault();
     const nama = document.getElementById("nama").value.trim();
@@ -550,7 +548,19 @@
     }
 
     const { ram, harga, node } = getOrder();
-    const pesan = `Halo Admin, saya mau order Panel Bot WA.\n\nDETAIL PESANAN\n- Nama  : ${nama}\n- Node  : ${node}\n- RAM   : ${ram}\n- Total : ${rupiah(harga)}\n\nMohon diproses ya. Terima kasih.`;
+    
+    // Format struk/invoice yang rapi dan anti-auto-correct
+    const pesan = `*ORDER BARU - PANEL BOT WA*
+-----------------------------------
+Halo Admin, saya ingin memesan panel dengan detail sebagai berikut:
+
+*Nama Pembeli* ${nama}
+*Versi Node* ${node}
+*Kapasitas RAM* ${ram}
+
+*TOTAL PEMBAYARAN* ${rupiah(harga)}
+-----------------------------------
+Mohon dibantu untuk proses aktivasi panelnya ya Admin. Terima kasih!`;
 
     submitBtn.classList.add("loading");
     submitBtn.textContent = "Mengarahkan...";
