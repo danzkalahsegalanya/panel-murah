@@ -286,7 +286,7 @@
   button .ripple { background: rgba(255,255,255,0.4); }
   @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
 
-  /* === SECTION KENAPA PILIH KAMI (BARU) === */
+  /* === SECTION KENAPA PILIH KAMI === */
   .why-section {
     width: 100%; max-width: 1100px; margin: 0 auto; padding: 60px 20px;
     border-top: 1px solid var(--border);
@@ -298,7 +298,17 @@
     background: var(--card); border: 1px solid var(--border);
     padding: 24px; border-radius: 16px; text-align: center;
   }
-  .why-icon { font-size: 28px; margin-bottom: 12px; }
+  .why-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; height: 48px;
+    background: var(--neon-soft);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    color: var(--neon);
+  }
+  .why-icon svg { width: 24px; height: 24px; }
   .why-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #fff; }
   .why-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
@@ -467,21 +477,34 @@
       <p>Bukan cuma murah, tapi kualitasnya gak main-main.</p>
     </div>
     <div class="why-grid">
+      
+      <!-- Card 1: Anti Lag (Ikon Petir) -->
       <div class="why-card">
-        <div class="why-icon">⚡</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
         <h3>Anti Lag & Down</h3>
         <p>Server kami dioptimalkan khusus buat bot WhatsApp. Gak gampang down meski dipakai 24 jam.</p>
       </div>
+
+      <!-- Card 2: Aman (Ikon Perisai) -->
       <div class="why-card">
-        <div class="why-icon">🛡️</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
         <h3>Aman & Privasi Terjaga</h3>
         <p>Data kamu 100% aman. Gak ada namanya bot mati tiba-tiba atau data disalahgunakan.</p>
       </div>
+
+      <!-- Card 3: Fast Respon (Ikon Chat) -->
       <div class="why-card">
-        <div class="why-icon">🤝</div>
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </div>
         <h3>Admin Fast Respon</h3>
         <p>Bingung cara settingnya? Chat admin aja. Kami siap bantu sampai bot kamu jalan.</p>
       </div>
+
     </div>
   </div>
 
