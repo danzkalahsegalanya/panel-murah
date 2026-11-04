@@ -16,6 +16,14 @@
     --neon-glow: rgba(0, 229, 255, .18);
     --neon-soft: rgba(0, 229, 255, .08);
   }
+  html, body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
   body {
     font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
     background:
@@ -34,6 +42,25 @@
     border-radius: 16px;
     padding: 28px 24px 24px;
     box-shadow: 0 0 0 1px rgba(0,229,255,.03), 0 20px 50px -20px rgba(0,0,0,.8);
+    animation: cardIn .5s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Field enter animation */
+  .field {
+    margin-top: 20px;
+    animation: fieldIn .45s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .field:nth-of-type(1) { animation-delay: .08s; }
+  .field:nth-of-type(2) { animation-delay: .16s; }
+  .field:nth-of-type(3) { animation-delay: .24s; }
+  .field:nth-of-type(4) { animation-delay: .32s; }
+  @keyframes fieldIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   /* Header */
@@ -45,12 +72,15 @@
     padding: 5px 12px; border-radius: 999px; margin-bottom: 14px;
     letter-spacing: .4px;
     box-shadow: 0 0 20px -4px var(--neon-glow);
+    animation: badgePulse 3s ease-in-out infinite;
+  }
+  @keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 20px -4px var(--neon-glow); }
+    50%      { box-shadow: 0 0 28px -2px rgba(0,229,255,.35); }
   }
   .head h1 { font-size: 23px; font-weight: 700; letter-spacing: -.4px; }
   .head p { font-size: 13px; color: var(--muted); margin-top: 6px; }
 
-  /* Field */
-  .field { margin-top: 20px; }
   .field > label {
     display: block; font-size: 12.5px; font-weight: 500;
     color: var(--muted); margin-bottom: 9px; letter-spacing: .3px;
@@ -62,6 +92,8 @@
     border: 1px solid var(--border); border-radius: 10px;
     outline: none; transition: border-color .15s, box-shadow .15s;
     font-family: inherit;
+    -webkit-user-select: text;
+    user-select: text;
   }
   input[type="text"]:focus {
     border-color: var(--neon);
@@ -76,21 +108,29 @@
     font-size: 13.5px; font-weight: 500;
     background: #080b14; border: 1px solid var(--border);
     border-radius: 10px; cursor: pointer;
-    transition: all .15s; color: var(--muted);
+    transition: all .2s cubic-bezier(.2,.8,.2,1);
+    color: var(--muted);
   }
   .node-group input { position: absolute; opacity: 0; pointer-events: none; }
   .node-group label:hover { border-color: #2a3654; }
+  .node-group label:active { transform: scale(.97); }
   .node-group label:has(input:checked) {
     border-color: var(--neon);
     background: var(--neon-soft);
     color: var(--text);
     box-shadow: 0 0 20px -6px var(--neon-glow);
+    transform: translateY(-1px);
   }
   .node-group label:has(input:checked)::after {
     content: ""; position: absolute; top: 9px; right: 11px;
     width: 7px; height: 7px; border-radius: 50%;
     background: var(--neon);
     box-shadow: 0 0 8px var(--neon);
+    animation: dotIn .3s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes dotIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
   }
 
   /* RAM Grid */
@@ -107,25 +147,41 @@
     display: block; padding: 12px 6px; text-align: center;
     background: #080b14; border: 1px solid var(--border);
     border-radius: 10px; cursor: pointer;
-    transition: all .15s;
+    transition: all .22s cubic-bezier(.2,.8,.2,1);
+    position: relative; overflow: hidden;
   }
   .ram-item .ram-name {
     display: block; font-size: 13.5px; font-weight: 600;
     color: var(--text); letter-spacing: -.2px;
+    transition: color .2s;
   }
   .ram-item .ram-price {
     display: block; font-size: 11px; color: var(--muted);
-    margin-top: 3px;
+    margin-top: 3px; transition: color .2s;
   }
-  .ram-item label:hover { border-color: #2a3654; }
+  .ram-item label:hover { border-color: #2a3654; transform: translateY(-1px); }
+  .ram-item label:active { transform: scale(.96); }
   .ram-item input:checked + label {
     border-color: var(--neon);
     background: var(--neon-soft);
     box-shadow: 0 0 20px -6px var(--neon-glow);
+    transform: translateY(-2px);
   }
   .ram-item input:checked + label .ram-price { color: var(--neon); }
   .ram-item.unli label { border-color: rgba(0,229,255,.25); }
   .ram-item.unli .ram-name { color: var(--neon); }
+
+  /* Ripple feedback */
+  .ram-item label .ripple,
+  .node-group label .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(0,229,255,.35);
+    transform: scale(0); pointer-events: none;
+    animation: rippleOut .55s ease-out forwards;
+  }
+  @keyframes rippleOut {
+    to { transform: scale(3.5); opacity: 0; }
+  }
 
   /* Total */
   .total {
@@ -134,13 +190,22 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     display: flex; justify-content: space-between; align-items: center;
+    transition: border-color .25s;
   }
+  .total.flash { border-color: var(--neon); }
   .total-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .3px; }
-  .total-info { font-size: 11.5px; color: #4a5470; margin-top: 4px; }
+  .total-info { font-size: 11.5px; color: #4a5470; margin-top: 4px; transition: color .25s; }
   .total-price {
     font-size: 22px; font-weight: 700; color: var(--neon);
     letter-spacing: -.5px;
     text-shadow: 0 0 20px var(--neon-glow);
+    transition: transform .25s cubic-bezier(.2,.8,.2,1);
+  }
+  .total-price.bump { animation: priceBump .35s cubic-bezier(.2,.8,.2,1); }
+  @keyframes priceBump {
+    0%   { transform: scale(1); }
+    45%  { transform: scale(1.12); }
+    100% { transform: scale(1); }
   }
 
   /* Button */
@@ -149,14 +214,24 @@
     background: var(--neon); color: #001a1f;
     font-weight: 700; font-size: 15px; font-family: inherit;
     border: none; border-radius: 10px; cursor: pointer;
-    transition: all .15s; letter-spacing: .3px;
+    transition: all .2s cubic-bezier(.2,.8,.2,1);
+    letter-spacing: .3px;
     box-shadow: 0 0 24px -6px var(--neon-glow);
+    position: relative; overflow: hidden;
   }
   button:hover {
     background: #33ebff;
     box-shadow: 0 0 32px -4px rgba(0,229,255,.4);
+    transform: translateY(-1px);
   }
-  button:active { transform: scale(.985); }
+  button:active { transform: scale(.975); }
+  button.loading { pointer-events: none; opacity: .85; }
+  button .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,.5);
+    transform: scale(0); pointer-events: none;
+    animation: rippleOut .55s ease-out forwards;
+  }
 
   .foot {
     text-align: center; font-size: 11.5px; color: #4a5470;
@@ -167,6 +242,23 @@
     .card { padding: 22px 18px 20px; }
     .head h1 { font-size: 20px; }
     .ram-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* Toast feedback */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #0d1220; color: var(--neon);
+    border: 1px solid rgba(0,229,255,.3);
+    padding: 11px 18px; border-radius: 10px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 0 30px -6px var(--neon-glow);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s, transform .25s;
+    z-index: 999;
+  }
+  .toast.show {
+    opacity: 1; transform: translateX(-50%) translateY(0);
   }
 </style>
 </head>
@@ -209,7 +301,7 @@
     </div>
   </div>
 
-  <div class="total">
+  <div class="total" id="totalBox">
     <div>
       <div class="total-label">Total Bayar</div>
       <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
@@ -217,17 +309,81 @@
     <div class="total-price" id="totalText">Rp 300</div>
   </div>
 
-  <button type="submit">Pesan via WhatsApp</button>
+  <button type="submit" id="submitBtn">Pesan via WhatsApp</button>
 
   <p class="foot">Pesanan otomatis terkirim ke admin. Bayar setelah konfirmasi.</p>
 </form>
 
+<div class="toast" id="toast"></div>
+
 <script>
   const ADMIN_WA = "6288906198025";
-  const form = document.getElementById("orderForm");
+  const form     = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
   const orderInfo = document.getElementById("orderInfo");
+  const totalBox  = document.getElementById("totalBox");
+  const submitBtn = document.getElementById("submitBtn");
+  const toast     = document.getElementById("toast");
 
+  /* =========================================================
+     PROTEKSI: anti klik kanan, anti copy/cut, anti drag, anti devtools shortcut
+     ========================================================= */
+  document.addEventListener("contextmenu", e => e.preventDefault());
+  document.addEventListener("copy",  e => e.preventDefault());
+  document.addEventListener("cut",   e => e.preventDefault());
+  document.addEventListener("dragstart", e => e.preventDefault());
+
+  // Blokir shortcut inspect & view-source
+  document.addEventListener("keydown", e => {
+    const k = e.key.toLowerCase();
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k)) ||
+      (e.ctrlKey && k === "u") ||
+      (e.ctrlKey && k === "s")
+    ) {
+      e.preventDefault();
+      showToast("Aksi diblokir");
+    }
+  });
+
+  // Klik kiri biasa tetap boleh (form harus bisa diisi)
+  // Yang diblokir: klik kanan, copy, cut, drag, shortcut devtools.
+
+  /* =========================================================
+     TOAST FEEDBACK
+     ========================================================= */
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+  }
+
+  /* =========================================================
+     RIPPLE FEEDBACK pada klik kotak RAM / node / tombol
+     ========================================================= */
+  function attachRipple(el) {
+    el.addEventListener("pointerdown", e => {
+      const rect = el.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const ripple = document.createElement("span");
+      ripple.className = "ripple";
+      ripple.style.width  = ripple.style.height = size + "px";
+      ripple.style.left   = (e.clientX - rect.left - size / 2) + "px";
+      ripple.style.top    = (e.clientY - rect.top  - size / 2) + "px";
+      el.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+  }
+  document.querySelectorAll(
+    ".ram-item label, .node-group label, #submitBtn"
+  ).forEach(attachRipple);
+
+  /* =========================================================
+     ORDER + TOTAL + ANIMASI PINDAH KOTAK
+     ========================================================= */
   const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 
   function getOrder() {
@@ -240,22 +396,50 @@
     };
   }
 
-  function updateTotal() {
+  function updateTotal(animate = true) {
     const { ram, harga, node } = getOrder();
     totalText.textContent = rupiah(harga);
     orderInfo.textContent = `RAM ${ram} / ${node}`;
+
+    if (animate) {
+      // bump harga
+      totalText.classList.remove("bump");
+      void totalText.offsetWidth; // reflow supaya animasi restart
+      totalText.classList.add("bump");
+
+      // flash border box total
+      totalBox.classList.add("flash");
+      setTimeout(() => totalBox.classList.remove("flash"), 350);
+    }
   }
 
-  form.addEventListener("change", updateTotal);
-  updateTotal();
+  form.addEventListener("change", e => {
+    if (e.target.name === "ram" || e.target.name === "node") {
+      updateTotal(true);
+      // feedback kecil sesuai pilihan
+      if (e.target.name === "ram") {
+        showToast(`${e.target.value} dipilih`);
+      } else {
+        showToast(`${e.target.value} dipilih`);
+      }
+    }
+  });
 
+  updateTotal(false); // initial, tanpa animasi
+
+  /* =========================================================
+     SUBMIT -> WhatsApp
+     ========================================================= */
   form.addEventListener("submit", e => {
     e.preventDefault();
+
     const nama = document.getElementById("nama").value.trim();
     if (!nama) {
-      alert("Nama wajib diisi.");
+      showToast("Nama wajib diisi");
+      document.getElementById("nama").focus();
       return;
     }
+
     const { ram, harga, node } = getOrder();
 
     const pesan =
@@ -269,8 +453,18 @@ DETAIL PESANAN
 
 Mohon diproses ya. Terima kasih.`;
 
+    // feedback tombol
+    submitBtn.classList.add("loading");
+    submitBtn.textContent = "Mengarahkan ke WhatsApp...";
+    showToast("Membuka WhatsApp");
+
     const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
-    window.open(url, "_blank");
+
+    setTimeout(() => {
+      window.open(url, "_blank");
+      submitBtn.classList.remove("loading");
+      submitBtn.textContent = "Pesan via WhatsApp";
+    }, 400);
   });
 </script>
 </body>
