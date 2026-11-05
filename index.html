@@ -33,67 +33,120 @@
     background-color: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
     overflow-x: hidden;
-    background-image: 
-      linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    background-position: center;
   }
 
-  /* === AUTH SECTION (LOGIN / REGISTER) === */
+  /* =========================================
+     TAMPILAN 1: AUTH (LOGIN / REGISTER)
+     ========================================= */
   #authScreen {
     position: fixed; inset: 0; background: var(--bg); z-index: 1000;
     display: flex; align-items: center; justify-content: center;
-    padding: 20px;
+  }
+  
+  .auth-container {
+    display: flex; width: 100%; height: 100vh;
+  }
+
+  /* KIRI: Visual Branding */
+  .auth-brand {
+    flex: 1;
+    background: linear-gradient(135deg, #0a1122 0%, #05080f 100%);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px; border-right: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  /* Grid background ala tech */
+  .auth-brand::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: 
+      linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px; z-index: 0;
+  }
+  /* Efek cahaya di pojok */
+  .auth-brand::after {
+    content: ''; position: absolute; top: -20%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 70%);
+    z-index: 0;
+  }
+  .brand-content { position: relative; z-index: 1; max-width: 400px; }
+  .brand-content h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+  .brand-content h1 span { color: var(--neon); text-shadow: 0 0 30px var(--neon-glow); }
+  .brand-content p { font-size: 16px; color: #a0aec0; line-height: 1.6; }
+
+  /* KANAN: Form */
+  .auth-form-area {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 40px; background: var(--bg);
   }
   .auth-box {
-    width: 100%; max-width: 400px;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; padding: 40px 32px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-    text-align: center;
+    width: 100%; max-width: 380px;
     animation: fadeIn 0.4s ease-out;
   }
-  @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   
-  .auth-box h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
-  .auth-box p { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  .auth-box h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .auth-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
   
-  .auth-field { margin-bottom: 16px; text-align: left; }
+  .auth-field { margin-bottom: 20px; }
   .auth-field label {
-    display: block; font-size: 12px; font-weight: 600; color: var(--muted);
-    margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+    display: block; font-size: 13px; font-weight: 600; color: #cbd5e1;
+    margin-bottom: 8px;
   }
-  .auth-field input {
-    width: 100%; padding: 12px 14px; font-size: 14px;
-    font-family: inherit; background: #060911; color: var(--text);
+  .input-wrapper { position: relative; }
+  .input-wrapper input {
+    width: 100%; padding: 14px 16px; font-size: 14px;
+    font-family: inherit; background: #0d1220; color: var(--text);
     border: 1px solid var(--border); border-radius: 10px; outline: none;
+    transition: all 0.2s;
   }
-  .auth-field input:focus { border-color: var(--neon); }
+  .input-wrapper input:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
+  
+  /* Icon Mata buat liat password */
+  .toggle-pass {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); cursor: pointer; background: none; border: none;
+    font-size: 12px; font-weight: 600;
+  }
+  .toggle-pass:hover { color: var(--neon); }
   
   .auth-btn {
-    width: 100%; padding: 14px; background: var(--neon); color: #001a1f;
-    font-weight: 800; font-size: 14px; font-family: inherit;
-    border: none; border-radius: 10px; cursor: pointer;
-    margin-top: 10px; text-transform: uppercase; transition: all 0.2s;
+    width: 100%; padding: 15px; background: var(--neon); color: #001a1f;
+    font-weight: 800; font-size: 15px; border: none; border-radius: 10px;
+    cursor: pointer; margin-top: 10px; transition: all 0.2s;
+    text-transform: uppercase; letter-spacing: 0.5px;
   }
-  .auth-btn:hover { background: var(--neon-hover); transform: translateY(-1px); }
+  .auth-btn:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: 0 4px 15px var(--neon-glow); }
   
-  .auth-switch { margin-top: 20px; font-size: 13px; color: var(--muted); }
+  .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
+  .auth-switch a:hover { text-decoration: underline; }
   
-  .error-msg { color: var(--danger); font-size: 12px; margin-bottom: 10px; display: none; }
+  .error-msg {
+    background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
+    color: var(--danger); font-size: 13px; padding: 10px;
+    border-radius: 8px; margin-bottom: 20px; display: none;
+  }
 
-  /* === MAIN APP (SEMBUNYI DULU) === */
-  #mainApp { display: none; flex-direction: column; min-height: 100vh; }
+  /* =========================================
+     TAMPILAN 2: MAIN APP (ORDER)
+     ========================================= */
+  #mainApp { display: none; flex-direction: column; min-height: 100vh; background: var(--bg); }
+  
+  /* Grid background */
+  #mainApp::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: 
+      linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; z-index: 0; pointer-events: none;
+  }
 
-  /* Main Container */
   .main-container {
     flex: 1; display: flex; align-items: center; justify-content: center;
-    padding: 60px 20px;
+    padding: 60px 20px; position: relative; z-index: 1;
   }
 
   .wrapper {
@@ -103,55 +156,45 @@
 
   /* User Bar */
   .user-bar {
-    position: absolute; top: 20px; right: 20px;
-    display: flex; align-items: center; gap: 12px;
+    position: absolute; top: 24px; right: 24px;
+    display: flex; align-items: center; gap: 16px;
     background: var(--card); border: 1px solid var(--border);
-    padding: 8px 16px; border-radius: 99px;
-    font-size: 13px; font-weight: 600;
-    z-index: 100;
+    padding: 10px 20px; border-radius: 99px;
+    font-size: 13px; font-weight: 500; z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
   }
-  .user-bar span { color: var(--neon); }
+  .user-bar span { color: var(--neon); font-weight: 700; }
   .logout-btn {
-    background: transparent; color: var(--danger); border: none;
-    font-size: 12px; font-weight: 700; cursor: pointer; padding: 0;
-    text-transform: uppercase;
+    background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2);
+    font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px;
+    border-radius: 6px; text-transform: uppercase; transition: all 0.2s;
   }
+  .logout-btn:hover { background: var(--danger); color: white; }
 
-  /* === LEFT SECTION (Info & Copywriting) === */
+  /* Info Kiri */
   .info-section { flex: 1; max-width: 520px; }
   .badge {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 12px; font-weight: 700; color: var(--neon);
     background: var(--neon-soft); border: 1px solid rgba(0, 210, 255, 0.3);
-    padding: 7px 16px; border-radius: 99px; margin-bottom: 24px;
+    padding: 8px 16px; border-radius: 99px; margin-bottom: 24px;
     text-transform: uppercase; letter-spacing: 0.5px;
-    animation: pulseBadge 2s infinite;
   }
-  @keyframes pulseBadge {
-    0% { box-shadow: 0 0 15px rgba(0, 210, 255, 0.15); }
-    50% { box-shadow: 0 0 25px rgba(0, 210, 255, 0.4); }
-    100% { box-shadow: 0 0 15px rgba(0, 210, 255, 0.15); }
-  }
-
-  .info-section h1 {
-    font-size: 54px; font-weight: 800; line-height: 1.1;
-    letter-spacing: -1.5px; margin-bottom: 20px;
-  }
-  .info-section h1 span { color: var(--neon); text-shadow: 0 0 30px var(--neon-glow); }
+  .info-section h1 { font-size: 54px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+  .info-section h1 span { color: var(--neon); }
   .info-section .subheadline { font-size: 17px; color: #a0aec0; line-height: 1.6; margin-bottom: 32px; }
-  .info-section .subheadline strong { color: #fff; font-weight: 600; }
+  .info-section .subheadline strong { color: #fff; }
   
   .features { display: flex; flex-direction: column; gap: 16px; }
-  .feature-item { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 500; color: #cbd5e1; }
-  .feature-item svg { width: 22px; height: 22px; color: var(--neon); flex-shrink: 0; }
+  .feature-item { display: flex; align-items: center; gap: 14px; font-size: 15px; color: #cbd5e1; }
+  .feature-item svg { width: 20px; height: 20px; color: var(--neon); }
 
-  /* === RIGHT SECTION (Form) === */
+  /* Form Kanan */
   .form-section {
     flex: 1; max-width: 460px; background: var(--card);
     border: 1px solid var(--border); border-radius: 20px;
     padding: 36px 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
   }
-
   .promo-banner {
     background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent);
     border-left: 3px solid var(--neon); padding: 14px 16px;
@@ -168,7 +211,6 @@
     display: block; font-size: 12.5px; font-weight: 600; color: var(--muted);
     margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
   }
-
   input[type="text"] {
     width: 100%; padding: 13px 14px; font-size: 14px;
     font-family: inherit; background: #060911; color: var(--text);
@@ -187,7 +229,6 @@
   }
   .node-group input { position: absolute; opacity: 0; }
   .node-group label:has(input:checked) { border-color: var(--neon); background: var(--neon-soft); color: var(--text); }
-  
   .node-group label.disabled {
     opacity: 0.3; cursor: not-allowed; background: #0a0d15;
     border-color: #1a2338; color: #4a5470; pointer-events: none;
@@ -209,13 +250,10 @@
     cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
   }
   .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-  
-  .ram-item .ram-price-discount { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+  .ram-item .ram-price-discount { display: flex; flex-direction: column; align-items: center; gap: 1px; }
   .ram-item .price-old { font-size: 9.5px; color: #4a5470; text-decoration: line-through; }
   .ram-item .price-new { font-size: 12px; font-weight: 700; color: var(--neon); }
-
   .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); }
-  
   .discount-badge {
     position: absolute; top: 0; right: 0; background: var(--danger);
     color: white; font-size: 8px; font-weight: 700; padding: 2px 4px;
@@ -234,83 +272,119 @@
   .total-old-price { font-size: 12px; color: var(--danger); text-decoration: line-through; display: none; }
   .total-price { font-size: 24px; font-weight: 700; color: var(--neon); }
 
-  /* Button */
+  /* Submit Button */
   button[type="submit"] {
     width: 100%; margin-top: 20px; padding: 15px;
     background: var(--neon); color: #001a1f; font-weight: 800;
     font-size: 15px; border: none; border-radius: 10px; cursor: pointer;
     text-transform: uppercase; transition: all 0.2s;
   }
-  button[type="submit"]:hover { background: var(--neon-hover); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .wrapper { flex-direction: column; gap: 40px; }
-    .info-section { text-align: center; }
-    .info-section h1 { font-size: 38px; }
-    .features { display: none; }
-    .form-section { width: 100%; }
-    .user-bar { top: 10px; right: 10px; }
-  }
+  button[type="submit"]:hover { background: var(--neon-hover); transform: translateY(-1px); }
 
   /* Toast */
   .toast {
     position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
     background: #0b101c; color: var(--neon); border: 1px solid rgba(0, 210, 255, 0.3);
     padding: 12px 20px; border-radius: 10px; opacity: 0; pointer-events: none;
-    transition: all 0.3s; z-index: 2000;
+    transition: all 0.3s; z-index: 2000; font-weight: 500;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .auth-brand { display: none; } /* Sembunyikan branding kiri di HP */
+    .auth-form-area { padding: 20px; }
+    .wrapper { flex-direction: column; gap: 40px; }
+    .info-section { text-align: center; }
+    .info-section h1 { font-size: 38px; }
+    .features { display: none; }
+    .form-section { width: 100%; }
+    .user-bar { top: 10px; right: 10px; padding: 8px 12px; font-size: 12px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ================= SCREEN 1: AUTH (LOGIN/REGISTER) ================= -->
+<!-- ================= SCREEN 1: AUTH ================= -->
 <div id="authScreen">
-  <div class="auth-box">
-    <!-- LOGIN FORM -->
-    <div id="loginForm">
-      <h2>Welcome Back</h2>
-      <p>Log in to continue to Kitzune Store.</p>
-      <div class="error-msg" id="loginError">Invalid username or password.</div>
-      
-      <div class="auth-field">
-        <label>Username</label>
-        <input type="text" id="loginUsername" placeholder="Enter your username">
-      </div>
-      <div class="auth-field">
-        <label>Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter your password">
-      </div>
-      <button class="auth-btn" onclick="doLogin()">Log In</button>
-      
-      <div class="auth-switch">
-        Don't have an account? <a onclick="toggleAuth('register')">Register here</a>
+  <div class="auth-container">
+    
+    <!-- Kiri: Visual -->
+    <div class="auth-brand">
+      <div class="brand-content">
+        <h1>Welcome to <br><span>Kitzune Store.</span></h1>
+        <p>The most affordable and reliable WhatsApp Bot Panel in the market. Register now and get up to 90% discount for your first order.</p>
       </div>
     </div>
 
-    <!-- REGISTER FORM (HIDDEN BY DEFAULT) -->
-    <div id="registerForm" style="display: none;">
-      <h2>Create Account</h2>
-      <p>Join Kitzune Store to order your panel.</p>
-      <div class="error-msg" id="regError">Passwords do not match.</div>
-      
-      <div class="auth-field">
-        <label>Username</label>
-        <input type="text" id="regUsername" placeholder="Choose a username">
-      </div>
-      <div class="auth-field">
-        <label>Password</label>
-        <input type="password" id="regPassword" placeholder="Create a password">
-      </div>
-      <div class="auth-field">
-        <label>Confirm Password</label>
-        <input type="password" id="regConfirmPassword" placeholder="Repeat your password">
-      </div>
-      <button class="auth-btn" onclick="doRegister()">Register & Login</button>
-      
-      <div class="auth-switch">
-        Already have an account? <a onclick="toggleAuth('login')">Log in</a>
+    <!-- Kanan: Form -->
+    <div class="auth-form-area">
+      <div class="auth-box">
+        
+        <!-- LOGIN FORM -->
+        <div id="loginForm">
+          <h2>Sign In</h2>
+          <p>Enter your details to access your dashboard.</p>
+          <div class="error-msg" id="loginError">Invalid username or password.</div>
+          
+          <div class="auth-field">
+            <label>Username</label>
+            <div class="input-wrapper">
+              <input type="text" id="loginUsername" placeholder="Enter username">
+            </div>
+          </div>
+          
+          <div class="auth-field">
+            <label>Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="loginPassword" placeholder="Enter password">
+              <button class="toggle-pass" onclick="togglePass('loginPassword', this)">SHOW</button>
+            </div>
+          </div>
+          
+          <button class="auth-btn" onclick="doLogin()">Log In</button>
+          
+          <div class="auth-switch">
+            Don't have an account? <a onclick="toggleAuth('register')">Create one</a>
+          </div>
+        </div>
+
+        <!-- REGISTER FORM -->
+        <div id="registerForm" style="display: none;">
+          <h2>Create Account</h2>
+          <p>Join us to get the best deals on bot panels.</p>
+          <div class="error-msg" id="regError">Passwords do not match.</div>
+          
+          <div class="auth-field">
+            <label>Username</label>
+            <div class="input-wrapper">
+              <input type="text" id="regUsername" placeholder="Choose a username">
+            </div>
+          </div>
+          
+          <div class="auth-field">
+            <label>Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="regPassword" placeholder="Create a password">
+              <button class="toggle-pass" onclick="togglePass('regPassword', this)">SHOW</button>
+            </div>
+          </div>
+          
+          <div class="auth-field">
+            <label>Confirm Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="regConfirmPassword" placeholder="Repeat password">
+              <button class="toggle-pass" onclick="togglePass('regConfirmPassword', this)">SHOW</button>
+            </div>
+          </div>
+          
+          <button class="auth-btn" onclick="doRegister()">Register & Login</button>
+          
+          <div class="auth-switch">
+            Already have an account? <a onclick="toggleAuth('login')">Log in here</a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -318,8 +392,6 @@
 
 <!-- ================= SCREEN 2: MAIN APP ================= -->
 <div id="mainApp">
-  
-  <!-- Top Bar User -->
   <div class="user-bar">
     Logged in as <span id="displayUser">User</span>
     <button class="logout-btn" onclick="doLogout()">Logout</button>
@@ -328,14 +400,12 @@
   <div class="main-container">
     <div class="wrapper">
       
-      <!-- LEFT: Info -->
       <div class="info-section">
-        <div class="badge">MASSIVE CLEARANCE SALE</div>
+        <div class="badge">LIMITED TIME OFFER</div>
         <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
         <p class="subheadline">
           No coding skills required. <strong>Choose your plan, pay with pocket change, and let your bot run 24/7 non-stop.</strong>
         </p>
-        
         <div class="features">
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
@@ -352,12 +422,10 @@
         </div>
       </div>
 
-      <!-- RIGHT: Form -->
       <div class="form-section">
         <div class="promo-banner">
           <strong>Crazy Discount!</strong> All RAM packages are up to 90% OFF today.
         </div>
-
         <div class="form-header">
           <h2>Secure Your Slot Now</h2>
           <p>Fill in the details below, your order will be sent to admin.</p>
@@ -366,7 +434,7 @@
         <form id="orderForm">
           <div class="field">
             <label>Username (Auto-filled)</label>
-            <input type="text" id="orderNama" readonly style="opacity: 0.7; cursor: not-allowed;">
+            <input type="text" id="orderNama" readonly style="opacity: 0.6; cursor: not-allowed;">
           </div>
 
           <div class="field">
@@ -382,14 +450,7 @@
             <div class="ram-grid">
               <div class="ram-item">
                 <input type="radio" name="ram" id="r1" value="1GB" data-harga="300" data-harga-asli="5000" checked>
-                <label for="r1">
-                  <span class="discount-badge">94% OFF</span>
-                  <span class="ram-name">1 GB</span>
-                  <div class="ram-price-discount">
-                    <span class="price-old">Rp 5,000</span>
-                    <span class="price-new">Rp 300</span>
-                  </div>
-                </label>
+                <label for="r1"><span class="discount-badge">94% OFF</span><span class="ram-name">1 GB</span><div class="ram-price-discount"><span class="price-old">Rp 5,000</span><span class="price-new">Rp 300</span></div></label>
               </div>
               <div class="ram-item">
                 <input type="radio" name="ram" id="r2" value="2GB" data-harga="450" data-harga-asli="6000">
@@ -457,12 +518,24 @@
 <script>
   const ADMIN_WA = "6288906198025";
   
-  // --- SISTEM AUTHENTIKASI (LOCALSTORAGE) ---
+  // --- AUTH SYSTEM ---
   function toggleAuth(type) {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
     document.getElementById('loginError').style.display = 'none';
     document.getElementById('regError').style.display = 'none';
+  }
+
+  // Fitur Show/Hide Password
+  function togglePass(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === "password") {
+      input.type = "text";
+      btn.textContent = "HIDE";
+    } else {
+      input.type = "password";
+      btn.textContent = "SHOW";
+    }
   }
 
   function doRegister() {
@@ -482,11 +555,8 @@
       return;
     }
 
-    // Simpan ke localStorage (Dummy database)
     localStorage.setItem('kitzune_user', user);
     localStorage.setItem('kitzune_pass', pass);
-    
-    // Auto Login
     loginSuccess(user);
   }
 
@@ -510,40 +580,26 @@
     document.getElementById('authScreen').style.display = 'none';
     document.getElementById('mainApp').style.display = 'flex';
     
-    // Set username ke UI
     document.getElementById('displayUser').textContent = username;
     document.getElementById('orderNama').value = username;
     
-    showToast(`Welcome, ${username}!`);
+    showToast(`Welcome back, ${username}!`);
     updateTotal();
   }
 
   function doLogout() {
-    // Hapus session (bukan akunnya, cuma balik ke layar login)
     document.getElementById('authScreen').style.display = 'flex';
     document.getElementById('mainApp').style.display = 'none';
-    
-    // Reset form login
     document.getElementById('loginUsername').value = '';
     document.getElementById('loginPassword').value = '';
     toggleAuth('login');
   }
 
-  // Cek apakah udah pernah login sebelumnya
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedUser = localStorage.getItem('kitzune_user');
-    if (savedUser) {
-      // Jika ada data, kita biarin dia harus login manual lagi (karena kita gak simpan session)
-      // Kalo mau auto-login tiap refresh, tinggal panggil loginSuccess(savedUser); di sini
-    }
-  });
-
-  // --- SISTEM ORDER ---
+  // --- ORDER SYSTEM ---
   const form = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
   const totalOldPrice = document.getElementById("totalOldPrice");
   const orderInfo = document.getElementById("orderInfo");
-  const totalBox = document.getElementById("totalBox");
   const submitBtn = document.getElementById("submitBtn");
   const toast = document.getElementById("toast");
 
@@ -552,7 +608,7 @@
     toast.textContent = msg;
     toast.classList.add("show");
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove("show"), 2000);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
   }
 
   const rupiah = n => "Rp " + n.toLocaleString("en-US");
@@ -577,15 +633,12 @@
   }
 
   form.addEventListener("change", e => {
-    if (e.target.name === "ram" || e.target.name === "node") {
-      updateTotal();
-    }
+    if (e.target.name === "ram" || e.target.name === "node") updateTotal();
   });
 
   form.addEventListener("submit", e => {
     e.preventDefault();
     const nama = document.getElementById("orderNama").value;
-
     const { ram, harga, node } = getOrder();
     
     const pesan = `*NEW ORDER - KITZUNE STORE*
@@ -602,7 +655,6 @@ Please proceed with the activation. Thank you!`;
 
     submitBtn.textContent = "Processing...";
     submitBtn.disabled = true;
-
     const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
 
     setTimeout(() => {
