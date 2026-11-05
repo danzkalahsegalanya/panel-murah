@@ -30,9 +30,11 @@ export default async function handler(req, res) {
       cpu = 20 + (gb * 20); 
     }
 
-    // 3. Buat User di Pterodactyl
+    // 3. Buat User di Pterodactyl (Email dibikin unik pakai Date.now)
+    const uniqueEmail = `${username}-${Date.now()}@kitzunemarket.com`;
+
     const userRes = await axios.post(`${DOMAIN}/api/application/users`, {
-      email: email,
+      email: uniqueEmail, // <--- MENGGUNAKAN EMAIL UNIK
       username: username.toLowerCase().replace(/[^a-z0-9]/g, ''),
       first_name: username,
       last_name: "Server",
