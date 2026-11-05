@@ -3,454 +3,559 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panel Bot WA - Kitzune Store</title>
+<title>Kitzune Store - Premium WhatsApp Bot Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* Reset standar */
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
-  /* Warna dasar yang kalem, gak norak */
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f4f5f7; /* Abu-abu terang ala web jadul */
-    color: #24292f; /* Warna teks standar GitHub */
-    line-height: 1.5;
+  :root {
+    --bg: #05080f;
+    --card: #0b101c;
+    --border: #1a2338;
+    --text: #f0f4f8;
+    --muted: #8492b0;
+    --neon: #00d2ff;
+    --neon-hover: #33ddff;
+    --neon-glow: rgba(0, 210, 255, 0.15);
+    --neon-soft: rgba(0, 210, 255, 0.08);
+    --danger: #ef4444;
+  }
+
+  html, body {
     -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
-  }
-
-  /* Container utama ala dashboard */
-  .container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #ffffff;
-    border: 1px solid #d0d7de;
-    border-radius: 6px; /* Sudut kotak gak terlalu bulat */
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
-
-  /* Header ala admin panel */
-  .header {
-    padding: 20px 24px;
-    border-bottom: 1px solid #d0d7de;
-    background: #f6f8fa;
-  }
-  .header h1 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .header p {
-    font-size: 13px;
-    color: #57606a;
-  }
-
-  /* Layout dua kolom (Kiri info, Kanan Form) */
-  .content {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-image: 
+      linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center;
   }
 
-  /* Bagian Kiri: Info & List Harga */
-  .info-area {
-    flex: 1;
-    padding: 24px;
-    border-right: 1px solid #d0d7de;
-    min-width: 300px;
+  /* === AUTH SECTION (LOGIN / REGISTER) === */
+  #authScreen {
+    position: fixed; inset: 0; background: var(--bg); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
   }
-  .info-area h2 {
-    font-size: 16px;
-    margin-bottom: 12px;
-    font-weight: 600;
+  .auth-box {
+    width: 100%; max-width: 400px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    animation: fadeIn 0.4s ease-out;
   }
-  .info-area p {
-    font-size: 13px;
-    color: #57606a;
-    margin-bottom: 20px;
-  }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
   
-  /* List fitur tanpa ikon-ikon lebay */
-  .feature-list {
-    list-style: none;
-    font-size: 13px;
+  .auth-box h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  .auth-box p { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+  
+  .auth-field { margin-bottom: 16px; text-align: left; }
+  .auth-field label {
+    display: block; font-size: 12px; font-weight: 600; color: var(--muted);
+    margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
   }
-  .feature-list li {
-    margin-bottom: 8px;
-    padding-left: 16px;
-    position: relative;
+  .auth-field input {
+    width: 100%; padding: 12px 14px; font-size: 14px;
+    font-family: inherit; background: #060911; color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px; outline: none;
   }
-  .feature-list li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #57606a;
-    font-weight: bold;
+  .auth-field input:focus { border-color: var(--neon); }
+  
+  .auth-btn {
+    width: 100%; padding: 14px; background: var(--neon); color: #001a1f;
+    font-weight: 800; font-size: 14px; font-family: inherit;
+    border: none; border-radius: 10px; cursor: pointer;
+    margin-top: 10px; text-transform: uppercase; transition: all 0.2s;
+  }
+  .auth-btn:hover { background: var(--neon-hover); transform: translateY(-1px); }
+  
+  .auth-switch { margin-top: 20px; font-size: 13px; color: var(--muted); }
+  .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
+  
+  .error-msg { color: var(--danger); font-size: 12px; margin-bottom: 10px; display: none; }
+
+  /* === MAIN APP (SEMBUNYI DULU) === */
+  #mainApp { display: none; flex-direction: column; min-height: 100vh; }
+
+  /* Main Container */
+  .main-container {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 60px 20px;
   }
 
-  /* Bagian Kanan: Form */
-  .form-area {
-    flex: 1.2;
-    padding: 24px;
-    min-width: 300px;
-    background: #ffffff;
+  .wrapper {
+    display: flex; width: 100%; max-width: 1100px;
+    gap: 60px; align-items: center; justify-content: center;
   }
+
+  /* User Bar */
+  .user-bar {
+    position: absolute; top: 20px; right: 20px;
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 99px;
+    font-size: 13px; font-weight: 600;
+    z-index: 100;
+  }
+  .user-bar span { color: var(--neon); }
+  .logout-btn {
+    background: transparent; color: var(--danger); border: none;
+    font-size: 12px; font-weight: 700; cursor: pointer; padding: 0;
+    text-transform: uppercase;
+  }
+
+  /* === LEFT SECTION (Info & Copywriting) === */
+  .info-section { flex: 1; max-width: 520px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700; color: var(--neon);
+    background: var(--neon-soft); border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 7px 16px; border-radius: 99px; margin-bottom: 24px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    animation: pulseBadge 2s infinite;
+  }
+  @keyframes pulseBadge {
+    0% { box-shadow: 0 0 15px rgba(0, 210, 255, 0.15); }
+    50% { box-shadow: 0 0 25px rgba(0, 210, 255, 0.4); }
+    100% { box-shadow: 0 0 15px rgba(0, 210, 255, 0.15); }
+  }
+
+  .info-section h1 {
+    font-size: 54px; font-weight: 800; line-height: 1.1;
+    letter-spacing: -1.5px; margin-bottom: 20px;
+  }
+  .info-section h1 span { color: var(--neon); text-shadow: 0 0 30px var(--neon-glow); }
+  .info-section .subheadline { font-size: 17px; color: #a0aec0; line-height: 1.6; margin-bottom: 32px; }
+  .info-section .subheadline strong { color: #fff; font-weight: 600; }
   
-  .form-group {
-    margin-bottom: 16px;
+  .features { display: flex; flex-direction: column; gap: 16px; }
+  .feature-item { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 500; color: #cbd5e1; }
+  .feature-item svg { width: 22px; height: 22px; color: var(--neon); flex-shrink: 0; }
+
+  /* === RIGHT SECTION (Form) === */
+  .form-section {
+    flex: 1; max-width: 460px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 36px 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
   }
-  .form-group label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 6px;
+
+  .promo-banner {
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent);
+    border-left: 3px solid var(--neon); padding: 14px 16px;
+    border-radius: 8px; margin-bottom: 24px; font-size: 13.5px; color: #e2e8f0;
   }
-  
-  /* Input standar */
+  .promo-banner strong { color: var(--neon); }
+
+  .form-header { margin-bottom: 20px; }
+  .form-header h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .form-header p { font-size: 13px; color: var(--muted); }
+
+  .field { margin-bottom: 20px; }
+  .field > label {
+    display: block; font-size: 12.5px; font-weight: 600; color: var(--muted);
+    margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
   input[type="text"] {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1px solid #d0d7de;
-    border-radius: 4px;
-    outline: none;
-    font-family: inherit;
-    color: #24292f;
-    -webkit-user-select: text;
-    user-select: text;
+    width: 100%; padding: 13px 14px; font-size: 14px;
+    font-family: inherit; background: #060911; color: var(--text);
+    border: 1px solid var(--border); border-radius: 10px; outline: none;
+    -webkit-user-select: text; user-select: text;
   }
-  input[type="text"]:focus {
-    border-color: #0969da; /* Biru standar link */
-    box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
-  }
+  input[type="text"]:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
 
-  /* Node Radio standar */
-  .radio-group {
-    display: flex;
-    gap: 16px;
-    font-size: 14px;
+  /* Node Toggle */
+  .node-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .node-group label {
+    position: relative; padding: 12px; text-align: center;
+    font-size: 13.5px; font-weight: 500; background: #060911;
+    border: 1px solid var(--border); border-radius: 10px;
+    cursor: pointer; transition: all 0.2s; color: var(--muted);
   }
-  .radio-group label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 400;
-    cursor: pointer;
-  }
-  .radio-group input[type="radio"] {
-    cursor: pointer;
-  }
+  .node-group input { position: absolute; opacity: 0; }
+  .node-group label:has(input:checked) { border-color: var(--neon); background: var(--neon-soft); color: var(--text); }
   
-  /* Node V2 Disabled */
-  .radio-group label.disabled {
-    color: #8c959f;
-    cursor: not-allowed;
-    text-decoration: line-through;
+  .node-group label.disabled {
+    opacity: 0.3; cursor: not-allowed; background: #0a0d15;
+    border-color: #1a2338; color: #4a5470; pointer-events: none;
   }
-  .radio-group label.disabled input {
-    cursor: not-allowed;
+  .node-group label.disabled::after {
+    content: "Closed"; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    font-size: 10px; font-weight: 800; color: var(--danger);
   }
 
-  /* Grid RAM (Kotak-kotak biasa) */
-  .ram-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+  /* RAM Grid */
+  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
+  .ram-item { position: relative; }
+  .ram-item input { position: absolute; opacity: 0; }
+  .ram-item label {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 10px 4px; text-align: center; background: #060911;
+    border: 1px solid var(--border); border-radius: 10px;
+    cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
   }
-  .ram-box {
-    position: relative;
-  }
-  .ram-box input {
-    position: absolute;
-    opacity: 0;
-  }
-  .ram-box label {
-    display: block;
-    padding: 10px;
-    border: 1px solid #d0d7de;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.1s;
-  }
-  .ram-box label:hover {
-    background: #f6f8fa;
-  }
-  .ram-box input:checked + label {
-    border-color: #0969da;
-    background: #f0f6ff;
-    box-shadow: inset 0 0 0 1px #0969da;
-  }
+  .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
   
-  /* Teks harga coret */
-  .price-old {
-    display: block;
-    font-size: 11px;
-    color: #8c959f;
-    text-decoration: line-through;
-    margin-top: 2px;
-  }
-  .price-new {
-    display: block;
-    font-weight: 600;
-    color: #1a7f37; /* Hijau harga */
+  .ram-item .ram-price-discount { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+  .ram-item .price-old { font-size: 9.5px; color: #4a5470; text-decoration: line-through; }
+  .ram-item .price-new { font-size: 12px; font-weight: 700; color: var(--neon); }
+
+  .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); }
+  
+  .discount-badge {
+    position: absolute; top: 0; right: 0; background: var(--danger);
+    color: white; font-size: 8px; font-weight: 700; padding: 2px 4px;
+    border-bottom-left-radius: 6px;
   }
 
-  /* Ringkasan Total */
-  .summary-box {
-    margin-top: 16px;
-    padding: 12px;
-    background: #f6f8fa;
-    border: 1px solid #d0d7de;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
+  /* Total Box */
+  .total {
+    margin-top: 24px; padding: 16px; background: #060911;
+    border: 1px solid var(--border); border-radius: 12px;
+    display: flex; justify-content: space-between; align-items: center;
   }
-  .summary-text span {
-    display: block;
-    font-size: 12px;
-    color: #57606a;
+  .total-label { font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 600;}
+  .total-info { font-size: 12px; color: #4a5470; margin-top: 4px; }
+  .total-price-wrapper { display: flex; flex-direction: column; align-items: flex-end; }
+  .total-old-price { font-size: 12px; color: var(--danger); text-decoration: line-through; display: none; }
+  .total-price { font-size: 24px; font-weight: 700; color: var(--neon); }
+
+  /* Button */
+  button[type="submit"] {
+    width: 100%; margin-top: 20px; padding: 15px;
+    background: var(--neon); color: #001a1f; font-weight: 800;
+    font-size: 15px; border: none; border-radius: 10px; cursor: pointer;
+    text-transform: uppercase; transition: all 0.2s;
   }
-  .summary-price {
-    text-align: right;
-  }
-  .summary-price .old {
-    font-size: 12px;
-    color: #cf222e; /* Merah coret */
-    text-decoration: line-through;
-    display: block;
-  }
-  .summary-price .new {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1a7f37;
+  button[type="submit"]:hover { background: var(--neon-hover); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .wrapper { flex-direction: column; gap: 40px; }
+    .info-section { text-align: center; }
+    .info-section h1 { font-size: 38px; }
+    .features { display: none; }
+    .form-section { width: 100%; }
+    .user-bar { top: 10px; right: 10px; }
   }
 
-  /* Tombol Submit standar */
-  button {
-    width: 100%;
-    margin-top: 16px;
-    padding: 10px;
-    background: #1f883d; /* Hijau tombol GitHub */
-    color: white;
-    border: 1px solid rgba(31, 35, 40, 0.15);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    font-family: inherit;
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: #0b101c; color: var(--neon); border: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 12px 20px; border-radius: 10px; opacity: 0; pointer-events: none;
+    transition: all 0.3s; z-index: 2000;
   }
-  button:hover {
-    background: #1a7f37;
-  }
-  button:active {
-    background: #187733;
-  }
-
-  /* Footer info kecil */
-  .footer {
-    padding: 12px 24px;
-    border-top: 1px solid #d0d7de;
-    background: #f6f8fa;
-    font-size: 12px;
-    color: #57606a;
-    text-align: center;
-  }
-
-  /* Responsif HP */
-  @media (max-width: 700px) {
-    .container { margin: 16px; }
-    .content { flex-direction: column; }
-    .info-area { border-right: none; border-bottom: 1px solid #d0d7de; }
-    .ram-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="header">
-    <h1>Kitzune Store Dashboard</h1>
-    <p>Create and deploy your WhatsApp Bot Panel instantly.</p>
-  </div>
-
-  <div class="content">
-    <!-- KIRI: Info -->
-    <div class="info-area">
-      <h2>Node.js Hosting</h2>
-      <p>High-performance server specifically optimized for WhatsApp bots. Zero downtime, instant deployment.</p>
+<!-- ================= SCREEN 1: AUTH (LOGIN/REGISTER) ================= -->
+<div id="authScreen">
+  <div class="auth-box">
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <h2>Welcome Back</h2>
+      <p>Log in to continue to Kitzune Store.</p>
+      <div class="error-msg" id="loginError">Invalid username or password.</div>
       
-      <ul class="feature-list">
-        <li>Node.js v1 Environment</li>
-        <li>Low latency RAM allocation</li>
-        <li>Unlimited bandwidth (Fair Use)</li>
-        <li>Immediate activation via WhatsApp</li>
-      </ul>
-
-      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #d0d7de;">
-        <h2 style="font-size: 14px;">System Status</h2>
-        <p style="font-size: 12px; color: #1a7f37; margin-bottom: 0;">
-          <svg style="width: 10px; height: 10px; fill: #1a7f37; margin-right: 4px;" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
-          All systems operational
-        </p>
+      <div class="auth-field">
+        <label>Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter your username">
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password">
+      </div>
+      <button class="auth-btn" onclick="doLogin()">Log In</button>
+      
+      <div class="auth-switch">
+        Don't have an account? <a onclick="toggleAuth('register')">Register here</a>
       </div>
     </div>
 
-    <!-- KANAN: Form -->
-    <div class="form-area">
-      <form id="orderForm">
-        <div class="form-group">
-          <label>Username</label>
-          <input type="text" id="nama" placeholder="Enter your desired username" required>
-        </div>
-
-        <div class="form-group">
-          <label>Node.js Version</label>
-          <div class="radio-group">
-            <label><input type="radio" name="node" value="Node.js v1" checked> v1 (Stable)</label>
-            <label class="disabled" title="Out of stock"><input type="radio" name="node" value="Node.js v2" disabled> v2 (Closed)</label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>RAM Allocation</label>
-          <div class="ram-grid">
-            <!-- 1 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r1" value="1GB" data-harga="300" data-harga-asli="5000" checked>
-              <label for="r1">
-                1 GB
-                <span class="price-old">Rp 5.000</span>
-                <span class="price-new">Rp 300</span>
-              </label>
-            </div>
-            <!-- 2 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r2" value="2GB" data-harga="450" data-harga-asli="6000">
-              <label for="r2">
-                2 GB
-                <span class="price-old">Rp 6.000</span>
-                <span class="price-new">Rp 450</span>
-              </label>
-            </div>
-            <!-- 3 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r3" value="3GB" data-harga="600" data-harga-asli="7000">
-              <label for="r3">
-                3 GB
-                <span class="price-old">Rp 7.000</span>
-                <span class="price-new">Rp 600</span>
-              </label>
-            </div>
-            <!-- 4 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r4" value="4GB" data-harga="750" data-harga-asli="8000">
-              <label for="r4">
-                4 GB
-                <span class="price-old">Rp 8.000</span>
-                <span class="price-new">Rp 750</span>
-              </label>
-            </div>
-            <!-- 5 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r5" value="5GB" data-harga="900" data-harga-asli="9000">
-              <label for="r5">
-                5 GB
-                <span class="price-old">Rp 9.000</span>
-                <span class="price-new">Rp 900</span>
-              </label>
-            </div>
-            <!-- 6 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r6" value="6GB" data-harga="1050" data-harga-asli="10000">
-              <label for="r6">
-                6 GB
-                <span class="price-old">Rp 10.000</span>
-                <span class="price-new">Rp 1.050</span>
-              </label>
-            </div>
-            <!-- 7 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r7" value="7GB" data-harga="1200" data-harga-asli="11000">
-              <label for="r7">
-                7 GB
-                <span class="price-old">Rp 11.000</span>
-                <span class="price-new">Rp 1.200</span>
-              </label>
-            </div>
-            <!-- 8 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r8" value="8GB" data-harga="1350" data-harga-asli="12000">
-              <label for="r8">
-                8 GB
-                <span class="price-old">Rp 12.000</span>
-                <span class="price-new">Rp 1.350</span>
-              </label>
-            </div>
-            <!-- 9 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r9" value="9GB" data-harga="1500" data-harga-asli="13000">
-              <label for="r9">
-                9 GB
-                <span class="price-old">Rp 13.000</span>
-                <span class="price-new">Rp 1.500</span>
-              </label>
-            </div>
-            <!-- 10 GB -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="r10" value="10GB" data-harga="1700" data-harga-asli="15000">
-              <label for="r10">
-                10 GB
-                <span class="price-old">Rp 15.000</span>
-                <span class="price-new">Rp 1.700</span>
-              </label>
-            </div>
-            <!-- Unlimited -->
-            <div class="ram-box">
-              <input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000" data-harga-asli="50000">
-              <label for="runli">
-                Unli
-                <span class="price-old">Rp 50.000</span>
-                <span class="price-new">Rp 2.000</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="summary-box">
-          <div class="summary-text">
-            Total Payment
-            <span id="orderInfo">1 GB / Node.js v1</span>
-          </div>
-          <div class="summary-price">
-            <span class="old" id="totalOldPrice">Rp 5.000</span>
-            <span class="new" id="totalText">Rp 300</span>
-          </div>
-        </div>
-
-        <button type="submit" id="submitBtn">Checkout via WhatsApp</button>
-      </form>
+    <!-- REGISTER FORM (HIDDEN BY DEFAULT) -->
+    <div id="registerForm" style="display: none;">
+      <h2>Create Account</h2>
+      <p>Join Kitzune Store to order your panel.</p>
+      <div class="error-msg" id="regError">Passwords do not match.</div>
+      
+      <div class="auth-field">
+        <label>Username</label>
+        <input type="text" id="regUsername" placeholder="Choose a username">
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Create a password">
+      </div>
+      <div class="auth-field">
+        <label>Confirm Password</label>
+        <input type="password" id="regConfirmPassword" placeholder="Repeat your password">
+      </div>
+      <button class="auth-btn" onclick="doRegister()">Register & Login</button>
+      
+      <div class="auth-switch">
+        Already have an account? <a onclick="toggleAuth('login')">Log in</a>
+      </div>
     </div>
-  </div>
-
-  <div class="footer">
-    &copy; 2024 Kitzune Store. Built for performance.
   </div>
 </div>
 
+<!-- ================= SCREEN 2: MAIN APP ================= -->
+<div id="mainApp">
+  
+  <!-- Top Bar User -->
+  <div class="user-bar">
+    Logged in as <span id="displayUser">User</span>
+    <button class="logout-btn" onclick="doLogout()">Logout</button>
+  </div>
+
+  <div class="main-container">
+    <div class="wrapper">
+      
+      <!-- LEFT: Info -->
+      <div class="info-section">
+        <div class="badge">MASSIVE CLEARANCE SALE</div>
+        <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
+        <p class="subheadline">
+          No coding skills required. <strong>Choose your plan, pay with pocket change, and let your bot run 24/7 non-stop.</strong>
+        </p>
+        
+        <div class="features">
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>Supports Node.js v1 (Most Stable)</span>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <span>Up to 90% OFF (Cheaper than coffee)</span>
+          </div>
+          <div class="feature-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            <span>Instant Activation, Ready to Use</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="form-section">
+        <div class="promo-banner">
+          <strong>Crazy Discount!</strong> All RAM packages are up to 90% OFF today.
+        </div>
+
+        <div class="form-header">
+          <h2>Secure Your Slot Now</h2>
+          <p>Fill in the details below, your order will be sent to admin.</p>
+        </div>
+
+        <form id="orderForm">
+          <div class="field">
+            <label>Username (Auto-filled)</label>
+            <input type="text" id="orderNama" readonly style="opacity: 0.7; cursor: not-allowed;">
+          </div>
+
+          <div class="field">
+            <label>Node.js Version</label>
+            <div class="node-group">
+              <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
+              <label class="disabled"><input type="radio" name="node" value="Node.js v2" disabled>Node.js v2</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Select RAM Capacity</label>
+            <div class="ram-grid">
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r1" value="1GB" data-harga="300" data-harga-asli="5000" checked>
+                <label for="r1">
+                  <span class="discount-badge">94% OFF</span>
+                  <span class="ram-name">1 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 5,000</span>
+                    <span class="price-new">Rp 300</span>
+                  </div>
+                </label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r2" value="2GB" data-harga="450" data-harga-asli="6000">
+                <label for="r2"><span class="discount-badge">92% OFF</span><span class="ram-name">2 GB</span><div class="ram-price-discount"><span class="price-old">Rp 6,000</span><span class="price-new">Rp 450</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r3" value="3GB" data-harga="600" data-harga-asli="7000">
+                <label for="r3"><span class="discount-badge">91% OFF</span><span class="ram-name">3 GB</span><div class="ram-price-discount"><span class="price-old">Rp 7,000</span><span class="price-new">Rp 600</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r4" value="4GB" data-harga="750" data-harga-asli="8000">
+                <label for="r4"><span class="discount-badge">90% OFF</span><span class="ram-name">4 GB</span><div class="ram-price-discount"><span class="price-old">Rp 8,000</span><span class="price-new">Rp 750</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r5" value="5GB" data-harga="900" data-harga-asli="9000">
+                <label for="r5"><span class="discount-badge">90% OFF</span><span class="ram-name">5 GB</span><div class="ram-price-discount"><span class="price-old">Rp 9,000</span><span class="price-new">Rp 900</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r6" value="6GB" data-harga="1050" data-harga-asli="10000">
+                <label for="r6"><span class="discount-badge">89% OFF</span><span class="ram-name">6 GB</span><div class="ram-price-discount"><span class="price-old">Rp 10,000</span><span class="price-new">Rp 1,050</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r7" value="7GB" data-harga="1200" data-harga-asli="11000">
+                <label for="r7"><span class="discount-badge">89% OFF</span><span class="ram-name">7 GB</span><div class="ram-price-discount"><span class="price-old">Rp 11,000</span><span class="price-new">Rp 1,200</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r8" value="8GB" data-harga="1350" data-harga-asli="12000">
+                <label for="r8"><span class="discount-badge">88% OFF</span><span class="ram-name">8 GB</span><div class="ram-price-discount"><span class="price-old">Rp 12,000</span><span class="price-new">Rp 1,350</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r9" value="9GB" data-harga="1500" data-harga-asli="13000">
+                <label for="r9"><span class="discount-badge">88% OFF</span><span class="ram-name">9 GB</span><div class="ram-price-discount"><span class="price-old">Rp 13,000</span><span class="price-new">Rp 1,500</span></div></label>
+              </div>
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r10" value="10GB" data-harga="1700" data-harga-asli="15000">
+                <label for="r10"><span class="discount-badge">88% OFF</span><span class="ram-name">10 GB</span><div class="ram-price-discount"><span class="price-old">Rp 15,000</span><span class="price-new">Rp 1,700</span></div></label>
+              </div>
+              <div class="ram-item unli">
+                <input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000" data-harga-asli="50000">
+                <label for="runli"><span class="discount-badge">96% OFF</span><span class="ram-name">Unlimited</span><div class="ram-price-discount"><span class="price-old">Rp 50,000</span><span class="price-new">Rp 2,000</span></div></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="total" id="totalBox">
+            <div>
+              <div class="total-label">Total Payment</div>
+              <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
+            </div>
+            <div class="total-price-wrapper">
+              <div class="total-old-price" id="totalOldPrice">Rp 5,000</div>
+              <div class="total-price" id="totalText">Rp 300</div>
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn">Get Panel Now</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
 <script>
   const ADMIN_WA = "6288906198025";
+  
+  // --- SISTEM AUTHENTIKASI (LOCALSTORAGE) ---
+  function toggleAuth(type) {
+    document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
+    document.getElementById('loginError').style.display = 'none';
+    document.getElementById('regError').style.display = 'none';
+  }
+
+  function doRegister() {
+    const user = document.getElementById('regUsername').value.trim();
+    const pass = document.getElementById('regPassword').value;
+    const confirmPass = document.getElementById('regConfirmPassword').value;
+    const err = document.getElementById('regError');
+
+    if (!user || !pass) {
+      err.textContent = "Username and password cannot be empty.";
+      err.style.display = "block";
+      return;
+    }
+    if (pass !== confirmPass) {
+      err.textContent = "Passwords do not match!";
+      err.style.display = "block";
+      return;
+    }
+
+    // Simpan ke localStorage (Dummy database)
+    localStorage.setItem('kitzune_user', user);
+    localStorage.setItem('kitzune_pass', pass);
+    
+    // Auto Login
+    loginSuccess(user);
+  }
+
+  function doLogin() {
+    const user = document.getElementById('loginUsername').value.trim();
+    const pass = document.getElementById('loginPassword').value;
+    const err = document.getElementById('loginError');
+
+    const savedUser = localStorage.getItem('kitzune_user');
+    const savedPass = localStorage.getItem('kitzune_pass');
+
+    if (user === savedUser && pass === savedPass && user !== null) {
+      loginSuccess(user);
+    } else {
+      err.textContent = "Invalid username or password.";
+      err.style.display = "block";
+    }
+  }
+
+  function loginSuccess(username) {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'flex';
+    
+    // Set username ke UI
+    document.getElementById('displayUser').textContent = username;
+    document.getElementById('orderNama').value = username;
+    
+    showToast(`Welcome, ${username}!`);
+    updateTotal();
+  }
+
+  function doLogout() {
+    // Hapus session (bukan akunnya, cuma balik ke layar login)
+    document.getElementById('authScreen').style.display = 'flex';
+    document.getElementById('mainApp').style.display = 'none';
+    
+    // Reset form login
+    document.getElementById('loginUsername').value = '';
+    document.getElementById('loginPassword').value = '';
+    toggleAuth('login');
+  }
+
+  // Cek apakah udah pernah login sebelumnya
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedUser = localStorage.getItem('kitzune_user');
+    if (savedUser) {
+      // Jika ada data, kita biarin dia harus login manual lagi (karena kita gak simpan session)
+      // Kalo mau auto-login tiap refresh, tinggal panggil loginSuccess(savedUser); di sini
+    }
+  });
+
+  // --- SISTEM ORDER ---
   const form = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
   const totalOldPrice = document.getElementById("totalOldPrice");
   const orderInfo = document.getElementById("orderInfo");
+  const totalBox = document.getElementById("totalBox");
+  const submitBtn = document.getElementById("submitBtn");
+  const toast = document.getElementById("toast");
 
-  // Proteksi dasar
-  document.addEventListener("contextmenu", e => e.preventDefault());
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2000);
+  }
 
-  const rupiah = n => "Rp " + n.toLocaleString("id-ID");
+  const rupiah = n => "Rp " + n.toLocaleString("en-US");
 
   function getOrder() {
     const ramEl = form.querySelector('input[name="ram"]:checked');
@@ -467,7 +572,8 @@
     const { ram, harga, hargaAsli, node } = getOrder();
     totalText.textContent = rupiah(harga);
     totalOldPrice.textContent = rupiah(hargaAsli);
-    orderInfo.textContent = `${ram} / ${node}`;
+    totalOldPrice.style.display = "block";
+    orderInfo.textContent = `RAM ${ram} / ${node}`;
   }
 
   form.addEventListener("change", e => {
@@ -476,40 +582,33 @@
     }
   });
 
-  updateTotal();
-
-  // Submit
   form.addEventListener("submit", e => {
     e.preventDefault();
-    const nama = document.getElementById("nama").value.trim();
-    if (!nama) {
-      alert("Please enter a username.");
-      document.getElementById("nama").focus();
-      return;
-    }
+    const nama = document.getElementById("orderNama").value;
 
     const { ram, harga, node } = getOrder();
     
-    // Format WA gak pakai bahasa lebay
-    const pesan = `*NEW ORDER*
+    const pesan = `*NEW ORDER - KITZUNE STORE*
 -----------------------------------
-Username: ${nama}
-Node: ${node}
-RAM: ${ram}
-Total: ${rupiah(harga)}
+Hello Admin, I would like to order a panel with the following details:
+
+*Name* ${nama}
+*Node Version* ${node}
+*RAM Capacity* ${ram}
+
+*TOTAL PAYMENT* ${rupiah(harga)}
 -----------------------------------
-Please activate my panel. Thanks.`;
+Please proceed with the activation. Thank you!`;
+
+    submitBtn.textContent = "Processing...";
+    submitBtn.disabled = true;
 
     const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
 
-    const btn = document.getElementById("submitBtn");
-    btn.textContent = "Redirecting...";
-    btn.disabled = true;
-
     setTimeout(() => {
       window.open(url, "_blank");
-      btn.textContent = "Checkout via WhatsApp";
-      btn.disabled = false;
+      submitBtn.textContent = "Get Panel Now";
+      submitBtn.disabled = false;
     }, 500);
   });
 </script>
