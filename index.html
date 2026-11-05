@@ -189,9 +189,7 @@
       <br>
       <table>
         <thead><tr><th>Email</th><th>Saldo</th><th>Aksi</th></tr></thead>
-        <tbody id="userTableBody">
-          <!-- Data user akan muncul di sini -->
-        </tbody>
+        <tbody id="userTableBody"></tbody>
       </table>
     </div>
   </div>
@@ -253,7 +251,6 @@
     document.getElementById('btnRegister').disabled = true;
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-      // Simpan user ke database dengan saldo 0
       await setDoc(doc(db, "users", userCredential.user.uid), {
         email: email,
         balance: 0
@@ -301,12 +298,10 @@
       document.getElementById('authScreen').style.display = 'none';
 
       if (user.email === ADMIN_EMAIL) {
-        // TAMPILAN ADMIN
         document.getElementById('adminApp').style.display = 'block';
         document.getElementById('mainApp').style.display = 'none';
         loadAdminData();
       } else {
-        // TAMPILAN USER
         document.getElementById('mainApp').style.display = 'block';
         document.getElementById('adminApp').style.display = 'none';
         
@@ -314,7 +309,6 @@
         await updateUserBalanceUI(user.uid);
       }
     } else {
-      // LOGOUT
       document.getElementById('authScreen').style.display = 'flex';
       document.getElementById('mainApp').style.display = 'none';
       document.getElementById('adminApp').style.display = 'none';
@@ -362,7 +356,7 @@
 
     await updateDoc(docRef, { balance: currentBalance + amount });
     alert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${email}`);
-    loadAdminData(); // Refresh tabel
+    loadAdminData();
   }
 
   // --- FUNGSI ORDER PANEL (USER) ---
@@ -377,14 +371,12 @@
 
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    
     if (!currentUser) return;
     
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
     const harga = parseInt(ramEl.dataset.harga);
     const username = currentUser.email.split('@')[0];
     
-    // 1. Cek Saldo
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
     const saldo = docSnap.data().balance || 0;
@@ -396,40 +388,34 @@
 
     if (!confirm(`Yakin beli panel RAM ${ramEl.value} seharga Rp ${harga.toLocaleString()}?`)) return;
 
-    // Tampilkan loading
     const submitBtn = document.getElementById("submitBtn");
     submitBtn.disabled = true;
     submitBtn.textContent = "Memproses Panel...";
 
     try {
-      // 2. Panggil API Backend buat bikin panel (PASTIKAN API BACKEND SUDAH ADA)
       const response = await fetch('/api/create-panel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           email: currentUser.email, 
           username: username,
-          ram: ramEl.value.replace("GB", "").replace("Unlimited", "0"), // Ambil angka aja
-          harga: harga,
-          uid: currentUser.uid
+          ram: ramEl.value
         })
       });
 
       const data = await response.json();
 
       if (!data.success) {
-        throw new Error(data.error || "Gagal membuat panel. Pastikan API backend sudah terpasang di Vercel.");
+        throw new Error(data.error || "Gagal membuat panel.");
       }
 
-      // 3. Potong Saldo User
       await updateDoc(docRef, { balance: saldo - harga });
       await updateUserBalanceUI(currentUser.uid);
 
-      // 4. Tampilkan Data Login ke User
       alert(`PANEL BERHASIL DIBUAT!\n\nLink: https://srv2.cristall.my.id\nUsername: ${data.username}\nPassword: ${data.password}\n\nSilakan login dan ganti password Anda.`);
 
     } catch (error) {
-      alert(error.message);
+      alert("Error: " + error.message);
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Beli Panel";
