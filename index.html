@@ -215,6 +215,23 @@
   }
   @keyframes dotIn { from { transform: scale(0); } to { transform: scale(1); } }
 
+  /* FITUR BARU: Style buat Node yang abu-abu / Disabled */
+  .node-group label.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #0a0d15;
+    border-color: #1a2338;
+    color: #4a5470;
+    pointer-events: none; /* Biar beneran gabisa diklik */
+  }
+  .node-group label.disabled::after {
+    content: "Closed"; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    font-size: 10px; font-weight: 800; color: var(--danger);
+    letter-spacing: 1px; text-transform: uppercase;
+    opacity: 0.8;
+  }
+
   /* RAM Grid */
   .ram-grid {
     display: grid;
@@ -419,7 +436,7 @@
         <div class="features">
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            <span>Supports Node.js v1 & v2 (Most Stable)</span>
+            <span>Supports Node.js v1 (Most Stable)</span>
           </div>
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
@@ -455,7 +472,8 @@
             <label>Node.js Version</label>
             <div class="node-group">
               <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
-              <label><input type="radio" name="node" value="Node.js v2">Node.js v2</label>
+              <!-- NODE V2 DISABLED -->
+              <label class="disabled"><input type="radio" name="node" value="Node.js v2" disabled>Node.js v2</label>
             </div>
           </div>
 
@@ -743,7 +761,7 @@
   }
 
   // --- RIPPLE ---
-  document.querySelectorAll(".ram-item label, .node-group label, #submitBtn").forEach(el => {
+  document.querySelectorAll(".ram-item label, .node-group label:not(.disabled), #submitBtn").forEach(el => {
     el.addEventListener("pointerdown", e => {
       const rect = el.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
@@ -776,7 +794,6 @@
     totalText.textContent = rupiah(harga);
     orderInfo.textContent = `RAM ${ram} / ${node}`;
 
-    // Selalu tampilkan harga coret karena semua paket didiskon
     totalOldPrice.textContent = rupiah(hargaAsli);
     totalOldPrice.style.display = "block";
 
@@ -798,7 +815,7 @@
 
   updateTotal(false);
 
-  // --- SUBMIT TO WA (ENGLISH INVOICE STYLE) ---
+  // --- SUBMIT TO WA ---
   form.addEventListener("submit", e => {
     e.preventDefault();
     const nama = document.getElementById("nama").value.trim();
