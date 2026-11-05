@@ -150,13 +150,22 @@
   .dash-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px; }
   .dash-card h3 svg { width: 18px; height: 18px; color: var(--accent); }
   
-  .panel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--glass-border); }
+  .panel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--glass-border); }
   .panel-list-item:last-child { border-bottom: none; }
-  .panel-details h4 { font-size: 14.5px; font-weight: 700; color: #fff; }
-  .panel-details p { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .panel-status { padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  .panel-details h4 { font-size: 15px; font-weight: 700; color: #fff; }
+  .panel-details p { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  
+  .panel-actions { display: flex; align-items: center; gap: 12px; }
+  .panel-status { padding: 5px 12px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
   .status-active { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
-  .status-expired { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+  
+  /* TOMBOL MANAGE BARU */
+  .btn-manage { 
+    background: var(--accent); color: #001a1f; border: none; padding: 6px 14px; 
+    border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; 
+    text-transform: uppercase; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .btn-manage:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 4px 10px var(--accent-glow); }
 
   .history-item { padding: 14px 0; border-bottom: 1px solid var(--glass-border); }
   .history-item:last-child { border-bottom: none; }
@@ -433,7 +442,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCjhtqP_oVnT9C_fgu1FFlKCDxnlEIrWM4",
@@ -477,14 +486,13 @@
     document.getElementById('regError').style.display = 'none';
   }
 
-  // --- MAIN TAB SWITCHER (Dashboard / Order) ---
   window.switchMainTab = (tab) => {
     if (tab === 'dashboard') {
       document.getElementById('navDash').classList.add('active');
       document.getElementById('navOrder').classList.remove('active');
       document.getElementById('tabContentDashboard').style.display = 'block';
       document.getElementById('tabContentOrder').style.display = 'none';
-      loadUserDashboard(); // Load data
+      loadUserDashboard(); 
     } else {
       document.getElementById('navDash').classList.remove('active');
       document.getElementById('navOrder').classList.add('active');
@@ -493,7 +501,6 @@
     }
   };
 
-  // --- ORDER TAB SWITCHER (New / Add) ---
   window.switchOrderTab = (mode) => {
     currentMode = mode;
     if (mode === 'new') {
@@ -583,7 +590,7 @@
         document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
         
         await updateUserBalanceUI(user.uid);
-        switchMainTab('dashboard'); // Default ke dashboard
+        switchMainTab('dashboard'); 
       }
     } else {
       document.getElementById('authScreen').style.display = 'flex';
@@ -602,12 +609,10 @@
     }
   }
 
-  // --- LOAD DATA DASHBOARD USER ---
   async function loadUserDashboard() {
     if (!currentUser) return;
 
     try {
-      // Ambil Riwayat Transaksi
       const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
       const querySnapshot = await getDocs(q);
       
@@ -615,7 +620,6 @@
       let htmlPanel = "";
       let totalPanel = 0;
 
-      // Sort manual karena butuh index bawaan firestore kalo pake orderBy
       let docs = querySnapshot.docs.map(d => d.data());
       docs.sort((a, b) => b.createdAt - a.createdAt);
 
@@ -634,8 +638,7 @@
           </div>
         `;
 
-        // Render List Panel (Cuma mode 'new' atau 'add' yg masih aktif)
-        // Cek masa aktif (30 hari)
+        // Render List Panel (Masa Aktif 30 Hari)
         const now = Date.now();
         const msInDay = 24 * 60 * 60 * 1000;
         const daysPassed = Math.floor((now - data.createdAt) / msInDay);
@@ -643,13 +646,20 @@
 
         if (daysLeft > 0) {
           totalPanel++;
+          // TOMBOL MANAGE DITAMBAHKAN DI SINI
           htmlPanel += `
             <div class="panel-list-item">
               <div class="panel-details">
                 <h4>${data.namaPanel}</h4>
                 <p>${data.ram} • Sisa ${daysLeft} Hari</p>
               </div>
-              <div class="panel-status status-active">Aktif</div>
+              <div class="panel-actions">
+                <div class="panel-status status-active">Aktif</div>
+                <button class="btn-manage" onclick="managePanel('${data.namaPanel}')">
+                  Manage
+                  <svg style="width:12px; height:12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+              </div>
             </div>
           `;
         }
@@ -671,6 +681,19 @@
       console.error("Error load dashboard:", error);
     }
   }
+
+  // --- FUNGSI MANAGE PANEL (KE PTERODACTYL) ---
+  window.managePanel = (username) => {
+    // Copy username ke clipboard
+    const textToCopy = `${username}@kitzunemarket.com`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      alert(`Username (${textToCopy}) berhasil disalin!\n\nAnda akan diarahkan ke halaman login panel. Silakan paste username di kolom login.`);
+      window.open("https://srv2.cristall.my.id", "_blank");
+    }).catch(err => {
+      alert("Gagal menyalin username. Silakan buka panel manual dan ketik username Anda.");
+      window.open("https://srv2.cristall.my.id", "_blank");
+    });
+  };
 
   // --- FUNGSI ADMIN ---
   async function loadAdminData() {
