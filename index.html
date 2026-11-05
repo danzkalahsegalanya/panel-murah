@@ -28,22 +28,15 @@
     -webkit-user-select: none; -moz-user-select: none; user-select: none;
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
-    
     background-image: 
       linear-gradient(to bottom, rgba(5, 8, 15, 0.7), rgba(5, 8, 15, 0.9)),
       url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-size: cover; background-position: center; background-attachment: fixed;
   }
 
-  /* === LIQUID GLASS CLASS === */
   .liquid-glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-top: 1px solid var(--glass-highlight);
+    background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight);
     border-left: 1px solid var(--glass-highlight);
     box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
   }
@@ -59,7 +52,6 @@
   
   .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
   .auth-box { width: 100%; max-width: 380px; padding: 40px 32px; border-radius: 24px; }
-  
   .auth-box h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
   .auth-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
   .auth-field { margin-bottom: 20px; }
@@ -67,160 +59,118 @@
   
   .glass-input {
     width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500;
-    background: rgba(0,0,0,0.3); color: #fff; 
-    border: 1px solid var(--glass-border); border-radius: 12px; 
-    outline: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-family: inherit;
+    background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--glass-border); 
+    border-radius: 12px; outline: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-family: inherit;
   }
-  .glass-input:focus { 
-    background: rgba(0,0,0,0.5);
-    border-color: var(--accent); 
-    box-shadow: 0 0 0 4px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.05); 
-  }
+  .glass-input:focus { background: rgba(0,0,0,0.5); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); }
   .glass-input::placeholder { color: #64748b; }
 
   .auth-btn { width: 100%; padding: 15px; background: var(--accent); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: all 0.3s; position: relative; overflow: hidden; }
   .auth-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px var(--accent-glow); }
-  .auth-btn:active { transform: scale(0.97); }
-  
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--accent); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
-  /* === MAIN APP (USER) === */
+  /* === MAIN APP === */
   #mainApp { display: none; flex-direction: column; min-height: 100vh; }
   
-  /* HEADER BARU (TOP BAR) */
+  /* HEADER BARU */
   .top-header {
-    position: absolute; top: 24px; left: 24px; right: 24px;
+    position: sticky; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
-    z-index: 100;
+    padding: 16px 24px; z-index: 100;
+    background: rgba(5, 8, 15, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border);
   }
   
-  /* Profile Card */
-  .profile-card {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 16px; border-radius: 99px;
-  }
+  .profile-card { display: flex; align-items: center; gap: 12px; }
   .avatar {
     width: 38px; height: 38px; border-radius: 50%;
     background: linear-gradient(135deg, var(--accent), #0077ff);
     display: flex; align-items: center; justify-content: center;
-    font-weight: 800; color: #001a1f; font-size: 16px;
-    box-shadow: 0 0 10px var(--accent-glow);
+    font-weight: 800; color: #001a1f; font-size: 16px; box-shadow: 0 0 10px var(--accent-glow);
   }
   .profile-info { display: flex; flex-direction: column; }
-  .profile-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .profile-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .profile-info strong { font-size: 14px; color: #fff; font-weight: 700; }
-  .logout-btn { background: rgba(239,68,68,.15); color: #fca5a5; border: 1px solid rgba(239,68,68,.3); font-size: 12px; font-weight: 700; cursor: pointer; padding: 8px 14px; border-radius: 99px; transition: all 0.2s; margin-left: 8px; }
+  .logout-btn { background: rgba(239,68,68,.15); color: #fca5a5; border: 1px solid rgba(239,68,68,.3); font-size: 12px; font-weight: 700; cursor: pointer; padding: 8px 14px; border-radius: 99px; transition: all 0.2s; margin-left: 12px; }
   .logout-btn:hover { background: var(--danger); color: white; }
 
-  /* Balance Card */
-  .balance-card {
-    display: flex; align-items: center; gap: 16px;
-    padding: 10px 16px; border-radius: 99px;
-  }
+  .header-right { display: flex; align-items: center; gap: 16px; }
   .balance-info { display: flex; flex-direction: column; text-align: right; }
-  .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; }
-  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
+  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; transition: all 0.2s; }
   .topup-btn:hover { background: #34d399; transform: translateY(-2px); }
 
-  /* Content */
-  .main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 100px 20px 60px; position: relative; z-index: 1; }
-  .wrapper { display: flex; width: 100%; max-width: 1100px; gap: 60px; align-items: center; justify-content: center; }
+  /* NAV MENU */
+  .nav-menu { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--glass-border); width: fit-content; }
+  .nav-btn { padding: 10px 24px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13.5px; border-radius: 10px; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+  .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  .nav-btn.active { background: var(--accent); color: #001a1f; box-shadow: 0 4px 15px var(--accent-glow); }
+
+  /* Content Container */
+  .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
   
-  /* Kiri: Info */
+  /* TAB CONTENT: ORDER */
+  #tabContentOrder { display: none; }
+  .wrapper-order { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
   .info-section { flex: 1; max-width: 520px; }
-  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(0,229,255,.3); padding: 8px 16px; border-radius: 99px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(5px); }
-  .info-section h1 { font-size: 54px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+  .info-section h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; }
   .info-section h1 span { color: var(--accent); }
-  .info-section .subheadline { font-size: 17px; color: #cbd5e1; line-height: 1.6; margin-bottom: 32px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+  .info-section p { font-size: 16px; color: #cbd5e1; line-height: 1.6; margin-bottom: 32px; }
 
-  /* Kanan: Form */
-  .form-section { flex: 1; max-width: 460px; border-radius: 24px; padding: 36px 32px; }
+  .form-section { flex: 1; max-width: 460px; padding: 36px 32px; border-radius: 24px; }
+  .tab-menu-inner { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--glass-border); }
+  .tab-btn-inner { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; transition: all 0.3s; font-family: inherit; text-transform: uppercase; }
+  .tab-btn-inner.active { background: var(--accent); color: #001a1f; }
+  .field { margin-bottom: 20px; }
+  .field > label { display: block; font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; }
+  .input-group { display: flex; align-items: stretch; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; }
+  .input-group input { flex: 1; border: none; background: transparent; padding: 14px 16px; font-size: 14.5px; color: #fff; outline: none; }
+  .input-group .suffix { padding: 0 16px; color: var(--muted); font-size: 13.5px; background: rgba(0,0,0,0.2); border-left: 1px solid var(--glass-border); display: flex; align-items: center; font-weight: 600; }
   
-  /* Tab Menu */
-  .tab-menu { display: flex; gap: 10px; margin-bottom: 28px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--glass-border); }
-  .tab-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-family: inherit; text-transform: uppercase; letter-spacing: 0.5px; }
-  .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
-  .tab-btn.active { background: var(--accent); color: #001a1f; box-shadow: 0 4px 15px var(--accent-glow); }
-
-  .field { margin-bottom: 22px; }
-  .field > label { display: block; font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-  /* Input Group (Add Server) */
-  .input-group {
-    display: flex; align-items: stretch; background: rgba(0,0,0,0.3);
-    border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden;
-    transition: all 0.3s;
-  }
-  .input-group:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); background: rgba(0,0,0,0.5); }
-  .input-group input {
-    flex: 1; border: none; background: transparent; padding: 14px 16px;
-    font-size: 14.5px; font-weight: 500; color: #fff; outline: none; font-family: inherit;
-  }
-  .input-group input::placeholder { color: #64748b; }
-  .input-group .suffix {
-    padding: 0 16px; color: var(--muted); font-size: 13.5px; background: rgba(0,0,0,0.2);
-    border-left: 1px solid var(--glass-border); display: flex; align-items: center; font-weight: 600;
-  }
-
-  /* Grid RAM */
-  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; }
+  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
   .ram-item input { position: absolute; opacity: 0; }
-  .ram-item label {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 12px 4px; text-align: center; background: rgba(0,0,0,0.3);
-    border: 1px solid var(--glass-border); border-radius: 12px; cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden;
-  }
-  .ram-item .ram-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: #fff; z-index: 2; }
-  .ram-item .price-new { font-size: 11.5px; font-weight: 700; color: var(--muted); transition: color 0.3s; z-index: 2; }
-  
-  .ram-item label:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
-  .ram-item input:checked + label { 
-    border-color: var(--accent); 
-    background: var(--accent-soft); 
-    box-shadow: 0 0 25px -5px var(--accent-glow), inset 0 0 10px rgba(0,229,255,0.1); 
-    transform: translateY(-3px) scale(1.02);
-  }
+  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 10px; cursor: pointer; transition: all 0.3s; }
+  .ram-item .ram-name { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; color: #fff; }
+  .ram-item .price-new { font-size: 11px; font-weight: 700; color: var(--muted); }
+  .ram-item input:checked + label { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px) scale(1.02); box-shadow: 0 0 15px var(--accent-glow); }
   .ram-item input:checked + label .price-new { color: var(--accent); }
 
-  /* Total Box */
-  .total {
-    margin-top: 28px; padding: 20px; background: rgba(0,0,0,0.3);
-    border: 1px solid var(--glass-border); border-radius: 14px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .total span:first-child { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-  .total-price { font-size: 26px; font-weight: 800; color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
+  .total { margin-top: 24px; padding: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .total span:first-child { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
+  .total-price { font-size: 24px; font-weight: 800; color: var(--accent); }
+  button[type="submit"] { width: 100%; margin-top: 20px; padding: 15px; background: var(--accent); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; transition: all 0.3s; position: relative; overflow: hidden; }
+  button[type="submit"]:hover { background: var(--accent-hover); transform: translateY(-2px); }
+  
+  /* TAB CONTENT: DASHBOARD */
+  #tabContentDashboard { display: block; }
+  .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .dash-card { padding: 24px; border-radius: 16px; }
+  .dash-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .dash-card h3 svg { width: 18px; height: 18px; color: var(--accent); }
+  
+  .panel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--glass-border); }
+  .panel-list-item:last-child { border-bottom: none; }
+  .panel-details h4 { font-size: 14.5px; font-weight: 700; color: #fff; }
+  .panel-details p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .panel-status { padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  .status-active { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .status-expired { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
 
-  /* Submit Button */
-  button[type="submit"] {
-    width: 100%; margin-top: 24px; padding: 16px;
-    background: var(--accent); color: #001a1f; font-weight: 800;
-    font-size: 15px; border: none; border-radius: 12px; cursor: pointer;
-    text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 8px 20px -5px var(--accent-glow);
-    position: relative; overflow: hidden;
-  }
-  button[type="submit"]:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 12px 25px -5px rgba(0,229,255,0.4); }
-  button[type="submit"]:active { transform: scale(0.96); }
-
-  /* Ripple Animasi Tombol */
-  .ripple {
-    position: absolute; border-radius: 50%;
-    background: rgba(255,255,255,0.4);
-    transform: scale(0); pointer-events: none;
-    animation: rippleEffect 0.6s linear;
-  }
-  @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+  .history-item { padding: 14px 0; border-bottom: 1px solid var(--glass-border); }
+  .history-item:last-child { border-bottom: none; }
+  .history-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .history-header strong { font-size: 14px; color: #fff; }
+  .history-header span { font-size: 12px; color: var(--accent); font-weight: 700; }
+  .history-details { display: flex; justify-content: space-between; align-items: center; }
+  .history-details p { font-size: 12px; color: var(--muted); }
+  .history-date { font-size: 11px; color: #64748b; }
 
   /* === ADMIN DASHBOARD === */
   #adminApp { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; min-height: 100vh; }
   .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; }
   .admin-header h1 { font-size: 28px; font-weight: 800; color: var(--accent); }
-  .admin-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
   .table-card { border-radius: 16px; padding: 24px; overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; text-align: left; }
   th { padding: 12px; border-bottom: 1px solid var(--glass-border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
@@ -228,18 +178,16 @@
   .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
 
   /* === MODAL SYSTEM === */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
   .modal-overlay.active { display: flex; }
   .modal-content { padding: 32px; border-radius: 24px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   @keyframes popIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
   .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
   .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
   .modal-input { width: 100%; padding: 14px; font-size: 15px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--glass-border); border-radius: 12px; outline: none; margin-bottom: 20px; text-align: center; }
-  .modal-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-
+  
   .panel-data-box { background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; user-select: text; -webkit-user-select: text; }
   .panel-data-box .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
-  .panel-data-box .row:last-child { margin-bottom: 0; }
   .panel-data-box .label { color: var(--muted); }
   .panel-data-box .value { color: var(--accent); font-weight: 700; }
   .warning-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
@@ -247,25 +195,20 @@
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
   .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
   .btn-cancel { background: transparent; border: 1px solid var(--glass-border); color: var(--text); }
-  .btn-cancel:hover { background: rgba(255,255,255,0.1); }
   .btn-confirm { background: var(--accent); color: #001a1f; }
-  .btn-confirm:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
   @media (max-width: 900px) {
     .auth-brand { display: none; } 
-    .top-header { flex-direction: column; align-items: stretch; gap: 10px; position: relative; top: 0; left: 0; right: 0; padding: 20px; }
-    .profile-card, .balance-card { width: 100%; justify-content: space-between; border-radius: 16px; }
-    .wrapper { flex-direction: column; gap: 40px; padding-top: 20px; }
-    .main-container { padding-top: 20px; }
-    .admin-header { flex-direction: column; gap: 15px; align-items: flex-start; }
-    .info-section h1 { font-size: 38px; }
-    .form-section { padding: 28px 20px; }
+    .top-header { flex-direction: column; gap: 16px; padding: 16px; }
+    .profile-card, .header-right { width: 100%; justify-content: space-between; }
+    .wrapper-order { flex-direction: column; }
+    .dashboard-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- ================= SCREEN 1: AUTH ================= -->
+<!-- AUTH SECTION -->
 <div id="authScreen">
   <div class="auth-container">
     <div class="auth-brand">
@@ -279,32 +222,17 @@
         <div id="loginForm">
           <h2>Sign In</h2>
           <div class="error-msg" id="loginError"></div>
-          <div class="auth-field">
-            <label>Email</label>
-            <input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email">
-          </div>
-          <div class="auth-field">
-            <label>Password</label>
-            <input type="password" id="loginPassword" class="glass-input" placeholder="Enter password">
-          </div>
+          <div class="auth-field"><label>Email</label><input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email"></div>
+          <div class="auth-field"><label>Password</label><input type="password" id="loginPassword" class="glass-input" placeholder="Enter password"></div>
           <button class="auth-btn" id="btnLogin" onclick="doLogin(event)">Log In</button>
           <div class="auth-switch">Don't have an account? <a onclick="toggleAuth('register')">Create one</a></div>
         </div>
         <div id="registerForm" style="display: none;">
           <h2>Create Account</h2>
           <div class="error-msg" id="regError"></div>
-          <div class="auth-field">
-            <label>Email</label>
-            <input type="text" id="regEmail" class="glass-input" placeholder="Enter your email">
-          </div>
-          <div class="auth-field">
-            <label>Password</label>
-            <input type="password" id="regPassword" class="glass-input" placeholder="Create a password">
-          </div>
-          <div class="auth-field">
-            <label>Confirm Password</label>
-            <input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password">
-          </div>
+          <div class="auth-field"><label>Email</label><input type="text" id="regEmail" class="glass-input" placeholder="Enter your email"></div>
+          <div class="auth-field"><label>Password</label><input type="password" id="regPassword" class="glass-input" placeholder="Create a password"></div>
+          <div class="auth-field"><label>Confirm Password</label><input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password"></div>
           <button class="auth-btn" id="btnRegister" onclick="doRegister(event)">Register & Login</button>
           <div class="auth-switch">Already have an account? <a onclick="toggleAuth('login')">Log in here</a></div>
         </div>
@@ -313,13 +241,10 @@
   </div>
 </div>
 
-<!-- ================= SCREEN 2: USER APP ================= -->
+<!-- MAIN APP -->
 <div id="mainApp">
-  <!-- HEADER BARU -->
   <div class="top-header">
-    
-    <!-- KIRI: Profile -->
-    <div class="profile-card liquid-glass">
+    <div class="profile-card">
       <div class="avatar" id="userAvatar">U</div>
       <div class="profile-info">
         <span>Logged in as</span>
@@ -328,102 +253,134 @@
       <button class="logout-btn" onclick="doLogout()">Logout</button>
     </div>
 
-    <!-- KANAN: Balance -->
-    <div class="balance-card liquid-glass">
+    <div class="header-right">
       <div class="balance-info">
         <span>My Balance</span>
         <strong id="displayBalance">Rp 0</strong>
       </div>
       <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
     </div>
-    
   </div>
 
   <div class="main-container">
-    <div class="wrapper">
-      <div class="info-section">
-        <div class="badge">LIMITED TIME OFFER</div>
-        <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
-        <p class="subheadline">Buy panel instantly using your balance. Topup via WhatsApp, fast response!</p>
-      </div>
-      <div class="form-section liquid-glass">
+    
+    <!-- NAVIGATION MENU -->
+    <div class="nav-menu liquid-glass">
+      <button class="nav-btn active" id="navDash" onclick="switchMainTab('dashboard')">Dashboard</button>
+      <button class="nav-btn" id="navOrder" onclick="switchMainTab('order')">Beli Panel</button>
+    </div>
+
+    <!-- TAB CONTENT: DASHBOARD -->
+    <div id="tabContentDashboard">
+      <div class="dashboard-grid">
         
-        <!-- TAB MENU -->
-        <div class="tab-menu">
-          <button type="button" class="tab-btn active" id="tabNew" onclick="switchTab('new')">Beli Panel Baru</button>
-          <button type="button" class="tab-btn" id="tabAdd" onclick="switchTab('addserver')">Add Server</button>
+        <!-- Panel Aktif -->
+        <div class="dash-card liquid-glass">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Panel Aktif
+          </h3>
+          <div id="listPanelAktif">
+            <p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada panel aktif.</p>
+          </div>
         </div>
 
-        <form id="orderForm">
-          
-          <!-- INPUT NAMA PANEL (MODE NEW) -->
-          <div class="field" id="fieldName">
-            <label>Nama Panel (Tanpa Spasi)</label>
-            <input type="text" id="customName" class="glass-input" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+        <!-- Riwayat Transaksi -->
+        <div class="dash-card liquid-glass">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Riwayat Transaksi
+          </h3>
+          <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
+            <p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada transaksi.</p>
           </div>
+        </div>
 
-          <!-- INPUT USERNAME ADD SERVER (MODE ADD) -->
-          <div class="field" id="fieldAddUser" style="display: none;">
-            <label>Username Akun Panel Kamu</label>
-            <div class="input-group">
-              <input type="text" id="addUsername" placeholder="Misal: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
-              <span class="suffix">@kitzunemarket.com</span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Node.js Version</label>
-            <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
-          </div>
-          
-          <div class="field">
-            <label>Select RAM Capacity</label>
-            <div class="ram-grid">
-              <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="price-new">Rp 750</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="price-new">Rp 900</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
-            </div>
-          </div>
-          
-          <div class="total">
-            <span>Total Bayar</span>
-            <span class="total-price" id="totalText">Rp 300</span>
-          </div>
-          
-          <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
-        </form>
       </div>
     </div>
+
+    <!-- TAB CONTENT: ORDER -->
+    <div id="tabContentOrder" style="display: none;">
+      <div class="wrapper-order">
+        <div class="info-section">
+          <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
+          <p>Buy panel instantly using your balance. Topup via WhatsApp, fast response!</p>
+        </div>
+        <div class="form-section liquid-glass">
+          
+          <div class="tab-menu-inner">
+            <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">Beli Panel Baru</button>
+            <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
+          </div>
+
+          <form id="orderForm">
+            
+            <div class="field" id="fieldName">
+              <label>Nama Panel (Tanpa Spasi)</label>
+              <input type="text" id="customName" class="glass-input" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+            </div>
+
+            <div class="field" id="fieldAddUser" style="display: none;">
+              <label>Username Akun Panel Kamu</label>
+              <div class="input-group">
+                <input type="text" id="addUsername" placeholder="Misal: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+                <span class="suffix">@kitzunemarket.com</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Node.js Version</label>
+              <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+            </div>
+            
+            <div class="field">
+              <label>Select RAM Capacity</label>
+              <div class="ram-grid">
+                <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="price-new">Rp 750</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="price-new">Rp 900</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
+                <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
+              </div>
+            </div>
+            
+            <div class="total">
+              <span>Total Bayar</span>
+              <span class="total-price" id="totalText">Rp 300</span>
+            </div>
+            
+            <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- ================= SCREEN 3: ADMIN APP ================= -->
+<!-- ADMIN APP -->
 <div id="adminApp">
   <div class="admin-header">
     <h1>Admin Dashboard</h1>
     <button class="logout-btn" onclick="doLogout()">Logout</button>
   </div>
-  <div class="admin-grid">
-    <div class="table-card liquid-glass">
-      <h3>Daftar Pengguna</h3>
-      <br>
-      <table>
-        <thead><tr><th>Email</th><th>Saldo</th><th>Aksi</th></tr></thead>
-        <tbody id="userTableBody"></tbody>
-      </table>
-    </div>
+  <div class="table-card liquid-glass">
+    <h3>Daftar Pengguna</h3>
+    <br>
+    <table>
+      <thead><tr><th>Email</th><th>Saldo</th><th>Aksi</th></tr></thead>
+      <tbody id="userTableBody"></tbody>
+    </table>
   </div>
 </div>
 
-<!-- MODAL TOPUP USER -->
+<!-- MODAL TOPUP -->
 <div id="topupModal" class="modal-overlay">
   <div class="modal-content liquid-glass">
     <h3>Topup Saldo</h3>
@@ -439,8 +396,8 @@
 <!-- MODAL KONFIRMASI -->
 <div id="confirmModal" class="modal-overlay">
   <div class="modal-content liquid-glass">
-    <h3>Konfirmasi Pembelian</h3>
-    <p id="confirmText">Apakah Anda yakin ingin membeli panel ini?</p>
+    <h3>Konfirmasi</h3>
+    <p id="confirmText">Apakah Anda yakin?</p>
     <div class="modal-actions">
       <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
       <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
@@ -451,8 +408,8 @@
 <!-- MODAL SUKSES -->
 <div id="successModal" class="modal-overlay">
   <div class="modal-content liquid-glass">
-    <h3 id="successTitle">Panel Berhasil Dibuat!</h3>
-    <p id="successDesc">Berikut adalah data login panel Anda.</p>
+    <h3 id="successTitle">Berhasil!</h3>
+    <p id="successDesc">Data berhasil diproses.</p>
     
     <div class="panel-data-box" id="panelDataBox">
       <div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div>
@@ -476,9 +433,8 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  // CONFIG FIREBASE LU
   const firebaseConfig = {
     apiKey: "AIzaSyCjhtqP_oVnT9C_fgu1FFlKCDxnlEIrWM4",
     authDomain: "kitzunemarket.firebaseapp.com",
@@ -505,18 +461,15 @@
     const circle = document.createElement("span");
     const diameter = Math.max(btn.clientWidth, btn.clientHeight);
     const radius = diameter / 2;
-    
     circle.style.width = circle.style.height = `${diameter}px`;
     circle.style.left = `${event.clientX - btn.getBoundingClientRect().left - radius}px`;
     circle.style.top = `${event.clientY - btn.getBoundingClientRect().top - radius}px`;
     circle.classList.add("ripple");
-    
     const ripple = btn.getElementsByClassName("ripple")[0];
     if (ripple) { ripple.remove(); }
     btn.appendChild(circle);
   };
 
-  // --- UI LOGIC ---
   window.toggleAuth = (type) => {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
@@ -524,33 +477,44 @@
     document.getElementById('regError').style.display = 'none';
   }
 
-  // --- SWITCH TAB ---
-  window.switchTab = (mode) => {
+  // --- MAIN TAB SWITCHER (Dashboard / Order) ---
+  window.switchMainTab = (tab) => {
+    if (tab === 'dashboard') {
+      document.getElementById('navDash').classList.add('active');
+      document.getElementById('navOrder').classList.remove('active');
+      document.getElementById('tabContentDashboard').style.display = 'block';
+      document.getElementById('tabContentOrder').style.display = 'none';
+      loadUserDashboard(); // Load data
+    } else {
+      document.getElementById('navDash').classList.remove('active');
+      document.getElementById('navOrder').classList.add('active');
+      document.getElementById('tabContentDashboard').style.display = 'none';
+      document.getElementById('tabContentOrder').style.display = 'block';
+    }
+  };
+
+  // --- ORDER TAB SWITCHER (New / Add) ---
+  window.switchOrderTab = (mode) => {
     currentMode = mode;
     if (mode === 'new') {
       document.getElementById('tabNew').classList.add('active');
       document.getElementById('tabAdd').classList.remove('active');
-      
       document.getElementById('fieldName').style.display = 'block';
       document.getElementById('fieldAddUser').style.display = 'none';
-      
       document.getElementById('submitBtn').textContent = "Beli Panel";
       document.getElementById('submitBtn').style.background = "var(--accent)";
       document.getElementById('submitBtn').style.color = "#001a1f";
     } else {
       document.getElementById('tabNew').classList.remove('active');
       document.getElementById('tabAdd').classList.add('active');
-      
       document.getElementById('fieldName').style.display = 'none';
       document.getElementById('fieldAddUser').style.display = 'block';
-      
       document.getElementById('submitBtn').textContent = "Add Server";
       document.getElementById('submitBtn').style.background = "var(--success)";
       document.getElementById('submitBtn').style.color = "#fff";
     }
   }
 
-  // --- REGISTER ---
   window.doRegister = async (event) => {
     if(event) createRipple(event);
     const email = document.getElementById('regEmail').value.trim();
@@ -573,7 +537,6 @@
     }
   }
 
-  // --- LOGIN ---
   window.doLogin = async (event) => {
     if(event) createRipple(event);
     const email = document.getElementById('loginEmail').value.trim();
@@ -589,10 +552,8 @@
     }
   }
 
-  // --- LOGOUT ---
   window.doLogout = () => signOut(auth);
 
-  // --- TOPUP LOGIC ---
   window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
   
   window.proceedTopup = () => {
@@ -604,7 +565,6 @@
     document.getElementById('topupModal').classList.remove('active');
   }
 
-  // --- CEK STATUS LOGIN ---
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
@@ -623,6 +583,7 @@
         document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
         
         await updateUserBalanceUI(user.uid);
+        switchMainTab('dashboard'); // Default ke dashboard
       }
     } else {
       document.getElementById('authScreen').style.display = 'flex';
@@ -633,12 +594,81 @@
     }
   });
 
-  // --- FUNGSI USER ---
   async function updateUserBalanceUI(uid) {
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       document.getElementById('displayBalance').textContent = "Rp " + (docSnap.data().balance || 0).toLocaleString();
+    }
+  }
+
+  // --- LOAD DATA DASHBOARD USER ---
+  async function loadUserDashboard() {
+    if (!currentUser) return;
+
+    try {
+      // Ambil Riwayat Transaksi
+      const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
+      const querySnapshot = await getDocs(q);
+      
+      let htmlRiwayat = "";
+      let htmlPanel = "";
+      let totalPanel = 0;
+
+      // Sort manual karena butuh index bawaan firestore kalo pake orderBy
+      let docs = querySnapshot.docs.map(d => d.data());
+      docs.sort((a, b) => b.createdAt - a.createdAt);
+
+      docs.forEach(data => {
+        // Render Riwayat
+        htmlRiwayat += `
+          <div class="history-item">
+            <div class="history-header">
+              <strong>${data.mode === 'new' ? 'Beli Panel Baru' : 'Add Server'}</strong>
+              <span>Rp ${data.harga.toLocaleString()}</span>
+            </div>
+            <div class="history-details">
+              <p>${data.namaPanel} [${data.ram}]</p>
+              <span class="history-date">${new Date(data.createdAt).toLocaleDateString('id-ID')}</span>
+            </div>
+          </div>
+        `;
+
+        // Render List Panel (Cuma mode 'new' atau 'add' yg masih aktif)
+        // Cek masa aktif (30 hari)
+        const now = Date.now();
+        const msInDay = 24 * 60 * 60 * 1000;
+        const daysPassed = Math.floor((now - data.createdAt) / msInDay);
+        const daysLeft = 30 - daysPassed;
+
+        if (daysLeft > 0) {
+          totalPanel++;
+          htmlPanel += `
+            <div class="panel-list-item">
+              <div class="panel-details">
+                <h4>${data.namaPanel}</h4>
+                <p>${data.ram} • Sisa ${daysLeft} Hari</p>
+              </div>
+              <div class="panel-status status-active">Aktif</div>
+            </div>
+          `;
+        }
+      });
+
+      if (totalPanel === 0) {
+        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada panel aktif.</p>`;
+      } else {
+        document.getElementById('listPanelAktif').innerHTML = htmlPanel;
+      }
+
+      if (docs.length === 0) {
+        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada transaksi.</p>`;
+      } else {
+        document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
+      }
+
+    } catch (error) {
+      console.error("Error load dashboard:", error);
     }
   }
 
@@ -675,7 +705,7 @@
     loadAdminData();
   }
 
-  // --- FUNGSI ORDER PANEL (USER) ---
+  // --- ORDER LOGIC ---
   const orderForm = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
 
@@ -753,23 +783,40 @@
         throw new Error(data.error || "Gagal memproses.");
       }
 
+      // 1. Potong Saldo
       await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
 
+      // 2. Simpan ke Riwayat Transaksi
+      await setDoc(doc(collection(db, "transactions")), {
+        uid: currentUser.uid,
+        email: currentUser.email,
+        mode: pendingOrder.mode,
+        namaPanel: pendingOrder.username,
+        ram: pendingOrder.ram,
+        harga: pendingOrder.harga,
+        createdAt: Date.now()
+      });
+
+      // 3. Tampilkan Modal Sukses
       document.getElementById("resUsername").textContent = data.username;
       
       if (pendingOrder.mode === 'new') {
         document.getElementById("successTitle").textContent = "Panel Berhasil Dibuat!";
-        document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda.";
+        document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda. Masa aktif 1 bulan (30 hari).";
         document.getElementById("resPassword").textContent = data.password;
         document.getElementById("rowPassword").style.display = "flex";
       } else {
         document.getElementById("successTitle").textContent = "Server Berhasil Ditambahkan!";
-        document.getElementById("successDesc").textContent = "Server baru telah masuk ke akun panel Anda.";
+        document.getElementById("successDesc").textContent = "Server baru telah masuk ke akun panel Anda. Masa aktif 1 bulan (30 hari).";
         document.getElementById("rowPassword").style.display = "none";
       }
 
       document.getElementById("successModal").classList.add("active");
+
+      // 4. Reload Dashboard
+      loadUserDashboard();
+      switchMainTab('dashboard');
 
     } catch (error) {
       alert("Error: " + error.message);
