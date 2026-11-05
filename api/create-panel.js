@@ -8,8 +8,9 @@ export default async function handler(req, res) {
   // ================= KONFIGURASI LU =================
   const DOMAIN = "https://srv2.cristall.my.id";
   const API_KEY = "ptla_grahKdZyOpmLrn8AlagBblMEd22PPplOUf662TqtrlR";
-  const NEST_ID = 5;
-  const EGG_ID = 15;
+  
+  const NEST_ID = 5; 
+  const EGG_ID = 15; 
   const LOC_ID = 1;
   // ===================================================
 
@@ -30,11 +31,11 @@ export default async function handler(req, res) {
       cpu = 20 + (gb * 20); 
     }
 
-    // 3. Buat User di Pterodactyl (Email dibikin unik pakai Date.now)
+    // 3. Buat User Pterodactyl (Email Unik)
     const uniqueEmail = `${username}-${Date.now()}@kitzunemarket.com`;
 
     const userRes = await axios.post(`${DOMAIN}/api/application/users`, {
-      email: uniqueEmail, // <--- MENGGUNAKAN EMAIL UNIK
+      email: uniqueEmail,
       username: username.toLowerCase().replace(/[^a-z0-9]/g, ''),
       first_name: username,
       last_name: "Server",
@@ -50,11 +51,19 @@ export default async function handler(req, res) {
 
     const user = userRes.data.attributes;
 
-    // 4. Ambil Startup Command
+    // 4. Ambil Info Egg (Startup CMD, Docker Image, & Environment)
     const eggRes = await axios.get(`${DOMAIN}/api/application/nests/${NEST_ID}/eggs/${EGG_ID}`, {
       headers: { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' }
     });
+    
     const startup_cmd = eggRes.data.attributes.startup;
+    const docker_image = eggRes.data.attributes.docker_image;
+    
+    // Otomatis isi semua environment yang dibutuhin egg (biar gak error "Command Run required")
+    const environment = {};
+    eggRes.data.attributes.relationships.variables.data.forEach(v => {
+      environment[v.attributes.env_variable] = v.attributes.default_value;
+    });
 
     // 5. Buat Server
     const serverRes = await axios.post(`${DOMAIN}/api/application/servers`, {
@@ -62,14 +71,9 @@ export default async function handler(req, res) {
       description: "Created via Web Kitzune Store",
       user: user.id,
       egg: EGG_ID,
-      docker_image: "ghcr.io/parkervcp/yolks:nodejs_18",
+      docker_image: docker_image,
       startup: startup_cmd,
-      environment: {
-        "INST": "npm",
-        "USER_UPLOAD": "0",
-        "AUTO_UPDATE": "0",
-        "CMD_RUN": "npm start"
-      },
+      environment: environment,
       limits: {
         memory: mem,
         swap: 0,
@@ -96,10 +100,22 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
+    // KALAU ERROR, TAMPILKAN PESAN ASLINYA
     console.error("Pterodactyl Error:", error.response?.data || error.message);
+    
+    let errorMsg = "Unknown error";
+    if (error.response?.data?.errors) {
+      // Ambil pesan error paling detail dari Pterodactyl
+      errorMsg = error.response.data.errors.map(e => `${e.code}: ${e.detail}`).join(" | ");
+    } else if (error.response?.data?.error) {
+      errorMsg = error.response.data.error;
+    } else {
+      errorMsg = error.message;
+    }
+
     return res.status(500).json({ 
       success: false, 
-      error: error.response?.data?.errors?.[0]?.detail || error.message 
+      error: errorMsg
     });
   }
 }
