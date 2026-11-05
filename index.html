@@ -159,6 +159,13 @@
               <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
               <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
               <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="price-new">Rp 750</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="price-new">Rp 900</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
               <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
             </div>
           </div>
@@ -201,7 +208,7 @@
   </div>
 </div>
 
-<!-- FIREBASE SDK -->
+<!-- FIREBASE SDK & LOGIC -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -223,7 +230,7 @@
   const db = getFirestore(app);
   
   const ADMIN_EMAIL = "upiljaranmmbu@gmail.com";
-  const ADMIN_WA = "6288906198025";
+  const ADMIN_WA = "6288906198025"; // Ganti dengan nomor WA lu
   let currentUser = null;
 
   // --- UI LOGIC ---
@@ -370,9 +377,14 @@
 
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    
+    if (!currentUser) return;
+    
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
     const harga = parseInt(ramEl.dataset.harga);
+    const username = currentUser.email.split('@')[0];
     
+    // 1. Cek Saldo
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
     const saldo = docSnap.data().balance || 0;
@@ -384,15 +396,44 @@
 
     if (!confirm(`Yakin beli panel RAM ${ramEl.value} seharga Rp ${harga.toLocaleString()}?`)) return;
 
-    // Kurangi saldo
-    await updateDoc(docRef, { balance: saldo - harga });
-    await updateUserBalanceUI(currentUser.uid);
+    // Tampilkan loading
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Memproses Panel...";
 
-    // Kirim WA ke admin
-    const pesan = `*NEW ORDER*\n\nUser: ${currentUser.email}\nRAM: ${ramEl.value}\nTotal: Rp ${harga.toLocaleString()}\n\n(Saldo user telah dipotong otomatis. Mohon buatkan panelnya).`;
-    window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
-    
-    alert("Pesanan berhasil! Admin akan segera memproses panel lu.");
+    try {
+      // 2. Panggil API Backend buat bikin panel (PASTIKAN API BACKEND SUDAH ADA)
+      const response = await fetch('/api/create-panel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: currentUser.email, 
+          username: username,
+          ram: ramEl.value.replace("GB", "").replace("Unlimited", "0"), // Ambil angka aja
+          harga: harga,
+          uid: currentUser.uid
+        })
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Gagal membuat panel. Pastikan API backend sudah terpasang di Vercel.");
+      }
+
+      // 3. Potong Saldo User
+      await updateDoc(docRef, { balance: saldo - harga });
+      await updateUserBalanceUI(currentUser.uid);
+
+      // 4. Tampilkan Data Login ke User
+      alert(`PANEL BERHASIL DIBUAT!\n\nLink: https://srv2.cristall.my.id\nUsername: ${data.username}\nPassword: ${data.password}\n\nSilakan login dan ganti password Anda.`);
+
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Beli Panel";
+    }
   });
 </script>
 
