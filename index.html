@@ -50,7 +50,9 @@
   #mainApp::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(0,210,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,210,255,.03) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; pointer-events: none; }
   .main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; position: relative; z-index: 1; }
   .wrapper { display: flex; width: 100%; max-width: 1100px; gap: 60px; align-items: center; justify-content: center; }
-  .user-bar { position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; }
+  
+  /* Top Bar */
+  .user-bar { position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
   .user-bar span { color: var(--neon); font-weight: 700; }
   .user-bar .balance { color: var(--success); font-weight: 700; margin-left: 8px; }
   .logout-btn { background: rgba(239,68,68,.1); color: var(--danger); border: 1px solid rgba(239,68,68,.2); font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
@@ -58,34 +60,84 @@
   .topup-btn { background: var(--success); color: #001a1f; border: none; font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
   .topup-btn:hover { background: #34d399; transform: translateY(-1px); }
 
+  /* Kiri: Info */
   .info-section { flex: 1; max-width: 520px; }
   .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--neon); background: var(--neon-soft); border: 1px solid rgba(0,210,255,.3); padding: 8px 16px; border-radius: 99px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
   .info-section h1 { font-size: 54px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
   .info-section h1 span { color: var(--neon); }
   .info-section .subheadline { font-size: 17px; color: #a0aec0; line-height: 1.6; margin-bottom: 32px; }
-  .form-section { flex: 1; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; }
-  
-  /* TAB MENU */
-  .tab-menu { display: flex; gap: 10px; margin-bottom: 24px; background: #060911; padding: 6px; border-radius: 10px; border: 1px solid var(--border); }
-  .tab-btn { flex: 1; padding: 10px; background: transparent; border: none; color: var(--muted); font-weight: 600; font-size: 13.5px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-  .tab-btn.active { background: var(--neon); color: #001a1f; }
 
-  .field { margin-bottom: 20px; }
-  .field > label { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
-  .input-group { display: flex; align-items: center; background: #060911; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .input-group input { flex: 1; border: none; background: transparent; padding: 13px 14px; font-size: 14px; color: var(--text); outline: none; }
-  .input-group input:focus { border-color: var(--neon); }
-  .input-group .suffix { padding: 0 14px; color: var(--muted); font-size: 13.5px; background: #0b101c; border-left: 1px solid var(--border); align-self: stretch; display: flex; align-items: center; font-weight: 500; }
+  /* Kanan: Form */
+  .form-section { flex: 1; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); }
   
-  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
+  /* Tab Menu Segar */
+  .tab-menu { display: flex; gap: 10px; margin-bottom: 28px; background: #060911; padding: 6px; border-radius: 12px; border: 1px solid var(--border); }
+  .tab-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: inherit; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tab-btn:hover { color: #fff; }
+  .tab-btn.active { background: var(--neon); color: #001a1f; box-shadow: 0 0 15px var(--neon-glow); }
+
+  /* Input Fields yang Baru */
+  .field { margin-bottom: 22px; }
+  .field > label { display: block; font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  
+  .custom-input {
+    width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500;
+    background: #060911; color: #fff; border: 1px solid var(--border);
+    border-radius: 12px; outline: none; transition: all 0.2s; font-family: inherit;
+  }
+  .custom-input:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
+  .custom-input::placeholder { color: #3b475e; }
+
+  /* Input Group (Add Server) */
+  .input-group {
+    display: flex; align-items: stretch; background: #060911;
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    transition: all 0.2s;
+  }
+  .input-group:focus-within { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
+  .input-group input {
+    flex: 1; border: none; background: transparent; padding: 14px 16px;
+    font-size: 14.5px; font-weight: 500; color: #fff; outline: none; font-family: inherit;
+  }
+  .input-group input::placeholder { color: #3b475e; }
+  .input-group .suffix {
+    padding: 0 16px; color: var(--muted); font-size: 13.5px; background: #0b101c;
+    border-left: 1px solid var(--border); display: flex; align-items: center; font-weight: 600;
+  }
+
+  /* Grid RAM */
+  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; }
   .ram-item input { position: absolute; opacity: 0; }
-  .ram-item label { display: flex; flex-direction: column; padding: 10px 4px; text-align: center; background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; position: relative; }
-  .ram-item .ram-name { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
-  .ram-item .price-new { font-size: 12px; font-weight: 700; color: var(--neon); }
-  .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); }
-  .total { margin-top: 24px; padding: 16px; background: #060911; border: 1px solid var(--border); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
-  .total-price { font-size: 24px; font-weight: 700; color: var(--neon); }
-  button[type="submit"] { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; }
+  .ram-item label {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 12px 4px; text-align: center; background: #060911;
+    border: 1px solid var(--border); border-radius: 12px; cursor: pointer;
+    transition: all 0.2s; position: relative; overflow: hidden;
+  }
+  .ram-item .ram-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: #fff; }
+  .ram-item .price-new { font-size: 11.5px; font-weight: 700; color: var(--muted); transition: color 0.2s; }
+  .ram-item label:hover { border-color: #2a3654; background: #0b101c; }
+  .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); box-shadow: 0 0 15px -5px var(--neon-glow); }
+  .ram-item input:checked + label .price-new { color: var(--neon); }
+
+  /* Total Box */
+  .total {
+    margin-top: 28px; padding: 20px; background: #060911;
+    border: 1px solid var(--border); border-radius: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .total span:first-child { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .total-price { font-size: 26px; font-weight: 800; color: var(--neon); text-shadow: 0 0 20px var(--neon-glow); }
+
+  /* Submit Button */
+  button[type="submit"] {
+    width: 100%; margin-top: 24px; padding: 16px;
+    background: var(--neon); color: #001a1f; font-weight: 800;
+    font-size: 15px; border: none; border-radius: 12px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s;
+    box-shadow: 0 0 20px -5px var(--neon-glow);
+  }
+  button[type="submit"]:hover { background: var(--neon-hover); transform: translateY(-2px); box-shadow: 0 0 30px -5px rgba(0,210,255,0.4); }
 
   /* === ADMIN DASHBOARD === */
   #adminApp { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; min-height: 100vh; }
@@ -105,7 +157,7 @@
   @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
   .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
   .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
-  .modal-input { width: 100%; padding: 12px; font-size: 14px; background: #060911; color: var(--text); border: 1px solid var(--border); border-radius: 10px; outline: none; margin-bottom: 20px; text-align: center; }
+  .modal-input { width: 100%; padding: 14px; font-size: 15px; background: #060911; color: #fff; border: 1px solid var(--border); border-radius: 10px; outline: none; margin-bottom: 20px; text-align: center; }
   .modal-input:focus { border-color: var(--neon); }
 
   .panel-data-box { background: #060911; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; user-select: text; -webkit-user-select: text; }
@@ -113,7 +165,6 @@
   .panel-data-box .row:last-child { margin-bottom: 0; }
   .panel-data-box .label { color: var(--muted); }
   .panel-data-box .value { color: var(--neon); font-weight: 700; }
-  
   .warning-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
@@ -124,8 +175,9 @@
   .btn-confirm:hover { background: var(--neon-hover); transform: translateY(-1px); }
 
   @media (max-width: 900px) {
-    .auth-brand { display: none; } .wrapper { flex-direction: column; } .user-bar { position: relative; top: 0; right: 0; margin: 20px; justify-content: center; flex-wrap: wrap; }
+    .auth-brand { display: none; } .wrapper { flex-direction: column; gap: 40px; } .user-bar { position: relative; top: 0; right: 0; margin: 20px; justify-content: center; flex-wrap: wrap; }
     .admin-header { flex-direction: column; gap: 15px; align-items: flex-start; }
+    .info-section h1 { font-size: 38px; }
   }
 </style>
 </head>
@@ -190,13 +242,13 @@
 
         <form id="orderForm">
           
-          <!-- INPUT NAMA PANEL / USERNAME -->
+          <!-- INPUT NAMA PANEL (MODE NEW) -->
           <div class="field" id="fieldName">
             <label>Nama Panel (Tanpa Spasi)</label>
-            <input type="text" id="customName" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+            <input type="text" id="customName" class="custom-input" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
           </div>
 
-          <!-- INPUT USERNAME ADD SERVER (Ada embel-embel @kitzunemarket.com) -->
+          <!-- INPUT USERNAME ADD SERVER (MODE ADD) -->
           <div class="field" id="fieldAddUser" style="display: none;">
             <label>Username Akun Panel Kamu</label>
             <div class="input-group">
@@ -205,9 +257,13 @@
             </div>
           </div>
 
-          <div class="field"><label>Node.js Version</label><input type="text" value="Node.js v1" readonly style="opacity:0.6; width:100%; padding:13px; background:#060911; border:1px solid var(--border); border-radius:10px;"></div>
+          <div class="field">
+            <label>Node.js Version</label>
+            <input type="text" value="Node.js v1 (Stable)" class="custom-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+          </div>
           
-          <div class="field"><label>Select RAM</label>
+          <div class="field">
+            <label>Select RAM Capacity</label>
             <div class="ram-grid">
               <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
               <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
@@ -222,7 +278,12 @@
               <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
             </div>
           </div>
-          <div class="total"><span>Total Bayar</span><span class="total-price" id="totalText">Rp 300</span></div>
+          
+          <div class="total">
+            <span>Total Bayar</span>
+            <span class="total-price" id="totalText">Rp 300</span>
+          </div>
+          
           <button type="submit" id="submitBtn">Beli Panel</button>
         </form>
       </div>
@@ -261,7 +322,7 @@
   </div>
 </div>
 
-<!-- MODAL KONFIRMASI BELI PANEL -->
+<!-- MODAL KONFIRMASI -->
 <div id="confirmModal" class="modal-overlay">
   <div class="modal-content">
     <h3>Konfirmasi Pembelian</h3>
@@ -273,7 +334,7 @@
   </div>
 </div>
 
-<!-- MODAL SUKSES DATA PANEL -->
+<!-- MODAL SUKSES -->
 <div id="successModal" class="modal-overlay">
   <div class="modal-content">
     <h3 id="successTitle">Panel Berhasil Dibuat!</h3>
@@ -322,7 +383,7 @@
   const ADMIN_WA = "6288906198025";
   let currentUser = null;
   let pendingOrder = null;
-  let currentMode = "new"; // Mode default
+  let currentMode = "new"; 
 
   // --- UI LOGIC ---
   window.toggleAuth = (type) => {
@@ -344,6 +405,7 @@
       
       document.getElementById('submitBtn').textContent = "Beli Panel";
       document.getElementById('submitBtn').style.background = "var(--neon)";
+      document.getElementById('submitBtn').style.color = "#001a1f";
     } else {
       document.getElementById('tabNew').classList.remove('active');
       document.getElementById('tabAdd').classList.add('active');
@@ -352,7 +414,8 @@
       document.getElementById('fieldAddUser').style.display = 'block';
       
       document.getElementById('submitBtn').textContent = "Add Server";
-      document.getElementById('submitBtn').style.background = "#10b981"; // Warna hijau beda
+      document.getElementById('submitBtn').style.background = "var(--success)";
+      document.getElementById('submitBtn').style.color = "#fff";
     }
   }
 
@@ -486,7 +549,6 @@
     }
   });
 
-  // 1. Klik Submit -> Muncul Modal Konfirmasi
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!currentUser) return;
@@ -530,7 +592,6 @@
     document.getElementById("confirmModal").classList.add("active");
   });
 
-  // 2. Eksekusi Pembelian
   window.executePurchase = async () => {
     document.getElementById("confirmModal").classList.remove("active");
     
@@ -559,7 +620,6 @@
       await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
 
-      // Setup Tampilan Modal Sukses
       document.getElementById("resUsername").textContent = data.username;
       
       if (pendingOrder.mode === 'new') {
@@ -570,7 +630,7 @@
       } else {
         document.getElementById("successTitle").textContent = "Server Berhasil Ditambahkan!";
         document.getElementById("successDesc").textContent = "Server baru telah masuk ke akun panel Anda.";
-        document.getElementById("rowPassword").style.display = "none"; // Sembunyikan password
+        document.getElementById("rowPassword").style.display = "none";
       }
 
       document.getElementById("successModal").classList.add("active");
@@ -583,7 +643,6 @@
     }
   };
 
-  // 3. Fungsi Copy Data
   window.copyPanelData = () => {
     const user = document.getElementById("resUsername").textContent;
     const pass = document.getElementById("resPassword").textContent;
@@ -609,7 +668,6 @@
     });
   };
 
-  // 4. Tutup Modal Sukses
   window.closeSuccessModal = () => {
     document.getElementById("successModal").classList.remove("active");
     document.getElementById("customName").value = "";
