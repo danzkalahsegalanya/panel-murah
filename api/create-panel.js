@@ -1,82 +1,113 @@
-// api/create-panel.js
 import axios from 'axios';
 
 export default async function handler(req, res) {
-  // Hanya izinkan metode POST
-  if (req.method !== 'POST') return res.status(405).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: "Method not allowed" });
 
-  const { email, username, ram, harga, uid } = req.body;
+  const { email, username, ram, uid } = req.body;
 
-  // Konfigurasi Pterodactyl (Ambil dari Environment Vercel)
-  const PTERO_URL = process.env.PTERO_DOMAIN;
-  const PTERO_API_KEY = process.env.PTERO_API_KEY; 
-  
-  if (!PTERO_URL || !PTERO_API_KEY) {
-    return res.status(500).json({ error: "Konfigurasi server belum lengkap." });
-  }
+  // Konfigurasi Pterodactyl lu (Disamain sama script bot)
+  const DOMAIN = "https://srv2.cristall.my.id";
+  const API_KEY = "ptla_grahKdZyOpmLrn8AlagBblMEd22PPplOUf662TqtrlR";
+  const NEST_ID = 5;
+  const EGG_ID = 15;
+  const LOC_ID = 1;
 
   try {
-    // 1. Bikin Password Random
-    const generatePassword = () => Math.random().toString(36).slice(-8) + "A1!";
-    const randomPassword = generatePassword();
+    // 1. Generate Password Random (biar aman)
+    const password = Math.random().toString(36).slice(-8) + "A1!";
+    
+    // 2. Tentukan RAM, Disk, CPU berdasarkan input user
+    let mem = 1000, disk = 1000, cpu = 40;
+    const ramStr = ram.toString().toLowerCase();
+    
+    if (ramStr === "unlimited" || ramStr === "unli") {
+      mem = 0; disk = 0; cpu = 0;
+    } else {
+      const gb = parseInt(ramStr.replace("gb", ""));
+      mem = gb * 1000;
+      disk = gb * 1000;
+      cpu = 20 + (gb * 20); // 1gb=40, 2gb=60, dst
+    }
 
-    // 2. Buat User di Pterodactyl
-    const userRes = await axios.post(`${PTERO_URL}/api/application/users`, {
+    // 3. Buat User di Pterodactyl
+    const userRes = await axios.post(`${DOMAIN}/api/application/users`, {
       email: email,
-      username: username.toLowerCase().replace(/[^a-z0-9]/g, ''), // Hanya huruf & angka
+      username: username.toLowerCase().replace(/[^a-z0-9]/g, ''),
       first_name: username,
-      last_name: "Kitzune",
-      password: randomPassword
+      last_name: "Server",
+      language: "en",
+      password: password
     }, {
       headers: { 
-        'Authorization': `Bearer ${PTERO_API_KEY}`, 
+        'Authorization': `Bearer ${API_KEY}`, 
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     });
 
-    const userId = userRes.data.attributes.id;
+    const user = userRes.data.attributes;
+    const usr_id = user.id;
 
-    // 3. Buat Server Panel
-    const serverRes = await axios.post(`${PTERO_URL}/api/application/servers`, {
-      name: `Panel-${username}`,
-      user: userId,
-      egg: 15, // Sesuai global.egg lu
+    // 4. Ambil Startup Command dari Egg
+    const eggRes = await axios.get(`${DOMAIN}/api/application/nests/${NEST_ID}/eggs/${EGG_ID}`, {
+      headers: { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' }
+    });
+    const startup_cmd = eggRes.data.attributes.startup;
+
+    // 5. Buat Server di Pterodactyl
+    const serverRes = await axios.post(`${DOMAIN}/api/application/servers`, {
+      name: `${username} Server`,
+      description: "Created via Web Kitzune Store",
+      user: usr_id,
+      egg: EGG_ID,
       docker_image: "ghcr.io/parkervcp/yolks:nodejs_18",
-      startup: "npm start",
-      environment: {},
-      limits: { 
-        memory: parseInt(ram), // RAM dari input user
-        swap: 0, 
-        disk: 1024, 
-        io: 500, 
-        cpu: 100 
+      startup: startup_cmd,
+      environment: {
+        "INST": "npm",
+        "USER_UPLOAD": "0",
+        "AUTO_UPDATE": "0",
+        "CMD_RUN": "npm start" // INI KUNCI YANG BIKIN ERROR KEMARIN
       },
-      feature_limits: { databases: 0, allocations: 1, backups: 0 },
-      deploy: { 
-        locations: [1], // Sesuai global.loc lu
-        dedicated_ip: false, 
-        port_range: [] 
+      limits: {
+        memory: mem,
+        swap: 0,
+        disk: disk,
+        io: 500,
+        cpu: cpu
+      },
+      feature_limits: {
+        databases: 5,
+        backups: 5,
+        allocations: 5
+      },
+      deploy: {
+        locations: [LOC_ID],
+        dedicated_ip: false,
+        port_range: []
       }
     }, {
       headers: { 
-        'Authorization': `Bearer ${PTERO_API_KEY}`, 
+        'Authorization': `Bearer ${API_KEY}`, 
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     });
 
-    // 4. Kembalikan data login ke Frontend (Web)
+    const server = serverRes.data.attributes;
+
+    // 6. Kirim balik data login ke web
     return res.status(200).json({ 
       success: true, 
-      serverId: serverRes.data.attributes.id,
-      password: randomPassword,
-      username: username
+      serverId: server.id,
+      username: user.username,
+      password: password
     });
 
   } catch (error) {
     console.error(error.response?.data || error.message);
-    return res.status(500).json({ error: error.response?.data?.errors[0]?.detail || error.message });
+    return res.status(500).json({ 
+      success: false, 
+      error: error.response?.data?.errors?.[0]?.detail || error.message 
+    });
   }
 }
-
