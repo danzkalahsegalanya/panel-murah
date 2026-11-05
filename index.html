@@ -89,12 +89,63 @@
   th { padding: 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
   td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
   .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
+
+  /* === MODAL SYSTEM (KONFIRMASI & SUKSES) === */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 3000; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-content {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 30px; border-radius: 20px; width: 90%; max-width: 420px;
+    text-align: center; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+  .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
   
-  /* Modal Topup */
-  #topupModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center; }
-  .modal-box { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 16px; width: 100%; max-width: 400px; }
-  .modal-box h3 { margin-bottom: 20px; }
-  .modal-box input { width: 100%; padding: 12px; background: #060911; border: 1px solid var(--border); border-radius: 8px; color: white; margin-bottom: 20px; }
+  /* Form di dalam modal */
+  .modal-input {
+    width: 100%; padding: 12px; font-size: 14px; background: #060911;
+    color: var(--text); border: 1px solid var(--border); border-radius: 10px;
+    outline: none; margin-bottom: 20px; text-align: center;
+  }
+  .modal-input:focus { border-color: var(--neon); }
+
+  /* Data Panel Box (Sukses) */
+  .panel-data-box {
+    background: #060911; border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; text-align: left;
+    margin-bottom: 20px; font-family: monospace; font-size: 14px;
+    user-select: text; -webkit-user-select: text; /* Biar bisa diblok/copy */
+  }
+  .panel-data-box .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+  .panel-data-box .row:last-child { margin-bottom: 0; }
+  .panel-data-box .label { color: var(--muted); }
+  .panel-data-box .value { color: var(--neon); font-weight: 700; }
+  
+  .warning-box {
+    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+    color: var(--danger); font-size: 12.5px; padding: 12px; border-radius: 8px;
+    margin-bottom: 20px; font-weight: 600;
+  }
+
+  /* Tombol Modal */
+  .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
+  .btn-modal {
+    flex: 1; padding: 12px; border-radius: 10px; font-weight: 700;
+    font-size: 14px; cursor: pointer; border: none; transition: all 0.2s;
+  }
+  .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-cancel:hover { background: rgba(255,255,255,0.05); }
+  .btn-confirm { background: var(--neon); color: #001a1f; }
+  .btn-confirm:hover { background: var(--neon-hover); transform: translateY(-1px); }
 
   @media (max-width: 900px) {
     .auth-brand { display: none; } .wrapper { flex-direction: column; } .user-bar { position: relative; top: 0; right: 0; margin: 20px; justify-content: center; flex-wrap: wrap; }
@@ -156,10 +207,8 @@
       <div class="form-section">
         <form id="orderForm">
           
-          <!-- KOLOM INPUT NAMA PANEL KUSTOM -->
           <div class="field">
             <label>Nama Panel (Tanpa Spasi)</label>
-            <!-- TAMBAHAN oninput UNTUK MEMBUANG SPASI OTOMATIS -->
             <input type="text" id="customName" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
           </div>
 
@@ -207,15 +256,53 @@
 </div>
 
 <!-- MODAL TOPUP USER -->
-<div id="topupModal">
-  <div class="modal-box">
-    <h3>Topup Saldo (Min. Rp 400)</h3>
-    <p style="font-size:12px; color:var(--muted); margin-bottom:10px;">Masukkan nominal, lalu kirim pesan ke Admin via WhatsApp.</p>
-    <input type="number" id="topupAmount" placeholder="Contoh: 500" min="400">
-    <button class="auth-btn" onclick="proceedTopup()">Topup via WA</button>
-    <button class="logout-btn" style="margin-top:10px; width:100%; text-align:center;" onclick="document.getElementById('topupModal').style.display='none'">Batal</button>
+<div id="topupModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Topup Saldo</h3>
+    <p>Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.</p>
+    <input type="number" id="topupAmount" class="modal-input" placeholder="Contoh: 500" min="400">
+    <div class="modal-actions">
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')">Batal</button>
+      <button class="btn-modal btn-confirm" onclick="proceedTopup()">Topup via WA</button>
+    </div>
   </div>
 </div>
+
+<!-- MODAL KONFIRMASI BELI PANEL -->
+<div id="confirmModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Konfirmasi Pembelian</h3>
+    <p id="confirmText">Apakah Anda yakin ingin membeli panel ini?</p>
+    <div class="modal-actions">
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
+      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Beli Sekarang</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL SUKSES DATA PANEL -->
+<div id="successModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Panel Berhasil Dibuat!</h3>
+    <p>Berikut adalah data login panel Anda.</p>
+    
+    <div class="panel-data-box" id="panelDataBox">
+      <div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div>
+      <div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div>
+      <div class="row"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
+    </div>
+
+    <div class="warning-box">
+      PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin data ini sekarang. Jika hilang, data tidak bisa dikembalikan!
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-modal btn-confirm" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
+      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- FIREBASE SDK & LOGIC -->
 <script type="module">
@@ -239,8 +326,9 @@
   const db = getFirestore(app);
   
   const ADMIN_EMAIL = "upiljaranmmbu@gmail.com";
-  const ADMIN_WA = "6288906198025"; // Ganti dengan nomor WA lu
+  const ADMIN_WA = "6288906198025";
   let currentUser = null;
+  let pendingOrder = null; // Nyimpen data sementara sebelum konfirmasi
 
   // --- UI LOGIC ---
   window.toggleAuth = (type) => {
@@ -291,7 +379,7 @@
   window.doLogout = () => signOut(auth);
 
   // --- TOPUP LOGIC ---
-  window.openTopupModal = () => document.getElementById('topupModal').style.display = 'flex';
+  window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
   
   window.proceedTopup = () => {
     const amount = document.getElementById('topupAmount').value;
@@ -299,7 +387,7 @@
     
     const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${parseInt(amount).toLocaleString()}\n\nMohon diproses.`;
     window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
-    document.getElementById('topupModal').style.display = 'none';
+    document.getElementById('topupModal').classList.remove('active');
   }
 
   // --- CEK STATUS LOGIN ---
@@ -380,6 +468,7 @@
     }
   });
 
+  // 1. Klik Beli -> Muncul Modal Konfirmasi
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!currentUser) return;
@@ -392,7 +481,6 @@
 
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
     const harga = parseInt(ramEl.dataset.harga);
-    const username = currentUser.email.split('@')[0];
     
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
@@ -403,21 +491,37 @@
       return;
     }
 
-    if (!confirm(`Yakin beli panel RAM ${ramEl.value} seharga Rp ${harga.toLocaleString()} dengan nama "${customName}"?`)) return;
+    // Simpan data orderan sementara
+    pendingOrder = {
+      customName: customName,
+      ram: ramEl.value,
+      harga: harga,
+      docRef: docRef,
+      saldo: saldo
+    };
 
-    const submitBtn = document.getElementById("submitBtn");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Memproses Panel...";
+    // Tampilkan modal konfirmasi
+    document.getElementById("confirmText").innerHTML = 
+      `Yakin beli panel RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b><br>dengan nama <b>"${customName}"</b>?`;
+    document.getElementById("confirmModal").classList.add("active");
+  });
+
+  // 2. Eksekusi Pembelian (Klik "Ya, Beli Sekarang" di modal)
+  window.executePurchase = async () => {
+    document.getElementById("confirmModal").classList.remove("active");
+    
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.textContent = "Memproses Panel...";
 
     try {
-      // Kirim customName (Nama Panel) ke backend
       const response = await fetch('/api/create-panel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           email: currentUser.email, 
-          username: customName, // Pake nama kustom buat bikin username panel
-          ram: ramEl.value
+          username: pendingOrder.customName,
+          ram: pendingOrder.ram
         })
       });
 
@@ -427,18 +531,51 @@
         throw new Error(data.error || "Gagal membuat panel.");
       }
 
-      await updateDoc(docRef, { balance: saldo - harga });
+      // Potong saldo
+      await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
 
-      alert(`PANEL BERHASIL DIBUAT!\n\nLink: https://srv2.cristall.my.id\nUsername: ${data.username}\nPassword: ${data.password}\n\nSilakan login dan ganti password Anda.`);
+      // Tampilkan modal sukses dengan data
+      document.getElementById("resUsername").textContent = data.username;
+      document.getElementById("resPassword").textContent = data.password;
+      document.getElementById("successModal").classList.add("active");
 
     } catch (error) {
       alert("Error: " + error.message);
     } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Beli Panel";
+      btn.disabled = false;
+      btn.textContent = "Beli Panel";
     }
-  });
+  };
+
+  // 3. Fungsi Copy Data dari Modal Sukses
+  window.copyPanelData = () => {
+    const user = document.getElementById("resUsername").textContent;
+    const pass = document.getElementById("resPassword").textContent;
+    const textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}\nPassword: ${pass}`;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = "Berhasil Disalin!";
+      btn.style.background = "var(--success)";
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = "var(--neon)";
+      }, 2000);
+    }).catch(err => {
+      alert("Gagal menyalin: " + err);
+    });
+  };
+
+  // 4. Tutup Modal Sukses
+  window.closeSuccessModal = () => {
+    document.getElementById("successModal").classList.remove("active");
+    // Reset form biar bisa beli lagi
+    document.getElementById("customName").value = "";
+  };
+
 </script>
 
 </body>
