@@ -19,6 +19,7 @@
     --neon-hover: #33ddff;
     --neon-glow: rgba(0, 210, 255, 0.15);
     --neon-soft: rgba(0, 210, 255, 0.08);
+    --danger: #ef4444;
   }
 
   html, body {
@@ -229,8 +230,22 @@
     border-radius: 10px; cursor: pointer; transition: all 0.2s;
     position: relative; overflow: hidden;
   }
-  .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); }
-  .ram-item .ram-price { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  
+  /* Harga Normal */
+  .ram-item .ram-price { font-size: 11px; color: var(--muted); }
+  
+  /* Harga Diskon (Coret) */
+  .ram-item .ram-price-discount {
+    display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 2px;
+  }
+  .ram-item .price-old {
+    font-size: 10px; color: #4a5470; text-decoration: line-through;
+  }
+  .ram-item .price-new {
+    font-size: 12px; font-weight: 700; color: var(--neon);
+  }
+
   .ram-item label:hover { border-color: #2a3654; }
   .ram-item label:active { transform: scale(0.95); }
   .ram-item input:checked + label {
@@ -238,8 +253,18 @@
     box-shadow: 0 0 15px -5px var(--neon-glow);
   }
   .ram-item input:checked + label .ram-price { color: var(--neon); }
-  .ram-item.unli label { border-color: rgba(0, 210, 255, 0.2); }
+  
+  .ram-item.unli label { border-color: rgba(0, 210, 255, 0.4); }
   .ram-item.unli .ram-name { color: var(--neon); }
+  
+  /* Badge Diskon Kecil di Pojok */
+  .discount-badge {
+    position: absolute; top: 0; right: 0;
+    background: var(--danger); color: white;
+    font-size: 8.5px; font-weight: 700;
+    padding: 2px 4px; border-bottom-left-radius: 6px;
+    letter-spacing: 0.5px;
+  }
 
   /* Total Box */
   .total {
@@ -251,6 +276,8 @@
   .total.flash { border-color: var(--neon); }
   .total-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;}
   .total-info { font-size: 12px; color: #4a5470; margin-top: 4px; }
+  .total-price-wrapper { display: flex; flex-direction: column; align-items: flex-end; }
+  .total-old-price { font-size: 12px; color: var(--danger); text-decoration: line-through; margin-bottom: 2px; display: none; }
   .total-price {
     font-size: 24px; font-weight: 700; color: var(--neon);
     letter-spacing: -0.5px; text-shadow: 0 0 20px var(--neon-glow);
@@ -451,7 +478,20 @@
               <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="ram-price">Rp 1,350</span></label></div>
               <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="ram-price">Rp 1,500</span></label></div>
               <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="ram-price">Rp 1,700</span></label></div>
-              <div class="ram-item unli"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unlimited</span><span class="ram-price">Rp 2,000</span></label></div>
+              
+              <!-- UNLIMITED DENGAN HARGA CORET -->
+              <div class="ram-item unli">
+                <input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000" data-harga-asli="10000">
+                <label for="runli">
+                  <span class="discount-badge">80% OFF</span>
+                  <span class="ram-name">Unlimited</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 10,000</span>
+                    <span class="price-new">Rp 2,000</span>
+                  </div>
+                </label>
+              </div>
+
             </div>
           </div>
 
@@ -460,7 +500,10 @@
               <div class="total-label">Total Payment</div>
               <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
             </div>
-            <div class="total-price" id="totalText">Rp 300</div>
+            <div class="total-price-wrapper">
+              <div class="total-old-price" id="totalOldPrice">Rp 10,000</div>
+              <div class="total-price" id="totalText">Rp 300</div>
+            </div>
           </div>
 
           <button type="submit" id="submitBtn">Get Panel Now</button>
@@ -557,6 +600,7 @@
   const ADMIN_WA = "6288906198025";
   const form = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
+  const totalOldPrice = document.getElementById("totalOldPrice");
   const orderInfo = document.getElementById("orderInfo");
   const totalBox = document.getElementById("totalBox");
   const submitBtn = document.getElementById("submitBtn");
@@ -605,13 +649,26 @@
   function getOrder() {
     const ramEl = form.querySelector('input[name="ram"]:checked');
     const nodeEl = form.querySelector('input[name="node"]:checked');
-    return { ram: ramEl.value, harga: parseInt(ramEl.dataset.harga, 10), node: nodeEl.value };
+    return { 
+      ram: ramEl.value, 
+      harga: parseInt(ramEl.dataset.harga, 10), 
+      hargaAsli: ramEl.dataset.hargaAsli ? parseInt(ramEl.dataset.hargaAsli, 10) : null,
+      node: nodeEl.value 
+    };
   }
 
   function updateTotal(animate = true) {
-    const { ram, harga, node } = getOrder();
+    const { ram, harga, hargaAsli, node } = getOrder();
     totalText.textContent = rupiah(harga);
     orderInfo.textContent = `RAM ${ram} / ${node}`;
+
+    // Tampilkan harga coret kalau milih Unlimited
+    if (hargaAsli) {
+      totalOldPrice.textContent = rupiah(hargaAsli);
+      totalOldPrice.style.display = "block";
+    } else {
+      totalOldPrice.style.display = "none";
+    }
 
     if (animate) {
       totalText.classList.remove("bump");
