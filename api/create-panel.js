@@ -51,29 +51,26 @@ export default async function handler(req, res) {
 
     const user = userRes.data.attributes;
 
-    // 4. Ambil Info Egg (Startup CMD, Docker Image, & Environment)
+    // 4. Ambil Startup Command dari Egg
     const eggRes = await axios.get(`${DOMAIN}/api/application/nests/${NEST_ID}/eggs/${EGG_ID}`, {
       headers: { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' }
     });
-    
     const startup_cmd = eggRes.data.attributes.startup;
-    const docker_image = eggRes.data.attributes.docker_image;
-    
-    // Otomatis isi semua environment yang dibutuhin egg (biar gak error "Command Run required")
-    const environment = {};
-    eggRes.data.attributes.relationships.variables.data.forEach(v => {
-      environment[v.attributes.env_variable] = v.attributes.default_value;
-    });
 
-    // 5. Buat Server
+    // 5. Buat Server (Pakai environment manual yang udah pasti jalan)
     const serverRes = await axios.post(`${DOMAIN}/api/application/servers`, {
       name: `${username} Server`,
       description: "Created via Web Kitzune Store",
       user: user.id,
       egg: EGG_ID,
-      docker_image: docker_image,
+      docker_image: "ghcr.io/parkervcp/yolks:nodejs_18", // Pake image yang umum
       startup: startup_cmd,
-      environment: environment,
+      environment: {
+        "INST": "npm",
+        "USER_UPLOAD": "0",
+        "AUTO_UPDATE": "0",
+        "CMD_RUN": "npm start"
+      },
       limits: {
         memory: mem,
         swap: 0,
@@ -100,12 +97,10 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    // KALAU ERROR, TAMPILKAN PESAN ASLINYA
     console.error("Pterodactyl Error:", error.response?.data || error.message);
     
     let errorMsg = "Unknown error";
     if (error.response?.data?.errors) {
-      // Ambil pesan error paling detail dari Pterodactyl
       errorMsg = error.response.data.errors.map(e => `${e.code}: ${e.detail}`).join(" | ");
     } else if (error.response?.data?.error) {
       errorMsg = error.response.data.error;
