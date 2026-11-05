@@ -159,7 +159,7 @@
   .panel-status { padding: 5px 12px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
   .status-active { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
   
-  /* TOMBOL MANAGE BARU */
+  /* TOMBOL MANAGE */
   .btn-manage { 
     background: var(--accent); color: #001a1f; border: none; padding: 6px 14px; 
     border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; 
@@ -624,7 +624,6 @@
       docs.sort((a, b) => b.createdAt - a.createdAt);
 
       docs.forEach(data => {
-        // Render Riwayat
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
@@ -638,7 +637,6 @@
           </div>
         `;
 
-        // Render List Panel (Masa Aktif 30 Hari)
         const now = Date.now();
         const msInDay = 24 * 60 * 60 * 1000;
         const daysPassed = Math.floor((now - data.createdAt) / msInDay);
@@ -646,7 +644,6 @@
 
         if (daysLeft > 0) {
           totalPanel++;
-          // TOMBOL MANAGE DITAMBAHKAN DI SINI
           htmlPanel += `
             <div class="panel-list-item">
               <div class="panel-details">
@@ -682,15 +679,12 @@
     }
   }
 
-  // --- FUNGSI MANAGE PANEL (KE PTERODACTYL) ---
+  // --- FUNGSI MANAGE PANEL (LANGSUNG PINDAH) ---
   window.managePanel = (username) => {
-    // Copy username ke clipboard
     const textToCopy = `${username}@kitzunemarket.com`;
     navigator.clipboard.writeText(textToCopy).then(() => {
-      alert(`Username (${textToCopy}) berhasil disalin!\n\nAnda akan diarahkan ke halaman login panel. Silakan paste username di kolom login.`);
       window.open("https://srv2.cristall.my.id", "_blank");
     }).catch(err => {
-      alert("Gagal menyalin username. Silakan buka panel manual dan ketik username Anda.");
       window.open("https://srv2.cristall.my.id", "_blank");
     });
   };
@@ -806,11 +800,9 @@
         throw new Error(data.error || "Gagal memproses.");
       }
 
-      // 1. Potong Saldo
       await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
 
-      // 2. Simpan ke Riwayat Transaksi
       await setDoc(doc(collection(db, "transactions")), {
         uid: currentUser.uid,
         email: currentUser.email,
@@ -821,7 +813,6 @@
         createdAt: Date.now()
       });
 
-      // 3. Tampilkan Modal Sukses
       document.getElementById("resUsername").textContent = data.username;
       
       if (pendingOrder.mode === 'new') {
@@ -837,7 +828,6 @@
 
       document.getElementById("successModal").classList.add("active");
 
-      // 4. Reload Dashboard
       loadUserDashboard();
       switchMainTab('dashboard');
 
