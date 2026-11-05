@@ -11,13 +11,14 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --bg: #05080f; 
-    --card: rgba(11, 16, 28, 0.75); /* Transparan elegan */
-    --border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(15, 23, 42, 0.4); /* Warna kaca */
+    --glass-border: rgba(255, 255, 255, 0.08); /* Garis kaca */
+    --glass-highlight: rgba(255, 255, 255, 0.15); /* Pantulan cahaya */
     --text: #f0f4f8; 
-    --muted: #8492b0;
-    --accent: #00e5ff; /* Cyan terang */
+    --muted: #94a3b8;
+    --accent: #00e5ff; 
     --accent-hover: #33ebff;
-    --accent-glow: rgba(0, 229, 255, 0.2);
+    --accent-glow: rgba(0, 229, 255, 0.25);
     --accent-soft: rgba(0, 229, 255, 0.1);
     --danger: #ef4444; 
     --success: #10b981;
@@ -28,43 +29,65 @@
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
     
-    /* BACKGROUND IMAGE DARI UNSLPAH */
     background-image: 
-      linear-gradient(to bottom, rgba(5, 8, 15, 0.85), rgba(5, 8, 15, 0.95)),
+      linear-gradient(to bottom, rgba(5, 8, 15, 0.7), rgba(5, 8, 15, 0.9)),
       url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
   }
 
-  /* === AUTH SECTION === */
-  #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center;
-    background-image: linear-gradient(to bottom, rgba(5, 8, 15, 0.9), rgba(5, 8, 15, 0.95)), url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
-    background-size: cover; background-position: center;
+  /* === LIQUID GLASS CLASS === */
+  .liquid-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-highlight);
+    border-left: 1px solid var(--glass-highlight);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
   }
+
+  /* === AUTH SECTION === */
+  #authScreen { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
-  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
+  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--glass-border); position: relative; overflow: hidden; }
   .brand-content { position: relative; z-index: 1; max-width: 400px; }
   .brand-content h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
   .brand-content h1 span { color: var(--accent); }
   .brand-content p { font-size: 16px; color: #e2e8f0; line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
   
   .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
-  .auth-box { width: 100%; max-width: 380px; background: var(--card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); padding: 40px 32px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+  .auth-box { width: 100%; max-width: 380px; padding: 40px 32px; border-radius: 24px; }
   
   .auth-box h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
   .auth-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
   .auth-field { margin-bottom: 20px; }
   .auth-field label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
   .input-wrapper { position: relative; }
-  .input-wrapper input { width: 100%; padding: 14px 16px; font-size: 14px; background: rgba(0,0,0,0.3); color: var(--text); border: 1px solid var(--border); border-radius: 12px; outline: none; transition: all 0.2s; }
-  .input-wrapper input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  
+  /* Input Style (DIPERBAIKI) */
+  .glass-input {
+    width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500;
+    background: rgba(0,0,0,0.3); color: #fff; 
+    border: 1px solid var(--glass-border); border-radius: 12px; 
+    outline: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-family: inherit;
+  }
+  .glass-input:focus { 
+    background: rgba(0,0,0,0.5);
+    border-color: var(--accent); 
+    box-shadow: 0 0 0 4px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.05); 
+  }
+  .glass-input::placeholder { color: #64748b; }
+
   .toggle-pass { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); cursor: pointer; background: none; border: none; font-size: 12px; font-weight: 600; }
-  .auth-btn { width: 100%; padding: 15px; background: var(--accent); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: all 0.2s; }
-  .auth-btn:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 8px 20px var(--accent-glow); }
+  .auth-btn { width: 100%; padding: 15px; background: var(--accent); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: all 0.3s; position: relative; overflow: hidden; }
+  .auth-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px var(--accent-glow); }
+  .auth-btn:active { transform: scale(0.97); }
+  
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--accent); cursor: pointer; font-weight: 600; text-decoration: none; }
-  .error-msg { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
+  .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
   /* === MAIN APP (USER) === */
   #mainApp { display: none; flex-direction: column; min-height: 100vh; }
@@ -72,7 +95,7 @@
   .wrapper { display: flex; width: 100%; max-width: 1100px; gap: 60px; align-items: center; justify-content: center; }
   
   /* Top Bar */
-  .user-bar { position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px; background: var(--card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border); padding: 10px 20px; border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+  .user-bar { position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px; padding: 10px 20px; border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; }
   .user-bar span { color: var(--accent); font-weight: 700; }
   .user-bar .balance { color: var(--success); font-weight: 700; margin-left: 8px; }
   .logout-btn { background: rgba(239,68,68,.15); color: #fca5a5; border: 1px solid rgba(239,68,68,.3); font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
@@ -88,33 +111,24 @@
   .info-section .subheadline { font-size: 17px; color: #cbd5e1; line-height: 1.6; margin-bottom: 32px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
   /* Kanan: Form */
-  .form-section { flex: 1; max-width: 460px; background: var(--card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border); border-radius: 24px; padding: 36px 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); }
+  .form-section { flex: 1; max-width: 460px; border-radius: 24px; padding: 36px 32px; }
   
-  /* Tab Menu Segar */
-  .tab-menu { display: flex; gap: 10px; margin-bottom: 28px; background: rgba(0,0,0,0.3); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
-  .tab-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; transition: all 0.2s; font-family: inherit; text-transform: uppercase; letter-spacing: 0.5px; }
-  .tab-btn:hover { color: #fff; }
+  /* Tab Menu */
+  .tab-menu { display: flex; gap: 10px; margin-bottom: 28px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--glass-border); }
+  .tab-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-family: inherit; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
   .tab-btn.active { background: var(--accent); color: #001a1f; box-shadow: 0 4px 15px var(--accent-glow); }
 
-  /* Input Fields */
   .field { margin-bottom: 22px; }
   .field > label { display: block; font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-  
-  .custom-input {
-    width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500;
-    background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border);
-    border-radius: 12px; outline: none; transition: all 0.2s; font-family: inherit;
-  }
-  .custom-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-  .custom-input::placeholder { color: #64748b; }
 
   /* Input Group (Add Server) */
   .input-group {
     display: flex; align-items: stretch; background: rgba(0,0,0,0.3);
-    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
-    transition: all 0.2s;
+    border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden;
+    transition: all 0.3s;
   }
-  .input-group:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .input-group:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-glow); background: rgba(0,0,0,0.5); }
   .input-group input {
     flex: 1; border: none; background: transparent; padding: 14px 16px;
     font-size: 14.5px; font-weight: 500; color: #fff; outline: none; font-family: inherit;
@@ -122,28 +136,36 @@
   .input-group input::placeholder { color: #64748b; }
   .input-group .suffix {
     padding: 0 16px; color: var(--muted); font-size: 13.5px; background: rgba(0,0,0,0.2);
-    border-left: 1px solid var(--border); display: flex; align-items: center; font-weight: 600;
+    border-left: 1px solid var(--glass-border); display: flex; align-items: center; font-weight: 600;
   }
 
-  /* Grid RAM */
+  /* Grid RAM (ANIMASI PINDAH KOLOM) */
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; }
   .ram-item input { position: absolute; opacity: 0; }
   .ram-item label {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 12px 4px; text-align: center; background: rgba(0,0,0,0.3);
-    border: 1px solid var(--border); border-radius: 12px; cursor: pointer;
-    transition: all 0.2s; position: relative; overflow: hidden;
+    border: 1px solid var(--glass-border); border-radius: 12px; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden;
   }
-  .ram-item .ram-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: #fff; }
-  .ram-item .price-new { font-size: 11.5px; font-weight: 700; color: var(--muted); transition: color 0.2s; }
-  .ram-item label:hover { border-color: rgba(255,255,255,0.3); background: rgba(0,0,0,0.4); }
-  .ram-item input:checked + label { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 20px -5px var(--accent-glow); }
+  .ram-item .ram-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: #fff; z-index: 2; }
+  .ram-item .price-new { font-size: 11.5px; font-weight: 700; color: var(--muted); transition: color 0.3s; z-index: 2; }
+  
+  .ram-item label:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+  
+  /* Efek pas dipilih */
+  .ram-item input:checked + label { 
+    border-color: var(--accent); 
+    background: var(--accent-soft); 
+    box-shadow: 0 0 25px -5px var(--accent-glow), inset 0 0 10px rgba(0,229,255,0.1); 
+    transform: translateY(-3px) scale(1.02);
+  }
   .ram-item input:checked + label .price-new { color: var(--accent); }
 
   /* Total Box */
   .total {
     margin-top: 28px; padding: 20px; background: rgba(0,0,0,0.3);
-    border: 1px solid var(--border); border-radius: 14px;
+    border: 1px solid var(--glass-border); border-radius: 14px;
     display: flex; justify-content: space-between; align-items: center;
   }
   .total span:first-child { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
@@ -154,42 +176,53 @@
     width: 100%; margin-top: 24px; padding: 16px;
     background: var(--accent); color: #001a1f; font-weight: 800;
     font-size: 15px; border: none; border-radius: 12px; cursor: pointer;
-    text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.2s;
+    text-transform: uppercase; letter-spacing: 0.5px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 8px 20px -5px var(--accent-glow);
+    position: relative; overflow: hidden;
   }
   button[type="submit"]:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 12px 25px -5px rgba(0,229,255,0.4); }
+  button[type="submit"]:active { transform: scale(0.96); }
+
+  /* Ripple Animasi Tombol */
+  .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    transform: scale(0); pointer-events: none;
+    animation: rippleEffect 0.6s linear;
+  }
+  @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
 
   /* === ADMIN DASHBOARD === */
   #adminApp { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; min-height: 100vh; }
-  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; }
   .admin-header h1 { font-size: 28px; font-weight: 800; color: var(--accent); }
   .admin-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  .table-card { background: var(--card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 16px; padding: 24px; overflow-x: auto; }
+  .table-card { border-radius: 16px; padding: 24px; overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; text-align: left; }
-  th { padding: 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
-  td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  th { padding: 12px; border-bottom: 1px solid var(--glass-border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
+  td { padding: 12px; border-bottom: 1px solid var(--glass-border); font-size: 14px; }
   .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
 
   /* === MODAL SYSTEM === */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .modal-overlay.active { display: flex; }
-  .modal-content { background: var(--card); border: 1px solid var(--border); padding: 32px; border-radius: 24px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); }
-  @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+  .modal-content { padding: 32px; border-radius: 24px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
   .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
   .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
-  .modal-input { width: 100%; padding: 14px; font-size: 15px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--border); border-radius: 12px; outline: none; margin-bottom: 20px; text-align: center; }
-  .modal-input:focus { border-color: var(--accent); }
+  .modal-input { width: 100%; padding: 14px; font-size: 15px; background: rgba(0,0,0,0.3); color: #fff; border: 1px solid var(--glass-border); border-radius: 12px; outline: none; margin-bottom: 20px; text-align: center; }
+  .modal-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
 
-  .panel-data-box { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; user-select: text; -webkit-user-select: text; }
+  .panel-data-box { background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; user-select: text; -webkit-user-select: text; }
   .panel-data-box .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
   .panel-data-box .row:last-child { margin-bottom: 0; }
   .panel-data-box .label { color: var(--muted); }
   .panel-data-box .value { color: var(--accent); font-weight: 700; }
-  .warning-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
+  .warning-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
   .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
-  .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-cancel { background: transparent; border: 1px solid var(--glass-border); color: var(--text); }
   .btn-cancel:hover { background: rgba(255,255,255,0.1); }
   .btn-confirm { background: var(--accent); color: #001a1f; }
   .btn-confirm:hover { background: var(--accent-hover); transform: translateY(-1px); }
@@ -214,22 +247,37 @@
       </div>
     </div>
     <div class="auth-form-area">
-      <div class="auth-box">
+      <div class="auth-box liquid-glass">
         <div id="loginForm">
           <h2>Sign In</h2>
           <div class="error-msg" id="loginError"></div>
-          <div class="auth-field"><label>Email</label><input type="text" id="loginEmail" placeholder="Enter your email"></div>
-          <div class="auth-field"><label>Password</label><input type="password" id="loginPassword" placeholder="Enter password"></div>
-          <button class="auth-btn" id="btnLogin" onclick="doLogin()">Log In</button>
+          <div class="auth-field">
+            <label>Email</label>
+            <input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email">
+          </div>
+          <div class="auth-field">
+            <label>Password</label>
+            <input type="password" id="loginPassword" class="glass-input" placeholder="Enter password">
+          </div>
+          <button class="auth-btn" id="btnLogin" onclick="doLogin(event)">Log In</button>
           <div class="auth-switch">Don't have an account? <a onclick="toggleAuth('register')">Create one</a></div>
         </div>
         <div id="registerForm" style="display: none;">
           <h2>Create Account</h2>
           <div class="error-msg" id="regError"></div>
-          <div class="auth-field"><label>Email</label><input type="text" id="regEmail" placeholder="Enter your email"></div>
-          <div class="auth-field"><label>Password</label><input type="password" id="regPassword" placeholder="Create a password"></div>
-          <div class="auth-field"><label>Confirm Password</label><input type="password" id="regConfirmPassword" placeholder="Repeat password"></div>
-          <button class="auth-btn" id="btnRegister" onclick="doRegister()">Register & Login</button>
+          <div class="auth-field">
+            <label>Email</label>
+            <input type="text" id="regEmail" class="glass-input" placeholder="Enter your email">
+          </div>
+          <div class="auth-field">
+            <label>Password</label>
+            <input type="password" id="regPassword" class="glass-input" placeholder="Create a password">
+          </div>
+          <div class="auth-field">
+            <label>Confirm Password</label>
+            <input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password">
+          </div>
+          <button class="auth-btn" id="btnRegister" onclick="doRegister(event)">Register & Login</button>
           <div class="auth-switch">Already have an account? <a onclick="toggleAuth('login')">Log in here</a></div>
         </div>
       </div>
@@ -239,7 +287,7 @@
 
 <!-- ================= SCREEN 2: USER APP ================= -->
 <div id="mainApp">
-  <div class="user-bar">
+  <div class="user-bar liquid-glass">
     <div>User: <span id="displayUser">-</span></div>
     <div>Saldo: <span class="balance" id="displayBalance">Rp 0</span></div>
     <button class="topup-btn" onclick="openTopupModal()">Topup</button>
@@ -253,7 +301,7 @@
         <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
         <p class="subheadline">Buy panel instantly using your balance. Topup via WhatsApp, fast response!</p>
       </div>
-      <div class="form-section">
+      <div class="form-section liquid-glass">
         
         <!-- TAB MENU -->
         <div class="tab-menu">
@@ -266,7 +314,7 @@
           <!-- INPUT NAMA PANEL (MODE NEW) -->
           <div class="field" id="fieldName">
             <label>Nama Panel (Tanpa Spasi)</label>
-            <input type="text" id="customName" class="custom-input" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+            <input type="text" id="customName" class="glass-input" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
           </div>
 
           <!-- INPUT USERNAME ADD SERVER (MODE ADD) -->
@@ -280,7 +328,7 @@
 
           <div class="field">
             <label>Node.js Version</label>
-            <input type="text" value="Node.js v1 (Stable)" class="custom-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+            <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
           </div>
           
           <div class="field">
@@ -305,7 +353,7 @@
             <span class="total-price" id="totalText">Rp 300</span>
           </div>
           
-          <button type="submit" id="submitBtn">Beli Panel</button>
+          <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
         </form>
       </div>
     </div>
@@ -319,7 +367,7 @@
     <button class="logout-btn" onclick="doLogout()">Logout</button>
   </div>
   <div class="admin-grid">
-    <div class="table-card">
+    <div class="table-card liquid-glass">
       <h3>Daftar Pengguna</h3>
       <br>
       <table>
@@ -332,7 +380,7 @@
 
 <!-- MODAL TOPUP USER -->
 <div id="topupModal" class="modal-overlay">
-  <div class="modal-content">
+  <div class="modal-content liquid-glass">
     <h3>Topup Saldo</h3>
     <p>Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.</p>
     <input type="number" id="topupAmount" class="modal-input" placeholder="Contoh: 500" min="400">
@@ -345,7 +393,7 @@
 
 <!-- MODAL KONFIRMASI -->
 <div id="confirmModal" class="modal-overlay">
-  <div class="modal-content">
+  <div class="modal-content liquid-glass">
     <h3>Konfirmasi Pembelian</h3>
     <p id="confirmText">Apakah Anda yakin ingin membeli panel ini?</p>
     <div class="modal-actions">
@@ -357,7 +405,7 @@
 
 <!-- MODAL SUKSES -->
 <div id="successModal" class="modal-overlay">
-  <div class="modal-content">
+  <div class="modal-content liquid-glass">
     <h3 id="successTitle">Panel Berhasil Dibuat!</h3>
     <p id="successDesc">Berikut adalah data login panel Anda.</p>
     
@@ -406,6 +454,23 @@
   let pendingOrder = null;
   let currentMode = "new"; 
 
+  // --- RIPPLE ANIMATION (FEEDBACK) ---
+  window.createRipple = function(event) {
+    const btn = event.currentTarget;
+    const circle = document.createElement("span");
+    const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+    const radius = diameter / 2;
+    
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - btn.getBoundingClientRect().left - radius}px`;
+    circle.style.top = `${event.clientY - btn.getBoundingClientRect().top - radius}px`;
+    circle.classList.add("ripple");
+    
+    const ripple = btn.getElementsByClassName("ripple")[0];
+    if (ripple) { ripple.remove(); }
+    btn.appendChild(circle);
+  };
+
   // --- UI LOGIC ---
   window.toggleAuth = (type) => {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
@@ -441,7 +506,8 @@
   }
 
   // --- REGISTER ---
-  window.doRegister = async () => {
+  window.doRegister = async (event) => {
+    if(event) createRipple(event);
     const email = document.getElementById('regEmail').value.trim();
     const pass = document.getElementById('regPassword').value;
     const confirm = document.getElementById('regConfirmPassword').value;
@@ -463,7 +529,8 @@
   }
 
   // --- LOGIN ---
-  window.doLogin = async () => {
+  window.doLogin = async (event) => {
+    if(event) createRipple(event);
     const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPassword').value;
     const err = document.getElementById('loginError');
