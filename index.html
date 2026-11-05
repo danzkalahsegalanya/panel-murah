@@ -158,8 +158,9 @@
           
           <!-- KOLOM INPUT NAMA PANEL KUSTOM -->
           <div class="field">
-            <label>Nama Panel (Kustom)</label>
-            <input type="text" id="customName" placeholder="Misal: BotJuragan" required>
+            <label>Nama Panel (Tanpa Spasi)</label>
+            <!-- TAMBAHAN oninput UNTUK MEMBUANG SPASI OTOMATIS -->
+            <input type="text" id="customName" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
           </div>
 
           <div class="field"><label>Node.js Version</label><input type="text" value="Node.js v1" readonly style="opacity:0.6"></div>
