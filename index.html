@@ -11,9 +11,9 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --bg: #05080f; 
-    --glass-bg: rgba(15, 23, 42, 0.4); /* Warna kaca */
-    --glass-border: rgba(255, 255, 255, 0.08); /* Garis kaca */
-    --glass-highlight: rgba(255, 255, 255, 0.15); /* Pantulan cahaya */
+    --glass-bg: rgba(15, 23, 42, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
     --text: #f0f4f8; 
     --muted: #94a3b8;
     --accent: #00e5ff; 
@@ -64,9 +64,7 @@
   .auth-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
   .auth-field { margin-bottom: 20px; }
   .auth-field label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
-  .input-wrapper { position: relative; }
   
-  /* Input Style (DIPERBAIKI) */
   .glass-input {
     width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500;
     background: rgba(0,0,0,0.3); color: #fff; 
@@ -80,7 +78,6 @@
   }
   .glass-input::placeholder { color: #64748b; }
 
-  .toggle-pass { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); cursor: pointer; background: none; border: none; font-size: 12px; font-weight: 600; }
   .auth-btn { width: 100%; padding: 15px; background: var(--accent); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: all 0.3s; position: relative; overflow: hidden; }
   .auth-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px var(--accent-glow); }
   .auth-btn:active { transform: scale(0.97); }
@@ -91,18 +88,47 @@
 
   /* === MAIN APP (USER) === */
   #mainApp { display: none; flex-direction: column; min-height: 100vh; }
-  .main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; position: relative; z-index: 1; }
+  
+  /* HEADER BARU (TOP BAR) */
+  .top-header {
+    position: absolute; top: 24px; left: 24px; right: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+  }
+  
+  /* Profile Card */
+  .profile-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px; border-radius: 99px;
+  }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #0077ff);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #001a1f; font-size: 16px;
+    box-shadow: 0 0 10px var(--accent-glow);
+  }
+  .profile-info { display: flex; flex-direction: column; }
+  .profile-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .profile-info strong { font-size: 14px; color: #fff; font-weight: 700; }
+  .logout-btn { background: rgba(239,68,68,.15); color: #fca5a5; border: 1px solid rgba(239,68,68,.3); font-size: 12px; font-weight: 700; cursor: pointer; padding: 8px 14px; border-radius: 99px; transition: all 0.2s; margin-left: 8px; }
+  .logout-btn:hover { background: var(--danger); color: white; }
+
+  /* Balance Card */
+  .balance-card {
+    display: flex; align-items: center; gap: 16px;
+    padding: 10px 16px; border-radius: 99px;
+  }
+  .balance-info { display: flex; flex-direction: column; text-align: right; }
+  .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; }
+  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
+  .topup-btn:hover { background: #34d399; transform: translateY(-2px); }
+
+  /* Content */
+  .main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 100px 20px 60px; position: relative; z-index: 1; }
   .wrapper { display: flex; width: 100%; max-width: 1100px; gap: 60px; align-items: center; justify-content: center; }
   
-  /* Top Bar */
-  .user-bar { position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px; padding: 10px 20px; border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; }
-  .user-bar span { color: var(--accent); font-weight: 700; }
-  .user-bar .balance { color: var(--success); font-weight: 700; margin-left: 8px; }
-  .logout-btn { background: rgba(239,68,68,.15); color: #fca5a5; border: 1px solid rgba(239,68,68,.3); font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
-  .logout-btn:hover { background: var(--danger); color: white; }
-  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
-  .topup-btn:hover { background: #34d399; transform: translateY(-1px); }
-
   /* Kiri: Info */
   .info-section { flex: 1; max-width: 520px; }
   .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(0,229,255,.3); padding: 8px 16px; border-radius: 99px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(5px); }
@@ -139,7 +165,7 @@
     border-left: 1px solid var(--glass-border); display: flex; align-items: center; font-weight: 600;
   }
 
-  /* Grid RAM (ANIMASI PINDAH KOLOM) */
+  /* Grid RAM */
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; }
   .ram-item input { position: absolute; opacity: 0; }
   .ram-item label {
@@ -152,8 +178,6 @@
   .ram-item .price-new { font-size: 11.5px; font-weight: 700; color: var(--muted); transition: color 0.3s; z-index: 2; }
   
   .ram-item label:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
-  
-  /* Efek pas dipilih */
   .ram-item input:checked + label { 
     border-color: var(--accent); 
     background: var(--accent-soft); 
@@ -228,7 +252,11 @@
   .btn-confirm:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
   @media (max-width: 900px) {
-    .auth-brand { display: none; } .wrapper { flex-direction: column; gap: 40px; } .user-bar { position: relative; top: 0; right: 0; margin: 20px; justify-content: center; flex-wrap: wrap; }
+    .auth-brand { display: none; } 
+    .top-header { flex-direction: column; align-items: stretch; gap: 10px; position: relative; top: 0; left: 0; right: 0; padding: 20px; }
+    .profile-card, .balance-card { width: 100%; justify-content: space-between; border-radius: 16px; }
+    .wrapper { flex-direction: column; gap: 40px; padding-top: 20px; }
+    .main-container { padding-top: 20px; }
     .admin-header { flex-direction: column; gap: 15px; align-items: flex-start; }
     .info-section h1 { font-size: 38px; }
     .form-section { padding: 28px 20px; }
@@ -287,11 +315,28 @@
 
 <!-- ================= SCREEN 2: USER APP ================= -->
 <div id="mainApp">
-  <div class="user-bar liquid-glass">
-    <div>User: <span id="displayUser">-</span></div>
-    <div>Saldo: <span class="balance" id="displayBalance">Rp 0</span></div>
-    <button class="topup-btn" onclick="openTopupModal()">Topup</button>
-    <button class="logout-btn" onclick="doLogout()">Logout</button>
+  <!-- HEADER BARU -->
+  <div class="top-header">
+    
+    <!-- KIRI: Profile -->
+    <div class="profile-card liquid-glass">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-info">
+        <span>Logged in as</span>
+        <strong id="displayUser">User</strong>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+
+    <!-- KANAN: Balance -->
+    <div class="balance-card liquid-glass">
+      <div class="balance-info">
+        <span>My Balance</span>
+        <strong id="displayBalance">Rp 0</strong>
+      </div>
+      <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
+    </div>
+    
   </div>
 
   <div class="main-container">
@@ -454,7 +499,7 @@
   let pendingOrder = null;
   let currentMode = "new"; 
 
-  // --- RIPPLE ANIMATION (FEEDBACK) ---
+  // --- RIPPLE ANIMATION ---
   window.createRipple = function(event) {
     const btn = event.currentTarget;
     const circle = document.createElement("span");
@@ -570,10 +615,13 @@
         document.getElementById('mainApp').style.display = 'none';
         loadAdminData();
       } else {
-        document.getElementById('mainApp').style.display = 'block';
+        document.getElementById('mainApp').style.display = 'flex';
         document.getElementById('adminApp').style.display = 'none';
         
-        document.getElementById('displayUser').textContent = user.email.split('@')[0];
+        const username = user.email.split('@')[0];
+        document.getElementById('displayUser').textContent = username;
+        document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
+        
         await updateUserBalanceUI(user.uid);
       }
     } else {
