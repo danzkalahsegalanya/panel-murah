@@ -10,200 +10,93 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #05080f;
-    --card: #0b101c;
-    --border: #1a2338;
-    --text: #f0f4f8;
-    --muted: #8492b0;
-    --neon: #00d2ff;
-    --neon-hover: #33ddff;
-    --neon-glow: rgba(0, 210, 255, 0.15);
-    --neon-soft: rgba(0, 210, 255, 0.08);
-    --danger: #ef4444;
+    --bg: #05080f; --card: #0b101c; --border: #1a2338; --text: #f0f4f8; --muted: #8492b0;
+    --neon: #00d2ff; --neon-hover: #33ddff; --neon-glow: rgba(0, 210, 255, 0.15); --neon-soft: rgba(0, 210, 255, 0.08);
+    --danger: #ef4444; --success: #10b981;
   }
-
   html, body {
-    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
-    -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none;
-    font-family: 'Inter', -apple-system, sans-serif;
-    background-color: var(--bg); color: var(--text);
-    min-height: 100vh; overflow-x: hidden;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
+    -webkit-tap-highlight-color: transparent; font-family: 'Inter', sans-serif;
+    background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
   }
 
   /* === AUTH SECTION === */
-  #authScreen {
-    position: fixed; inset: 0; background: var(--bg); z-index: 1000;
-    display: flex; align-items: center; justify-content: center;
-  }
+  #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
-  
-  .auth-brand {
-    flex: 1; background: linear-gradient(135deg, #0a1122 0%, #05080f 100%);
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 60px; border-right: 1px solid var(--border);
-    position: relative; overflow: hidden;
-  }
-  .auth-brand::before {
-    content: ''; position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
-    background-size: 30px 30px; z-index: 0;
-  }
-  .auth-brand::after {
-    content: ''; position: absolute; top: -20%; left: -10%; width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 70%); z-index: 0;
-  }
+  .auth-brand { flex: 1; background: linear-gradient(135deg, #0a1122 0%, #05080f 100%); display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
+  .auth-brand::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,210,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,210,255,.05) 1px, transparent 1px); background-size: 30px 30px; z-index: 0; }
   .brand-content { position: relative; z-index: 1; max-width: 400px; }
   .brand-content h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-  .brand-content h1 span { color: var(--neon); text-shadow: 0 0 30px var(--neon-glow); }
+  .brand-content h1 span { color: var(--neon); }
   .brand-content p { font-size: 16px; color: #a0aec0; line-height: 1.6; }
-
-  .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; background: var(--bg); }
-  .auth-box { width: 100%; max-width: 380px; animation: fadeIn 0.4s ease-out; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  
+  .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
+  .auth-box { width: 100%; max-width: 380px; }
   .auth-box h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
   .auth-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
-  
   .auth-field { margin-bottom: 20px; }
   .auth-field label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
   .input-wrapper { position: relative; }
-  .input-wrapper input {
-    width: 100%; padding: 14px 16px; font-size: 14px; font-family: inherit;
-    background: #0d1220; color: var(--text); border: 1px solid var(--border);
-    border-radius: 10px; outline: none; transition: all 0.2s;
-  }
+  .input-wrapper input { width: 100%; padding: 14px 16px; font-size: 14px; background: #0d1220; color: var(--text); border: 1px solid var(--border); border-radius: 10px; outline: none; transition: all 0.2s; }
   .input-wrapper input:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
-  
-  .toggle-pass {
-    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-    color: var(--muted); cursor: pointer; background: none; border: none; font-size: 12px; font-weight: 600;
-  }
-  .toggle-pass:hover { color: var(--neon); }
-  
-  .auth-btn {
-    width: 100%; padding: 15px; background: var(--neon); color: #001a1f;
-    font-weight: 800; font-size: 15px; border: none; border-radius: 10px;
-    cursor: pointer; margin-top: 10px; transition: all 0.2s;
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .auth-btn:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: 0 4px 15px var(--neon-glow); }
-  .auth-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-  
+  .toggle-pass { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); cursor: pointer; background: none; border: none; font-size: 12px; font-weight: 600; }
+  .auth-btn { width: 100%; padding: 15px; background: var(--neon); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: all 0.2s; }
+  .auth-btn:hover { background: var(--neon-hover); transform: translateY(-1px); }
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
-  .auth-switch a:hover { text-decoration: underline; }
-  
-  .error-msg {
-    background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
-    color: var(--danger); font-size: 13px; padding: 10px; border-radius: 8px;
-    margin-bottom: 20px; display: none;
-  }
+  .error-msg { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: var(--danger); font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
-  /* === MAIN APP === */
-  #mainApp { display: none; flex-direction: column; min-height: 100vh; background: var(--bg); }
-  #mainApp::before {
-    content: ''; position: fixed; inset: 0;
-    background-image: linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px; z-index: 0; pointer-events: none;
-  }
+  /* === MAIN APP (USER) === */
+  #mainApp { display: none; flex-direction: column; min-height: 100vh; }
+  #mainApp::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(0,210,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,210,255,.03) 1px, transparent 1px); background-size: 40px 40px; z-index: 0; pointer-events: none; }
   .main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; position: relative; z-index: 1; }
   .wrapper { display: flex; width: 100%; max-width: 1100px; gap: 60px; align-items: center; justify-content: center; }
-
-  .user-bar {
-    position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px;
-    background: var(--card); border: 1px solid var(--border); padding: 10px 20px;
-    border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  }
+  .user-bar { position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--border); padding: 10px 20px; border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; }
   .user-bar span { color: var(--neon); font-weight: 700; }
-  .logout-btn {
-    background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2);
-    font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s;
-  }
+  .user-bar .balance { color: var(--success); font-weight: 700; margin-left: 8px; }
+  .logout-btn { background: rgba(239,68,68,.1); color: var(--danger); border: 1px solid rgba(239,68,68,.2); font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
   .logout-btn:hover { background: var(--danger); color: white; }
+  .topup-btn { background: var(--success); color: #001a1f; border: none; font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
+  .topup-btn:hover { background: #34d399; transform: translateY(-1px); }
 
   .info-section { flex: 1; max-width: 520px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--neon);
-    background: var(--neon-soft); border: 1px solid rgba(0, 210, 255, 0.3); padding: 8px 16px;
-    border-radius: 99px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px;
-  }
+  .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--neon); background: var(--neon-soft); border: 1px solid rgba(0,210,255,.3); padding: 8px 16px; border-radius: 99px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
   .info-section h1 { font-size: 54px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
   .info-section h1 span { color: var(--neon); }
   .info-section .subheadline { font-size: 17px; color: #a0aec0; line-height: 1.6; margin-bottom: 32px; }
-  .info-section .subheadline strong { color: #fff; }
-  .features { display: flex; flex-direction: column; gap: 16px; }
-  .feature-item { display: flex; align-items: center; gap: 14px; font-size: 15px; color: #cbd5e1; }
-  .feature-item svg { width: 20px; height: 20px; color: var(--neon); }
-
-  .form-section { flex: 1; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); }
-  .promo-banner { background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent); border-left: 3px solid var(--neon); padding: 14px 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13.5px; color: #e2e8f0; }
-  .promo-banner strong { color: var(--neon); }
-  .form-header { margin-bottom: 20px; }
-  .form-header h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
-  .form-header p { font-size: 13px; color: var(--muted); }
+  .form-section { flex: 1; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; }
   .field { margin-bottom: 20px; }
-  .field > label { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-  
-  input[type="text"] {
-    width: 100%; padding: 13px 14px; font-size: 14px; font-family: inherit;
-    background: #060911; color: var(--text); border: 1px solid var(--border);
-    border-radius: 10px; outline: none; -webkit-user-select: text; user-select: text;
-  }
-  input[type="text"]:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
-
-  .node-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .node-group label {
-    position: relative; padding: 12px; text-align: center; font-size: 13.5px; font-weight: 500;
-    background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; color: var(--muted);
-  }
-  .node-group input { position: absolute; opacity: 0; }
-  .node-group label:has(input:checked) { border-color: var(--neon); background: var(--neon-soft); color: var(--text); }
-  .node-group label.disabled { opacity: 0.3; cursor: not-allowed; background: #0a0d15; border-color: #1a2338; color: #4a5470; pointer-events: none; }
-  .node-group label.disabled::after { content: "Closed"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-10deg); font-size: 10px; font-weight: 800; color: var(--danger); }
-
+  .field > label { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
+  input[type="text"] { width: 100%; padding: 13px 14px; font-size: 14px; background: #060911; color: var(--text); border: 1px solid var(--border); border-radius: 10px; outline: none; }
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
-  .ram-item { position: relative; }
   .ram-item input { position: absolute; opacity: 0; }
-  .ram-item label {
-    display: flex; flex-direction: column; justify-content: center; padding: 10px 4px; text-align: center;
-    background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
-  }
-  .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-  .ram-item .ram-price-discount { display: flex; flex-direction: column; align-items: center; gap: 1px; }
-  .ram-item .price-old { font-size: 9.5px; color: #4a5470; text-decoration: line-through; }
+  .ram-item label { display: flex; flex-direction: column; padding: 10px 4px; text-align: center; background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; position: relative; }
+  .ram-item .ram-name { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
   .ram-item .price-new { font-size: 12px; font-weight: 700; color: var(--neon); }
   .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); }
-  .discount-badge { position: absolute; top: 0; right: 0; background: var(--danger); color: white; font-size: 8px; font-weight: 700; padding: 2px 4px; border-bottom-left-radius: 6px; }
-
   .total { margin-top: 24px; padding: 16px; background: #060911; border: 1px solid var(--border); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
-  .total-label { font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 600;}
-  .total-info { font-size: 12px; color: #4a5470; margin-top: 4px; }
-  .total-price-wrapper { display: flex; flex-direction: column; align-items: flex-end; }
-  .total-old-price { font-size: 12px; color: var(--danger); text-decoration: line-through; display: none; }
   .total-price { font-size: 24px; font-weight: 700; color: var(--neon); }
+  button[type="submit"] { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; }
 
-  button[type="submit"] {
-    width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #001a1f;
-    font-weight: 800; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;
-  }
-  button[type="submit"]:hover { background: var(--neon-hover); transform: translateY(-1px); }
-
-  .toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: #0b101c; color: var(--neon); border: 1px solid rgba(0, 210, 255, 0.3);
-    padding: 12px 20px; border-radius: 10px; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 2000; font-weight: 500;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  /* === ADMIN DASHBOARD === */
+  #adminApp { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; min-height: 100vh; }
+  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .admin-header h1 { font-size: 28px; font-weight: 800; color: var(--neon); }
+  .admin-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  .table-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th { padding: 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
+  td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
+  
+  /* Modal Topup */
+  #topupModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center; }
+  .modal-box { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 16px; width: 100%; max-width: 400px; }
+  .modal-box h3 { margin-bottom: 20px; }
+  .modal-box input { width: 100%; padding: 12px; background: #060911; border: 1px solid var(--border); border-radius: 8px; color: white; margin-bottom: 20px; }
 
   @media (max-width: 900px) {
-    .auth-brand { display: none; }
-    .auth-form-area { padding: 20px; }
-    .wrapper { flex-direction: column; gap: 40px; }
-    .info-section { text-align: center; }
-    .info-section h1 { font-size: 38px; }
-    .features { display: none; }
-    .form-section { width: 100%; }
-    .user-bar { top: 10px; right: 10px; padding: 8px 12px; font-size: 12px; }
+    .auth-brand { display: none; } .wrapper { flex-direction: column; } .user-bar { position: relative; top: 0; right: 0; margin: 20px; justify-content: center; flex-wrap: wrap; }
+    .admin-header { flex-direction: column; gap: 15px; align-items: flex-start; }
   }
 </style>
 </head>
@@ -215,85 +108,39 @@
     <div class="auth-brand">
       <div class="brand-content">
         <h1>Welcome to <br><span>Kitzune Store.</span></h1>
-        <p>The most affordable and reliable WhatsApp Bot Panel in the market. Register now and get up to 90% discount for your first order.</p>
+        <p>The most affordable and reliable WhatsApp Bot Panel in the market.</p>
       </div>
     </div>
     <div class="auth-form-area">
       <div class="auth-box">
-        
-        <!-- LOGIN FORM -->
         <div id="loginForm">
           <h2>Sign In</h2>
-          <p>Enter your details to access your dashboard.</p>
           <div class="error-msg" id="loginError"></div>
-          
-          <div class="auth-field">
-            <label>Email</label>
-            <div class="input-wrapper">
-              <input type="text" id="loginEmail" placeholder="Enter your email">
-            </div>
-          </div>
-          
-          <div class="auth-field">
-            <label>Password</label>
-            <div class="input-wrapper">
-              <input type="password" id="loginPassword" placeholder="Enter password">
-              <button class="toggle-pass" onclick="togglePass('loginPassword', this)">SHOW</button>
-            </div>
-          </div>
-          
+          <div class="auth-field"><label>Email</label><input type="text" id="loginEmail" placeholder="Enter your email"></div>
+          <div class="auth-field"><label>Password</label><input type="password" id="loginPassword" placeholder="Enter password"></div>
           <button class="auth-btn" id="btnLogin" onclick="doLogin()">Log In</button>
-          
-          <div class="auth-switch">
-            Don't have an account? <a onclick="toggleAuth('register')">Create one</a>
-          </div>
+          <div class="auth-switch">Don't have an account? <a onclick="toggleAuth('register')">Create one</a></div>
         </div>
-
-        <!-- REGISTER FORM -->
         <div id="registerForm" style="display: none;">
           <h2>Create Account</h2>
-          <p>Join us to get the best deals on bot panels.</p>
           <div class="error-msg" id="regError"></div>
-          
-          <div class="auth-field">
-            <label>Email</label>
-            <div class="input-wrapper">
-              <input type="text" id="regEmail" placeholder="Enter your email">
-            </div>
-          </div>
-          
-          <div class="auth-field">
-            <label>Password</label>
-            <div class="input-wrapper">
-              <input type="password" id="regPassword" placeholder="Create a password">
-              <button class="toggle-pass" onclick="togglePass('regPassword', this)">SHOW</button>
-            </div>
-          </div>
-          
-          <div class="auth-field">
-            <label>Confirm Password</label>
-            <div class="input-wrapper">
-              <input type="password" id="regConfirmPassword" placeholder="Repeat password">
-              <button class="toggle-pass" onclick="togglePass('regConfirmPassword', this)">SHOW</button>
-            </div>
-          </div>
-          
+          <div class="auth-field"><label>Email</label><input type="text" id="regEmail" placeholder="Enter your email"></div>
+          <div class="auth-field"><label>Password</label><input type="password" id="regPassword" placeholder="Create a password"></div>
+          <div class="auth-field"><label>Confirm Password</label><input type="password" id="regConfirmPassword" placeholder="Repeat password"></div>
           <button class="auth-btn" id="btnRegister" onclick="doRegister()">Register & Login</button>
-          
-          <div class="auth-switch">
-            Already have an account? <a onclick="toggleAuth('login')">Log in here</a>
-          </div>
+          <div class="auth-switch">Already have an account? <a onclick="toggleAuth('login')">Log in here</a></div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- ================= SCREEN 2: MAIN APP ================= -->
+<!-- ================= SCREEN 2: USER APP ================= -->
 <div id="mainApp">
   <div class="user-bar">
-    Logged in as <span id="displayUser">User</span>
+    <div>User: <span id="displayUser">-</span></div>
+    <div>Saldo: <span class="balance" id="displayBalance">Rp 0</span></div>
+    <button class="topup-btn" onclick="openTopupModal()">Topup</button>
     <button class="logout-btn" onclick="doLogout()">Logout</button>
   </div>
 
@@ -302,120 +149,65 @@
       <div class="info-section">
         <div class="badge">LIMITED TIME OFFER</div>
         <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
-        <p class="subheadline">No coding skills required. <strong>Choose your plan, pay with pocket change, and let your bot run 24/7 non-stop.</strong></p>
-        <div class="features">
-          <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            <span>Supports Node.js v1 (Most Stable)</span>
-          </div>
-          <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            <span>Up to 90% OFF (Cheaper than coffee)</span>
-          </div>
-          <div class="feature-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-            <span>Instant Activation, Ready to Use</span>
-          </div>
-        </div>
+        <p class="subheadline">Buy panel instantly using your balance. Topup via WhatsApp, fast response!</p>
       </div>
-
       <div class="form-section">
-        <div class="promo-banner"><strong>Crazy Discount!</strong> All RAM packages are up to 90% OFF today.</div>
-        <div class="form-header">
-          <h2>Secure Your Slot Now</h2>
-          <p>Fill in the details below, your order will be sent to admin.</p>
-        </div>
-
         <form id="orderForm">
-          <div class="field">
-            <label>Email (Auto-filled)</label>
-            <input type="text" id="orderNama" readonly style="opacity: 0.6; cursor: not-allowed;">
-          </div>
-
-          <div class="field">
-            <label>Node.js Version</label>
-            <div class="node-group">
-              <label><input type="radio" name="node" value="Node.js v1" checked>Node.js v1</label>
-              <label class="disabled"><input type="radio" name="node" value="Node.js v2" disabled>Node.js v2</label>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Select RAM Capacity</label>
+          <div class="field"><label>Node.js Version</label><input type="text" value="Node.js v1" readonly style="opacity:0.6"></div>
+          <div class="field"><label>Select RAM</label>
             <div class="ram-grid">
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r1" value="1GB" data-harga="300" data-harga-asli="5000" checked>
-                <label for="r1"><span class="discount-badge">94% OFF</span><span class="ram-name">1 GB</span><div class="ram-price-discount"><span class="price-old">Rp 5,000</span><span class="price-new">Rp 300</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r2" value="2GB" data-harga="450" data-harga-asli="6000">
-                <label for="r2"><span class="discount-badge">92% OFF</span><span class="ram-name">2 GB</span><div class="ram-price-discount"><span class="price-old">Rp 6,000</span><span class="price-new">Rp 450</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r3" value="3GB" data-harga="600" data-harga-asli="7000">
-                <label for="r3"><span class="discount-badge">91% OFF</span><span class="ram-name">3 GB</span><div class="ram-price-discount"><span class="price-old">Rp 7,000</span><span class="price-new">Rp 600</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r4" value="4GB" data-harga="750" data-harga-asli="8000">
-                <label for="r4"><span class="discount-badge">90% OFF</span><span class="ram-name">4 GB</span><div class="ram-price-discount"><span class="price-old">Rp 8,000</span><span class="price-new">Rp 750</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r5" value="5GB" data-harga="900" data-harga-asli="9000">
-                <label for="r5"><span class="discount-badge">90% OFF</span><span class="ram-name">5 GB</span><div class="ram-price-discount"><span class="price-old">Rp 9,000</span><span class="price-new">Rp 900</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r6" value="6GB" data-harga="1050" data-harga-asli="10000">
-                <label for="r6"><span class="discount-badge">89% OFF</span><span class="ram-name">6 GB</span><div class="ram-price-discount"><span class="price-old">Rp 10,000</span><span class="price-new">Rp 1,050</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r7" value="7GB" data-harga="1200" data-harga-asli="11000">
-                <label for="r7"><span class="discount-badge">89% OFF</span><span class="ram-name">7 GB</span><div class="ram-price-discount"><span class="price-old">Rp 11,000</span><span class="price-new">Rp 1,200</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r8" value="8GB" data-harga="1350" data-harga-asli="12000">
-                <label for="r8"><span class="discount-badge">88% OFF</span><span class="ram-name">8 GB</span><div class="ram-price-discount"><span class="price-old">Rp 12,000</span><span class="price-new">Rp 1,350</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r9" value="9GB" data-harga="1500" data-harga-asli="13000">
-                <label for="r9"><span class="discount-badge">88% OFF</span><span class="ram-name">9 GB</span><div class="ram-price-discount"><span class="price-old">Rp 13,000</span><span class="price-new">Rp 1,500</span></div></label>
-              </div>
-              <div class="ram-item">
-                <input type="radio" name="ram" id="r10" value="10GB" data-harga="1700" data-harga-asli="15000">
-                <label for="r10"><span class="discount-badge">88% OFF</span><span class="ram-name">10 GB</span><div class="ram-price-discount"><span class="price-old">Rp 15,000</span><span class="price-new">Rp 1,700</span></div></label>
-              </div>
-              <div class="ram-item unli">
-                <input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000" data-harga-asli="50000">
-                <label for="runli"><span class="discount-badge">96% OFF</span><span class="ram-name">Unlimited</span><div class="ram-price-discount"><span class="price-old">Rp 50,000</span><span class="price-new">Rp 2,000</span></div></label>
-              </div>
+              <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
+              <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
             </div>
           </div>
-
-          <div class="total" id="totalBox">
-            <div>
-              <div class="total-label">Total Payment</div>
-              <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
-            </div>
-            <div class="total-price-wrapper">
-              <div class="total-old-price" id="totalOldPrice">Rp 5,000</div>
-              <div class="total-price" id="totalText">Rp 300</div>
-            </div>
-          </div>
-
-          <button type="submit" id="submitBtn">Get Panel Now</button>
+          <div class="total"><span>Total Bayar</span><span class="total-price" id="totalText">Rp 300</span></div>
+          <button type="submit" id="submitBtn">Beli Panel</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- ================= SCREEN 3: ADMIN APP ================= -->
+<div id="adminApp">
+  <div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <button class="logout-btn" onclick="doLogout()">Logout</button>
+  </div>
+  <div class="admin-grid">
+    <div class="table-card">
+      <h3>Daftar Pengguna</h3>
+      <br>
+      <table>
+        <thead><tr><th>Email</th><th>Saldo</th><th>Aksi</th></tr></thead>
+        <tbody id="userTableBody">
+          <!-- Data user akan muncul di sini -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TOPUP USER -->
+<div id="topupModal">
+  <div class="modal-box">
+    <h3>Topup Saldo (Min. Rp 400)</h3>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:10px;">Masukkan nominal, lalu kirim pesan ke Admin via WhatsApp.</p>
+    <input type="number" id="topupAmount" placeholder="Contoh: 500" min="400">
+    <button class="auth-btn" onclick="proceedTopup()">Topup via WA</button>
+    <button class="logout-btn" style="margin-top:10px; width:100%; text-align:center;" onclick="document.getElementById('topupModal').style.display='none'">Batal</button>
+  </div>
+</div>
 
 <!-- FIREBASE SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  // Config Firebase (API KEY UDAH BENER)
+  // CONFIG FIREBASE LU
   const firebaseConfig = {
     apiKey: "AIzaSyCjhtqP_oVnT9C_fgu1FFlKCDxnlEIrWM4",
     authDomain: "kitzunemarket.firebaseapp.com",
@@ -428,162 +220,179 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
+  
+  const ADMIN_EMAIL = "upiljaranmmbu@gmail.com";
+  const ADMIN_WA = "6288906198025";
+  let currentUser = null;
 
   // --- UI LOGIC ---
-  window.toggleAuth = function(type) {
+  window.toggleAuth = (type) => {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
     document.getElementById('loginError').style.display = 'none';
     document.getElementById('regError').style.display = 'none';
   }
 
-  window.togglePass = function(id, btn) {
-    const input = document.getElementById(id);
-    input.type = input.type === "password" ? "text" : "password";
-    btn.textContent = input.type === "password" ? "SHOW" : "HIDE";
-  }
-
   // --- REGISTER ---
-  window.doRegister = async function() {
+  window.doRegister = async () => {
     const email = document.getElementById('regEmail').value.trim();
     const pass = document.getElementById('regPassword').value;
-    const confirmPass = document.getElementById('regConfirmPassword').value;
+    const confirm = document.getElementById('regConfirmPassword').value;
     const err = document.getElementById('regError');
-    const btn = document.getElementById('btnRegister');
 
-    if (!email || !pass) {
-      err.textContent = "Email and password cannot be empty.";
-      err.style.display = "block"; return;
-    }
-    if (pass !== confirmPass) {
-      err.textContent = "Passwords do not match!";
-      err.style.display = "block"; return;
-    }
+    if (pass !== confirm) { err.textContent = "Passwords do not match!"; err.style.display = "block"; return; }
 
-    btn.disabled = true; btn.textContent = "Creating account...";
+    document.getElementById('btnRegister').disabled = true;
     try {
-      await createUserWithEmailAndPassword(auth, email, pass);
-      // onAuthStateChanged akan otomatis nge-handle login
+      const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+      // Simpan user ke database dengan saldo 0
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        email: email,
+        balance: 0
+      });
     } catch (error) {
-      err.textContent = error.message.replace("Firebase: ", "");
-      err.style.display = "block";
-      btn.disabled = false; btn.textContent = "Register & Login";
+      err.textContent = error.message; err.style.display = "block";
+      document.getElementById('btnRegister').disabled = false;
     }
   }
 
   // --- LOGIN ---
-  window.doLogin = async function() {
+  window.doLogin = async () => {
     const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPassword').value;
     const err = document.getElementById('loginError');
-    const btn = document.getElementById('btnLogin');
 
-    btn.disabled = true; btn.textContent = "Logging in...";
+    document.getElementById('btnLogin').disabled = true;
     try {
       await signInWithEmailAndPassword(auth, email, pass);
     } catch (error) {
-      err.textContent = "Invalid email or password.";
-      err.style.display = "block";
-      btn.disabled = false; btn.textContent = "Log In";
+      err.textContent = "Invalid email or password."; err.style.display = "block";
+      document.getElementById('btnLogin').disabled = false;
     }
   }
 
   // --- LOGOUT ---
-  window.doLogout = function() {
-    signOut(auth);
+  window.doLogout = () => signOut(auth);
+
+  // --- TOPUP LOGIC ---
+  window.openTopupModal = () => document.getElementById('topupModal').style.display = 'flex';
+  
+  window.proceedTopup = () => {
+    const amount = document.getElementById('topupAmount').value;
+    if (amount < 400) { alert("Minimal topup Rp 400"); return; }
+    
+    const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${parseInt(amount).toLocaleString()}\n\nMohon diproses.`;
+    window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
+    document.getElementById('topupModal').style.display = 'none';
   }
 
-  // --- CEK STATUS LOGIN (OTOMATIS) ---
-  onAuthStateChanged(auth, (user) => {
+  // --- CEK STATUS LOGIN ---
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // User berhasil login / register
+      currentUser = user;
       document.getElementById('authScreen').style.display = 'none';
-      document.getElementById('mainApp').style.display = 'flex';
-      
-      const displayName = user.email.split('@')[0]; // Ambil nama depan dari email
-      document.getElementById('displayUser').textContent = displayName;
-      document.getElementById('orderNama').value = user.email; // Isi otomatis di form order
-      
-      updateTotal();
+
+      if (user.email === ADMIN_EMAIL) {
+        // TAMPILAN ADMIN
+        document.getElementById('adminApp').style.display = 'block';
+        document.getElementById('mainApp').style.display = 'none';
+        loadAdminData();
+      } else {
+        // TAMPILAN USER
+        document.getElementById('mainApp').style.display = 'block';
+        document.getElementById('adminApp').style.display = 'none';
+        
+        document.getElementById('displayUser').textContent = user.email.split('@')[0];
+        await updateUserBalanceUI(user.uid);
+      }
     } else {
-      // User belum login / logout
+      // LOGOUT
       document.getElementById('authScreen').style.display = 'flex';
       document.getElementById('mainApp').style.display = 'none';
-      
-      // Reset tombol
-      document.getElementById('btnLogin').disabled = false; document.getElementById('btnLogin').textContent = "Log In";
-      document.getElementById('btnRegister').disabled = false; document.getElementById('btnRegister').textContent = "Register & Login";
+      document.getElementById('adminApp').style.display = 'none';
+      document.getElementById('btnLogin').disabled = false;
+      document.getElementById('btnRegister').disabled = false;
     }
   });
 
-  // --- ORDER SYSTEM ---
-  const ADMIN_WA = "6288906198025";
-  const form = document.getElementById("orderForm");
+  // --- FUNGSI USER ---
+  async function updateUserBalanceUI(uid) {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      document.getElementById('displayBalance').textContent = "Rp " + (docSnap.data().balance || 0).toLocaleString();
+    }
+  }
+
+  // --- FUNGSI ADMIN ---
+  async function loadAdminData() {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const tbody = document.getElementById('userTableBody');
+    tbody.innerHTML = '';
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${data.email}</td>
+        <td>Rp ${(data.balance || 0).toLocaleString()}</td>
+        <td><button class="btn-action" onclick="addBalance('${doc.id}', '${data.email}')">Tambah Saldo</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  window.addBalance = async (uid, email) => {
+    const amountStr = prompt(`Tambah saldo untuk ${email} (Masukkan angka, misal 2000):`);
+    if (!amountStr) return;
+    const amount = parseInt(amountStr);
+    if (isNaN(amount) || amount <= 0) { alert("Nominal tidak valid"); return; }
+
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+    const currentBalance = docSnap.data().balance || 0;
+
+    await updateDoc(docRef, { balance: currentBalance + amount });
+    alert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${email}`);
+    loadAdminData(); // Refresh tabel
+  }
+
+  // --- FUNGSI ORDER PANEL (USER) ---
+  const orderForm = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
-  const totalOldPrice = document.getElementById("totalOldPrice");
-  const orderInfo = document.getElementById("orderInfo");
-  const submitBtn = document.getElementById("submitBtn");
-  const toast = document.getElementById("toast");
 
-  let toastTimer;
-  window.showToast = function(msg) {
-    toast.textContent = msg;
-    toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
-  }
-
-  const rupiah = n => "Rp " + n.toLocaleString("en-US");
-
-  function getOrder() {
-    const ramEl = form.querySelector('input[name="ram"]:checked');
-    const nodeEl = form.querySelector('input[name="node"]:checked');
-    return { 
-      ram: ramEl.value, 
-      harga: parseInt(ramEl.dataset.harga, 10), 
-      hargaAsli: parseInt(ramEl.dataset.hargaAsli, 10),
-      node: nodeEl.value 
-    };
-  }
-
-  function updateTotal() {
-    const { ram, harga, hargaAsli, node } = getOrder();
-    totalText.textContent = rupiah(harga);
-    totalOldPrice.textContent = rupiah(hargaAsli);
-    totalOldPrice.style.display = "block";
-    orderInfo.textContent = `RAM ${ram} / ${node}`;
-  }
-
-  form.addEventListener("change", e => {
-    if (e.target.name === "ram" || e.target.name === "node") updateTotal();
+  orderForm.addEventListener("change", (e) => {
+    if (e.target.name === "ram") {
+      totalText.textContent = "Rp " + parseInt(e.target.dataset.harga).toLocaleString();
+    }
   });
 
-  form.addEventListener("submit", e => {
+  orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const nama = document.getElementById("orderNama").value;
-    const { ram, harga, node } = getOrder();
+    const ramEl = orderForm.querySelector('input[name="ram"]:checked');
+    const harga = parseInt(ramEl.dataset.harga);
     
-    const pesan = `*NEW ORDER - KITZUNE STORE*
------------------------------------
-Hello Admin, I would like to order a panel with the following details:
+    const docRef = doc(db, "users", currentUser.uid);
+    const docSnap = await getDoc(docRef);
+    const saldo = docSnap.data().balance || 0;
 
-*Email* ${nama}
-*Node Version* ${node}
-*RAM Capacity* ${ram}
+    if (saldo < harga) {
+      alert("Saldo tidak cukup! Silakan topup dulu.");
+      return;
+    }
 
-*TOTAL PAYMENT* ${rupiah(harga)}
------------------------------------
-Please proceed with the activation. Thank you!`;
+    if (!confirm(`Yakin beli panel RAM ${ramEl.value} seharga Rp ${harga.toLocaleString()}?`)) return;
 
-    submitBtn.textContent = "Processing...";
-    submitBtn.disabled = true;
-    const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`;
+    // Kurangi saldo
+    await updateDoc(docRef, { balance: saldo - harga });
+    await updateUserBalanceUI(currentUser.uid);
 
-    setTimeout(() => {
-      window.open(url, "_blank");
-      submitBtn.textContent = "Get Panel Now";
-      submitBtn.disabled = false;
-    }, 500);
+    // Kirim WA ke admin
+    const pesan = `*NEW ORDER*\n\nUser: ${currentUser.email}\nRAM: ${ramEl.value}\nTotal: Rp ${harga.toLocaleString()}\n\n(Saldo user telah dipotong otomatis. Mohon buatkan panelnya).`;
+    window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
+    
+    alert("Pesanan berhasil! Admin akan segera memproses panel lu.");
   });
 </script>
 
