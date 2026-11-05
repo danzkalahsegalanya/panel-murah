@@ -232,15 +232,12 @@
   }
   .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
   
-  /* Harga Normal */
-  .ram-item .ram-price { font-size: 11px; color: var(--muted); }
-  
-  /* Harga Diskon (Coret) */
+  /* Harga Coret (Diskon) */
   .ram-item .ram-price-discount {
-    display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 2px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; margin-top: 2px;
   }
   .ram-item .price-old {
-    font-size: 10px; color: #4a5470; text-decoration: line-through;
+    font-size: 9.5px; color: #4a5470; text-decoration: line-through;
   }
   .ram-item .price-new {
     font-size: 12px; font-weight: 700; color: var(--neon);
@@ -252,16 +249,12 @@
     border-color: var(--neon); background: var(--neon-soft);
     box-shadow: 0 0 15px -5px var(--neon-glow);
   }
-  .ram-item input:checked + label .ram-price { color: var(--neon); }
-  
-  .ram-item.unli label { border-color: rgba(0, 210, 255, 0.4); }
-  .ram-item.unli .ram-name { color: var(--neon); }
   
   /* Badge Diskon Kecil di Pojok */
   .discount-badge {
     position: absolute; top: 0; right: 0;
     background: var(--danger); color: white;
-    font-size: 8.5px; font-weight: 700;
+    font-size: 8px; font-weight: 700;
     padding: 2px 4px; border-bottom-left-radius: 6px;
     letter-spacing: 0.5px;
   }
@@ -403,8 +396,9 @@
   }
 
   @media (max-width: 400px) {
-    .ram-grid { grid-template-columns: repeat(3, 1fr); }
-    .ram-item .ram-price { font-size: 10px; }
+    .ram-grid { grid-template-columns: repeat(2, 1fr); }
+    .ram-item .price-old { font-size: 9px; }
+    .ram-item .price-new { font-size: 11px; }
   }
 </style>
 </head>
@@ -416,7 +410,7 @@
       
       <!-- LEFT: Hero Copy -->
       <div class="info-section">
-        <div class="badge">Unlimited Promo Only Rp 2,000</div>
+        <div class="badge">MASSIVE CLEARANCE SALE</div>
         <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
         <p class="subheadline">
           No coding skills required. <strong>Choose your plan, pay with pocket change, and let your bot run 24/7 non-stop.</strong>
@@ -429,7 +423,7 @@
           </div>
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            <span>Prices starting from Rp 300 (Cheaper than coffee)</span>
+            <span>Up to 90% OFF (Cheaper than coffee)</span>
           </div>
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
@@ -443,7 +437,7 @@
         
         <!-- Promo Banner -->
         <div class="promo-banner">
-          <strong>Special Offer!</strong> Get <strong>Unlimited RAM</strong> for just Rp 2,000. Limited slots available!
+          <strong>Crazy Discount!</strong> All RAM packages are up to 90% OFF today. Grab yours before they're gone!
         </div>
 
         <div class="form-header">
@@ -468,25 +462,145 @@
           <div class="field">
             <label>Select RAM Capacity</label>
             <div class="ram-grid">
-              <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="ram-price">Rp 300</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="ram-price">Rp 450</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="ram-price">Rp 600</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="ram-price">Rp 750</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="ram-price">Rp 900</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="ram-price">Rp 1,050</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="ram-price">Rp 1,200</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="ram-price">Rp 1,350</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="ram-price">Rp 1,500</span></label></div>
-              <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="ram-price">Rp 1,700</span></label></div>
               
-              <!-- UNLIMITED DENGAN HARGA CORET -->
-              <div class="ram-item unli">
-                <input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000" data-harga-asli="10000">
-                <label for="runli">
-                  <span class="discount-badge">80% OFF</span>
-                  <span class="ram-name">Unlimited</span>
+              <!-- 1 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r1" value="1GB" data-harga="300" data-harga-asli="5000" checked>
+                <label for="r1">
+                  <span class="discount-badge">94% OFF</span>
+                  <span class="ram-name">1 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 5,000</span>
+                    <span class="price-new">Rp 300</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 2 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r2" value="2GB" data-harga="450" data-harga-asli="6000">
+                <label for="r2">
+                  <span class="discount-badge">92% OFF</span>
+                  <span class="ram-name">2 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 6,000</span>
+                    <span class="price-new">Rp 450</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 3 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r3" value="3GB" data-harga="600" data-harga-asli="7000">
+                <label for="r3">
+                  <span class="discount-badge">91% OFF</span>
+                  <span class="ram-name">3 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 7,000</span>
+                    <span class="price-new">Rp 600</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 4 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r4" value="4GB" data-harga="750" data-harga-asli="8000">
+                <label for="r4">
+                  <span class="discount-badge">90% OFF</span>
+                  <span class="ram-name">4 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 8,000</span>
+                    <span class="price-new">Rp 750</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 5 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r5" value="5GB" data-harga="900" data-harga-asli="9000">
+                <label for="r5">
+                  <span class="discount-badge">90% OFF</span>
+                  <span class="ram-name">5 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 9,000</span>
+                    <span class="price-new">Rp 900</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 6 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r6" value="6GB" data-harga="1050" data-harga-asli="10000">
+                <label for="r6">
+                  <span class="discount-badge">89% OFF</span>
+                  <span class="ram-name">6 GB</span>
                   <div class="ram-price-discount">
                     <span class="price-old">Rp 10,000</span>
+                    <span class="price-new">Rp 1,050</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 7 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r7" value="7GB" data-harga="1200" data-harga-asli="11000">
+                <label for="r7">
+                  <span class="discount-badge">89% OFF</span>
+                  <span class="ram-name">7 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 11,000</span>
+                    <span class="price-new">Rp 1,200</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 8 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r8" value="8GB" data-harga="1350" data-harga-asli="12000">
+                <label for="r8">
+                  <span class="discount-badge">88% OFF</span>
+                  <span class="ram-name">8 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 12,000</span>
+                    <span class="price-new">Rp 1,350</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 9 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r9" value="9GB" data-harga="1500" data-harga-asli="13000">
+                <label for="r9">
+                  <span class="discount-badge">88% OFF</span>
+                  <span class="ram-name">9 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 13,000</span>
+                    <span class="price-new">Rp 1,500</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 10 GB -->
+              <div class="ram-item">
+                <input type="radio" name="ram" id="r10" value="10GB" data-harga="1700" data-harga-asli="15000">
+                <label for="r10">
+                  <span class="discount-badge">88% OFF</span>
+                  <span class="ram-name">10 GB</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 15,000</span>
+                    <span class="price-new">Rp 1,700</span>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Unlimited -->
+              <div class="ram-item unli">
+                <input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000" data-harga-asli="50000">
+                <label for="runli">
+                  <span class="discount-badge">96% OFF</span>
+                  <span class="ram-name">Unlimited</span>
+                  <div class="ram-price-discount">
+                    <span class="price-old">Rp 50,000</span>
                     <span class="price-new">Rp 2,000</span>
                   </div>
                 </label>
@@ -501,7 +615,7 @@
               <div class="total-info" id="orderInfo">RAM 1 GB / Node.js v1</div>
             </div>
             <div class="total-price-wrapper">
-              <div class="total-old-price" id="totalOldPrice">Rp 10,000</div>
+              <div class="total-old-price" id="totalOldPrice">Rp 5,000</div>
               <div class="total-price" id="totalText">Rp 300</div>
             </div>
           </div>
@@ -652,7 +766,7 @@
     return { 
       ram: ramEl.value, 
       harga: parseInt(ramEl.dataset.harga, 10), 
-      hargaAsli: ramEl.dataset.hargaAsli ? parseInt(ramEl.dataset.hargaAsli, 10) : null,
+      hargaAsli: parseInt(ramEl.dataset.hargaAsli, 10),
       node: nodeEl.value 
     };
   }
@@ -662,13 +776,9 @@
     totalText.textContent = rupiah(harga);
     orderInfo.textContent = `RAM ${ram} / ${node}`;
 
-    // Tampilkan harga coret kalau milih Unlimited
-    if (hargaAsli) {
-      totalOldPrice.textContent = rupiah(hargaAsli);
-      totalOldPrice.style.display = "block";
-    } else {
-      totalOldPrice.style.display = "none";
-    }
+    // Selalu tampilkan harga coret karena semua paket didiskon
+    totalOldPrice.textContent = rupiah(hargaAsli);
+    totalOldPrice.style.display = "block";
 
     if (animate) {
       totalText.classList.remove("bump");
