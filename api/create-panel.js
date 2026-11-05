@@ -31,13 +31,17 @@ export default async function handler(req, res) {
       cpu = 20 + (gb * 20); 
     }
 
-    // 3. Buat User Pterodactyl (Email Unik)
-    const uniqueEmail = `${username}-${Date.now()}@kitzunemarket.com`;
+    // 3. Bersihin Nama Kustom
+    const cleanUsername = username.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    
+    // FORMAT EMAIL BARU (TANPA TIMESTAMP)
+    const newEmail = `${cleanUsername}@kitzunemarket.com`;
 
+    // 4. Buat User Pterodactyl
     const userRes = await axios.post(`${DOMAIN}/api/application/users`, {
-      email: uniqueEmail,
-      username: username.toLowerCase().replace(/[^a-z0-9]/g, ''),
-      first_name: username,
+      email: newEmail, // <--- EMAIL TANPA TIMESTAMP
+      username: cleanUsername,
+      first_name: username, 
       last_name: "Server",
       language: "en",
       password: password
@@ -51,20 +55,20 @@ export default async function handler(req, res) {
 
     const user = userRes.data.attributes;
 
-    // 4. Ambil Startup Command dari Egg
+    // 5. Ambil Startup Command dari Egg
     const eggRes = await axios.get(`${DOMAIN}/api/application/nests/${NEST_ID}/eggs/${EGG_ID}`, {
       headers: { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' }
     });
     const startup_cmd = eggRes.data.attributes.startup;
 
-    // 5. Format Nama Server: "UDIN [UNLI]"
+    // 6. Format Nama Server: "TESWEB [1GB]"
     const paketLabel = ramStr === "unlimited" || ramStr === "unli" ? "UNLI" : ramStr.toUpperCase();
-    const serverName = `${username} [${paketLabel}]`; // Contoh: UDIN [1GB] / UDIN [UNLI]
+    const serverName = `${username} [${paketLabel}]`;
 
-    // 6. Buat Server
+    // 7. Buat Server
     const serverRes = await axios.post(`${DOMAIN}/api/application/servers`, {
       name: serverName,
-      description: "BY KITZUNE MARKET", // Deskripsi Server
+      description: "BY KITZUNE MARKET",
       user: user.id,
       egg: EGG_ID,
       docker_image: "ghcr.io/parkervcp/yolks:nodejs_18",
@@ -92,7 +96,7 @@ export default async function handler(req, res) {
       }
     });
 
-    // 7. Sukses
+    // 8. Sukses
     return res.status(200).json({ 
       success: true, 
       serverId: serverRes.data.attributes.id,
