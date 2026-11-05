@@ -64,10 +64,18 @@
   .info-section h1 span { color: var(--neon); }
   .info-section .subheadline { font-size: 17px; color: #a0aec0; line-height: 1.6; margin-bottom: 32px; }
   .form-section { flex: 1; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; }
+  
+  /* TAB MENU */
+  .tab-menu { display: flex; gap: 10px; margin-bottom: 24px; background: #060911; padding: 6px; border-radius: 10px; border: 1px solid var(--border); }
+  .tab-btn { flex: 1; padding: 10px; background: transparent; border: none; color: var(--muted); font-weight: 600; font-size: 13.5px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .tab-btn.active { background: var(--neon); color: #001a1f; }
+
   .field { margin-bottom: 20px; }
   .field > label { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
-  input[type="text"] { width: 100%; padding: 13px 14px; font-size: 14px; background: #060911; color: var(--text); border: 1px solid var(--border); border-radius: 10px; outline: none; }
-  input[type="text"]:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
+  .input-group { display: flex; align-items: center; background: #060911; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .input-group input { flex: 1; border: none; background: transparent; padding: 13px 14px; font-size: 14px; color: var(--text); outline: none; }
+  .input-group input:focus { border-color: var(--neon); }
+  .input-group .suffix { padding: 0 14px; color: var(--muted); font-size: 13.5px; background: #0b101c; border-left: 1px solid var(--border); align-self: stretch; display: flex; align-items: center; font-weight: 500; }
   
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
   .ram-item input { position: absolute; opacity: 0; }
@@ -90,58 +98,26 @@
   td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
   .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
 
-  /* === MODAL SYSTEM (KONFIRMASI & SUKSES) === */
-  .modal-overlay {
-    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-    z-index: 3000; align-items: center; justify-content: center;
-    backdrop-filter: blur(4px);
-  }
+  /* === MODAL SYSTEM === */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
   .modal-overlay.active { display: flex; }
-  .modal-content {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 30px; border-radius: 20px; width: 90%; max-width: 420px;
-    text-align: center; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
-  }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
+  .modal-content { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 20px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
   .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
   .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
-  
-  /* Form di dalam modal */
-  .modal-input {
-    width: 100%; padding: 12px; font-size: 14px; background: #060911;
-    color: var(--text); border: 1px solid var(--border); border-radius: 10px;
-    outline: none; margin-bottom: 20px; text-align: center;
-  }
+  .modal-input { width: 100%; padding: 12px; font-size: 14px; background: #060911; color: var(--text); border: 1px solid var(--border); border-radius: 10px; outline: none; margin-bottom: 20px; text-align: center; }
   .modal-input:focus { border-color: var(--neon); }
 
-  /* Data Panel Box (Sukses) */
-  .panel-data-box {
-    background: #060911; border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px; text-align: left;
-    margin-bottom: 20px; font-family: monospace; font-size: 14px;
-    user-select: text; -webkit-user-select: text;
-  }
+  .panel-data-box { background: #060911; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; user-select: text; -webkit-user-select: text; }
   .panel-data-box .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
   .panel-data-box .row:last-child { margin-bottom: 0; }
   .panel-data-box .label { color: var(--muted); }
   .panel-data-box .value { color: var(--neon); font-weight: 700; }
   
-  .warning-box {
-    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
-    color: var(--danger); font-size: 12.5px; padding: 12px; border-radius: 8px;
-    margin-bottom: 20px; font-weight: 600;
-  }
+  .warning-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
-  /* Tombol Modal */
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
-  .btn-modal {
-    flex: 1; padding: 12px; border-radius: 10px; font-weight: 700;
-    font-size: 14px; cursor: pointer; border: none; transition: all 0.2s;
-  }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
   .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
   .btn-cancel:hover { background: rgba(255,255,255,0.05); }
   .btn-confirm { background: var(--neon); color: #001a1f; }
@@ -205,14 +181,31 @@
         <p class="subheadline">Buy panel instantly using your balance. Topup via WhatsApp, fast response!</p>
       </div>
       <div class="form-section">
+        
+        <!-- TAB MENU -->
+        <div class="tab-menu">
+          <button type="button" class="tab-btn active" id="tabNew" onclick="switchTab('new')">Beli Panel Baru</button>
+          <button type="button" class="tab-btn" id="tabAdd" onclick="switchTab('addserver')">Add Server</button>
+        </div>
+
         <form id="orderForm">
           
-          <div class="field">
+          <!-- INPUT NAMA PANEL / USERNAME -->
+          <div class="field" id="fieldName">
             <label>Nama Panel (Tanpa Spasi)</label>
             <input type="text" id="customName" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
           </div>
 
-          <div class="field"><label>Node.js Version</label><input type="text" value="Node.js v1" readonly style="opacity:0.6"></div>
+          <!-- INPUT USERNAME ADD SERVER (Ada embel-embel @kitzunemarket.com) -->
+          <div class="field" id="fieldAddUser" style="display: none;">
+            <label>Username Akun Panel Kamu</label>
+            <div class="input-group">
+              <input type="text" id="addUsername" placeholder="Misal: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+              <span class="suffix">@kitzunemarket.com</span>
+            </div>
+          </div>
+
+          <div class="field"><label>Node.js Version</label><input type="text" value="Node.js v1" readonly style="opacity:0.6; width:100%; padding:13px; background:#060911; border:1px solid var(--border); border-radius:10px;"></div>
           
           <div class="field"><label>Select RAM</label>
             <div class="ram-grid">
@@ -275,7 +268,7 @@
     <p id="confirmText">Apakah Anda yakin ingin membeli panel ini?</p>
     <div class="modal-actions">
       <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
-      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Beli Sekarang</button>
+      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
     </div>
   </div>
 </div>
@@ -283,13 +276,13 @@
 <!-- MODAL SUKSES DATA PANEL -->
 <div id="successModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Panel Berhasil Dibuat!</h3>
-    <p>Berikut adalah data login panel Anda.</p>
+    <h3 id="successTitle">Panel Berhasil Dibuat!</h3>
+    <p id="successDesc">Berikut adalah data login panel Anda.</p>
     
     <div class="panel-data-box" id="panelDataBox">
       <div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div>
       <div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div>
-      <div class="row"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
+      <div class="row" id="rowPassword"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
     </div>
 
     <div class="warning-box">
@@ -329,6 +322,7 @@
   const ADMIN_WA = "6288906198025";
   let currentUser = null;
   let pendingOrder = null;
+  let currentMode = "new"; // Mode default
 
   // --- UI LOGIC ---
   window.toggleAuth = (type) => {
@@ -336,6 +330,30 @@
     document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
     document.getElementById('loginError').style.display = 'none';
     document.getElementById('regError').style.display = 'none';
+  }
+
+  // --- SWITCH TAB ---
+  window.switchTab = (mode) => {
+    currentMode = mode;
+    if (mode === 'new') {
+      document.getElementById('tabNew').classList.add('active');
+      document.getElementById('tabAdd').classList.remove('active');
+      
+      document.getElementById('fieldName').style.display = 'block';
+      document.getElementById('fieldAddUser').style.display = 'none';
+      
+      document.getElementById('submitBtn').textContent = "Beli Panel";
+      document.getElementById('submitBtn').style.background = "var(--neon)";
+    } else {
+      document.getElementById('tabNew').classList.remove('active');
+      document.getElementById('tabAdd').classList.add('active');
+      
+      document.getElementById('fieldName').style.display = 'none';
+      document.getElementById('fieldAddUser').style.display = 'block';
+      
+      document.getElementById('submitBtn').textContent = "Add Server";
+      document.getElementById('submitBtn').style.background = "#10b981"; // Warna hijau beda
+    }
   }
 
   // --- REGISTER ---
@@ -468,15 +486,22 @@
     }
   });
 
-  // 1. Klik Beli -> Muncul Modal Konfirmasi
+  // 1. Klik Submit -> Muncul Modal Konfirmasi
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!currentUser) return;
-    
-    const customName = document.getElementById("customName").value.trim();
-    if (!customName) {
-      alert("Nama panel wajib diisi!");
-      return;
+
+    let finalUsername = "";
+    let displayConfirm = "";
+
+    if (currentMode === 'new') {
+      finalUsername = document.getElementById("customName").value.trim();
+      if (!finalUsername) { alert("Nama panel wajib diisi!"); return; }
+      displayConfirm = `Yakin beli <b>Panel Baru</b> dengan nama <b>"${finalUsername}"</b>?`;
+    } else {
+      finalUsername = document.getElementById("addUsername").value.trim();
+      if (!finalUsername) { alert("Username panel wajib diisi!"); return; }
+      displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${finalUsername}@kitzunemarket.com"</b>?`;
     }
 
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
@@ -492,7 +517,8 @@
     }
 
     pendingOrder = {
-      customName: customName,
+      mode: currentMode,
+      username: finalUsername,
       ram: ramEl.value,
       harga: harga,
       docRef: docRef,
@@ -500,25 +526,26 @@
     };
 
     document.getElementById("confirmText").innerHTML = 
-      `Yakin beli panel RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b><br>dengan nama <b>"${customName}"</b>?`;
+      `${displayConfirm}<br>Paket RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
     document.getElementById("confirmModal").classList.add("active");
   });
 
-  // 2. Eksekusi Pembelian (Klik "Ya, Beli Sekarang" di modal)
+  // 2. Eksekusi Pembelian
   window.executePurchase = async () => {
     document.getElementById("confirmModal").classList.remove("active");
     
     const btn = document.getElementById("submitBtn");
     btn.disabled = true;
-    btn.textContent = "Memproses Panel...";
+    btn.textContent = "Memproses...";
 
     try {
       const response = await fetch('/api/create-panel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
+          mode: pendingOrder.mode,
           email: currentUser.email, 
-          username: pendingOrder.customName,
+          username: pendingOrder.username,
           ram: pendingOrder.ram
         })
       });
@@ -526,32 +553,49 @@
       const data = await response.json();
 
       if (!data.success) {
-        throw new Error(data.error || "Gagal membuat panel.");
+        throw new Error(data.error || "Gagal memproses.");
       }
 
       await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
 
+      // Setup Tampilan Modal Sukses
       document.getElementById("resUsername").textContent = data.username;
-      document.getElementById("resPassword").textContent = data.password;
+      
+      if (pendingOrder.mode === 'new') {
+        document.getElementById("successTitle").textContent = "Panel Berhasil Dibuat!";
+        document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda.";
+        document.getElementById("resPassword").textContent = data.password;
+        document.getElementById("rowPassword").style.display = "flex";
+      } else {
+        document.getElementById("successTitle").textContent = "Server Berhasil Ditambahkan!";
+        document.getElementById("successDesc").textContent = "Server baru telah masuk ke akun panel Anda.";
+        document.getElementById("rowPassword").style.display = "none"; // Sembunyikan password
+      }
+
       document.getElementById("successModal").classList.add("active");
 
     } catch (error) {
       alert("Error: " + error.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = "Beli Panel";
+      btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
     }
   };
 
-  // 3. Fungsi Copy Data dari Modal Sukses (BIAR GAK ERROR LAGI)
+  // 3. Fungsi Copy Data
   window.copyPanelData = () => {
     const user = document.getElementById("resUsername").textContent;
     const pass = document.getElementById("resPassword").textContent;
-    const textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}\nPassword: ${pass}`;
+    const mode = pendingOrder ? pendingOrder.mode : 'new';
+    
+    let textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`;
+    if (mode === 'new') {
+      textToCopy += `\nPassword: ${pass}`;
+    }
     
     navigator.clipboard.writeText(textToCopy).then(() => {
-      const btn = document.getElementById("btnCopyData"); // Ambil ID tombol
+      const btn = document.getElementById("btnCopyData");
       const originalText = btn.textContent;
       btn.textContent = "Berhasil Disalin!";
       btn.style.background = "var(--success)";
@@ -569,6 +613,7 @@
   window.closeSuccessModal = () => {
     document.getElementById("successModal").classList.remove("active");
     document.getElementById("customName").value = "";
+    document.getElementById("addUsername").value = "";
   };
 
 </script>
