@@ -123,7 +123,7 @@
     background: #060911; border: 1px solid var(--border);
     border-radius: 12px; padding: 20px; text-align: left;
     margin-bottom: 20px; font-family: monospace; font-size: 14px;
-    user-select: text; -webkit-user-select: text; /* Biar bisa diblok/copy */
+    user-select: text; -webkit-user-select: text;
   }
   .panel-data-box .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
   .panel-data-box .row:last-child { margin-bottom: 0; }
@@ -297,7 +297,7 @@
     </div>
 
     <div class="modal-actions">
-      <button class="btn-modal btn-confirm" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
+      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
       <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Tutup</button>
     </div>
   </div>
@@ -328,7 +328,7 @@
   const ADMIN_EMAIL = "upiljaranmmbu@gmail.com";
   const ADMIN_WA = "6288906198025";
   let currentUser = null;
-  let pendingOrder = null; // Nyimpen data sementara sebelum konfirmasi
+  let pendingOrder = null;
 
   // --- UI LOGIC ---
   window.toggleAuth = (type) => {
@@ -491,7 +491,6 @@
       return;
     }
 
-    // Simpan data orderan sementara
     pendingOrder = {
       customName: customName,
       ram: ramEl.value,
@@ -500,7 +499,6 @@
       saldo: saldo
     };
 
-    // Tampilkan modal konfirmasi
     document.getElementById("confirmText").innerHTML = 
       `Yakin beli panel RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b><br>dengan nama <b>"${customName}"</b>?`;
     document.getElementById("confirmModal").classList.add("active");
@@ -531,11 +529,9 @@
         throw new Error(data.error || "Gagal membuat panel.");
       }
 
-      // Potong saldo
       await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
 
-      // Tampilkan modal sukses dengan data
       document.getElementById("resUsername").textContent = data.username;
       document.getElementById("resPassword").textContent = data.password;
       document.getElementById("successModal").classList.add("active");
@@ -548,14 +544,14 @@
     }
   };
 
-  // 3. Fungsi Copy Data dari Modal Sukses
+  // 3. Fungsi Copy Data dari Modal Sukses (BIAR GAK ERROR LAGI)
   window.copyPanelData = () => {
     const user = document.getElementById("resUsername").textContent;
     const pass = document.getElementById("resPassword").textContent;
     const textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}\nPassword: ${pass}`;
     
     navigator.clipboard.writeText(textToCopy).then(() => {
-      const btn = event.target;
+      const btn = document.getElementById("btnCopyData"); // Ambil ID tombol
       const originalText = btn.textContent;
       btn.textContent = "Berhasil Disalin!";
       btn.style.background = "var(--success)";
@@ -572,7 +568,6 @@
   // 4. Tutup Modal Sukses
   window.closeSuccessModal = () => {
     document.getElementById("successModal").classList.remove("active");
-    // Reset form biar bisa beli lagi
     document.getElementById("customName").value = "";
   };
 
