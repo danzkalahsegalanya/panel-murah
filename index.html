@@ -23,92 +23,60 @@
   }
 
   html, body {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
+    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+    -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none;
     font-family: 'Inter', -apple-system, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
+    background-color: var(--bg); color: var(--text);
+    min-height: 100vh; overflow-x: hidden;
   }
 
-  /* =========================================
-     TAMPILAN 1: AUTH (LOGIN / REGISTER)
-     ========================================= */
+  /* === AUTH SECTION === */
   #authScreen {
     position: fixed; inset: 0; background: var(--bg); z-index: 1000;
     display: flex; align-items: center; justify-content: center;
   }
+  .auth-container { display: flex; width: 100%; height: 100vh; }
   
-  .auth-container {
-    display: flex; width: 100%; height: 100vh;
-  }
-
-  /* KIRI: Visual Branding */
   .auth-brand {
-    flex: 1;
-    background: linear-gradient(135deg, #0a1122 0%, #05080f 100%);
+    flex: 1; background: linear-gradient(135deg, #0a1122 0%, #05080f 100%);
     display: flex; flex-direction: column; justify-content: center;
     padding: 60px; border-right: 1px solid var(--border);
     position: relative; overflow: hidden;
   }
-  /* Grid background ala tech */
   .auth-brand::before {
     content: ''; position: absolute; inset: 0;
-    background-image: 
-      linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(0, 210, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 210, 255, 0.05) 1px, transparent 1px);
     background-size: 30px 30px; z-index: 0;
   }
-  /* Efek cahaya di pojok */
   .auth-brand::after {
-    content: ''; position: absolute; top: -20%; left: -10%;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 70%);
-    z-index: 0;
+    content: ''; position: absolute; top: -20%; left: -10%; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, transparent 70%); z-index: 0;
   }
   .brand-content { position: relative; z-index: 1; max-width: 400px; }
   .brand-content h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
   .brand-content h1 span { color: var(--neon); text-shadow: 0 0 30px var(--neon-glow); }
   .brand-content p { font-size: 16px; color: #a0aec0; line-height: 1.6; }
 
-  /* KANAN: Form */
-  .auth-form-area {
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    padding: 40px; background: var(--bg);
-  }
-  .auth-box {
-    width: 100%; max-width: 380px;
-    animation: fadeIn 0.4s ease-out;
-  }
+  .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; background: var(--bg); }
+  .auth-box { width: 100%; max-width: 380px; animation: fadeIn 0.4s ease-out; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   
   .auth-box h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
   .auth-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
   
   .auth-field { margin-bottom: 20px; }
-  .auth-field label {
-    display: block; font-size: 13px; font-weight: 600; color: #cbd5e1;
-    margin-bottom: 8px;
-  }
+  .auth-field label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
   .input-wrapper { position: relative; }
   .input-wrapper input {
-    width: 100%; padding: 14px 16px; font-size: 14px;
-    font-family: inherit; background: #0d1220; color: var(--text);
-    border: 1px solid var(--border); border-radius: 10px; outline: none;
-    transition: all 0.2s;
+    width: 100%; padding: 14px 16px; font-size: 14px; font-family: inherit;
+    background: #0d1220; color: var(--text); border: 1px solid var(--border);
+    border-radius: 10px; outline: none; transition: all 0.2s;
   }
   .input-wrapper input:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
   
-  /* Icon Mata buat liat password */
   .toggle-pass {
     position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-    color: var(--muted); cursor: pointer; background: none; border: none;
-    font-size: 12px; font-weight: 600;
+    color: var(--muted); cursor: pointer; background: none; border: none; font-size: 12px; font-weight: 600;
   }
   .toggle-pass:hover { color: var(--neon); }
   
@@ -119,6 +87,7 @@
     text-transform: uppercase; letter-spacing: 0.5px;
   }
   .auth-btn:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: 0 4px 15px var(--neon-glow); }
+  .auth-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
@@ -126,173 +95,108 @@
   
   .error-msg {
     background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
-    color: var(--danger); font-size: 13px; padding: 10px;
-    border-radius: 8px; margin-bottom: 20px; display: none;
+    color: var(--danger); font-size: 13px; padding: 10px; border-radius: 8px;
+    margin-bottom: 20px; display: none;
   }
 
-  /* =========================================
-     TAMPILAN 2: MAIN APP (ORDER)
-     ========================================= */
+  /* === MAIN APP === */
   #mainApp { display: none; flex-direction: column; min-height: 100vh; background: var(--bg); }
-  
-  /* Grid background */
   #mainApp::before {
     content: ''; position: fixed; inset: 0;
-    background-image: 
-      linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(0, 210, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 210, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px; z-index: 0; pointer-events: none;
   }
+  .main-container { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; position: relative; z-index: 1; }
+  .wrapper { display: flex; width: 100%; max-width: 1100px; gap: 60px; align-items: center; justify-content: center; }
 
-  .main-container {
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    padding: 60px 20px; position: relative; z-index: 1;
-  }
-
-  .wrapper {
-    display: flex; width: 100%; max-width: 1100px;
-    gap: 60px; align-items: center; justify-content: center;
-  }
-
-  /* User Bar */
   .user-bar {
-    position: absolute; top: 24px; right: 24px;
-    display: flex; align-items: center; gap: 16px;
-    background: var(--card); border: 1px solid var(--border);
-    padding: 10px 20px; border-radius: 99px;
-    font-size: 13px; font-weight: 500; z-index: 100;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    position: absolute; top: 24px; right: 24px; display: flex; align-items: center; gap: 16px;
+    background: var(--card); border: 1px solid var(--border); padding: 10px 20px;
+    border-radius: 99px; font-size: 13px; font-weight: 500; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
   }
   .user-bar span { color: var(--neon); font-weight: 700; }
   .logout-btn {
     background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2);
-    font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px;
-    border-radius: 6px; text-transform: uppercase; transition: all 0.2s;
+    font-size: 12px; font-weight: 700; cursor: pointer; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; transition: all 0.2s;
   }
   .logout-btn:hover { background: var(--danger); color: white; }
 
-  /* Info Kiri */
   .info-section { flex: 1; max-width: 520px; }
   .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 700; color: var(--neon);
-    background: var(--neon-soft); border: 1px solid rgba(0, 210, 255, 0.3);
-    padding: 8px 16px; border-radius: 99px; margin-bottom: 24px;
-    text-transform: uppercase; letter-spacing: 0.5px;
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--neon);
+    background: var(--neon-soft); border: 1px solid rgba(0, 210, 255, 0.3); padding: 8px 16px;
+    border-radius: 99px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px;
   }
   .info-section h1 { font-size: 54px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
   .info-section h1 span { color: var(--neon); }
   .info-section .subheadline { font-size: 17px; color: #a0aec0; line-height: 1.6; margin-bottom: 32px; }
   .info-section .subheadline strong { color: #fff; }
-  
   .features { display: flex; flex-direction: column; gap: 16px; }
   .feature-item { display: flex; align-items: center; gap: 14px; font-size: 15px; color: #cbd5e1; }
   .feature-item svg { width: 20px; height: 20px; color: var(--neon); }
 
-  /* Form Kanan */
-  .form-section {
-    flex: 1; max-width: 460px; background: var(--card);
-    border: 1px solid var(--border); border-radius: 20px;
-    padding: 36px 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-  }
-  .promo-banner {
-    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent);
-    border-left: 3px solid var(--neon); padding: 14px 16px;
-    border-radius: 8px; margin-bottom: 24px; font-size: 13.5px; color: #e2e8f0;
-  }
+  .form-section { flex: 1; max-width: 460px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); }
+  .promo-banner { background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent); border-left: 3px solid var(--neon); padding: 14px 16px; border-radius: 8px; margin-bottom: 24px; font-size: 13.5px; color: #e2e8f0; }
   .promo-banner strong { color: var(--neon); }
-
   .form-header { margin-bottom: 20px; }
   .form-header h2 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
   .form-header p { font-size: 13px; color: var(--muted); }
-
   .field { margin-bottom: 20px; }
-  .field > label {
-    display: block; font-size: 12.5px; font-weight: 600; color: var(--muted);
-    margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
-  }
+  .field > label { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  
   input[type="text"] {
-    width: 100%; padding: 13px 14px; font-size: 14px;
-    font-family: inherit; background: #060911; color: var(--text);
-    border: 1px solid var(--border); border-radius: 10px; outline: none;
-    -webkit-user-select: text; user-select: text;
+    width: 100%; padding: 13px 14px; font-size: 14px; font-family: inherit;
+    background: #060911; color: var(--text); border: 1px solid var(--border);
+    border-radius: 10px; outline: none; -webkit-user-select: text; user-select: text;
   }
   input[type="text"]:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
 
-  /* Node Toggle */
   .node-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .node-group label {
-    position: relative; padding: 12px; text-align: center;
-    font-size: 13.5px; font-weight: 500; background: #060911;
-    border: 1px solid var(--border); border-radius: 10px;
-    cursor: pointer; transition: all 0.2s; color: var(--muted);
+    position: relative; padding: 12px; text-align: center; font-size: 13.5px; font-weight: 500;
+    background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; color: var(--muted);
   }
   .node-group input { position: absolute; opacity: 0; }
   .node-group label:has(input:checked) { border-color: var(--neon); background: var(--neon-soft); color: var(--text); }
-  .node-group label.disabled {
-    opacity: 0.3; cursor: not-allowed; background: #0a0d15;
-    border-color: #1a2338; color: #4a5470; pointer-events: none;
-  }
-  .node-group label.disabled::after {
-    content: "Closed"; position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%) rotate(-10deg);
-    font-size: 10px; font-weight: 800; color: var(--danger);
-  }
+  .node-group label.disabled { opacity: 0.3; cursor: not-allowed; background: #0a0d15; border-color: #1a2338; color: #4a5470; pointer-events: none; }
+  .node-group label.disabled::after { content: "Closed"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-10deg); font-size: 10px; font-weight: 800; color: var(--danger); }
 
-  /* RAM Grid */
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
   .ram-item { position: relative; }
   .ram-item input { position: absolute; opacity: 0; }
   .ram-item label {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 10px 4px; text-align: center; background: #060911;
-    border: 1px solid var(--border); border-radius: 10px;
-    cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; padding: 10px 4px; text-align: center;
+    background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden;
   }
   .ram-item .ram-name { font-size: 13.5px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
   .ram-item .ram-price-discount { display: flex; flex-direction: column; align-items: center; gap: 1px; }
   .ram-item .price-old { font-size: 9.5px; color: #4a5470; text-decoration: line-through; }
   .ram-item .price-new { font-size: 12px; font-weight: 700; color: var(--neon); }
   .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); }
-  .discount-badge {
-    position: absolute; top: 0; right: 0; background: var(--danger);
-    color: white; font-size: 8px; font-weight: 700; padding: 2px 4px;
-    border-bottom-left-radius: 6px;
-  }
+  .discount-badge { position: absolute; top: 0; right: 0; background: var(--danger); color: white; font-size: 8px; font-weight: 700; padding: 2px 4px; border-bottom-left-radius: 6px; }
 
-  /* Total Box */
-  .total {
-    margin-top: 24px; padding: 16px; background: #060911;
-    border: 1px solid var(--border); border-radius: 12px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
+  .total { margin-top: 24px; padding: 16px; background: #060911; border: 1px solid var(--border); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
   .total-label { font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 600;}
   .total-info { font-size: 12px; color: #4a5470; margin-top: 4px; }
   .total-price-wrapper { display: flex; flex-direction: column; align-items: flex-end; }
   .total-old-price { font-size: 12px; color: var(--danger); text-decoration: line-through; display: none; }
   .total-price { font-size: 24px; font-weight: 700; color: var(--neon); }
 
-  /* Submit Button */
   button[type="submit"] {
-    width: 100%; margin-top: 20px; padding: 15px;
-    background: var(--neon); color: #001a1f; font-weight: 800;
-    font-size: 15px; border: none; border-radius: 10px; cursor: pointer;
-    text-transform: uppercase; transition: all 0.2s;
+    width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #001a1f;
+    font-weight: 800; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;
   }
   button[type="submit"]:hover { background: var(--neon-hover); transform: translateY(-1px); }
 
-  /* Toast */
   .toast {
     position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
     background: #0b101c; color: var(--neon); border: 1px solid rgba(0, 210, 255, 0.3);
-    padding: 12px 20px; border-radius: 10px; opacity: 0; pointer-events: none;
-    transition: all 0.3s; z-index: 2000; font-weight: 500;
+    padding: 12px 20px; border-radius: 10px; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 2000; font-weight: 500;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  /* Responsive */
   @media (max-width: 900px) {
-    .auth-brand { display: none; } /* Sembunyikan branding kiri di HP */
+    .auth-brand { display: none; }
     .auth-form-area { padding: 20px; }
     .wrapper { flex-direction: column; gap: 40px; }
     .info-section { text-align: center; }
@@ -308,16 +212,12 @@
 <!-- ================= SCREEN 1: AUTH ================= -->
 <div id="authScreen">
   <div class="auth-container">
-    
-    <!-- Kiri: Visual -->
     <div class="auth-brand">
       <div class="brand-content">
         <h1>Welcome to <br><span>Kitzune Store.</span></h1>
         <p>The most affordable and reliable WhatsApp Bot Panel in the market. Register now and get up to 90% discount for your first order.</p>
       </div>
     </div>
-
-    <!-- Kanan: Form -->
     <div class="auth-form-area">
       <div class="auth-box">
         
@@ -325,12 +225,12 @@
         <div id="loginForm">
           <h2>Sign In</h2>
           <p>Enter your details to access your dashboard.</p>
-          <div class="error-msg" id="loginError">Invalid username or password.</div>
+          <div class="error-msg" id="loginError"></div>
           
           <div class="auth-field">
-            <label>Username</label>
+            <label>Email</label>
             <div class="input-wrapper">
-              <input type="text" id="loginUsername" placeholder="Enter username">
+              <input type="text" id="loginEmail" placeholder="Enter your email">
             </div>
           </div>
           
@@ -342,7 +242,7 @@
             </div>
           </div>
           
-          <button class="auth-btn" onclick="doLogin()">Log In</button>
+          <button class="auth-btn" id="btnLogin" onclick="doLogin()">Log In</button>
           
           <div class="auth-switch">
             Don't have an account? <a onclick="toggleAuth('register')">Create one</a>
@@ -353,12 +253,12 @@
         <div id="registerForm" style="display: none;">
           <h2>Create Account</h2>
           <p>Join us to get the best deals on bot panels.</p>
-          <div class="error-msg" id="regError">Passwords do not match.</div>
+          <div class="error-msg" id="regError"></div>
           
           <div class="auth-field">
-            <label>Username</label>
+            <label>Email</label>
             <div class="input-wrapper">
-              <input type="text" id="regUsername" placeholder="Choose a username">
+              <input type="text" id="regEmail" placeholder="Enter your email">
             </div>
           </div>
           
@@ -378,7 +278,7 @@
             </div>
           </div>
           
-          <button class="auth-btn" onclick="doRegister()">Register & Login</button>
+          <button class="auth-btn" id="btnRegister" onclick="doRegister()">Register & Login</button>
           
           <div class="auth-switch">
             Already have an account? <a onclick="toggleAuth('login')">Log in here</a>
@@ -399,13 +299,10 @@
 
   <div class="main-container">
     <div class="wrapper">
-      
       <div class="info-section">
         <div class="badge">LIMITED TIME OFFER</div>
         <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
-        <p class="subheadline">
-          No coding skills required. <strong>Choose your plan, pay with pocket change, and let your bot run 24/7 non-stop.</strong>
-        </p>
+        <p class="subheadline">No coding skills required. <strong>Choose your plan, pay with pocket change, and let your bot run 24/7 non-stop.</strong></p>
         <div class="features">
           <div class="feature-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
@@ -423,9 +320,7 @@
       </div>
 
       <div class="form-section">
-        <div class="promo-banner">
-          <strong>Crazy Discount!</strong> All RAM packages are up to 90% OFF today.
-        </div>
+        <div class="promo-banner"><strong>Crazy Discount!</strong> All RAM packages are up to 90% OFF today.</div>
         <div class="form-header">
           <h2>Secure Your Slot Now</h2>
           <p>Fill in the details below, your order will be sent to admin.</p>
@@ -433,7 +328,7 @@
 
         <form id="orderForm">
           <div class="field">
-            <label>Username (Auto-filled)</label>
+            <label>Email (Auto-filled)</label>
             <input type="text" id="orderNama" readonly style="opacity: 0.6; cursor: not-allowed;">
           </div>
 
@@ -515,87 +410,114 @@
 
 <div class="toast" id="toast"></div>
 
-<script>
-  const ADMIN_WA = "6288906198025";
-  
-  // --- AUTH SYSTEM ---
-  function toggleAuth(type) {
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+  // Config Firebase lu (Udah gue masukin)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjhtpQ_9vTn9C_fgu1FlKCDxnLEiWM4",
+    authDomain: "kitzunemarket.firebaseapp.com",
+    projectId: "kitzunemarket",
+    storageBucket: "kitzunemarket.firebasestorage.app",
+    messagingSenderId: "724574775248",
+    appId: "1:724574775248:web:157a2057ff8a31bc74bbd5",
+    measurementId: "G-8LBT3TQ4S"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // --- UI LOGIC ---
+  window.toggleAuth = function(type) {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
     document.getElementById('loginError').style.display = 'none';
     document.getElementById('regError').style.display = 'none';
   }
 
-  // Fitur Show/Hide Password
-  function togglePass(id, btn) {
+  window.togglePass = function(id, btn) {
     const input = document.getElementById(id);
-    if (input.type === "password") {
-      input.type = "text";
-      btn.textContent = "HIDE";
-    } else {
-      input.type = "password";
-      btn.textContent = "SHOW";
-    }
+    input.type = input.type === "password" ? "text" : "password";
+    btn.textContent = input.type === "password" ? "SHOW" : "HIDE";
   }
 
-  function doRegister() {
-    const user = document.getElementById('regUsername').value.trim();
+  // --- REGISTER ---
+  window.doRegister = async function() {
+    const email = document.getElementById('regEmail').value.trim();
     const pass = document.getElementById('regPassword').value;
     const confirmPass = document.getElementById('regConfirmPassword').value;
     const err = document.getElementById('regError');
+    const btn = document.getElementById('btnRegister');
 
-    if (!user || !pass) {
-      err.textContent = "Username and password cannot be empty.";
-      err.style.display = "block";
-      return;
+    if (!email || !pass) {
+      err.textContent = "Email and password cannot be empty.";
+      err.style.display = "block"; return;
     }
     if (pass !== confirmPass) {
       err.textContent = "Passwords do not match!";
-      err.style.display = "block";
-      return;
+      err.style.display = "block"; return;
     }
 
-    localStorage.setItem('kitzune_user', user);
-    localStorage.setItem('kitzune_pass', pass);
-    loginSuccess(user);
+    btn.disabled = true; btn.textContent = "Creating account...";
+    try {
+      await createUserWithEmailAndPassword(auth, email, pass);
+      // onAuthStateChanged akan otomatis nge-handle login
+    } catch (error) {
+      err.textContent = error.message.replace("Firebase: ", "");
+      err.style.display = "block";
+      btn.disabled = false; btn.textContent = "Register & Login";
+    }
   }
 
-  function doLogin() {
-    const user = document.getElementById('loginUsername').value.trim();
+  // --- LOGIN ---
+  window.doLogin = async function() {
+    const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPassword').value;
     const err = document.getElementById('loginError');
+    const btn = document.getElementById('btnLogin');
 
-    const savedUser = localStorage.getItem('kitzune_user');
-    const savedPass = localStorage.getItem('kitzune_pass');
-
-    if (user === savedUser && pass === savedPass && user !== null) {
-      loginSuccess(user);
-    } else {
-      err.textContent = "Invalid username or password.";
+    btn.disabled = true; btn.textContent = "Logging in...";
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } catch (error) {
+      err.textContent = "Invalid email or password.";
       err.style.display = "block";
+      btn.disabled = false; btn.textContent = "Log In";
     }
   }
 
-  function loginSuccess(username) {
-    document.getElementById('authScreen').style.display = 'none';
-    document.getElementById('mainApp').style.display = 'flex';
-    
-    document.getElementById('displayUser').textContent = username;
-    document.getElementById('orderNama').value = username;
-    
-    showToast(`Welcome back, ${username}!`);
-    updateTotal();
+  // --- LOGOUT ---
+  window.doLogout = function() {
+    signOut(auth);
   }
 
-  function doLogout() {
-    document.getElementById('authScreen').style.display = 'flex';
-    document.getElementById('mainApp').style.display = 'none';
-    document.getElementById('loginUsername').value = '';
-    document.getElementById('loginPassword').value = '';
-    toggleAuth('login');
-  }
+  // --- CEK STATUS LOGIN (OTOMATIS) ---
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User berhasil login / register
+      document.getElementById('authScreen').style.display = 'none';
+      document.getElementById('mainApp').style.display = 'flex';
+      
+      const displayName = user.email.split('@')[0]; // Ambil nama depan dari email
+      document.getElementById('displayUser').textContent = displayName;
+      document.getElementById('orderNama').value = user.email; // Isi otomatis di form order
+      
+      updateTotal();
+    } else {
+      // User belum login / logout
+      document.getElementById('authScreen').style.display = 'flex';
+      document.getElementById('mainApp').style.display = 'none';
+      
+      // Reset tombol
+      document.getElementById('btnLogin').disabled = false; document.getElementById('btnLogin').textContent = "Log In";
+      document.getElementById('btnRegister').disabled = false; document.getElementById('btnRegister').textContent = "Register & Login";
+    }
+  });
 
   // --- ORDER SYSTEM ---
+  const ADMIN_WA = "6288906198025";
   const form = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
   const totalOldPrice = document.getElementById("totalOldPrice");
@@ -604,7 +526,7 @@
   const toast = document.getElementById("toast");
 
   let toastTimer;
-  function showToast(msg) {
+  window.showToast = function(msg) {
     toast.textContent = msg;
     toast.classList.add("show");
     clearTimeout(toastTimer);
@@ -645,7 +567,7 @@
 -----------------------------------
 Hello Admin, I would like to order a panel with the following details:
 
-*Name* ${nama}
+*Email* ${nama}
 *Node Version* ${node}
 *RAM Capacity* ${ram}
 
@@ -664,5 +586,6 @@ Please proceed with the activation. Thank you!`;
     }, 500);
   });
 </script>
+
 </body>
 </html>
