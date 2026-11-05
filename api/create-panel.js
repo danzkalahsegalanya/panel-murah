@@ -57,13 +57,17 @@ export default async function handler(req, res) {
     });
     const startup_cmd = eggRes.data.attributes.startup;
 
-    // 5. Buat Server (Pakai environment manual yang udah pasti jalan)
+    // 5. Format Nama Server: "UDIN [UNLI]"
+    const paketLabel = ramStr === "unlimited" || ramStr === "unli" ? "UNLI" : ramStr.toUpperCase();
+    const serverName = `${username} [${paketLabel}]`; // Contoh: UDIN [1GB] / UDIN [UNLI]
+
+    // 6. Buat Server
     const serverRes = await axios.post(`${DOMAIN}/api/application/servers`, {
-      name: `${username} Server`,
-      description: "Created via Web Kitzune Store",
+      name: serverName,
+      description: "BY KITZUNE MARKET", // Deskripsi Server
       user: user.id,
       egg: EGG_ID,
-      docker_image: "ghcr.io/parkervcp/yolks:nodejs_18", // Pake image yang umum
+      docker_image: "ghcr.io/parkervcp/yolks:nodejs_18",
       startup: startup_cmd,
       environment: {
         "INST": "npm",
@@ -88,7 +92,7 @@ export default async function handler(req, res) {
       }
     });
 
-    // 6. Sukses
+    // 7. Sukses
     return res.status(200).json({ 
       success: true, 
       serverId: serverRes.data.attributes.id,
