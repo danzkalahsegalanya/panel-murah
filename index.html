@@ -67,6 +67,8 @@
   .field { margin-bottom: 20px; }
   .field > label { display: block; font-size: 12.5px; font-weight: 600; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
   input[type="text"] { width: 100%; padding: 13px 14px; font-size: 14px; background: #060911; color: var(--text); border: 1px solid var(--border); border-radius: 10px; outline: none; }
+  input[type="text"]:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
+  
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
   .ram-item input { position: absolute; opacity: 0; }
   .ram-item label { display: flex; flex-direction: column; padding: 10px 4px; text-align: center; background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; position: relative; }
@@ -153,7 +155,15 @@
       </div>
       <div class="form-section">
         <form id="orderForm">
+          
+          <!-- KOLOM INPUT NAMA PANEL KUSTOM -->
+          <div class="field">
+            <label>Nama Panel (Kustom)</label>
+            <input type="text" id="customName" placeholder="Misal: BotJuragan" required>
+          </div>
+
           <div class="field"><label>Node.js Version</label><input type="text" value="Node.js v1" readonly style="opacity:0.6"></div>
+          
           <div class="field"><label>Select RAM</label>
             <div class="ram-grid">
               <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
@@ -373,6 +383,12 @@
     e.preventDefault();
     if (!currentUser) return;
     
+    const customName = document.getElementById("customName").value.trim();
+    if (!customName) {
+      alert("Nama panel wajib diisi!");
+      return;
+    }
+
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
     const harga = parseInt(ramEl.dataset.harga);
     const username = currentUser.email.split('@')[0];
@@ -386,19 +402,20 @@
       return;
     }
 
-    if (!confirm(`Yakin beli panel RAM ${ramEl.value} seharga Rp ${harga.toLocaleString()}?`)) return;
+    if (!confirm(`Yakin beli panel RAM ${ramEl.value} seharga Rp ${harga.toLocaleString()} dengan nama "${customName}"?`)) return;
 
     const submitBtn = document.getElementById("submitBtn");
     submitBtn.disabled = true;
     submitBtn.textContent = "Memproses Panel...";
 
     try {
+      // Kirim customName (Nama Panel) ke backend
       const response = await fetch('/api/create-panel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           email: currentUser.email, 
-          username: username,
+          username: customName, // Pake nama kustom buat bikin username panel
           ram: ramEl.value
         })
       });
