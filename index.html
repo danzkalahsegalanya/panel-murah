@@ -221,7 +221,7 @@
 
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
   .modal-overlay.active { display: flex; }
-  .modal-content { padding: 32px; border-radius: 20px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--card); border: 1px solid var(--border); }
+  .modal-content { padding: 32px; border-radius: 20px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   @keyframes popIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
   .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
   .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
@@ -234,7 +234,7 @@
   .warning-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
-  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
   .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
   .btn-cancel:hover { background: rgba(255,255,255,0.05); }
   .btn-confirm { background: var(--neon); color: #fff; }
@@ -579,6 +579,17 @@
   </div>
 </div>
 
+<!-- CUSTOM ALERT -->
+<div id="customAlert" class="modal-overlay">
+  <div class="modal-content" style="max-width: 360px;">
+    <h3 id="alertTitle">Notifikasi</h3>
+    <p id="alertMessage">Pesan notifikasi.</p>
+    <div class="modal-actions">
+      <button class="btn-modal btn-confirm" style="flex: 1;" onclick="document.getElementById('customAlert').classList.remove('active')">OK</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- FIREBASE SDK & LOGIC -->
 <script type="module">
@@ -607,6 +618,13 @@
   let currentMode = "new"; 
   let currentCatalog = "wabot";
   let pendingAmEmail = "";
+
+  // --- CUSTOM ALERT HELPER ---
+  window.showAlert = function(message, title = "Notifikasi") {
+    document.getElementById('alertTitle').textContent = title;
+    document.getElementById('alertMessage').innerHTML = message;
+    document.getElementById('customAlert').classList.add('active');
+  };
 
   // --- RIPPLE ANIMATION ---
   window.createRipple = function(event) {
@@ -731,7 +749,7 @@
   
   window.proceedTopup = () => {
     const amount = document.getElementById('topupAmount').value;
-    if (amount < 400) { alert("Minimal topup Rp 400"); return; }
+    if (amount < 400) { showAlert("Minimal topup Rp 400"); return; }
     
     const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${parseInt(amount).toLocaleString()}\n\nMohon diproses.`;
     window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
@@ -941,14 +959,14 @@
     const amountStr = prompt(`Add balance for ${email} (Enter amount, ex: 2000):`);
     if (!amountStr) return;
     const amount = parseInt(amountStr);
-    if (isNaN(amount) || amount <= 0) { alert("Invalid amount"); return; }
+    if (isNaN(amount) || amount <= 0) { showAlert("Nominal tidak valid"); return; }
 
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
     const currentBalance = docSnap.data().balance || 0;
 
     await updateDoc(docRef, { balance: currentBalance + amount });
-    alert(`Successfully added Rp ${amount.toLocaleString()} to ${email}`);
+    showAlert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${email}`);
     loadAdminData();
   }
 
@@ -971,11 +989,11 @@
 
     if (currentMode === 'new') {
       finalUsername = document.getElementById("customName").value.trim();
-      if (!finalUsername) { alert("Nama panel wajib diisi!"); return; }
+      if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
       displayConfirm = `Yakin beli <b>Panel Baru</b> dengan nama <b>"${finalUsername}"</b>?`;
     } else {
       finalUsername = document.getElementById("addUsername").value.trim();
-      if (!finalUsername) { alert("Username wajib diisi!"); return; }
+      if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
       displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${finalUsername}@kitzunemarket.com"</b>?`;
     }
 
@@ -987,7 +1005,7 @@
     const saldo = docSnap.data().balance || 0;
 
     if (saldo < harga) {
-      alert("Saldo tidak cukup! Silakan topup dulu.");
+      showAlert("Saldo tidak cukup! Silakan topup dulu.");
       return;
     }
 
@@ -1009,7 +1027,7 @@
   // --- LOGIC ALIGHT MOTION ---
   window.sendAmLink = async (event) => {
     const email = document.getElementById("amEmail").value.trim();
-    if (!email) { alert("Masukkan email dulu!"); return; }
+    if (!email) { showAlert("Masukkan email dulu!"); return; }
 
     const btn = event.target;
     btn.disabled = true;
@@ -1029,10 +1047,10 @@
         document.getElementById("amStep1").style.display = "none";
         document.getElementById("amStep2").style.display = "block";
       } else {
-        alert("Gagal: " + data.why);
+        showAlert("Gagal: " + data.why);
       }
     } catch (err) {
-      alert("Error sistem.");
+      showAlert("Error sistem.");
     } finally {
       btn.disabled = false;
       btn.textContent = "Kirim Link Verifikasi";
@@ -1041,7 +1059,7 @@
 
   window.verifyAmLink = async (event) => {
     const linkInput = document.getElementById("amLink").value.trim();
-    if (!linkInput) { alert("Paste link verifikasinya dulu!"); return; }
+    if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; }
 
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
@@ -1049,53 +1067,59 @@
     const harga = 5000;
 
     if (saldo < harga) {
-      alert("Saldo tidak cukup! Silakan topup dulu.");
+      showAlert("Saldo tidak cukup! Silakan topup dulu.");
       return;
     }
 
-    if (!confirm(`Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`)) return;
+    // Konfirmasi pakai modal kustom
+    document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`;
+    document.getElementById("confirmModal").classList.add("active");
+    
+    // Karena ini async, kita simpan aksi di tombol execute
+    const confirmBtn = document.querySelector("#confirmModal .btn-confirm");
+    confirmBtn.onclick = async () => {
+      document.getElementById("confirmModal").classList.remove('active');
+      const btn = event.target;
+      btn.disabled = true;
+      btn.textContent = "Memverifikasi...";
 
-    const btn = event.target;
-    btn.disabled = true;
-    btn.textContent = "Memverifikasi...";
-
-    try {
-      // PENTING: Variabel 'link' diganti jadi 'verifyUrl' biar gak bentrok sama backend
-      const res = await fetch('/api/am-automation', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
-      });
-      const data = await res.json();
-
-      if (data.ok) {
-        await updateDoc(docRef, { balance: saldo - harga });
-        await updateUserBalanceUI(currentUser.uid);
-
-        await setDoc(doc(collection(db, "transactions")), {
-          uid: currentUser.uid,
-          email: currentUser.email,
-          produk: "am",
-          mode: "new",
-          namaPanel: "Alight Motion Premium",
-          emailAm: pendingAmEmail,
-          ram: "1 Tahun",
-          harga: harga,
-          createdAt: Date.now()
+      try {
+        const res = await fetch('/api/am-automation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
         });
+        const data = await res.json();
 
-        alert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.");
-        loadUserDashboard();
-        switchMainTab('dashboard');
-      } else {
-        alert("Gagal Verifikasi: " + data.why);
+        if (data.ok) {
+          await updateDoc(docRef, { balance: saldo - harga });
+          await updateUserBalanceUI(currentUser.uid);
+
+          await setDoc(doc(collection(db, "transactions")), {
+            uid: currentUser.uid,
+            email: currentUser.email,
+            produk: "am",
+            mode: "new",
+            namaPanel: "Alight Motion Premium",
+            emailAm: pendingAmEmail,
+            ram: "1 Tahun",
+            harga: harga,
+            createdAt: Date.now()
+          });
+
+          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.", "Berhasil!");
+          loadUserDashboard();
+          switchMainTab('dashboard');
+        } else {
+          showAlert("Gagal Verifikasi: " + data.why, "Gagal");
+        }
+      } catch (err) {
+        showAlert("Error sistem.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Aktifkan Premium (Rp 5.000)";
       }
-    } catch (err) {
-      alert("Error sistem.");
-    } finally {
-      btn.disabled = false;
-      btn.textContent = "Aktifkan Premium (Rp 5.000)";
-    }
+    };
   };
 
   // --- EXECUTE PURCHASE (WA BOT ONLY) ---
@@ -1148,7 +1172,7 @@
       switchMainTab('dashboard');
 
     } catch (error) {
-      alert("Error: " + error.message);
+      showAlert("Error: " + error.message);
     } finally {
       btn.disabled = false;
       btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
@@ -1180,7 +1204,7 @@
         btn.style.background = "var(--neon)";
       }, 2000);
     }).catch(err => {
-      alert("Gagal menyalin: " + err);
+      showAlert("Gagal menyalin: " + err);
     });
   };
 
