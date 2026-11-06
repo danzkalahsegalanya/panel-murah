@@ -38,21 +38,15 @@
   }
 
   /* === ANIMASI & HOVER EFFECTS === */
-  .hover-card {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+  .hover-card { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
   .hover-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 30px -10px var(--neon-glow);
     border-color: rgba(0, 210, 255, 0.3);
   }
 
-  button {
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  button:active {
-    transform: scale(0.96) !important;
-  }
+  button { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+  button:active { transform: scale(0.96) !important; }
 
   /* === SKELETON SHIMMER === */
   .skeleton {
@@ -68,7 +62,6 @@
   }
   .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
   .skeleton-text.short { width: 60%; }
-  .skeleton-box { height: 80px; width: 100%; margin-bottom: 12px; }
 
   /* === AUTH SECTION === */
   #authScreen { position: fixed; inset: 0; background: rgba(5, 8, 15, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
@@ -236,7 +229,7 @@
   .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
 
   /* =========================================
-     RESPONSIVE MOBILE (PERBAIKAN HEADER)
+     RESPONSIVE MOBILE
      ========================================= */
   @media (max-width: 900px) {
     html, body {
@@ -248,7 +241,6 @@
     .auth-brand { display: none; } 
     .auth-box { background: var(--card); padding: 30px 24px; }
     
-    /* HEADER HP DIBIKIN SATU BARIS TIPIS */
     .top-header { flex-direction: row; padding: 12px 16px; gap: 8px; }
     .profile-card { gap: 8px; }
     .avatar { width: 32px; height: 32px; font-size: 14px; }
@@ -278,7 +270,6 @@
     .ram-item .ram-name { font-size: 12px; }
     .ram-item .price-new { font-size: 10px; }
     
-    /* Panel List di HP */
     .panel-list-item { flex-direction: column; align-items: flex-start; gap: 10px; }
     .panel-actions { width: 100%; justify-content: space-between; margin-top: 8px; }
     
@@ -289,7 +280,6 @@
     .modal-content { padding: 24px 20px; }
     .panel-data-box { font-size: 12px; padding: 16px; }
 
-    /* Matikan hover card di HP biar gak aneh */
     .hover-card:hover { transform: none; box-shadow: none; border-color: var(--border); }
   }
 </style>
@@ -355,7 +345,7 @@
     <!-- NAVIGATION MENU -->
     <div class="nav-menu">
       <button class="nav-btn active" id="navDash" onclick="switchMainTab('dashboard')">Dashboard</button>
-      <button class="nav-btn" id="navOrder" onclick="switchMainTab('order')">Beli Panel</button>
+      <button class="nav-btn" id="navOrder" onclick="switchMainTab('order')">Buy Panel</button>
     </div>
 
     <!-- TAB CONTENT: DASHBOARD -->
@@ -366,10 +356,9 @@
         <div class="dash-card hover-card">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            Panel Aktif
+            Active Panels
           </h3>
           <div id="listPanelAktif">
-            <!-- Skeleton -->
             <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
             <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
             <div class="skeleton skeleton-text" style="width: 90%;"></div>
@@ -380,10 +369,9 @@
         <div class="dash-card hover-card">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Riwayat Transaksi
+            Transaction History
           </h3>
           <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
-            <!-- Skeleton -->
             <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
             <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
             <div class="skeleton skeleton-text" style="width: 50%;"></div>
@@ -403,21 +391,21 @@
         <div class="form-section hover-card">
           
           <div class="tab-menu-inner">
-            <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">Beli Panel Baru</button>
+            <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
             <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
           </div>
 
           <form id="orderForm">
             
             <div class="field" id="fieldName">
-              <label>Nama Panel (Tanpa Spasi)</label>
-              <input type="text" id="customName" class="glass-input" placeholder="Misal: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+              <label>Panel Name (No Spaces)</label>
+              <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
             </div>
 
             <div class="field" id="fieldAddUser" style="display: none;">
-              <label>Username Akun Panel Kamu</label>
+              <label>Your Panel Username</label>
               <div class="input-group">
-                <input type="text" id="addUsername" placeholder="Misal: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+                <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
                 <span class="suffix">@kitzunemarket.com</span>
               </div>
             </div>
@@ -445,11 +433,11 @@
             </div>
             
             <div class="total">
-              <span>Total Bayar</span>
+              <span>Total Payment</span>
               <span class="total-price" id="totalText">Rp 300</span>
             </div>
             
-            <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
+            <button type="submit" id="submitBtn" onclick="createRipple(event)">Buy Panel</button>
           </form>
         </div>
       </div>
@@ -465,10 +453,10 @@
     <button class="logout-btn" onclick="doLogout()">Logout</button>
   </div>
   <div class="table-card hover-card">
-    <h3>Daftar Pengguna</h3>
+    <h3>User List</h3>
     <br>
     <table>
-      <thead><tr><th>Email</th><th>Saldo</th><th>Aksi</th></tr></thead>
+      <thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead>
       <tbody id="userTableBody"></tbody>
     </table>
   </div>
@@ -477,11 +465,11 @@
 <!-- MODAL TOPUP -->
 <div id="topupModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Topup Saldo</h3>
-    <p>Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.</p>
-    <input type="number" id="topupAmount" class="modal-input" placeholder="Contoh: 500" min="400">
+    <h3>Topup Balance</h3>
+    <p>Enter amount (Min. Rp 400), then send message to Admin via WhatsApp.</p>
+    <input type="number" id="topupAmount" class="modal-input" placeholder="Ex: 500" min="400">
     <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')">Batal</button>
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')">Cancel</button>
       <button class="btn-modal btn-confirm" onclick="proceedTopup()">Topup via WA</button>
     </div>
   </div>
@@ -490,11 +478,11 @@
 <!-- MODAL KONFIRMASI -->
 <div id="confirmModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Konfirmasi</h3>
-    <p id="confirmText">Apakah Anda yakin?</p>
+    <h3>Confirmation</h3>
+    <p id="confirmText">Are you sure?</p>
     <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
-      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Cancel</button>
+      <button class="btn-modal btn-confirm" onclick="executePurchase()">Yes, Proceed</button>
     </div>
   </div>
 </div>
@@ -502,8 +490,8 @@
 <!-- MODAL SUKSES -->
 <div id="successModal" class="modal-overlay">
   <div class="modal-content">
-    <h3 id="successTitle">Berhasil!</h3>
-    <p id="successDesc">Data berhasil diproses.</p>
+    <h3 id="successTitle">Success!</h3>
+    <p id="successDesc">Data processed successfully.</p>
     
     <div class="panel-data-box" id="panelDataBox">
       <div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div>
@@ -512,12 +500,12 @@
     </div>
 
     <div class="warning-box">
-      PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin data ini sekarang. Jika hilang, data tidak bisa dikembalikan!
+      IMPORTANT: We only show this data ONCE. Please save/copy it now. If lost, it cannot be recovered!
     </div>
 
     <div class="modal-actions">
-      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
-      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Tutup</button>
+      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Copy Data</button>
+      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Close</button>
     </div>
   </div>
 </div>
@@ -593,7 +581,7 @@
       document.getElementById('tabAdd').classList.remove('active');
       document.getElementById('fieldName').style.display = 'block';
       document.getElementById('fieldAddUser').style.display = 'none';
-      document.getElementById('submitBtn').textContent = "Beli Panel";
+      document.getElementById('submitBtn').textContent = "Buy Panel";
       document.getElementById('submitBtn').style.background = "var(--neon)";
       document.getElementById('submitBtn').style.color = "#001a1f";
     } else {
@@ -720,20 +708,49 @@
       let docs = querySnapshot.docs.map(d => d.data());
       docs.sort((a, b) => b.createdAt - a.createdAt);
 
+      // Ambil daftar username panel buat di cek ke Pterodactyl
+      let panelUsernames = docs.filter(d => {
+        const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
+        return (30 - daysPassed) > 0;
+      }).map(d => d.namaPanel);
+
+      let serverStatus = {};
+      
+      // --- PANGGIL BACKEND BUAT CEK STATUS REAL-TIME ---
+      if (panelUsernames.length > 0) {
+        try {
+          const checkRes = await fetch('/api/check-panel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ users: panelUsernames })
+          });
+          const checkData = await checkRes.json();
+          if (checkData.success) {
+            checkData.data.forEach(item => {
+              serverStatus[item.username] = item.exists;
+            });
+          }
+        } catch (err) {
+          console.error("Gagal cek status panel:", err);
+        }
+      }
+
       docs.forEach(data => {
+        // Render Riwayat
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
-              <strong>${data.mode === 'new' ? 'Beli Panel Baru' : 'Add Server'}</strong>
+              <strong>${data.mode === 'new' ? 'New Panel' : 'Add Server'}</strong>
               <span>Rp ${data.harga.toLocaleString()}</span>
             </div>
             <div class="history-details">
               <p>${data.namaPanel} [${data.ram}]</p>
-              <span class="history-date">${new Date(data.createdAt).toLocaleDateString('id-ID')}</span>
+              <span class="history-date">${new Date(data.createdAt).toLocaleDateString('en-GB')}</span>
             </div>
           </div>
         `;
 
+        // Render List Panel (Masa Aktif 30 Hari)
         const now = Date.now();
         const msInDay = 24 * 60 * 60 * 1000;
         const daysPassed = Math.floor((now - data.createdAt) / msInDay);
@@ -741,40 +758,59 @@
 
         if (daysLeft > 0) {
           totalPanel++;
-          htmlPanel += `
-            <div class="panel-list-item">
-              <div class="panel-details">
-                <h4>${data.namaPanel}</h4>
-                <p>${data.ram} • Sisa ${daysLeft} Hari</p>
+          
+          // Cek apakah server masih ada di Pterodactyl
+          const isExists = serverStatus[data.namaPanel] !== false; 
+
+          if (isExists) {
+            htmlPanel += `
+              <div class="panel-list-item">
+                <div class="panel-details">
+                  <h4>${data.namaPanel}</h4>
+                  <p>${data.ram} • ${daysLeft} Days Left</p>
+                </div>
+                <div class="panel-actions">
+                  <div class="panel-status status-active">Active</div>
+                  <button class="btn-manage" onclick="managePanel('${data.namaPanel}')">
+                    Manage
+                    <svg style="width:12px; height:12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  </button>
+                </div>
               </div>
-              <div class="panel-actions">
-                <div class="panel-status status-active">Aktif</div>
-                <button class="btn-manage" onclick="managePanel('${data.namaPanel}')">
-                  Manage
-                  <svg style="width:12px; height:12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </button>
+            `;
+          } else {
+            // Kalau udah dihapus di Pterodactyl
+            htmlPanel += `
+              <div class="panel-list-item" style="opacity: 0.6;">
+                <div class="panel-details">
+                  <h4 style="text-decoration: line-through;">${data.namaPanel}</h4>
+                  <p>${data.ram} • Deleted by Admin</p>
+                </div>
+                <div class="panel-actions">
+                  <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div>
+                </div>
               </div>
-            </div>
-          `;
+            `;
+          }
         }
       });
 
       if (totalPanel === 0) {
-        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada panel aktif.</p>`;
+        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">No active panels found.</p>`;
       } else {
         document.getElementById('listPanelAktif').innerHTML = htmlPanel;
       }
 
       if (docs.length === 0) {
-        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada transaksi.</p>`;
+        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">No transaction history.</p>`;
       } else {
         document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
       }
 
     } catch (error) {
       console.error("Error load dashboard:", error);
-      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
-      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
+      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Failed to load data.</p>`;
+      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Failed to load data.</p>`;
     }
   }
 
@@ -799,24 +835,24 @@
       tr.innerHTML = `
         <td>${data.email}</td>
         <td>Rp ${(data.balance || 0).toLocaleString()}</td>
-        <td><button class="btn-action" onclick="addBalance('${doc.id}', '${data.email}')">Tambah Saldo</button></td>
+        <td><button class="btn-action" onclick="addBalance('${doc.id}', '${data.email}')">Add Balance</button></td>
       `;
       tbody.appendChild(tr);
     });
   }
 
   window.addBalance = async (uid, email) => {
-    const amountStr = prompt(`Tambah saldo untuk ${email} (Masukkan angka, misal 2000):`);
+    const amountStr = prompt(`Add balance for ${email} (Enter amount, ex: 2000):`);
     if (!amountStr) return;
     const amount = parseInt(amountStr);
-    if (isNaN(amount) || amount <= 0) { alert("Nominal tidak valid"); return; }
+    if (isNaN(amount) || amount <= 0) { alert("Invalid amount"); return; }
 
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
     const currentBalance = docSnap.data().balance || 0;
 
     await updateDoc(docRef, { balance: currentBalance + amount });
-    alert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${email}`);
+    alert(`Successfully added Rp ${amount.toLocaleString()} to ${email}`);
     loadAdminData();
   }
 
@@ -839,12 +875,12 @@
 
     if (currentMode === 'new') {
       finalUsername = document.getElementById("customName").value.trim();
-      if (!finalUsername) { alert("Nama panel wajib diisi!"); return; }
-      displayConfirm = `Yakin beli <b>Panel Baru</b> dengan nama <b>"${finalUsername}"</b>?`;
+      if (!finalUsername) { alert("Panel name is required!"); return; }
+      displayConfirm = `Are you sure to buy <b>New Panel</b> with name <b>"${finalUsername}"</b>?`;
     } else {
       finalUsername = document.getElementById("addUsername").value.trim();
-      if (!finalUsername) { alert("Username panel wajib diisi!"); return; }
-      displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${finalUsername}@kitzunemarket.com"</b>?`;
+      if (!finalUsername) { alert("Username is required!"); return; }
+      displayConfirm = `Are you sure to <b>Add Server</b> to account <b>"${finalUsername}@kitzunemarket.com"</b>?`;
     }
 
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
@@ -855,7 +891,7 @@
     const saldo = docSnap.data().balance || 0;
 
     if (saldo < harga) {
-      alert("Saldo tidak cukup! Silakan topup dulu.");
+      alert("Insufficient balance! Please topup first.");
       return;
     }
 
@@ -869,7 +905,7 @@
     };
 
     document.getElementById("confirmText").innerHTML = 
-      `${displayConfirm}<br>Paket RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
+      `${displayConfirm}<br>RAM Package <b>${ramEl.value}</b> for <b>Rp ${harga.toLocaleString()}</b>.`;
     document.getElementById("confirmModal").classList.add("active");
   });
 
@@ -878,7 +914,7 @@
     
     const btn = document.getElementById("submitBtn");
     btn.disabled = true;
-    btn.textContent = "Memproses...";
+    btn.textContent = "Processing...";
 
     try {
       const response = await fetch('/api/create-panel', {
@@ -895,7 +931,7 @@
       const data = await response.json();
 
       if (!data.success) {
-        throw new Error(data.error || "Gagal memproses.");
+        throw new Error(data.error || "Failed to process.");
       }
 
       await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
@@ -914,13 +950,13 @@
       document.getElementById("resUsername").textContent = data.username;
       
       if (pendingOrder.mode === 'new') {
-        document.getElementById("successTitle").textContent = "Panel Berhasil Dibuat!";
-        document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda. Masa aktif 1 bulan (30 hari).";
+        document.getElementById("successTitle").textContent = "Panel Successfully Created!";
+        document.getElementById("successDesc").textContent = "Here are your panel login details. Active for 1 month (30 days).";
         document.getElementById("resPassword").textContent = data.password;
         document.getElementById("rowPassword").style.display = "flex";
       } else {
-        document.getElementById("successTitle").textContent = "Server Berhasil Ditambahkan!";
-        document.getElementById("successDesc").textContent = "Server baru telah masuk ke akun panel Anda. Masa aktif 1 bulan (30 hari).";
+        document.getElementById("successTitle").textContent = "Server Successfully Added!";
+        document.getElementById("successDesc").textContent = "New server has been added to your panel account. Active for 1 month (30 days).";
         document.getElementById("rowPassword").style.display = "none";
       }
 
@@ -933,7 +969,7 @@
       alert("Error: " + error.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
+      btn.textContent = currentMode === 'new' ? "Buy Panel" : "Add Server";
     }
   };
 
@@ -950,7 +986,7 @@
     navigator.clipboard.writeText(textToCopy).then(() => {
       const btn = document.getElementById("btnCopyData");
       const originalText = btn.textContent;
-      btn.textContent = "Berhasil Disalin!";
+      btn.textContent = "Copied!";
       btn.style.background = "var(--success)";
       
       setTimeout(() => {
@@ -958,7 +994,7 @@
         btn.style.background = "var(--neon)";
       }, 2000);
     }).catch(err => {
-      alert("Gagal menyalin: " + err);
+      alert("Failed to copy: " + err);
     });
   };
 
