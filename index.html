@@ -37,6 +37,39 @@
     background-attachment: fixed;
   }
 
+  /* === ANIMASI & HOVER EFFECTS === */
+  .hover-card {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hover-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px var(--neon-glow);
+    border-color: rgba(0, 210, 255, 0.3);
+  }
+
+  button {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  button:active {
+    transform: scale(0.96) !important;
+  }
+
+  /* === SKELETON SHIMMER === */
+  .skeleton {
+    background: #1a2338;
+    background-image: linear-gradient(90deg, #1a2338 0px, #2a3654 40px, #1a2338 80px);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 8px;
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
+  .skeleton-text.short { width: 60%; }
+  .skeleton-box { height: 80px; width: 100%; margin-bottom: 12px; }
+
   /* === AUTH SECTION === */
   #authScreen { position: fixed; inset: 0; background: rgba(5, 8, 15, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
@@ -61,8 +94,8 @@
   .glass-input:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
   .glass-input::placeholder { color: #64748b; }
 
-  .auth-btn { width: 100%; padding: 15px; background: var(--neon); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; transition: all 0.2s; position: relative; overflow: hidden; }
-  .auth-btn:hover { background: var(--neon-hover); transform: translateY(-2px); box-shadow: 0 8px 20px var(--neon-glow); }
+  .auth-btn { width: 100%; padding: 15px; background: var(--neon); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; position: relative; overflow: hidden; }
+  .auth-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
@@ -95,12 +128,12 @@
   .balance-info { display: flex; flex-direction: column; text-align: right; }
   .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; }
-  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; transition: all 0.2s; }
-  .topup-btn:hover { background: #34d399; transform: translateY(-2px); }
+  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; }
+  .topup-btn:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
 
   /* NAV MENU */
   .nav-menu { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.5); padding: 6px; border-radius: 14px; border: 1px solid var(--border); width: fit-content; }
-  .nav-btn { padding: 10px 24px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13.5px; border-radius: 10px; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+  .nav-btn { padding: 10px 24px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13.5px; border-radius: 10px; cursor: pointer; font-family: inherit; }
   .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
   .nav-btn.active { background: var(--neon); color: #001a1f; box-shadow: 0 4px 15px var(--neon-glow); }
 
@@ -117,7 +150,8 @@
 
   .form-section { flex: 1; max-width: 460px; padding: 36px 32px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   .tab-menu-inner { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.3); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
-  .tab-btn-inner { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; transition: all 0.3s; font-family: inherit; text-transform: uppercase; }
+  .tab-btn-inner { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: inherit; text-transform: uppercase; }
+  .tab-btn-inner:hover { color: #fff; background: rgba(255,255,255,0.05); }
   .tab-btn-inner.active { background: var(--neon); color: #001a1f; }
   .field { margin-bottom: 20px; }
   .field > label { display: block; font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; }
@@ -127,17 +161,18 @@
   
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
   .ram-item input { position: absolute; opacity: 0; }
-  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.3s; }
+  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; background: #060911; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
   .ram-item .ram-name { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; color: #fff; }
   .ram-item .price-new { font-size: 11px; font-weight: 700; color: var(--muted); }
   .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); transform: translateY(-2px) scale(1.02); box-shadow: 0 0 15px var(--neon-glow); }
   .ram-item input:checked + label .price-new { color: var(--neon); }
+  .ram-item label:hover { border-color: rgba(0, 210, 255, 0.4); }
 
   .total { margin-top: 24px; padding: 16px; background: #060911; border: 1px solid var(--border); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
   .total span:first-child { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
   .total-price { font-size: 24px; font-weight: 800; color: var(--neon); }
-  button[type="submit"] { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; transition: all 0.3s; position: relative; overflow: hidden; }
-  button[type="submit"]:hover { background: var(--neon-hover); transform: translateY(-2px); }
+  button[type="submit"] { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #001a1f; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; }
+  button[type="submit"]:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   
   /* TAB CONTENT: DASHBOARD */
   #tabContentDashboard { display: block; }
@@ -155,7 +190,7 @@
   .panel-status { padding: 5px 12px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
   .status-active { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
   
-  .btn-manage { background: var(--neon); color: #001a1f; border: none; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+  .btn-manage { background: var(--neon); color: #001a1f; border: none; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
   .btn-manage:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: 0 4px 10px var(--neon-glow); }
 
   .history-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
@@ -176,6 +211,7 @@
   th { padding: 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
   td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
   .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
+  .btn-action:hover { background: #34d399; transform: scale(1.05); }
 
   /* === MODAL SYSTEM === */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
@@ -193,9 +229,11 @@
   .warning-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
-  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; }
   .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-cancel:hover { background: rgba(255,255,255,0.05); }
   .btn-confirm { background: var(--neon); color: #001a1f; }
+  .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
 
   /* =========================================
      RESPONSIVE MOBILE (PERBAIKAN HEADER)
@@ -211,19 +249,15 @@
     .auth-box { background: var(--card); padding: 30px 24px; }
     
     /* HEADER HP DIBIKIN SATU BARIS TIPIS */
-    .top-header { 
-      flex-direction: row; 
-      padding: 12px 16px; 
-      gap: 8px;
-    }
+    .top-header { flex-direction: row; padding: 12px 16px; gap: 8px; }
     .profile-card { gap: 8px; }
     .avatar { width: 32px; height: 32px; font-size: 14px; }
-    .profile-info span { display: none; } /* Sembunyikan tulisan "Logged in as" */
+    .profile-info span { display: none; }
     .profile-info strong { font-size: 13px; }
     .logout-btn { padding: 6px 10px; font-size: 11px; margin-left: 4px; }
 
     .header-right { gap: 8px; }
-    .balance-info span { display: none; } /* Sembunyikan "My Balance" */
+    .balance-info span { display: none; }
     .balance-info strong { font-size: 14px; }
     .topup-btn { padding: 6px 12px; font-size: 11px; }
     
@@ -254,6 +288,9 @@
     
     .modal-content { padding: 24px 20px; }
     .panel-data-box { font-size: 12px; padding: 16px; }
+
+    /* Matikan hover card di HP biar gak aneh */
+    .hover-card:hover { transform: none; box-shadow: none; border-color: var(--border); }
   }
 </style>
 </head>
@@ -269,7 +306,7 @@
       </div>
     </div>
     <div class="auth-form-area">
-      <div class="auth-box">
+      <div class="auth-box hover-card">
         <div id="loginForm">
           <h2>Sign In</h2>
           <div class="error-msg" id="loginError"></div>
@@ -326,24 +363,30 @@
       <div class="dashboard-grid">
         
         <!-- Panel Aktif -->
-        <div class="dash-card">
+        <div class="dash-card hover-card">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
             Panel Aktif
           </h3>
           <div id="listPanelAktif">
-            <p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada panel aktif.</p>
+            <!-- Skeleton -->
+            <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text" style="width: 90%;"></div>
           </div>
         </div>
 
         <!-- Riwayat Transaksi -->
-        <div class="dash-card">
+        <div class="dash-card hover-card">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             Riwayat Transaksi
           </h3>
           <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
-            <p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada transaksi.</p>
+            <!-- Skeleton -->
+            <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text" style="width: 50%;"></div>
           </div>
         </div>
 
@@ -357,7 +400,7 @@
           <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
           <p>Buy panel instantly using your balance. Topup via WhatsApp, fast response!</p>
         </div>
-        <div class="form-section">
+        <div class="form-section hover-card">
           
           <div class="tab-menu-inner">
             <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">Beli Panel Baru</button>
@@ -421,7 +464,7 @@
     <h1>Admin Dashboard</h1>
     <button class="logout-btn" onclick="doLogout()">Logout</button>
   </div>
-  <div class="table-card">
+  <div class="table-card hover-card">
     <h3>Daftar Pengguna</h3>
     <br>
     <table>
@@ -654,6 +697,18 @@
   async function loadUserDashboard() {
     if (!currentUser) return;
 
+    // Skeleton Loading Simulation
+    document.getElementById('listPanelAktif').innerHTML = `
+      <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text" style="width: 90%;"></div>
+    `;
+    document.getElementById('listRiwayat').innerHTML = `
+      <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text" style="width: 50%;"></div>
+    `;
+
     try {
       const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
       const querySnapshot = await getDocs(q);
@@ -718,6 +773,8 @@
 
     } catch (error) {
       console.error("Error load dashboard:", error);
+      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
+      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
     }
   }
 
