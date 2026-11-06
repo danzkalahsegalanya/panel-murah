@@ -104,6 +104,7 @@
 
   #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   
+  /* HEADER DENGAN BURGER MENU */
   .top-header {
     position: sticky; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
@@ -122,8 +123,6 @@
   .profile-info { display: flex; flex-direction: column; }
   .profile-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .profile-info strong { font-size: 14px; color: #fff; font-weight: 700; }
-  .logout-btn { background: rgba(239,68,68,.1); color: #fca5a5; border: 1px solid rgba(239,68,68,.2); font-size: 12px; font-weight: 700; cursor: pointer; padding: 8px 14px; border-radius: 99px; transition: all 0.2s; margin-left: 12px; }
-  .logout-btn:hover { background: var(--danger); color: white; }
 
   .header-right { display: flex; align-items: center; gap: 16px; }
   .balance-info { display: flex; flex-direction: column; text-align: right; }
@@ -131,11 +130,45 @@
   .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; }
   .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; }
   .topup-btn:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
-
-  .nav-menu { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.6); padding: 6px; border-radius: 14px; border: 1px solid var(--border); width: fit-content; }
-  .nav-btn { padding: 10px 24px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13.5px; border-radius: 10px; cursor: pointer; font-family: inherit; }
-  .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
-  .nav-btn.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
+  
+  /* Burger Button */
+  .burger-btn {
+    background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 4px;
+    padding: 8px; margin-left: 16px; border-radius: 8px; z-index: 105;
+  }
+  .burger-btn:hover { background: rgba(255,255,255,0.1); }
+  .burger-btn span { display: block; width: 24px; height: 2px; background: #fff; transition: 0.3s; }
+  
+  /* Sidebar Menu */
+  .sidebar {
+    position: fixed; top: 0; right: -300px; width: 280px; height: 100vh;
+    background: var(--card); border-left: 1px solid var(--border);
+    z-index: 200; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex; flex-direction: column; padding: 24px;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  }
+  .sidebar.active { right: 0; }
+  .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+  .sidebar-header h2 { font-size: 18px; color: var(--neon); font-weight: 800; }
+  .close-btn { background: transparent; border: none; color: var(--muted); font-size: 24px; cursor: pointer; }
+  
+  .sidebar-menu { display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-item {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    background: transparent; border: none; color: var(--text); font-size: 14px; font-weight: 600;
+    border-radius: 12px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; font-family: inherit;
+  }
+  .sidebar-item:hover { background: rgba(255,255,255,0.05); }
+  .sidebar-item.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
+  .sidebar-item svg { width: 20px; height: 20px; }
+  
+  .sidebar-footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 16px; }
+  .logout-btn { width: 100%; background: rgba(239,68,68,.1); color: #fca5a5; border: 1px solid rgba(239,68,68,.2); font-size: 13px; font-weight: 700; cursor: pointer; padding: 12px; border-radius: 10px; transition: all 0.2s; }
+  .logout-btn:hover { background: var(--danger); color: white; }
+  
+  /* Overlay untuk nutup sidebar */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; opacity: 0; pointer-events: none; transition: 0.3s; }
+  .overlay.active { opacity: 1; pointer-events: auto; }
 
   .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
   
@@ -148,10 +181,21 @@
 
   .form-section { flex: 1; max-width: 460px; padding: 36px 32px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   
-  .catalog-tabs { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.5); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
-  .cat-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: inherit; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .cat-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
-  .cat-btn.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
+  /* KATALOG GRID BARU (2 KOTAK) */
+  .catalog-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
+  }
+  .catalog-card {
+    background: #0a0612; border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px; cursor: pointer; transition: all 0.3s; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .catalog-card:hover { border-color: var(--neon); transform: translateY(-4px); box-shadow: 0 10px 20px -10px var(--neon-glow); }
+  .catalog-card img {
+    width: 100%; height: 120px; object-fit: cover; border-radius: 10px; margin-bottom: 12px;
+  }
+  .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; }
   
   .product-content { display: none; }
   .product-content.active { display: block; animation: fadeIn 0.3s ease; }
@@ -256,16 +300,13 @@
     .avatar { width: 32px; height: 32px; font-size: 14px; }
     .profile-info span { display: none; }
     .profile-info strong { font-size: 13px; }
-    .logout-btn { padding: 6px 10px; font-size: 11px; margin-left: 4px; }
-
+    
     .header-right { gap: 8px; }
     .balance-info span { display: none; }
     .balance-info strong { font-size: 14px; }
     .topup-btn { padding: 6px 12px; font-size: 11px; }
     
     .main-container { padding: 16px; }
-    .nav-menu { width: 100%; justify-content: center; margin-bottom: 16px; }
-    .nav-btn { flex: 1; text-align: center; padding: 10px; font-size: 12.5px; }
     
     .wrapper-order { flex-direction: column; gap: 20px; }
     .info-section h1 { font-size: 28px; text-align: center; margin-bottom: 8px; }
@@ -276,7 +317,9 @@
     
     .dashboard-grid { grid-template-columns: 1fr; gap: 16px; }
     
-    .catalog-tabs { flex-direction: column; }
+    /* Katalog di HP jadi tumpuk atas bawah biar gambar gede */
+    .catalog-grid { grid-template-columns: 1fr; }
+    .catalog-card img { height: 160px; }
     
     .ram-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
     .ram-item .ram-name { font-size: 12px; }
@@ -341,7 +384,6 @@
         <span>Logged in as</span>
         <strong id="displayUser">User</strong>
       </div>
-      <button class="logout-btn" onclick="doLogout()">Logout</button>
     </div>
 
     <div class="header-right">
@@ -350,16 +392,40 @@
         <strong id="displayBalance">Rp 0</strong>
       </div>
       <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
+      
+      <!-- BURGER MENU BUTTON -->
+      <button class="burger-btn" onclick="toggleSidebar(true)">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR MENU -->
+  <div class="overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
+  <div class="sidebar" id="sidebarMenu">
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <button class="close-btn" onclick="toggleSidebar(false)">&times;</button>
+    </div>
+    
+    <div class="sidebar-menu">
+      <button class="sidebar-item active" id="navDash" onclick="switchMainTab('dashboard')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        Dashboard
+      </button>
+      <button class="sidebar-item" id="navOrder" onclick="switchMainTab('order')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        Katalog Produk
+      </button>
+    </div>
+    
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
     </div>
   </div>
 
   <div class="main-container">
     
-    <div class="nav-menu">
-      <button class="nav-btn active" id="navDash" onclick="switchMainTab('dashboard')">Dashboard</button>
-      <button class="nav-btn" id="navOrder" onclick="switchMainTab('order')">Katalog Produk</button>
-    </div>
-
     <!-- TAB CONTENT: DASHBOARD (USER) -->
     <div id="tabContentDashboard">
       <div class="dashboard-grid">
@@ -400,16 +466,18 @@
         </div>
         <div class="form-section hover-card">
           
-          <!-- KATALOG TABS -->
-          <div class="catalog-tabs">
-            <button type="button" class="cat-btn active" id="catWaBot" onclick="switchCatalog('wabot')">
-              <svg style="width:16px; height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-              WA Bot Panel
-            </button>
-            <button type="button" class="cat-btn" id="catAmPremium" onclick="switchCatalog('am')">
-              <svg style="width:16px; height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
-              Alight Motion
-            </button>
+          <!-- KATALOG GRID BARU -->
+          <div class="catalog-grid">
+            <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
+              <img src="/media/panel.png" alt="WA Bot Panel">
+              <h4>WA Bot Panel</h4>
+              <p>Mulai Rp 300</p>
+            </div>
+            <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')">
+              <img src="/media/am.png" alt="Alight Motion">
+              <h4>Alight Motion</h4>
+              <p>Rp 5.000 / Tahun</p>
+            </div>
           </div>
 
           <!-- PRODUCT 1: WA BOT -->
@@ -503,16 +571,14 @@
         <span>Logged in as</span>
         <strong>Administrator</strong>
       </div>
-      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+    
+    <div class="header-right">
+      <button class="logout-btn" onclick="doLogout()" style="width: auto; padding: 8px 14px;">Logout</button>
     </div>
   </div>
 
   <div class="main-container">
-    
-    <div class="nav-menu">
-      <button class="nav-btn active" id="adminNavDash" onclick="switchAdminTab('dashboard')">Admin Dashboard</button>
-    </div>
-
     <div id="adminTabContentDashboard">
       <div class="admin-header">
         <h1>User Management</h1>
@@ -526,7 +592,6 @@
         </table>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -626,6 +691,19 @@
     document.getElementById('customAlert').classList.add('active');
   };
 
+  // --- SIDEBAR MENU LOGIC ---
+  window.toggleSidebar = (show) => {
+    const sidebar = document.getElementById('sidebarMenu');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (show) {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+    } else {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+  };
+
   // --- RIPPLE ANIMATION ---
   window.createRipple = function(event) {
     const btn = event.currentTarget;
@@ -651,28 +729,27 @@
   // --- SWITCH CATALOG ---
   window.switchCatalog = (cat) => {
     currentCatalog = cat;
-    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.catalog-card').forEach(card => card.classList.remove('active'));
     document.querySelectorAll('.product-content').forEach(el => el.classList.remove('active'));
 
     if (cat === 'wabot') {
-      document.getElementById('catWaBot').classList.add('active');
       document.getElementById('productWaBot').classList.add('active');
     } else {
-      document.getElementById('catAmPremium').classList.add('active');
       document.getElementById('productAm').classList.add('active');
     }
   };
 
   // --- USER NAVIGATION ---
   window.switchMainTab = (tab) => {
+    toggleSidebar(false); // Tutup sidebar tiap pindah tab
+    document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+    
     if (tab === 'dashboard') {
       document.getElementById('navDash').classList.add('active');
-      document.getElementById('navOrder').classList.remove('active');
       document.getElementById('tabContentDashboard').style.display = 'block';
       document.getElementById('tabContentOrder').style.display = 'none';
       loadUserDashboard(); 
     } else {
-      document.getElementById('navDash').classList.remove('active');
       document.getElementById('navOrder').classList.add('active');
       document.getElementById('tabContentDashboard').style.display = 'none';
       document.getElementById('tabContentOrder').style.display = 'block';
@@ -695,15 +772,6 @@
       document.getElementById('submitBtn').textContent = "Add Server";
     }
   }
-
-  // --- ADMIN NAVIGATION ---
-  window.switchAdminTab = (tab) => {
-    if (tab === 'dashboard') {
-      document.getElementById('adminNavDash').classList.add('active');
-      document.getElementById('adminTabContentDashboard').style.display = 'block';
-      loadAdminData();
-    }
-  };
 
   // --- AUTH LOGIC ---
   window.doRegister = async (event) => {
@@ -764,7 +832,7 @@
       if (user.email === ADMIN_EMAIL) {
         document.getElementById('adminApp').style.display = 'flex';
         document.getElementById('mainApp').style.display = 'none';
-        switchAdminTab('dashboard');
+        loadAdminData();
       } else {
         document.getElementById('mainApp').style.display = 'flex';
         document.getElementById('adminApp').style.display = 'none';
@@ -1071,11 +1139,9 @@
       return;
     }
 
-    // Konfirmasi pakai modal kustom
     document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`;
     document.getElementById("confirmModal").classList.add("active");
     
-    // Karena ini async, kita simpan aksi di tombol execute
     const confirmBtn = document.querySelector("#confirmModal .btn-confirm");
     confirmBtn.onclick = async () => {
       document.getElementById("confirmModal").classList.remove('active');
@@ -1109,7 +1175,7 @@
 
           showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.", "Berhasil!");
           loadUserDashboard();
-          switchMainTab('dashboard'); // Balik ke dashboard otomatis
+          switchMainTab('dashboard'); 
         } else {
           showAlert("Gagal Verifikasi: " + data.why, "Gagal");
         }
