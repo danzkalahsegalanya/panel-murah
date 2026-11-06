@@ -578,6 +578,10 @@
             <input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
           </div>
           <div class="field">
+            <label>Password Saat Ini (Wajib)</label>
+            <input type="password" id="currentPassEmail" class="glass-input" placeholder="Masukkan password Anda">
+          </div>
+          <div class="field">
             <label>Email Baru</label>
             <input type="email" id="newEmail" class="glass-input" placeholder="Masukkan email baru">
           </div>
@@ -586,6 +590,10 @@
           <hr style="border: 1px solid var(--border); margin: 24px 0;">
 
           <!-- Form Ubah Password -->
+          <div class="field">
+            <label>Password Saat Ini (Wajib)</label>
+            <input type="password" id="currentPassPassword" class="glass-input" placeholder="Masukkan password lama Anda">
+          </div>
           <div class="field">
             <label>Password Baru</label>
             <input type="password" id="newPassword" class="glass-input" placeholder="Masukkan password baru">
@@ -930,32 +938,35 @@
     }
   }
 
-  // --- ACCOUNT SETTINGS (CHANGE EMAIL & PASSWORD) ---
+  // --- ACCOUNT SETTINGS (RE-AUTH WITH OLD PASSWORD) ---
   window.changeEmail = async (event) => {
+    const oldPass = document.getElementById('currentPassEmail').value;
     const newEmail = document.getElementById('newEmail').value.trim();
-    if (!newEmail) { showAlert("Masukkan email baru!"); return; }
+
+    if (!oldPass || !newEmail) { showAlert("Isi password saat ini dan email baru!"); return; }
 
     const btn = event.target;
     btn.disabled = true;
     btn.textContent = "Memproses...";
 
     try {
+      // 1. Re-autentikasi dulu pakai password lama
+      const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
+      await reauthenticateWithCredential(currentUser, credential);
+
+      // 2. Kalau sukses, baru ganti email
       await updateEmail(currentUser, newEmail);
       
-      // Update email di database Firestore juga
+      // 3. Update email di database Firestore juga
       const docRef = doc(db, "users", currentUser.uid);
       await updateDoc(docRef, { email: newEmail });
 
-      showAlert("Email berhasil diubah! Silakan login ulang jika diperlukan.", "Berhasil");
-      document.getElementById('newEmail').value = "";
-      document.getElementById('currentEmailDisplay').value = newEmail;
-      
-      // Firebase kadang butuh re-login buat sinkron, kita logout aja biar aman
-      setTimeout(() => signOut(auth), 3000);
+      showAlert("Email berhasil diubah! Silakan login ulang.", "Berhasil");
+      setTimeout(() => signOut(auth), 2000);
 
     } catch (error) {
-      if (error.code === 'auth/requires-recent-login') {
-        showAlert("Sesi Anda sudah lama. Silakan logout lalu login kembali untuk mengubah email.", "Perlu Login Ulang");
+      if (error.code === 'auth/wrong-password') {
+        showAlert("Password saat ini salah!", "Gagal");
       } else {
         showAlert(error.message, "Gagal");
       }
@@ -966,10 +977,11 @@
   };
 
   window.changePassword = async (event) => {
+    const oldPass = document.getElementById('currentPassPassword').value;
     const newPass = document.getElementById('newPassword').value;
     const confirmPass = document.getElementById('confirmNewPassword').value;
     
-    if (!newPass || !confirmPass) { showAlert("Password tidak boleh kosong!"); return; }
+    if (!oldPass || !newPass || !confirmPass) { showAlert("Semua kolom wajib diisi!"); return; }
     if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; }
     if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; }
 
@@ -978,13 +990,21 @@
     btn.textContent = "Memproses...";
 
     try {
+      // 1. Re-autentikasi dulu pakai password lama
+      const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
+      await reauthenticateWithCredential(currentUser, credential);
+
+      // 2. Kalau sukses, baru ganti password
       await updatePassword(currentUser, newPass);
+      
       showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
+      document.getElementById('currentPassPassword').value = "";
       document.getElementById('newPassword').value = "";
       document.getElementById('confirmNewPassword').value = "";
+
     } catch (error) {
-      if (error.code === 'auth/requires-recent-login') {
-        showAlert("Sesi Anda sudah lama. Silakan logout lalu login kembali untuk mengubah password.", "Perlu Login Ulang");
+      if (error.code === 'auth/wrong-password') {
+        showAlert("Password saat ini salah!", "Gagal");
       } else {
         showAlert(error.message, "Gagal");
       }
