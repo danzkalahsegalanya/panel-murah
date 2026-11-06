@@ -104,7 +104,7 @@
 
   #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   
-  /* HEADER DENGAN BURGER MENU */
+  /* HEADER */
   .top-header {
     position: sticky; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
@@ -285,7 +285,7 @@
   .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
 
   /* =========================================
-     RESPONSIVE MOBILE (DIBIKIN LEBIH RAPI)
+     RESPONSIVE MOBILE (SIDEBAR FULL FIX)
      ========================================= */
   @media (max-width: 900px) {
     html, body {
@@ -297,20 +297,15 @@
     .auth-brand { display: none; } 
     .auth-box { background: var(--card); padding: 30px 24px; }
     
-    /* HEADER HP LEBIH TIPIS */
-    .top-header { 
-      flex-direction: row; 
-      padding: 10px 14px; 
-      gap: 8px;
-    }
+    .top-header { flex-direction: row; padding: 10px 14px; gap: 8px; }
     .profile-card { gap: 8px; }
     .header-logo { width: 28px; height: 28px; }
     .avatar { width: 32px; height: 32px; font-size: 14px; }
-    .profile-info span { display: none; } /* Sembunyikan "Logged in as" */
+    .profile-info span { display: none; }
     .profile-info strong { font-size: 13px; }
     
     .header-right { gap: 8px; }
-    .balance-info span { display: none; } /* Sembunyikan "My Balance" */
+    .balance-info span { display: none; }
     .balance-info strong { font-size: 13.5px; }
     .topup-btn { padding: 6px 10px; font-size: 11px; }
     .burger-btn { padding: 6px; }
@@ -327,7 +322,6 @@
     
     .dashboard-grid { grid-template-columns: 1fr; gap: 16px; }
     
-    /* Katalog jadi 1 kolom di HP */
     .catalog-grid { grid-template-columns: 1fr; gap: 12px; }
     .catalog-card { padding: 16px; flex-direction: row; text-align: left; gap: 16px; align-items: center; }
     .catalog-card img { width: 80px; height: 80px; margin-bottom: 0; }
@@ -348,6 +342,19 @@
     .panel-data-box { font-size: 12px; padding: 16px; }
 
     .hover-card:hover { transform: none; box-shadow: none; border-color: var(--border); }
+
+    /* --- PERBAIKAN SIDEBAR DI HP --- */
+    .sidebar {
+      width: 100%; /* Full width di HP */
+      right: -100%; 
+      padding: 20px 20px 40px 20px;
+      overflow-y: auto; /* Biar bisa di scroll */
+    }
+    .sidebar.active { right: 0; }
+    .sidebar-footer { 
+      margin-top: 40px; /* Jarak aman dari menu */
+      padding-bottom: 20px; /* Jarak aman dari bawah layar HP */
+    }
   }
 </style>
 </head>
