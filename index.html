@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kitzune Store - Premium WhatsApp Bot Panel</title>
+
+<!-- FAVICON (HASIL DARI FAVICON.IO) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="manifest" href="/site.webmanifest">
 
 <!-- OPEN GRAPH (BIAR MUNCUL GAMBAR DI WA) -->
 <meta property="og:type" content="website">
@@ -122,6 +128,10 @@
   }
   
   .profile-card { display: flex; align-items: center; gap: 12px; }
+  
+  /* LOGO HEADER */
+  .header-logo { width: 32px; height: 32px; object-fit: contain; margin-right: 4px; }
+  
   .avatar {
     width: 38px; height: 38px; border-radius: 50%;
     background: linear-gradient(135deg, var(--neon), #0077ff);
@@ -259,6 +269,7 @@
     
     .top-header { flex-direction: row; padding: 12px 16px; gap: 8px; }
     .profile-card { gap: 8px; }
+    .header-logo { width: 28px; height: 28px; }
     .avatar { width: 32px; height: 32px; font-size: 14px; }
     .profile-info span { display: none; }
     .profile-info strong { font-size: 13px; }
@@ -339,6 +350,9 @@
 <div id="mainApp">
   <div class="top-header">
     <div class="profile-card">
+      <!-- LOGO HEADER DITAMBAHIN DI SINI -->
+      <img src="/favicon.png" alt="Logo" class="header-logo">
+      
       <div class="avatar" id="userAvatar">U</div>
       <div class="profile-info">
         <span>Logged in as</span>
@@ -467,6 +481,9 @@
   <!-- HEADER ADMIN -->
   <div class="top-header">
     <div class="profile-card">
+      <!-- LOGO HEADER DITAMBAHIN DI SINI -->
+      <img src="/favicon.png" alt="Logo" class="header-logo">
+      
       <div class="avatar" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
       <div class="profile-info">
         <span>Logged in as</span>
