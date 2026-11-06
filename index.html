@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kitzune Store - Premium WhatsApp Bot Panel</title>
+<title>Kitzune Store - Premium Digital Products</title>
 
 <!-- FAVICON -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -15,17 +15,9 @@
 <!-- OPEN GRAPH -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kitzunemarket.biz.id/">
-<meta property="og:title" content="Kitzune Store - Panel Murah & Cepat">
-<meta property="og:description" content="Bikin Bot WA Tanpa Batas. Unlimited cuma Rp 2.000 aja! Proses otomatis, langsung jadi.">
+<meta property="og:title" content="Kitzune Store - Premium Digital Products">
+<meta property="og:description" content="Bikin Bot WA Tanpa Batas. Unlimited cuma Rp 2.000 aja! Juga tersedia Alight Motion Premium.">
 <meta property="og:image" content="https://kitzunemarket.biz.id/banner.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-
-<!-- TWITTER CARD -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kitzune Store - Panel Murah & Cepat">
-<meta name="twitter:description" content="Bikin Bot WA Tanpa Batas. Unlimited cuma Rp 2.000 aja!">
-<meta name="twitter:image" content="https://kitzunemarket.biz.id/banner.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,12 +25,12 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #08050f; /* Background ungu gelap pekat */
-    --card: #110b1c; /* Card ungu gelap */
-    --border: #2a1a3a; /* Border ungu redup */
+    --bg: #08050f; 
+    --card: #110b1c; 
+    --border: #2a1a3a; 
     --text: #f0f4f8; 
-    --muted: #9a8eb0; /* Teks abu-abu keunguan */
-    --neon: #9d00ff; /* Ungu Neon */
+    --muted: #9a8eb0; 
+    --neon: #9d00ff; 
     --neon-hover: #b533ff;
     --neon-glow: rgba(157, 0, 255, 0.2);
     --neon-soft: rgba(157, 0, 255, 0.1);
@@ -51,7 +43,6 @@
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
     
-    /* Background image dikasih tint ungu */
     background-image: 
       linear-gradient(to bottom, rgba(8, 5, 15, 0.8), rgba(8, 5, 15, 0.95)),
       url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
@@ -61,7 +52,6 @@
     background-attachment: fixed;
   }
 
-  /* === ANIMASI & HOVER EFFECTS === */
   .hover-card { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
   .hover-card:hover {
     transform: translateY(-4px);
@@ -72,7 +62,6 @@
   button { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
   button:active { transform: scale(0.96) !important; }
 
-  /* === SKELETON SHIMMER === */
   .skeleton {
     background: #1f1530;
     background-image: linear-gradient(90deg, #1f1530 0px, #3a2559 40px, #1f1530 80px);
@@ -80,14 +69,10 @@
     animation: shimmer 1.5s infinite linear;
     border-radius: 8px;
   }
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
+  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
   .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
   .skeleton-text.short { width: 60%; }
 
-  /* === AUTH SECTION === */
   #authScreen { position: fixed; inset: 0; background: rgba(8, 5, 15, 0.85); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
   .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -117,10 +102,8 @@
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
-  /* === MAIN APP === */
   #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   
-  /* HEADER */
   .top-header {
     position: sticky; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
@@ -149,16 +132,13 @@
   .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; }
   .topup-btn:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
 
-  /* NAV MENU */
   .nav-menu { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.6); padding: 6px; border-radius: 14px; border: 1px solid var(--border); width: fit-content; }
   .nav-btn { padding: 10px 24px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13.5px; border-radius: 10px; cursor: pointer; font-family: inherit; }
   .nav-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
   .nav-btn.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
 
-  /* Content */
   .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
   
-  /* TAB CONTENT: ORDER */
   #tabContentOrder, #adminTabContentOrder { display: none; }
   .wrapper-order { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
   .info-section { flex: 1; max-width: 520px; }
@@ -167,6 +147,16 @@
   .info-section p { font-size: 16px; color: #cbd5e1; line-height: 1.6; margin-bottom: 32px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
   .form-section { flex: 1; max-width: 460px; padding: 36px 32px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+  
+  .catalog-tabs { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.5); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
+  .cat-btn { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: inherit; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .cat-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  .cat-btn.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
+  
+  .product-content { display: none; }
+  .product-content.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
   .tab-menu-inner { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
   .tab-btn-inner { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: inherit; text-transform: uppercase; }
   .tab-btn-inner:hover { color: #fff; background: rgba(255,255,255,0.05); }
@@ -189,10 +179,9 @@
   .total { margin-top: 24px; padding: 16px; background: #0a0612; border: 1px solid var(--border); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
   .total span:first-child { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
   .total-price { font-size: 24px; font-weight: 800; color: var(--neon); }
-  button[type="submit"] { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; }
-  button[type="submit"]:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
+  button[type="submit"], .auth-btn.am-btn { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; }
+  button[type="submit"]:hover, .auth-btn.am-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   
-  /* TAB CONTENT: DASHBOARD */
   #tabContentDashboard, #adminTabContentDashboard { display: block; }
   .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .dash-card { padding: 24px; border-radius: 16px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
@@ -207,6 +196,7 @@
   .panel-actions { display: flex; align-items: center; gap: 12px; }
   .panel-status { padding: 5px 12px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
   .status-active { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .status-am { background: rgba(157, 0, 255, 0.15); color: #d8b4fe; border: 1px solid rgba(157, 0, 255, 0.3); }
   
   .btn-manage { background: var(--neon); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
   .btn-manage:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: 0 4px 10px var(--neon-glow); }
@@ -220,7 +210,6 @@
   .history-details p { font-size: 12px; color: var(--muted); }
   .history-date { font-size: 11px; color: #5a4b73; }
 
-  /* === ADMIN DASHBOARD === */
   .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
   .admin-header h1 { font-size: 28px; font-weight: 800; color: var(--neon); }
   .table-card { border-radius: 16px; padding: 24px; overflow-x: auto; background: var(--card); border: 1px solid var(--border); }
@@ -230,7 +219,6 @@
   .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
   .btn-action:hover { background: #34d399; transform: scale(1.05); }
 
-  /* === MODAL SYSTEM === */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
   .modal-overlay.active { display: flex; }
   .modal-content { padding: 32px; border-radius: 20px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--card); border: 1px solid var(--border); }
@@ -252,9 +240,6 @@
   .btn-confirm { background: var(--neon); color: #fff; }
   .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
 
-  /* =========================================
-     RESPONSIVE MOBILE
-     ========================================= */
   @media (max-width: 900px) {
     html, body {
       background-image: 
@@ -291,6 +276,8 @@
     
     .dashboard-grid { grid-template-columns: 1fr; gap: 16px; }
     
+    .catalog-tabs { flex-direction: column; }
+    
     .ram-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
     .ram-item .ram-name { font-size: 12px; }
     .ram-item .price-new { font-size: 10px; }
@@ -317,7 +304,7 @@
     <div class="auth-brand">
       <div class="brand-content">
         <h1>Welcome to <br><span>Kitzune Store.</span></h1>
-        <p>The most affordable and reliable WhatsApp Bot Panel in the market.</p>
+        <p>The most affordable and reliable digital products in the market.</p>
       </div>
     </div>
     <div class="auth-form-area">
@@ -348,9 +335,7 @@
 <div id="mainApp">
   <div class="top-header">
     <div class="profile-card">
-      <!-- LOGO HEADER DITAMBAHIN DI SINI -->
       <img src="/favicon.png" alt="Logo" class="header-logo">
-      
       <div class="avatar" id="userAvatar">U</div>
       <div class="profile-info">
         <span>Logged in as</span>
@@ -370,21 +355,19 @@
 
   <div class="main-container">
     
-    <!-- NAVIGATION MENU (USER) -->
     <div class="nav-menu">
       <button class="nav-btn active" id="navDash" onclick="switchMainTab('dashboard')">Dashboard</button>
-      <button class="nav-btn" id="navOrder" onclick="switchMainTab('order')">Buy Panel</button>
+      <button class="nav-btn" id="navOrder" onclick="switchMainTab('order')">Katalog Produk</button>
     </div>
 
     <!-- TAB CONTENT: DASHBOARD (USER) -->
     <div id="tabContentDashboard">
       <div class="dashboard-grid">
         
-        <!-- Panel Aktif -->
         <div class="dash-card hover-card">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            Active Panels
+            Produk Aktif
           </h3>
           <div id="listPanelAktif">
             <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
@@ -393,11 +376,10 @@
           </div>
         </div>
 
-        <!-- Riwayat Transaksi -->
         <div class="dash-card hover-card">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Transaction History
+            Riwayat Transaksi
           </h3>
           <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
             <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
@@ -413,60 +395,97 @@
     <div id="tabContentOrder">
       <div class="wrapper-order">
         <div class="info-section">
-          <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
-          <p>Buy panel instantly using your balance. Topup via WhatsApp, fast response!</p>
+          <h1>Pilih Produk <br><span>Digital Kamu.</span></h1>
+          <p>Pilih dari katalog produk premium kami di bawah ini.</p>
         </div>
         <div class="form-section hover-card">
           
-          <div class="tab-menu-inner">
-            <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
-            <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
+          <!-- KATALOG TABS -->
+          <div class="catalog-tabs">
+            <button type="button" class="cat-btn active" id="catWaBot" onclick="switchCatalog('wabot')">
+              <svg style="width:16px; height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              WA Bot Panel
+            </button>
+            <button type="button" class="cat-btn" id="catAmPremium" onclick="switchCatalog('am')">
+              <svg style="width:16px; height:16px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+              Alight Motion
+            </button>
           </div>
 
-          <form id="orderForm">
-            
-            <div class="field" id="fieldName">
-              <label>Panel Name (No Spaces)</label>
-              <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+          <!-- PRODUCT 1: WA BOT -->
+          <div id="productWaBot" class="product-content active">
+            <div class="tab-menu-inner">
+              <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
+              <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
             </div>
 
-            <div class="field" id="fieldAddUser" style="display: none;">
-              <label>Your Panel Username</label>
-              <div class="input-group">
-                <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
-                <span class="suffix">@kitzunemarket.com</span>
+            <form id="orderForm">
+              <div class="field" id="fieldName">
+                <label>Panel Name (No Spaces)</label>
+                <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
               </div>
+
+              <div class="field" id="fieldAddUser" style="display: none;">
+                <label>Your Panel Username</label>
+                <div class="input-group">
+                  <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+                  <span class="suffix">@kitzunemarket.com</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Node.js Version</label>
+                <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+              </div>
+              
+              <div class="field">
+                <label>Select RAM Capacity</label>
+                <div class="ram-grid">
+                  <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="price-new">Rp 750</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="price-new">Rp 900</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
+                </div>
+              </div>
+              
+              <div class="total">
+                <span>Total Pembayaran</span>
+                <span class="total-price" id="totalText">Rp 300</span>
+              </div>
+              
+              <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
+            </form>
+          </div>
+
+          <!-- PRODUCT 2: ALIGHT MOTION -->
+          <div id="productAm" class="product-content">
+            
+            <div id="amStep1">
+              <div class="field">
+                <label>Email Alight Motion Kamu</label>
+                <input type="email" id="amEmail" class="glass-input" placeholder="contoh@gmail.com" required>
+              </div>
+              <button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)">Kirim Link Verifikasi</button>
             </div>
 
-            <div class="field">
-              <label>Node.js Version</label>
-              <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
-            </div>
-            
-            <div class="field">
-              <label>Select RAM Capacity</label>
-              <div class="ram-grid">
-                <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="price-new">Rp 750</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="price-new">Rp 900</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r9" value="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="r10" value="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
-                <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
+            <div id="amStep2" style="display: none;">
+              <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;">Cek inbox/spam email <b id="amTextEmail"></b>. Copy link verifikasi dari email, lalu paste di bawah ini.</p>
+              <div class="field">
+                <label>Paste Link Verifikasi</label>
+                <textarea id="amLink" class="glass-input" placeholder="https://alightcreative.app.link/..." rows="3" style="resize: none; font-size: 13px;"></textarea>
               </div>
+              <button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);">Aktifkan Premium (Rp 5.000)</button>
             </div>
-            
-            <div class="total">
-              <span>Total Payment</span>
-              <span class="total-price" id="totalText">Rp 300</span>
-            </div>
-            
-            <button type="submit" id="submitBtn" onclick="createRipple(event)">Buy Panel</button>
-          </form>
+
+          </div>
+
         </div>
       </div>
     </div>
@@ -476,12 +495,9 @@
 
 <!-- ADMIN APP -->
 <div id="adminApp">
-  <!-- HEADER ADMIN -->
   <div class="top-header">
     <div class="profile-card">
-      <!-- LOGO HEADER DITAMBAHIN DI SINI -->
       <img src="/favicon.png" alt="Logo" class="header-logo">
-      
       <div class="avatar" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
       <div class="profile-info">
         <span>Logged in as</span>
@@ -493,13 +509,10 @@
 
   <div class="main-container">
     
-    <!-- NAVIGATION MENU (ADMIN) -->
     <div class="nav-menu">
       <button class="nav-btn active" id="adminNavDash" onclick="switchAdminTab('dashboard')">Admin Dashboard</button>
-      <button class="nav-btn" id="adminNavOrder" onclick="switchAdminTab('order')">Buy Panel (Test)</button>
     </div>
 
-    <!-- TAB CONTENT: ADMIN DASHBOARD -->
     <div id="adminTabContentDashboard">
       <div class="admin-header">
         <h1>User Management</h1>
@@ -511,63 +524,6 @@
           <thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead>
           <tbody id="userTableBody"></tbody>
         </table>
-      </div>
-    </div>
-
-    <!-- TAB CONTENT: ADMIN ORDER (TEST) -->
-    <div id="adminTabContentOrder">
-      <div class="wrapper-order">
-        <div class="info-section">
-          <h1>Test Order <br><span>As Admin.</span></h1>
-          <p>You can test the purchase flow here. Saldo admin tidak akan terpotong.</p>
-        </div>
-        <div class="form-section hover-card">
-          
-          <div class="tab-menu-inner">
-            <button type="button" class="tab-btn-inner active" id="adminTabNew" onclick="switchAdminOrderTab('new')">New Panel</button>
-            <button type="button" class="tab-btn-inner" id="adminTabAdd" onclick="switchAdminOrderTab('addserver')">Add Server</button>
-          </div>
-
-          <form id="adminOrderForm">
-            
-            <div class="field" id="adminFieldName">
-              <label>Panel Name (No Spaces)</label>
-              <input type="text" id="adminCustomName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
-            </div>
-
-            <div class="field" id="adminFieldAddUser" style="display: none;">
-              <label>Your Panel Username</label>
-              <div class="input-group">
-                <input type="text" id="adminAddUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
-                <span class="suffix">@kitzunemarket.com</span>
-              </div>
-            </div>
-
-            <div class="field">
-              <label>Node.js Version</label>
-              <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
-            </div>
-            
-            <div class="field">
-              <label>Select RAM Capacity</label>
-              <div class="ram-grid">
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar1" value="1GB" checked><label for="ar1"><span class="ram-name">1 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar2" value="2GB"><label for="ar2"><span class="ram-name">2 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar3" value="3GB"><label for="ar3"><span class="ram-name">3 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar4" value="4GB"><label for="ar4"><span class="ram-name">4 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar5" value="5GB"><label for="ar5"><span class="ram-name">5 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar6" value="6GB"><label for="ar6"><span class="ram-name">6 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar7" value="7GB"><label for="ar7"><span class="ram-name">7 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar8" value="8GB"><label for="ar8"><span class="ram-name">8 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar9" value="9GB"><label for="ar9"><span class="ram-name">9 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="ar10" value="10GB"><label for="ar10"><span class="ram-name">10 GB</span><span class="price-new">Test</span></label></div>
-                <div class="ram-item"><input type="radio" name="adminRam" id="arunli" value="Unlimited"><label for="arunli"><span class="ram-name">Unli</span><span class="price-new">Test</span></label></div>
-              </div>
-            </div>
-            
-            <button type="submit" id="adminSubmitBtn" style="background: var(--danger); color: white;" onclick="createRipple(event)">Test Buy Panel (Free)</button>
-          </form>
-        </div>
       </div>
     </div>
 
@@ -590,11 +546,11 @@
 <!-- MODAL KONFIRMASI -->
 <div id="confirmModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Confirmation</h3>
-    <p id="confirmText">Are you sure?</p>
+    <h3>Konfirmasi</h3>
+    <p id="confirmText">Apakah anda yakin?</p>
     <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Cancel</button>
-      <button class="btn-modal btn-confirm" onclick="executePurchase()">Yes, Proceed</button>
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
+      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
     </div>
   </div>
 </div>
@@ -602,22 +558,23 @@
 <!-- MODAL SUKSES -->
 <div id="successModal" class="modal-overlay">
   <div class="modal-content">
-    <h3 id="successTitle">Success!</h3>
-    <p id="successDesc">Data processed successfully.</p>
+    <h3 id="successTitle">Berhasil!</h3>
+    <p id="successDesc">Pesanan diproses.</p>
     
     <div class="panel-data-box" id="panelDataBox">
       <div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div>
       <div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div>
       <div class="row" id="rowPassword"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
+      <div class="row" id="rowAmEmail" style="display: none;"><span class="label">Email:</span> <span class="value" id="resAmEmail">-</span></div>
     </div>
 
-    <div class="warning-box">
-      IMPORTANT: We only show this data ONCE. Please save/copy it now. If lost, it cannot be recovered!
+    <div class="warning-box" id="warningText">
+      PENTING: Simpan data ini.
     </div>
 
     <div class="modal-actions">
-      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Copy Data</button>
-      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Close</button>
+      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
+      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Tutup</button>
     </div>
   </div>
 </div>
@@ -648,8 +605,8 @@
   let currentUser = null;
   let pendingOrder = null;
   let currentMode = "new"; 
-  let currentAdminMode = "new";
-  let isAdminTest = false; 
+  let currentCatalog = "wabot";
+  let pendingAmEmail = "";
 
   // --- RIPPLE ANIMATION ---
   window.createRipple = function(event) {
@@ -672,6 +629,21 @@
     document.getElementById('loginError').style.display = 'none';
     document.getElementById('regError').style.display = 'none';
   }
+
+  // --- SWITCH CATALOG ---
+  window.switchCatalog = (cat) => {
+    currentCatalog = cat;
+    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.product-content').forEach(el => el.classList.remove('active'));
+
+    if (cat === 'wabot') {
+      document.getElementById('catWaBot').classList.add('active');
+      document.getElementById('productWaBot').classList.add('active');
+    } else {
+      document.getElementById('catAmPremium').classList.add('active');
+      document.getElementById('productAm').classList.add('active');
+    }
+  };
 
   // --- USER NAVIGATION ---
   window.switchMainTab = (tab) => {
@@ -696,17 +668,13 @@
       document.getElementById('tabAdd').classList.remove('active');
       document.getElementById('fieldName').style.display = 'block';
       document.getElementById('fieldAddUser').style.display = 'none';
-      document.getElementById('submitBtn').textContent = "Buy Panel";
-      document.getElementById('submitBtn').style.background = "var(--neon)";
-      document.getElementById('submitBtn').style.color = "#fff";
+      document.getElementById('submitBtn').textContent = "Beli Panel";
     } else {
       document.getElementById('tabNew').classList.remove('active');
       document.getElementById('tabAdd').classList.add('active');
       document.getElementById('fieldName').style.display = 'none';
       document.getElementById('fieldAddUser').style.display = 'block';
       document.getElementById('submitBtn').textContent = "Add Server";
-      document.getElementById('submitBtn').style.background = "var(--success)";
-      document.getElementById('submitBtn').style.color = "#fff";
     }
   }
 
@@ -714,32 +682,8 @@
   window.switchAdminTab = (tab) => {
     if (tab === 'dashboard') {
       document.getElementById('adminNavDash').classList.add('active');
-      document.getElementById('adminNavOrder').classList.remove('active');
       document.getElementById('adminTabContentDashboard').style.display = 'block';
-      document.getElementById('adminTabContentOrder').style.display = 'none';
       loadAdminData();
-    } else {
-      document.getElementById('adminNavDash').classList.remove('active');
-      document.getElementById('adminNavOrder').classList.add('active');
-      document.getElementById('adminTabContentDashboard').style.display = 'none';
-      document.getElementById('adminTabContentOrder').style.display = 'block';
-    }
-  };
-
-  window.switchAdminOrderTab = (mode) => {
-    currentAdminMode = mode;
-    if (mode === 'new') {
-      document.getElementById('adminTabNew').classList.add('active');
-      document.getElementById('adminTabAdd').classList.remove('active');
-      document.getElementById('adminFieldName').style.display = 'block';
-      document.getElementById('adminFieldAddUser').style.display = 'none';
-      document.getElementById('adminSubmitBtn').textContent = "Test Buy Panel";
-    } else {
-      document.getElementById('adminTabNew').classList.remove('active');
-      document.getElementById('adminTabAdd').classList.add('active');
-      document.getElementById('adminFieldName').style.display = 'none';
-      document.getElementById('adminFieldAddUser').style.display = 'block';
-      document.getElementById('adminSubmitBtn').textContent = "Test Add Server";
     }
   };
 
@@ -858,6 +802,7 @@
       docs.sort((a, b) => b.createdAt - a.createdAt);
 
       let panelUsernames = docs.filter(d => {
+        if(d.produk !== 'wabot') return false;
         const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
         return (30 - daysPassed) > 0;
       }).map(d => d.namaPanel);
@@ -877,87 +822,96 @@
               serverStatus[item.username] = item.exists;
             });
           }
-        } catch (err) {
-          console.error("Gagal cek status panel:", err);
-        }
+        } catch (err) {}
       }
 
       docs.forEach(data => {
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
-              <strong>${data.mode === 'new' ? 'New Panel' : 'Add Server'}</strong>
+              <strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? 'Panel Baru' : 'Add Server')}</strong>
               <span>Rp ${data.harga.toLocaleString()}</span>
             </div>
             <div class="history-details">
-              <p>${data.namaPanel} [${data.ram}]</p>
-              <span class="history-date">${new Date(data.createdAt).toLocaleDateString('en-GB')}</span>
+              <p>${data.namaPanel} [${data.ram || '1 Tahun'}]</p>
+              <span class="history-date">${new Date(data.createdAt).toLocaleDateString('id-ID')}</span>
             </div>
           </div>
         `;
 
-        const now = Date.now();
-        const msInDay = 24 * 60 * 60 * 1000;
-        const daysPassed = Math.floor((now - data.createdAt) / msInDay);
-        const daysLeft = 30 - daysPassed;
-
-        if (daysLeft > 0) {
+        if (data.produk === 'am') {
+          htmlPanel += `
+            <div class="panel-list-item">
+              <div class="panel-details">
+                <h4>Alight Motion</h4>
+                <p>1 Tahun • ${data.emailAm}</p>
+              </div>
+              <div class="panel-actions">
+                <div class="panel-status status-am">Active</div>
+              </div>
+            </div>
+          `;
           totalPanel++;
-          const isExists = serverStatus[data.namaPanel] !== false; 
+        } else {
+          const now = Date.now();
+          const msInDay = 24 * 60 * 60 * 1000;
+          const daysPassed = Math.floor((now - data.createdAt) / msInDay);
+          const daysLeft = 30 - daysPassed;
 
-          if (isExists) {
-            htmlPanel += `
-              <div class="panel-list-item">
-                <div class="panel-details">
-                  <h4>${data.namaPanel}</h4>
-                  <p>${data.ram} • ${daysLeft} Days Left</p>
+          if (daysLeft > 0) {
+            totalPanel++;
+            const isExists = serverStatus[data.namaPanel] !== false; 
+
+            if (isExists) {
+              htmlPanel += `
+                <div class="panel-list-item">
+                  <div class="panel-details">
+                    <h4>${data.namaPanel}</h4>
+                    <p>${data.ram} • Sisa ${daysLeft} Hari</p>
+                  </div>
+                  <div class="panel-actions">
+                    <div class="panel-status status-active">Active</div>
+                    <button class="btn-manage" onclick="managePanel('wabot', '${data.namaPanel}')">Manage</button>
+                  </div>
                 </div>
-                <div class="panel-actions">
-                  <div class="panel-status status-active">Active</div>
-                  <button class="btn-manage" onclick="managePanel('${data.namaPanel}')">
-                    Manage
-                    <svg style="width:12px; height:12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                  </button>
+              `;
+            } else {
+              htmlPanel += `
+                <div class="panel-list-item" style="opacity: 0.6;">
+                  <div class="panel-details">
+                    <h4 style="text-decoration: line-through;">${data.namaPanel}</h4>
+                    <p>${data.ram} • Deleted by Admin</p>
+                  </div>
+                  <div class="panel-actions">
+                    <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div>
+                  </div>
                 </div>
-              </div>
-            `;
-          } else {
-            htmlPanel += `
-              <div class="panel-list-item" style="opacity: 0.6;">
-                <div class="panel-details">
-                  <h4 style="text-decoration: line-through;">${data.namaPanel}</h4>
-                  <p>${data.ram} • Deleted by Admin</p>
-                </div>
-                <div class="panel-actions">
-                  <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div>
-                </div>
-              </div>
-            `;
+              `;
+            }
           }
         }
       });
 
       if (totalPanel === 0) {
-        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">No active panels found.</p>`;
+        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada produk aktif.</p>`;
       } else {
         document.getElementById('listPanelAktif').innerHTML = htmlPanel;
       }
 
       if (docs.length === 0) {
-        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">No transaction history.</p>`;
+        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada riwayat.</p>`;
       } else {
         document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
       }
 
     } catch (error) {
       console.error("Error load dashboard:", error);
-      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Failed to load data.</p>`;
-      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--danger); text-align:center; padding:20px 0;">Failed to load data.</p>`;
     }
   }
 
-  window.managePanel = (username) => {
-    const textToCopy = `${username}@kitzunemarket.com`;
+  window.managePanel = (type, val) => {
+    if (type === 'am') return; // AM gak butuh manage link
+    const textToCopy = `${val}@kitzunemarket.com`;
     navigator.clipboard.writeText(textToCopy).then(() => {
       window.open("https://srv2.cristall.my.id", "_blank");
     }).catch(err => {
@@ -998,7 +952,7 @@
     loadAdminData();
   }
 
-  // --- USER ORDER LOGIC ---
+  // --- USER ORDER LOGIC (WA BOT) ---
   const orderForm = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
 
@@ -1017,12 +971,12 @@
 
     if (currentMode === 'new') {
       finalUsername = document.getElementById("customName").value.trim();
-      if (!finalUsername) { alert("Panel name is required!"); return; }
-      displayConfirm = `Are you sure to buy <b>New Panel</b> with name <b>"${finalUsername}"</b>?`;
+      if (!finalUsername) { alert("Nama panel wajib diisi!"); return; }
+      displayConfirm = `Yakin beli <b>Panel Baru</b> dengan nama <b>"${finalUsername}"</b>?`;
     } else {
       finalUsername = document.getElementById("addUsername").value.trim();
-      if (!finalUsername) { alert("Username is required!"); return; }
-      displayConfirm = `Are you sure to <b>Add Server</b> to account <b>"${finalUsername}@kitzunemarket.com"</b>?`;
+      if (!finalUsername) { alert("Username wajib diisi!"); return; }
+      displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${finalUsername}@kitzunemarket.com"</b>?`;
     }
 
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
@@ -1033,11 +987,12 @@
     const saldo = docSnap.data().balance || 0;
 
     if (saldo < harga) {
-      alert("Insufficient balance! Please topup first.");
+      alert("Saldo tidak cukup! Silakan topup dulu.");
       return;
     }
 
     pendingOrder = {
+      produk: "wabot",
       mode: currentMode,
       username: finalUsername,
       ram: ramEl.value,
@@ -1047,54 +1002,108 @@
     };
 
     document.getElementById("confirmText").innerHTML = 
-      `${displayConfirm}<br>RAM Package <b>${ramEl.value}</b> for <b>Rp ${harga.toLocaleString()}</b>.`;
+      `${displayConfirm}<br>Paket RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
     document.getElementById("confirmModal").classList.add("active");
   });
 
-  // --- ADMIN TEST ORDER LOGIC ---
-  const adminOrderForm = document.getElementById("adminOrderForm");
+  // --- LOGIC ALIGHT MOTION ---
+  window.sendAmLink = async (event) => {
+    const email = document.getElementById("amEmail").value.trim();
+    if (!email) { alert("Masukkan email dulu!"); return; }
 
-  adminOrderForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!currentUser) return;
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Mengirim...";
 
-    let finalUsername = "";
-    let displayConfirm = "";
+    try {
+      const res = await fetch('/api/am-automation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'send-link', email: email })
+      });
+      const data = await res.json();
 
-    if (currentAdminMode === 'new') {
-      finalUsername = document.getElementById("adminCustomName").value.trim();
-      if (!finalUsername) { alert("Panel name is required!"); return; }
-      displayConfirm = `[ADMIN TEST] Are you sure to buy <b>New Panel</b> with name <b>"${finalUsername}"</b>?`;
-    } else {
-      finalUsername = document.getElementById("adminAddUsername").value.trim();
-      if (!finalUsername) { alert("Username is required!"); return; }
-      displayConfirm = `[ADMIN TEST] Are you sure to <b>Add Server</b> to account <b>"${finalUsername}@kitzunemarket.com"</b>?`;
+      if (data.ok) {
+        pendingAmEmail = email;
+        document.getElementById("amTextEmail").textContent = email;
+        document.getElementById("amStep1").style.display = "none";
+        document.getElementById("amStep2").style.display = "block";
+      } else {
+        alert("Gagal: " + data.why);
+      }
+    } catch (err) {
+      alert("Error sistem.");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Kirim Link Verifikasi";
+    }
+  };
+
+  window.verifyAmLink = async (event) => {
+    const link = document.getElementById("amLink").value.trim();
+    if (!link) { alert("Paste link verifikasinya dulu!"); return; }
+
+    const docRef = doc(db, "users", currentUser.uid);
+    const docSnap = await getDoc(docRef);
+    const saldo = docSnap.data().balance || 0;
+    const harga = 5000;
+
+    if (saldo < harga) {
+      alert("Saldo tidak cukup! Silakan topup dulu.");
+      return;
     }
 
-    const ramEl = adminOrderForm.querySelector('input[name="adminRam"]:checked');
-    
-    isAdminTest = true;
-    pendingOrder = {
-      mode: currentAdminMode,
-      username: finalUsername,
-      ram: ramEl.value,
-      harga: 0, 
-      docRef: null,
-      saldo: 0
-    };
+    if (!confirm(`Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`)) return;
 
-    document.getElementById("confirmText").innerHTML = 
-      `${displayConfirm}<br>RAM Package <b>${ramEl.value}</b>. (This is a free test).`;
-    document.getElementById("confirmModal").classList.add("active");
-  });
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Memverifikasi...";
 
-  // --- EXECUTE PURCHASE (USER & ADMIN) ---
+    try {
+      const res = await fetch('/api/am-automation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'verify', email: pendingAmEmail, link: link })
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        await updateDoc(docRef, { balance: saldo - harga });
+        await updateUserBalanceUI(currentUser.uid);
+
+        await setDoc(doc(collection(db, "transactions")), {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          produk: "am",
+          mode: "new",
+          namaPanel: "Alight Motion Premium",
+          emailAm: pendingAmEmail,
+          ram: "1 Tahun",
+          harga: harga,
+          createdAt: Date.now()
+        });
+
+        alert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.");
+        loadUserDashboard();
+        switchMainTab('dashboard');
+      } else {
+        alert("Gagal Verifikasi: " + data.why);
+      }
+    } catch (err) {
+      alert("Error sistem.");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Aktifkan Premium (Rp 5.000)";
+    }
+  };
+
+  // --- EXECUTE PURCHASE (WA BOT ONLY) ---
   window.executePurchase = async () => {
     document.getElementById("confirmModal").classList.remove("active");
     
-    const btn = isAdminTest ? document.getElementById("adminSubmitBtn") : document.getElementById("submitBtn");
+    const btn = document.getElementById("submitBtn");
     btn.disabled = true;
-    btn.textContent = "Processing...";
+    btn.textContent = "Memproses...";
 
     try {
       const response = await fetch('/api/create-panel', {
@@ -1102,76 +1111,67 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           mode: pendingOrder.mode,
-          email: isAdminTest ? "admin@test.com" : currentUser.email, 
+          email: currentUser.email, 
           username: pendingOrder.username,
           ram: pendingOrder.ram
         })
       });
 
       const data = await response.json();
+      if (!data.success) throw new Error(data.error || "Gagal membuat panel.");
 
-      if (!data.success) {
-        throw new Error(data.error || "Failed to process.");
-      }
+      await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
+      await updateUserBalanceUI(currentUser.uid);
 
-      if (!isAdminTest) {
-        await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
-        await updateUserBalanceUI(currentUser.uid);
-
-        await setDoc(doc(collection(db, "transactions")), {
-          uid: currentUser.uid,
-          email: currentUser.email,
-          mode: pendingOrder.mode,
-          namaPanel: pendingOrder.username,
-          ram: pendingOrder.ram,
-          harga: pendingOrder.harga,
-          createdAt: Date.now()
-        });
-      }
+      await setDoc(doc(collection(db, "transactions")), {
+        uid: currentUser.uid,
+        email: currentUser.email,
+        produk: "wabot",
+        mode: pendingOrder.mode,
+        namaPanel: pendingOrder.username,
+        ram: pendingOrder.ram,
+        harga: pendingOrder.harga,
+        createdAt: Date.now()
+      });
 
       document.getElementById("resUsername").textContent = data.username;
+      document.getElementById("rowPassword").style.display = "flex";
+      document.getElementById("rowAmEmail").style.display = "none";
+      document.getElementById("resPassword").textContent = data.password;
+      document.getElementById("successTitle").textContent = "Panel Berhasil Dibuat!";
+      document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda.";
+      document.getElementById("warningText").textContent = "PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!";
       
-      if (pendingOrder.mode === 'new') {
-        document.getElementById("successTitle").textContent = "Panel Successfully Created!";
-        document.getElementById("successDesc").textContent = "Here are your panel login details. Active for 1 month (30 days).";
-        document.getElementById("resPassword").textContent = data.password;
-        document.getElementById("rowPassword").style.display = "flex";
-      } else {
-        document.getElementById("successTitle").textContent = "Server Successfully Added!";
-        document.getElementById("successDesc").textContent = "New server has been added to your panel account. Active for 1 month (30 days).";
-        document.getElementById("rowPassword").style.display = "none";
-      }
-
       document.getElementById("successModal").classList.add("active");
-
-      if (!isAdminTest) {
-        loadUserDashboard();
-        switchMainTab('dashboard');
-      }
+      loadUserDashboard();
+      switchMainTab('dashboard');
 
     } catch (error) {
       alert("Error: " + error.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = isAdminTest ? (currentAdminMode === 'new' ? "Test Buy Panel (Free)" : "Test Add Server (Free)") : (currentMode === 'new' ? "Buy Panel" : "Add Server");
-      isAdminTest = false;
+      btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
     }
   };
 
   window.copyPanelData = () => {
-    const user = document.getElementById("resUsername").textContent;
-    const pass = document.getElementById("resPassword").textContent;
-    const mode = pendingOrder ? pendingOrder.mode : 'new';
+    let textToCopy = "";
     
-    let textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`;
-    if (mode === 'new') {
-      textToCopy += `\nPassword: ${pass}`;
+    if (pendingOrder && pendingOrder.produk === 'am') {
+      textToCopy = `Email: ${pendingOrder.emailAm}\nPaket: Alight Motion Premium 1 Tahun`;
+    } else {
+      const user = document.getElementById("resUsername").textContent;
+      const pass = document.getElementById("resPassword").textContent;
+      textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`;
+      if (pendingOrder && pendingOrder.mode === 'new') {
+        textToCopy += `\nPassword: ${pass}`;
+      }
     }
     
     navigator.clipboard.writeText(textToCopy).then(() => {
       const btn = document.getElementById("btnCopyData");
       const originalText = btn.textContent;
-      btn.textContent = "Copied!";
+      btn.textContent = "Berhasil Disalin!";
       btn.style.background = "var(--success)";
       
       setTimeout(() => {
@@ -1179,7 +1179,7 @@
         btn.style.background = "var(--neon)";
       }, 2000);
     }).catch(err => {
-      alert("Failed to copy: " + err);
+      alert("Gagal menyalin: " + err);
     });
   };
 
@@ -1187,8 +1187,8 @@
     document.getElementById("successModal").classList.remove("active");
     document.getElementById("customName").value = "";
     document.getElementById("addUsername").value = "";
-    document.getElementById("adminCustomName").value = "";
-    document.getElementById("adminAddUsername").value = "";
+    document.getElementById("amEmail").value = "";
+    document.getElementById("amLink").value = "";
   };
 
 </script>
