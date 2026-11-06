@@ -439,7 +439,7 @@
     </div>
     
     <div class="sidebar-footer">
-      <button class="logout-btn" onclick="doLogout()">Logout</button>
+      <button class="logout-btn" onclick="confirmLogout()">Logout</button>
     </div>
   </div>
 
@@ -597,7 +597,7 @@
     </div>
     
     <div class="header-right">
-      <button class="logout-btn" onclick="doLogout()" style="width: auto; padding: 8px 14px;">Logout</button>
+      <button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;">Logout</button>
     </div>
   </div>
 
@@ -639,6 +639,18 @@
     <div class="modal-actions">
       <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
       <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL KONFIRMASI LOGOUT -->
+<div id="logoutModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Konfirmasi Logout</h3>
+    <p>Apakah Anda yakin ingin keluar dari akun ini?</p>
+    <div class="modal-actions">
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('logoutModal').classList.remove('active')">Batal</button>
+      <button class="btn-modal btn-confirm" style="background: var(--danger);" onclick="executeLogout()">Ya, Logout</button>
     </div>
   </div>
 </div>
@@ -725,6 +737,17 @@
       sidebar.classList.remove('active');
       overlay.classList.remove('active');
     }
+  };
+
+  // --- LOGOUT CONFIRMATION ---
+  window.confirmLogout = () => {
+    toggleSidebar(false); // Tutup sidebar dulu
+    document.getElementById('logoutModal').classList.add('active');
+  };
+
+  window.executeLogout = () => {
+    document.getElementById('logoutModal').classList.remove('active');
+    signOut(auth);
   };
 
   // --- RIPPLE ANIMATION ---
@@ -833,8 +856,6 @@
       document.getElementById('btnLogin').disabled = false;
     }
   }
-
-  window.doLogout = () => signOut(auth);
 
   window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
   
