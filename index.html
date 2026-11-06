@@ -166,11 +166,14 @@
   .logout-btn { width: 100%; background: rgba(239,68,68,.1); color: #fca5a5; border: 1px solid rgba(239,68,68,.2); font-size: 13px; font-weight: 700; cursor: pointer; padding: 12px; border-radius: 10px; transition: all 0.2s; }
   .logout-btn:hover { background: var(--danger); color: white; }
   
-  /* Overlay untuk nutup sidebar */
+  /* Overlay */
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; opacity: 0; pointer-events: none; transition: 0.3s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
   .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
+  
+  /* Content Tab Settings */
+  #tabContentSettings { display: none; }
   
   #tabContentOrder, #adminTabContentOrder { display: none; }
   .wrapper-order { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
@@ -181,19 +184,14 @@
 
   .form-section { flex: 1; max-width: 460px; padding: 36px 32px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   
-  /* KATALOG GRID BARU (2 KOTAK) */
-  .catalog-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
-  }
+  .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
   .catalog-card {
     background: #0a0612; border: 1px solid var(--border); border-radius: 16px;
     padding: 20px; cursor: pointer; transition: all 0.3s; text-align: center;
     display: flex; flex-direction: column; align-items: center;
   }
   .catalog-card:hover { border-color: var(--neon); transform: translateY(-4px); box-shadow: 0 10px 20px -10px var(--neon-glow); }
-  .catalog-card img {
-    width: 100%; height: 100px; object-fit: contain; margin-bottom: 12px; border-radius: 8px;
-  }
+  .catalog-card img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 12px; border-radius: 8px; }
   .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; }
   
@@ -284,9 +282,6 @@
   .btn-confirm { background: var(--neon); color: #fff; }
   .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
 
-  /* =========================================
-     RESPONSIVE MOBILE (SIDEBAR FULL FIX)
-     ========================================= */
   @media (max-width: 900px) {
     html, body {
       background-image: 
@@ -343,18 +338,9 @@
 
     .hover-card:hover { transform: none; box-shadow: none; border-color: var(--border); }
 
-    /* --- PERBAIKAN SIDEBAR DI HP --- */
-    .sidebar {
-      width: 100%; /* Full width di HP */
-      right: -100%; 
-      padding: 20px 20px 40px 20px;
-      overflow-y: auto; /* Biar bisa di scroll */
-    }
+    .sidebar { width: 100%; right: -100%; padding: 20px 20px 40px 20px; overflow-y: auto; }
     .sidebar.active { right: 0; }
-    .sidebar-footer { 
-      margin-top: 40px; /* Jarak aman dari menu */
-      padding-bottom: 20px; /* Jarak aman dari bawah layar HP */
-    }
+    .sidebar-footer { margin-top: 40px; padding-bottom: 20px; }
   }
 </style>
 </head>
@@ -412,7 +398,6 @@
       </div>
       <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
       
-      <!-- BURGER MENU BUTTON -->
       <button class="burger-btn" onclick="toggleSidebar(true)">
         <span></span><span></span><span></span>
       </button>
@@ -436,6 +421,10 @@
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
         Katalog Produk
       </button>
+      <button class="sidebar-item" id="navSettings" onclick="switchMainTab('settings')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        Settings
+      </button>
     </div>
     
     <div class="sidebar-footer">
@@ -445,10 +434,9 @@
 
   <div class="main-container">
     
-    <!-- TAB CONTENT: DASHBOARD (USER) -->
+    <!-- TAB CONTENT: DASHBOARD -->
     <div id="tabContentDashboard">
       <div class="dashboard-grid">
-        
         <div class="dash-card hover-card">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
@@ -472,11 +460,10 @@
             <div class="skeleton skeleton-text" style="width: 50%;"></div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- TAB CONTENT: ORDER (USER) -->
+    <!-- TAB CONTENT: ORDER -->
     <div id="tabContentOrder">
       <div class="wrapper-order">
         <div class="info-section">
@@ -485,7 +472,6 @@
         </div>
         <div class="form-section hover-card">
           
-          <!-- KATALOG GRID BARU -->
           <div class="catalog-grid">
             <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
               <img src="/media/panel.png" alt="WA Bot Panel">
@@ -503,7 +489,6 @@
             </div>
           </div>
 
-          <!-- PRODUCT 1: WA BOT -->
           <div id="productWaBot" class="product-content active">
             <div class="tab-menu-inner">
               <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
@@ -555,9 +540,7 @@
             </form>
           </div>
 
-          <!-- PRODUCT 2: ALIGHT MOTION -->
           <div id="productAm" class="product-content">
-            
             <div id="amStep1">
               <div class="field">
                 <label>Email Alight Motion Kamu</label>
@@ -574,9 +557,45 @@
               </div>
               <button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);">Aktifkan Premium (Rp 5.000)</button>
             </div>
-
           </div>
 
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB CONTENT: SETTINGS -->
+    <div id="tabContentSettings">
+      <div class="wrapper-order">
+        <div class="info-section">
+          <h1>Account <br><span>Settings.</span></h1>
+          <p>Ubah email dan password akun Kitzune Store Anda.</p>
+        </div>
+        <div class="form-section hover-card">
+          
+          <!-- Form Ubah Email -->
+          <div class="field">
+            <label>Email Saat Ini</label>
+            <input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+          </div>
+          <div class="field">
+            <label>Email Baru</label>
+            <input type="email" id="newEmail" class="glass-input" placeholder="Masukkan email baru">
+          </div>
+          <button type="button" class="auth-btn am-btn" onclick="changeEmail(event)" style="background: var(--neon); margin-bottom: 24px;">Ubah Email</button>
+
+          <hr style="border: 1px solid var(--border); margin: 24px 0;">
+
+          <!-- Form Ubah Password -->
+          <div class="field">
+            <label>Password Baru</label>
+            <input type="password" id="newPassword" class="glass-input" placeholder="Masukkan password baru">
+          </div>
+          <div class="field">
+            <label>Konfirmasi Password Baru</label>
+            <input type="password" id="confirmNewPassword" class="glass-input" placeholder="Ulangi password baru">
+          </div>
+          <button type="button" class="auth-btn am-btn" onclick="changePassword(event)" style="background: var(--success);">Ubah Password</button>
+          
         </div>
       </div>
     </div>
@@ -694,7 +713,7 @@
 <!-- FIREBASE SDK & LOGIC -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
   import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -741,7 +760,7 @@
 
   // --- LOGOUT CONFIRMATION ---
   window.confirmLogout = () => {
-    toggleSidebar(false); // Tutup sidebar dulu
+    toggleSidebar(false);
     document.getElementById('logoutModal').classList.add('active');
   };
 
@@ -787,18 +806,24 @@
 
   // --- USER NAVIGATION ---
   window.switchMainTab = (tab) => {
-    toggleSidebar(false); // Tutup sidebar tiap pindah tab
+    toggleSidebar(false);
     document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+    
+    document.getElementById('tabContentDashboard').style.display = 'none';
+    document.getElementById('tabContentOrder').style.display = 'none';
+    document.getElementById('tabContentSettings').style.display = 'none';
     
     if (tab === 'dashboard') {
       document.getElementById('navDash').classList.add('active');
       document.getElementById('tabContentDashboard').style.display = 'block';
-      document.getElementById('tabContentOrder').style.display = 'none';
       loadUserDashboard(); 
-    } else {
+    } else if (tab === 'order') {
       document.getElementById('navOrder').classList.add('active');
-      document.getElementById('tabContentDashboard').style.display = 'none';
       document.getElementById('tabContentOrder').style.display = 'block';
+    } else if (tab === 'settings') {
+      document.getElementById('navSettings').classList.add('active');
+      document.getElementById('tabContentSettings').style.display = 'block';
+      document.getElementById('currentEmailDisplay').value = currentUser.email;
     }
   };
 
@@ -904,6 +929,70 @@
       document.getElementById('displayBalance').textContent = "Rp " + (docSnap.data().balance || 0).toLocaleString();
     }
   }
+
+  // --- ACCOUNT SETTINGS (CHANGE EMAIL & PASSWORD) ---
+  window.changeEmail = async (event) => {
+    const newEmail = document.getElementById('newEmail').value.trim();
+    if (!newEmail) { showAlert("Masukkan email baru!"); return; }
+
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Memproses...";
+
+    try {
+      await updateEmail(currentUser, newEmail);
+      
+      // Update email di database Firestore juga
+      const docRef = doc(db, "users", currentUser.uid);
+      await updateDoc(docRef, { email: newEmail });
+
+      showAlert("Email berhasil diubah! Silakan login ulang jika diperlukan.", "Berhasil");
+      document.getElementById('newEmail').value = "";
+      document.getElementById('currentEmailDisplay').value = newEmail;
+      
+      // Firebase kadang butuh re-login buat sinkron, kita logout aja biar aman
+      setTimeout(() => signOut(auth), 3000);
+
+    } catch (error) {
+      if (error.code === 'auth/requires-recent-login') {
+        showAlert("Sesi Anda sudah lama. Silakan logout lalu login kembali untuk mengubah email.", "Perlu Login Ulang");
+      } else {
+        showAlert(error.message, "Gagal");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Ubah Email";
+    }
+  };
+
+  window.changePassword = async (event) => {
+    const newPass = document.getElementById('newPassword').value;
+    const confirmPass = document.getElementById('confirmNewPassword').value;
+    
+    if (!newPass || !confirmPass) { showAlert("Password tidak boleh kosong!"); return; }
+    if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; }
+    if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; }
+
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Memproses...";
+
+    try {
+      await updatePassword(currentUser, newPass);
+      showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
+      document.getElementById('newPassword').value = "";
+      document.getElementById('confirmNewPassword').value = "";
+    } catch (error) {
+      if (error.code === 'auth/requires-recent-login') {
+        showAlert("Sesi Anda sudah lama. Silakan logout lalu login kembali untuk mengubah password.", "Perlu Login Ulang");
+      } else {
+        showAlert(error.message, "Gagal");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Ubah Password";
+    }
+  };
 
   // --- USER DASHBOARD ---
   async function loadUserDashboard() {
