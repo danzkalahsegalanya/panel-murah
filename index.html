@@ -1079,7 +1079,7 @@
     const confirmBtn = document.querySelector("#confirmModal .btn-confirm");
     confirmBtn.onclick = async () => {
       document.getElementById("confirmModal").classList.remove('active');
-      const btn = event.target;
+      const btn = document.getElementById("amBtnActivate");
       btn.disabled = true;
       btn.textContent = "Memverifikasi...";
 
@@ -1109,7 +1109,7 @@
 
           showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.", "Berhasil!");
           loadUserDashboard();
-          switchMainTab('dashboard');
+          switchMainTab('dashboard'); // Balik ke dashboard otomatis
         } else {
           showAlert("Gagal Verifikasi: " + data.why, "Gagal");
         }
