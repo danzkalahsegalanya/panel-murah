@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kitzune Store - Premium WhatsApp Bot Panel</title>
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- OPEN GRAPH (BIAR MUNCUL GAMBAR DI WA) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kitzunemarket.biz.id/">
+<meta property="og:title" content="Kitzune Store - Panel Murah & Cepat">
+<meta property="og:description" content="Bikin Bot WA Tanpa Batas. Unlimited cuma Rp 2.000 aja! Proses otomatis, langsung jadi.">
+<meta property="og:image" content="https://kitzunemarket.biz.id/banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- TWITTER CARD (OPSIONAL) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kitzune Store - Panel Murah & Cepat">
+<meta name="twitter:description" content="Bikin Bot WA Tanpa Batas. Unlimited cuma Rp 2.000 aja!">
+<meta name="twitter:image" content="https://kitzunemarket.biz.id/banner.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -135,7 +151,7 @@
   .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
   
   /* TAB CONTENT: ORDER */
-  #tabContentOrder { display: none; }
+  #tabContentOrder, #adminTabContentOrder { display: none; }
   .wrapper-order { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
   .info-section { flex: 1; max-width: 520px; }
   .info-section h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
@@ -169,7 +185,7 @@
   button[type="submit"]:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   
   /* TAB CONTENT: DASHBOARD */
-  #tabContentDashboard { display: block; }
+  #tabContentDashboard, #adminTabContentDashboard { display: block; }
   .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   .dash-card { padding: 24px; border-radius: 16px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   .dash-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px; }
@@ -382,7 +398,7 @@
     </div>
 
     <!-- TAB CONTENT: ORDER (USER) -->
-    <div id="tabContentOrder" style="display: none;">
+    <div id="tabContentOrder">
       <div class="wrapper-order">
         <div class="info-section">
           <h1>Build Your WA Bot <br><span>Without Limits.</span></h1>
@@ -484,7 +500,7 @@
     </div>
 
     <!-- TAB CONTENT: ADMIN ORDER (TEST) -->
-    <div id="adminTabContentOrder" style="display: none;">
+    <div id="adminTabContentOrder">
       <div class="wrapper-order">
         <div class="info-section">
           <h1>Test Order <br><span>As Admin.</span></h1>
@@ -618,7 +634,7 @@
   let pendingOrder = null;
   let currentMode = "new"; 
   let currentAdminMode = "new";
-  let isAdminTest = false; // Flag buat bedain orderan admin/user
+  let isAdminTest = false; 
 
   // --- RIPPLE ANIMATION ---
   window.createRipple = function(event) {
@@ -771,7 +787,7 @@
       if (user.email === ADMIN_EMAIL) {
         document.getElementById('adminApp').style.display = 'flex';
         document.getElementById('mainApp').style.display = 'none';
-        switchAdminTab('dashboard'); // Default admin ke dashboard
+        switchAdminTab('dashboard');
       } else {
         document.getElementById('mainApp').style.display = 'flex';
         document.getElementById('adminApp').style.display = 'none';
@@ -1047,7 +1063,7 @@
       mode: currentAdminMode,
       username: finalUsername,
       ram: ramEl.value,
-      harga: 0, // Gratis buat admin test
+      harga: 0, 
       docRef: null,
       saldo: 0
     };
@@ -1083,7 +1099,6 @@
         throw new Error(data.error || "Failed to process.");
       }
 
-      // Kalau bukan admin test, potong saldo & simpan riwayat
       if (!isAdminTest) {
         await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
         await updateUserBalanceUI(currentUser.uid);
@@ -1124,7 +1139,7 @@
     } finally {
       btn.disabled = false;
       btn.textContent = isAdminTest ? (currentAdminMode === 'new' ? "Test Buy Panel (Free)" : "Test Add Server (Free)") : (currentMode === 'new' ? "Buy Panel" : "Add Server");
-      isAdminTest = false; // Reset flag
+      isAdminTest = false;
     }
   };
 
