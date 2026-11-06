@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kitzune Store - Premium WhatsApp Bot Panel</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -94,7 +95,7 @@
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
   /* === MAIN APP === */
-  #mainApp { display: none; flex-direction: column; min-height: 100vh; }
+  #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   
   /* HEADER */
   .top-header {
@@ -196,7 +197,6 @@
   .history-date { font-size: 11px; color: #64748b; }
 
   /* === ADMIN DASHBOARD === */
-  #adminApp { display: none; padding: 40px 20px; max-width: 1100px; margin: 0 auto; min-height: 100vh; }
   .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
   .admin-header h1 { font-size: 28px; font-weight: 800; color: var(--neon); }
   .table-card { border-radius: 16px; padding: 24px; overflow-x: auto; background: var(--card); border: 1px solid var(--border); }
@@ -319,7 +319,7 @@
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- MAIN APP (USER) -->
 <div id="mainApp">
   <div class="top-header">
     <div class="profile-card">
@@ -342,13 +342,13 @@
 
   <div class="main-container">
     
-    <!-- NAVIGATION MENU -->
+    <!-- NAVIGATION MENU (USER) -->
     <div class="nav-menu">
       <button class="nav-btn active" id="navDash" onclick="switchMainTab('dashboard')">Dashboard</button>
       <button class="nav-btn" id="navOrder" onclick="switchMainTab('order')">Buy Panel</button>
     </div>
 
-    <!-- TAB CONTENT: DASHBOARD -->
+    <!-- TAB CONTENT: DASHBOARD (USER) -->
     <div id="tabContentDashboard">
       <div class="dashboard-grid">
         
@@ -381,7 +381,7 @@
       </div>
     </div>
 
-    <!-- TAB CONTENT: ORDER -->
+    <!-- TAB CONTENT: ORDER (USER) -->
     <div id="tabContentOrder" style="display: none;">
       <div class="wrapper-order">
         <div class="info-section">
@@ -448,17 +448,98 @@
 
 <!-- ADMIN APP -->
 <div id="adminApp">
-  <div class="admin-header">
-    <h1>Admin Dashboard</h1>
-    <button class="logout-btn" onclick="doLogout()">Logout</button>
+  <!-- HEADER ADMIN -->
+  <div class="top-header">
+    <div class="profile-card">
+      <div class="avatar" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
+      <div class="profile-info">
+        <span>Logged in as</span>
+        <strong>Administrator</strong>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
   </div>
-  <div class="table-card hover-card">
-    <h3>User List</h3>
-    <br>
-    <table>
-      <thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead>
-      <tbody id="userTableBody"></tbody>
-    </table>
+
+  <div class="main-container">
+    
+    <!-- NAVIGATION MENU (ADMIN) -->
+    <div class="nav-menu">
+      <button class="nav-btn active" id="adminNavDash" onclick="switchAdminTab('dashboard')">Admin Dashboard</button>
+      <button class="nav-btn" id="adminNavOrder" onclick="switchAdminTab('order')">Buy Panel (Test)</button>
+    </div>
+
+    <!-- TAB CONTENT: ADMIN DASHBOARD -->
+    <div id="adminTabContentDashboard">
+      <div class="admin-header">
+        <h1>User Management</h1>
+      </div>
+      <div class="table-card hover-card">
+        <h3>User List</h3>
+        <br>
+        <table>
+          <thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead>
+          <tbody id="userTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB CONTENT: ADMIN ORDER (TEST) -->
+    <div id="adminTabContentOrder" style="display: none;">
+      <div class="wrapper-order">
+        <div class="info-section">
+          <h1>Test Order <br><span>As Admin.</span></h1>
+          <p>You can test the purchase flow here. Saldo admin tidak akan terpotong.</p>
+        </div>
+        <div class="form-section hover-card">
+          
+          <div class="tab-menu-inner">
+            <button type="button" class="tab-btn-inner active" id="adminTabNew" onclick="switchAdminOrderTab('new')">New Panel</button>
+            <button type="button" class="tab-btn-inner" id="adminTabAdd" onclick="switchAdminOrderTab('addserver')">Add Server</button>
+          </div>
+
+          <form id="adminOrderForm">
+            
+            <div class="field" id="adminFieldName">
+              <label>Panel Name (No Spaces)</label>
+              <input type="text" id="adminCustomName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+            </div>
+
+            <div class="field" id="adminFieldAddUser" style="display: none;">
+              <label>Your Panel Username</label>
+              <div class="input-group">
+                <input type="text" id="adminAddUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+                <span class="suffix">@kitzunemarket.com</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Node.js Version</label>
+              <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+            </div>
+            
+            <div class="field">
+              <label>Select RAM Capacity</label>
+              <div class="ram-grid">
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar1" value="1GB" checked><label for="ar1"><span class="ram-name">1 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar2" value="2GB"><label for="ar2"><span class="ram-name">2 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar3" value="3GB"><label for="ar3"><span class="ram-name">3 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar4" value="4GB"><label for="ar4"><span class="ram-name">4 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar5" value="5GB"><label for="ar5"><span class="ram-name">5 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar6" value="6GB"><label for="ar6"><span class="ram-name">6 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar7" value="7GB"><label for="ar7"><span class="ram-name">7 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar8" value="8GB"><label for="ar8"><span class="ram-name">8 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar9" value="9GB"><label for="ar9"><span class="ram-name">9 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="ar10" value="10GB"><label for="ar10"><span class="ram-name">10 GB</span><span class="price-new">Test</span></label></div>
+                <div class="ram-item"><input type="radio" name="adminRam" id="arunli" value="Unlimited"><label for="arunli"><span class="ram-name">Unli</span><span class="price-new">Test</span></label></div>
+              </div>
+            </div>
+            
+            <button type="submit" id="adminSubmitBtn" style="background: var(--danger); color: white;" onclick="createRipple(event)">Test Buy Panel (Free)</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -536,6 +617,8 @@
   let currentUser = null;
   let pendingOrder = null;
   let currentMode = "new"; 
+  let currentAdminMode = "new";
+  let isAdminTest = false; // Flag buat bedain orderan admin/user
 
   // --- RIPPLE ANIMATION ---
   window.createRipple = function(event) {
@@ -559,6 +642,7 @@
     document.getElementById('regError').style.display = 'none';
   }
 
+  // --- USER NAVIGATION ---
   window.switchMainTab = (tab) => {
     if (tab === 'dashboard') {
       document.getElementById('navDash').classList.add('active');
@@ -595,6 +679,40 @@
     }
   }
 
+  // --- ADMIN NAVIGATION ---
+  window.switchAdminTab = (tab) => {
+    if (tab === 'dashboard') {
+      document.getElementById('adminNavDash').classList.add('active');
+      document.getElementById('adminNavOrder').classList.remove('active');
+      document.getElementById('adminTabContentDashboard').style.display = 'block';
+      document.getElementById('adminTabContentOrder').style.display = 'none';
+      loadAdminData();
+    } else {
+      document.getElementById('adminNavDash').classList.remove('active');
+      document.getElementById('adminNavOrder').classList.add('active');
+      document.getElementById('adminTabContentDashboard').style.display = 'none';
+      document.getElementById('adminTabContentOrder').style.display = 'block';
+    }
+  };
+
+  window.switchAdminOrderTab = (mode) => {
+    currentAdminMode = mode;
+    if (mode === 'new') {
+      document.getElementById('adminTabNew').classList.add('active');
+      document.getElementById('adminTabAdd').classList.remove('active');
+      document.getElementById('adminFieldName').style.display = 'block';
+      document.getElementById('adminFieldAddUser').style.display = 'none';
+      document.getElementById('adminSubmitBtn').textContent = "Test Buy Panel";
+    } else {
+      document.getElementById('adminTabNew').classList.remove('active');
+      document.getElementById('adminTabAdd').classList.add('active');
+      document.getElementById('adminFieldName').style.display = 'none';
+      document.getElementById('adminFieldAddUser').style.display = 'block';
+      document.getElementById('adminSubmitBtn').textContent = "Test Add Server";
+    }
+  };
+
+  // --- AUTH LOGIC ---
   window.doRegister = async (event) => {
     if(event) createRipple(event);
     const email = document.getElementById('regEmail').value.trim();
@@ -651,9 +769,9 @@
       document.getElementById('authScreen').style.display = 'none';
 
       if (user.email === ADMIN_EMAIL) {
-        document.getElementById('adminApp').style.display = 'block';
+        document.getElementById('adminApp').style.display = 'flex';
         document.getElementById('mainApp').style.display = 'none';
-        loadAdminData();
+        switchAdminTab('dashboard'); // Default admin ke dashboard
       } else {
         document.getElementById('mainApp').style.display = 'flex';
         document.getElementById('adminApp').style.display = 'none';
@@ -682,10 +800,10 @@
     }
   }
 
+  // --- USER DASHBOARD ---
   async function loadUserDashboard() {
     if (!currentUser) return;
 
-    // Skeleton Loading Simulation
     document.getElementById('listPanelAktif').innerHTML = `
       <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
       <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
@@ -708,7 +826,6 @@
       let docs = querySnapshot.docs.map(d => d.data());
       docs.sort((a, b) => b.createdAt - a.createdAt);
 
-      // Ambil daftar username panel buat di cek ke Pterodactyl
       let panelUsernames = docs.filter(d => {
         const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
         return (30 - daysPassed) > 0;
@@ -716,7 +833,6 @@
 
       let serverStatus = {};
       
-      // --- PANGGIL BACKEND BUAT CEK STATUS REAL-TIME ---
       if (panelUsernames.length > 0) {
         try {
           const checkRes = await fetch('/api/check-panel', {
@@ -736,7 +852,6 @@
       }
 
       docs.forEach(data => {
-        // Render Riwayat
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
@@ -750,7 +865,6 @@
           </div>
         `;
 
-        // Render List Panel (Masa Aktif 30 Hari)
         const now = Date.now();
         const msInDay = 24 * 60 * 60 * 1000;
         const daysPassed = Math.floor((now - data.createdAt) / msInDay);
@@ -758,8 +872,6 @@
 
         if (daysLeft > 0) {
           totalPanel++;
-          
-          // Cek apakah server masih ada di Pterodactyl
           const isExists = serverStatus[data.namaPanel] !== false; 
 
           if (isExists) {
@@ -779,7 +891,6 @@
               </div>
             `;
           } else {
-            // Kalau udah dihapus di Pterodactyl
             htmlPanel += `
               <div class="panel-list-item" style="opacity: 0.6;">
                 <div class="panel-details">
@@ -823,7 +934,7 @@
     });
   };
 
-  // --- FUNGSI ADMIN ---
+  // --- ADMIN DASHBOARD (USER TABLE) ---
   async function loadAdminData() {
     const querySnapshot = await getDocs(collection(db, "users"));
     const tbody = document.getElementById('userTableBody');
@@ -856,7 +967,7 @@
     loadAdminData();
   }
 
-  // --- ORDER LOGIC ---
+  // --- USER ORDER LOGIC ---
   const orderForm = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
 
@@ -909,10 +1020,48 @@
     document.getElementById("confirmModal").classList.add("active");
   });
 
+  // --- ADMIN TEST ORDER LOGIC ---
+  const adminOrderForm = document.getElementById("adminOrderForm");
+
+  adminOrderForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!currentUser) return;
+
+    let finalUsername = "";
+    let displayConfirm = "";
+
+    if (currentAdminMode === 'new') {
+      finalUsername = document.getElementById("adminCustomName").value.trim();
+      if (!finalUsername) { alert("Panel name is required!"); return; }
+      displayConfirm = `[ADMIN TEST] Are you sure to buy <b>New Panel</b> with name <b>"${finalUsername}"</b>?`;
+    } else {
+      finalUsername = document.getElementById("adminAddUsername").value.trim();
+      if (!finalUsername) { alert("Username is required!"); return; }
+      displayConfirm = `[ADMIN TEST] Are you sure to <b>Add Server</b> to account <b>"${finalUsername}@kitzunemarket.com"</b>?`;
+    }
+
+    const ramEl = adminOrderForm.querySelector('input[name="adminRam"]:checked');
+    
+    isAdminTest = true;
+    pendingOrder = {
+      mode: currentAdminMode,
+      username: finalUsername,
+      ram: ramEl.value,
+      harga: 0, // Gratis buat admin test
+      docRef: null,
+      saldo: 0
+    };
+
+    document.getElementById("confirmText").innerHTML = 
+      `${displayConfirm}<br>RAM Package <b>${ramEl.value}</b>. (This is a free test).`;
+    document.getElementById("confirmModal").classList.add("active");
+  });
+
+  // --- EXECUTE PURCHASE (USER & ADMIN) ---
   window.executePurchase = async () => {
     document.getElementById("confirmModal").classList.remove("active");
     
-    const btn = document.getElementById("submitBtn");
+    const btn = isAdminTest ? document.getElementById("adminSubmitBtn") : document.getElementById("submitBtn");
     btn.disabled = true;
     btn.textContent = "Processing...";
 
@@ -922,7 +1071,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           mode: pendingOrder.mode,
-          email: currentUser.email, 
+          email: isAdminTest ? "admin@test.com" : currentUser.email, 
           username: pendingOrder.username,
           ram: pendingOrder.ram
         })
@@ -934,18 +1083,21 @@
         throw new Error(data.error || "Failed to process.");
       }
 
-      await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
-      await updateUserBalanceUI(currentUser.uid);
+      // Kalau bukan admin test, potong saldo & simpan riwayat
+      if (!isAdminTest) {
+        await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
+        await updateUserBalanceUI(currentUser.uid);
 
-      await setDoc(doc(collection(db, "transactions")), {
-        uid: currentUser.uid,
-        email: currentUser.email,
-        mode: pendingOrder.mode,
-        namaPanel: pendingOrder.username,
-        ram: pendingOrder.ram,
-        harga: pendingOrder.harga,
-        createdAt: Date.now()
-      });
+        await setDoc(doc(collection(db, "transactions")), {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          mode: pendingOrder.mode,
+          namaPanel: pendingOrder.username,
+          ram: pendingOrder.ram,
+          harga: pendingOrder.harga,
+          createdAt: Date.now()
+        });
+      }
 
       document.getElementById("resUsername").textContent = data.username;
       
@@ -962,14 +1114,17 @@
 
       document.getElementById("successModal").classList.add("active");
 
-      loadUserDashboard();
-      switchMainTab('dashboard');
+      if (!isAdminTest) {
+        loadUserDashboard();
+        switchMainTab('dashboard');
+      }
 
     } catch (error) {
       alert("Error: " + error.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = currentMode === 'new' ? "Buy Panel" : "Add Server";
+      btn.textContent = isAdminTest ? (currentAdminMode === 'new' ? "Test Buy Panel (Free)" : "Test Add Server (Free)") : (currentMode === 'new' ? "Buy Panel" : "Add Server");
+      isAdminTest = false; // Reset flag
     }
   };
 
@@ -1002,6 +1157,8 @@
     document.getElementById("successModal").classList.remove("active");
     document.getElementById("customName").value = "";
     document.getElementById("addUsername").value = "";
+    document.getElementById("adminCustomName").value = "";
+    document.getElementById("adminAddUsername").value = "";
   };
 
 </script>
