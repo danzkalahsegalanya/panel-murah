@@ -910,7 +910,7 @@
   }
 
   window.managePanel = (type, val) => {
-    if (type === 'am') return; // AM gak butuh manage link
+    if (type === 'am') return; 
     const textToCopy = `${val}@kitzunemarket.com`;
     navigator.clipboard.writeText(textToCopy).then(() => {
       window.open("https://srv2.cristall.my.id", "_blank");
@@ -1040,8 +1040,8 @@
   };
 
   window.verifyAmLink = async (event) => {
-    const link = document.getElementById("amLink").value.trim();
-    if (!link) { alert("Paste link verifikasinya dulu!"); return; }
+    const linkInput = document.getElementById("amLink").value.trim();
+    if (!linkInput) { alert("Paste link verifikasinya dulu!"); return; }
 
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
@@ -1060,10 +1060,11 @@
     btn.textContent = "Memverifikasi...";
 
     try {
+      // PENTING: Variabel 'link' diganti jadi 'verifyUrl' biar gak bentrok sama backend
       const res = await fetch('/api/am-automation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'verify', email: pendingAmEmail, link: link })
+        body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
       });
       const data = await res.json();
 
