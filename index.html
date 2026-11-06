@@ -12,7 +12,6 @@
   :root {
     --bg: #05080f; 
     --card: #0b101c;
-    --card-mobile: rgba(11, 16, 28, 0.98); /* Lebih solid di HP */
     --border: #1a2338;
     --text: #f0f4f8; 
     --muted: #8492b0;
@@ -29,7 +28,6 @@
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
     
-    /* BACKGROUND GAMBAR */
     background-image: 
       linear-gradient(to bottom, rgba(5, 8, 15, 0.75), rgba(5, 8, 15, 0.9)),
       url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
@@ -200,45 +198,55 @@
   .btn-confirm { background: var(--neon); color: #001a1f; }
 
   /* =========================================
-     RESPONSIVE MOBILE (PERBAIKAN UTAMA)
+     RESPONSIVE MOBILE (PERBAIKAN HEADER)
      ========================================= */
   @media (max-width: 900px) {
-    /* Overlay background lebih gelap biar teks di HP kebaca */
     html, body {
       background-image: 
-        linear-gradient(to bottom, rgba(5, 8, 15, 0.9), rgba(5, 8, 15, 0.98)),
+        linear-gradient(to bottom, rgba(5, 8, 15, 0.95), rgba(5, 8, 15, 0.98)),
         url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
     }
 
     .auth-brand { display: none; } 
+    .auth-box { background: var(--card); padding: 30px 24px; }
     
-    .auth-box { background: var(--card-mobile); padding: 30px 24px; }
+    /* HEADER HP DIBIKIN SATU BARIS TIPIS */
+    .top-header { 
+      flex-direction: row; 
+      padding: 12px 16px; 
+      gap: 8px;
+    }
+    .profile-card { gap: 8px; }
+    .avatar { width: 32px; height: 32px; font-size: 14px; }
+    .profile-info span { display: none; } /* Sembunyikan tulisan "Logged in as" */
+    .profile-info strong { font-size: 13px; }
+    .logout-btn { padding: 6px 10px; font-size: 11px; margin-left: 4px; }
+
+    .header-right { gap: 8px; }
+    .balance-info span { display: none; } /* Sembunyikan "My Balance" */
+    .balance-info strong { font-size: 14px; }
+    .topup-btn { padding: 6px 12px; font-size: 11px; }
     
-    .top-header { flex-direction: column; gap: 16px; padding: 16px; }
-    .profile-card, .header-right { width: 100%; justify-content: space-between; }
+    .main-container { padding: 16px; }
+    .nav-menu { width: 100%; justify-content: center; margin-bottom: 16px; }
+    .nav-btn { flex: 1; text-align: center; padding: 10px; font-size: 12.5px; }
     
-    .main-container { padding: 24px 16px; }
-    .wrapper-order { flex-direction: column; gap: 24px; }
+    .wrapper-order { flex-direction: column; gap: 20px; }
+    .info-section h1 { font-size: 28px; text-align: center; margin-bottom: 8px; }
+    .info-section p { font-size: 13px; text-align: center; margin-bottom: 10px; }
     
-    .info-section h1 { font-size: 32px; text-align: center; }
-    .info-section p { font-size: 14px; text-align: center; margin-bottom: 0; }
-    
-    /* Card form lebih solid di HP */
-    .form-section { width: 100%; background: var(--card-mobile); padding: 24px 20px; }
-    .dash-card { background: var(--card-mobile); padding: 20px 16px; }
+    .form-section { width: 100%; padding: 24px 16px; }
+    .dash-card { padding: 20px 16px; }
     
     .dashboard-grid { grid-template-columns: 1fr; gap: 16px; }
     
-    /* Font & Grid RAM di HP */
     .ram-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .ram-item .ram-name { font-size: 12.5px; }
+    .ram-item .ram-name { font-size: 12px; }
     .ram-item .price-new { font-size: 10px; }
     
-    .nav-menu { width: 100%; justify-content: center; }
-    .nav-btn { flex: 1; text-align: center; }
-    
-    .panel-list-item { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .panel-actions { width: 100%; justify-content: space-between; }
+    /* Panel List di HP */
+    .panel-list-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .panel-actions { width: 100%; justify-content: space-between; margin-top: 8px; }
     
     .admin-header { flex-direction: column; gap: 16px; align-items: flex-start; }
     .table-card { padding: 16px; }
