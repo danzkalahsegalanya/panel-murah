@@ -390,15 +390,17 @@
   .music-ctrl-btn {
     width: 38px; height: 38px; border-radius: 50%;
     background: #06030a; border: 1px solid var(--border); color: #fff;
-    cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: all 0.2s;
   }
   .music-ctrl-btn:hover { background: var(--neon-soft); border-color: var(--neon); color: var(--neon); }
   .music-ctrl-play {
     width: 48px; height: 48px; background: var(--neon); border-color: var(--neon-hover);
-    font-size: 18px; box-shadow: 0 4px 15px var(--neon-glow);
+    box-shadow: 0 4px 15px var(--neon-glow);
   }
   .music-ctrl-play:hover { background: var(--neon-hover); color: #fff; }
+  .music-ctrl-btn svg { width: 16px; height: 16px; }
+  .music-ctrl-play svg { width: 20px; height: 20px; }
 
   .music-progress-wrap { margin-bottom: 14px; }
   .music-progress { width: 100%; height: 4px; -webkit-appearance: none; appearance: none; background: #23153a; border-radius: 2px; outline: none; cursor: pointer; }
@@ -406,7 +408,8 @@
   .music-progress::-moz-range-thumb { width: 12px; height: 12px; background: var(--neon); border-radius: 50%; cursor: pointer; border: none; }
   .music-time { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted); margin-top: 6px; font-family: monospace; }
 
-  .music-volume-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 14px; }
+  .music-volume-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: var(--muted); }
+  .music-volume-wrap svg { width: 14px; height: 14px; }
   .music-volume { flex: 1; height: 4px; -webkit-appearance: none; appearance: none; background: #23153a; border-radius: 2px; outline: none; cursor: pointer; }
   .music-volume::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; background: var(--success); border-radius: 50%; cursor: pointer; }
   .music-volume::-moz-range-thumb { width: 12px; height: 12px; background: var(--success); border-radius: 50%; cursor: pointer; border: none; }
@@ -778,6 +781,7 @@
 <!-- ============ MUSIC PLAYER ============ -->
 <div class="music-player" id="musicPlayer">
   <audio id="bgmAudio" loop></audio>
+  
   <button class="music-toggle" id="musicToggle" onclick="toggleMusicPanel()" title="Music">
     <svg id="musicIconPlay" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
@@ -787,7 +791,7 @@
 
   <div class="music-panel" id="musicPanel">
     <div class="music-panel-header">
-      <h4>🎵 Now Playing</h4>
+      <h4>NOW PLAYING</h4>
       <button onclick="toggleMusicPanel()" class="music-close">&times;</button>
     </div>
     <div class="music-now">
@@ -795,9 +799,19 @@
       <div class="music-sub" id="musicSub">Kitzune Store Playlist</div>
     </div>
     <div class="music-controls">
-      <button onclick="prevTrack()" class="music-ctrl-btn" title="Prev">⏮</button>
-      <button onclick="togglePlay()" class="music-ctrl-btn music-ctrl-play" id="playBtn" title="Play/Pause">▶</button>
-      <button onclick="nextTrack()" class="music-ctrl-btn" title="Next">⏭</button>
+      <!-- Prev Icon -->
+      <button onclick="prevTrack()" class="music-ctrl-btn" title="Prev">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+      <!-- Play/Pause Icon -->
+      <button onclick="togglePlay()" class="music-ctrl-btn music-ctrl-play" id="playBtn" title="Play/Pause">
+        <svg viewBox="0 0 24 24" fill="currentColor" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" id="pauseIcon" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <!-- Next Icon -->
+      <button onclick="nextTrack()" class="music-ctrl-btn" title="Next">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
     </div>
     <div class="music-progress-wrap">
       <input type="range" id="musicProgress" class="music-progress" value="0" min="0" max="100" step="0.1" oninput="seekMusic(this.value)">
@@ -807,7 +821,7 @@
       </div>
     </div>
     <div class="music-volume-wrap">
-      <span>🔊</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
       <input type="range" id="musicVolume" class="music-volume" min="0" max="100" value="50" oninput="setVolume(this.value)">
     </div>
     <div class="music-playlist" id="musicPlaylist"></div>
@@ -1459,7 +1473,7 @@
             <div class="panel-list-item">
               <div class="panel-details">
                 <h4>Alight Motion</h4>
-                <p>1 Tahun • ${data.emailAm}</p>
+                <p>1 Tahun - ${data.emailAm}</p>
               </div>
               <div class="panel-actions">
                 <div class="panel-status status-am">Active</div>
@@ -1482,7 +1496,7 @@
                 <div class="panel-list-item">
                   <div class="panel-details">
                     <h4>${data.namaPanel}</h4>
-                    <p>${data.ram} • Sisa ${daysLeft} Hari</p>
+                    <p>${data.ram} - Sisa ${daysLeft} Hari</p>
                   </div>
                   <div class="panel-actions">
                     <div class="panel-status status-active">Active</div>
@@ -1495,7 +1509,7 @@
                 <div class="panel-list-item" style="opacity: 0.6;">
                   <div class="panel-details">
                     <h4 style="text-decoration: line-through;">${data.namaPanel}</h4>
-                    <p>${data.ram} • Deleted by Admin</p>
+                    <p>${data.ram} - Deleted by Admin</p>
                   </div>
                   <div class="panel-actions">
                     <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div>
@@ -1818,7 +1832,8 @@
   ];
   let currentTrackIndex = 0;
   const bgmAudio = document.getElementById('bgmAudio');
-  const playBtn = document.getElementById('playBtn');
+  const playIcon = document.getElementById('playIcon');
+  const pauseIcon = document.getElementById('pauseIcon');
   const musicTitle = document.getElementById('musicTitle');
   const musicSub = document.getElementById('musicSub');
   const musicPlaylist = document.getElementById('musicPlaylist');
@@ -1833,7 +1848,7 @@
     playlist.forEach((track, i) => {
       const el = document.createElement('div');
       el.className = 'music-track' + (i === currentTrackIndex ? ' active' : '');
-      el.innerHTML = `<span class="music-track-name">${track.title}</span><span class="music-track-icon">${i === currentTrackIndex ? '▶' : ''}</span>`;
+      el.innerHTML = `<span class="music-track-name">${track.title}</span><span class="music-track-icon">${i === currentTrackIndex ? 'PLAYING' : ''}</span>`;
       el.onclick = () => loadTrack(i);
       musicPlaylist.appendChild(el);
     });
@@ -1858,12 +1873,14 @@
   window.togglePlay = () => {
     if (bgmAudio.paused) {
       bgmAudio.play();
-      playBtn.textContent = '⏸';
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'block';
       musicEq.style.display = 'flex';
       musicIcon.style.display = 'none';
     } else {
       bgmAudio.pause();
-      playBtn.textContent = '▶';
+      playIcon.style.display = 'block';
+      pauseIcon.style.display = 'none';
       musicEq.style.display = 'none';
       musicIcon.style.display = 'block';
     }
@@ -1872,7 +1889,8 @@
   window.nextTrack = () => {
     loadTrack((currentTrackIndex + 1) % playlist.length);
     bgmAudio.play();
-    playBtn.textContent = '⏸';
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
     musicEq.style.display = 'flex';
     musicIcon.style.display = 'none';
   };
@@ -1880,7 +1898,8 @@
   window.prevTrack = () => {
     loadTrack((currentTrackIndex - 1 + playlist.length) % playlist.length);
     bgmAudio.play();
-    playBtn.textContent = '⏸';
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
     musicEq.style.display = 'flex';
     musicIcon.style.display = 'none';
   };
