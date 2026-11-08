@@ -42,26 +42,63 @@
     -webkit-user-select: none; -moz-user-select: none; user-select: none;
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
-    
-    background-image: 
-      linear-gradient(to bottom, rgba(8, 5, 15, 0.8), rgba(8, 5, 15, 0.95)),
-      url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
   }
 
+  /* === ANIMASI BACKGROUND AURORA === */
+  .bg-aurora {
+    position: fixed; inset: 0; z-index: -1; overflow: hidden;
+    background: var(--bg);
+  }
+  .bg-aurora::before, .bg-aurora::after {
+    content: ''; position: absolute; width: 60vw; height: 60vw;
+    border-radius: 50%; filter: blur(120px); opacity: 0.15;
+    animation: floatBlob 20s infinite alternate ease-in-out;
+  }
+  .bg-aurora::before {
+    background: var(--neon); top: -10%; left: -10%;
+  }
+  .bg-aurora::after {
+    background: #5a00e0; bottom: -10%; right: -10%;
+    animation-delay: -10s; animation-duration: 25s;
+  }
+  @keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.2); }
+  }
+
+  /* === ANIMASI MASUK (STAGGERED) === */
+  .animate-in {
+    opacity: 0; transform: translateY(20px);
+    animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .animate-in.delay-1 { animation-delay: 0.1s; }
+  .animate-in.delay-2 { animation-delay: 0.2s; }
+  .animate-in.delay-3 { animation-delay: 0.3s; }
+
+  @keyframes slideUpFade {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === HOVER & CLICK EFFECTS === */
   .hover-card { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
   .hover-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) scale(1.01);
     box-shadow: 0 10px 30px -10px var(--neon-glow);
     border-color: rgba(157, 0, 255, 0.5);
   }
 
-  button { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-  button:active { transform: scale(0.96) !important; }
+  button, .auth-btn, .btn-manage, .btn-modal, .topup-btn {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  button:hover, .auth-btn:hover, .btn-manage:hover, .btn-modal:hover, .topup-btn:hover {
+    box-shadow: 0 0 20px -5px var(--neon-glow);
+    transform: translateY(-2px);
+  }
+  button:active, .auth-btn:active, .btn-manage:active, .btn-modal:active, .topup-btn:active {
+    transform: scale(0.95) !important;
+  }
 
+  /* === SKELETON PULSE === */
   .skeleton {
     background: #1f1530;
     background-image: linear-gradient(90deg, #1f1530 0px, #3a2559 40px, #1f1530 80px);
@@ -70,10 +107,9 @@
     border-radius: 8px;
   }
   @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-  .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
-  .skeleton-text.short { width: 60%; }
 
-  #authScreen { position: fixed; inset: 0; background: rgba(8, 5, 15, 0.85); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+  /* === AUTH SECTION === */
+  #authScreen { position: fixed; inset: 0; background: rgba(8, 5, 15, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
   .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
   .brand-content { position: relative; z-index: 1; max-width: 400px; }
@@ -97,7 +133,6 @@
   .glass-input::placeholder { color: #5a4b73; }
 
   .auth-btn { width: 100%; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; position: relative; overflow: hidden; }
-  .auth-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
@@ -109,7 +144,7 @@
     position: sticky; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
     padding: 16px 24px; z-index: 100;
-    background: rgba(8, 5, 15, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    background: rgba(8, 5, 15, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
   }
   
   .profile-card { display: flex; align-items: center; gap: 12px; }
@@ -129,14 +164,12 @@
   .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; }
   .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; }
-  .topup-btn:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
   
   /* Burger Button */
   .burger-btn {
     background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px;
     padding: 8px; border-radius: 8px; z-index: 105; justify-content: center; align-items: center;
   }
-  .burger-btn:hover { background: rgba(255,255,255,0.1); }
   .burger-btn span { display: block; width: 22px; height: 2px; background: #fff; transition: 0.3s; border-radius: 2px; }
   
   /* Sidebar Menu */
@@ -158,7 +191,6 @@
     background: transparent; border: none; color: var(--text); font-size: 14px; font-weight: 600;
     border-radius: 12px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; font-family: inherit;
   }
-  .sidebar-item:hover { background: rgba(255,255,255,0.05); }
   .sidebar-item.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
   .sidebar-item svg { width: 20px; height: 20px; }
   
@@ -166,11 +198,10 @@
   .logout-btn { width: 100%; background: rgba(239,68,68,.1); color: #fca5a5; border: 1px solid rgba(239,68,68,.2); font-size: 13px; font-weight: 700; cursor: pointer; padding: 12px; border-radius: 10px; transition: all 0.2s; }
   .logout-btn:hover { background: var(--danger); color: white; }
   
-  /* Overlay */
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; opacity: 0; pointer-events: none; transition: 0.3s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
-  .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
+  .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
   
   /* Content Tab Settings */
   #tabContentSettings { display: none; }
@@ -188,15 +219,20 @@
   .catalog-card {
     background: #0a0612; border: 1px solid var(--border); border-radius: 16px;
     padding: 20px; cursor: pointer; transition: all 0.3s; text-align: center;
-    display: flex; flex-direction: column; align-items: center;
+    display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden;
   }
+  .catalog-card::before {
+    content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, var(--neon-glow) 0%, transparent 70%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .catalog-card:hover::before { opacity: 1; }
   .catalog-card:hover { border-color: var(--neon); transform: translateY(-4px); box-shadow: 0 10px 20px -10px var(--neon-glow); }
-  .catalog-card img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 12px; border-radius: 8px; }
-  .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; }
+  .catalog-card img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 12px; border-radius: 8px; position: relative; z-index: 1; }
+  .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; position: relative; z-index: 1; }
+  .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; position: relative; z-index: 1; }
   
   .product-content { display: none; }
-  .product-content.active { display: block; animation: fadeIn 0.3s ease; }
+  .product-content.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
   .tab-menu-inner { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
@@ -211,7 +247,7 @@
   
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
   .ram-item input { position: absolute; opacity: 0; }
-  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; background: #0a0612; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
+  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; background: #0a0612; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
   .ram-item .ram-name { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; color: #fff; }
   .ram-item .price-new { font-size: 11px; font-weight: 700; color: var(--muted); }
   .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); transform: translateY(-2px) scale(1.02); box-shadow: 0 0 15px var(--neon-glow); }
@@ -222,7 +258,6 @@
   .total span:first-child { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
   .total-price { font-size: 24px; font-weight: 800; color: var(--neon); }
   button[type="submit"], .auth-btn.am-btn { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; }
-  button[type="submit"]:hover, .auth-btn.am-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   
   #tabContentDashboard, #adminTabContentDashboard { display: block; }
   .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -241,7 +276,6 @@
   .status-am { background: rgba(157, 0, 255, 0.15); color: #d8b4fe; border: 1px solid rgba(157, 0, 255, 0.3); }
   
   .btn-manage { background: var(--neon); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
-  .btn-manage:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: 0 4px 10px var(--neon-glow); }
 
   .history-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
   .history-item:last-child { border-bottom: none; }
@@ -259,7 +293,6 @@
   th { padding: 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
   td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
   .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
-  .btn-action:hover { background: #34d399; transform: scale(1.05); }
 
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
   .modal-overlay.active { display: flex; }
@@ -276,19 +309,20 @@
   .warning-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
-  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; }
   .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
-  .btn-cancel:hover { background: rgba(255,255,255,0.05); }
   .btn-confirm { background: var(--neon); color: #fff; }
-  .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
+
+  /* RIPPLE ANIMASI TOMBOL */
+  .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    transform: scale(0); pointer-events: none;
+    animation: rippleEffect 0.6s linear;
+  }
+  @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
 
   @media (max-width: 900px) {
-    html, body {
-      background-image: 
-        linear-gradient(to bottom, rgba(8, 5, 15, 0.95), rgba(8, 5, 15, 0.98)),
-        url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
-    }
-
     .auth-brand { display: none; } 
     .auth-box { background: var(--card); padding: 30px 24px; }
     
@@ -346,17 +380,20 @@
 </head>
 <body>
 
+<!-- ANIMASI BACKGROUND -->
+<div class="bg-aurora"></div>
+
 <!-- AUTH SECTION -->
 <div id="authScreen">
   <div class="auth-container">
     <div class="auth-brand">
-      <div class="brand-content">
+      <div class="brand-content animate-in">
         <h1>Welcome to <br><span>Kitzune Store.</span></h1>
         <p>The most affordable and reliable digital products in the market.</p>
       </div>
     </div>
     <div class="auth-form-area">
-      <div class="auth-box hover-card">
+      <div class="auth-box hover-card animate-in delay-2">
         <div id="loginForm">
           <h2>Sign In</h2>
           <div class="error-msg" id="loginError"></div>
@@ -437,7 +474,7 @@
     <!-- TAB CONTENT: DASHBOARD -->
     <div id="tabContentDashboard">
       <div class="dashboard-grid">
-        <div class="dash-card hover-card">
+        <div class="dash-card hover-card animate-in delay-1">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
             Produk Aktif
@@ -449,7 +486,7 @@
           </div>
         </div>
 
-        <div class="dash-card hover-card">
+        <div class="dash-card hover-card animate-in delay-2">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             Riwayat Transaksi
@@ -466,11 +503,11 @@
     <!-- TAB CONTENT: ORDER -->
     <div id="tabContentOrder">
       <div class="wrapper-order">
-        <div class="info-section">
+        <div class="info-section animate-in">
           <h1>Pilih Produk <br><span>Digital Kamu.</span></h1>
           <p>Pilih dari katalog produk premium kami di bawah ini.</p>
         </div>
-        <div class="form-section hover-card">
+        <div class="form-section hover-card animate-in delay-2">
           
           <div class="catalog-grid">
             <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
@@ -566,13 +603,12 @@
     <!-- TAB CONTENT: SETTINGS -->
     <div id="tabContentSettings">
       <div class="wrapper-order">
-        <div class="info-section">
+        <div class="info-section animate-in">
           <h1>Account <br><span>Settings.</span></h1>
           <p>Ubah email dan password akun Kitzune Store Anda.</p>
         </div>
-        <div class="form-section hover-card">
+        <div class="form-section hover-card animate-in delay-2">
           
-          <!-- Form Ubah Email -->
           <div class="field">
             <label>Email Saat Ini</label>
             <input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
@@ -589,7 +625,6 @@
 
           <hr style="border: 1px solid var(--border); margin: 24px 0;">
 
-          <!-- Form Ubah Password -->
           <div class="field">
             <label>Password Saat Ini (Wajib)</label>
             <input type="password" id="currentPassPassword" class="glass-input" placeholder="Masukkan password lama Anda">
@@ -630,10 +665,10 @@
 
   <div class="main-container">
     <div id="adminTabContentDashboard">
-      <div class="admin-header">
+      <div class="admin-header animate-in">
         <h1>User Management</h1>
       </div>
-      <div class="table-card hover-card">
+      <div class="table-card hover-card animate-in delay-1">
         <h3>User List</h3>
         <br>
         <table>
@@ -950,14 +985,10 @@
     btn.textContent = "Memproses...";
 
     try {
-      // 1. Re-autentikasi dulu pakai password lama
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
       await reauthenticateWithCredential(currentUser, credential);
-
-      // 2. Kalau sukses, baru ganti email
       await updateEmail(currentUser, newEmail);
       
-      // 3. Update email di database Firestore juga
       const docRef = doc(db, "users", currentUser.uid);
       await updateDoc(docRef, { email: newEmail });
 
@@ -990,11 +1021,8 @@
     btn.textContent = "Memproses...";
 
     try {
-      // 1. Re-autentikasi dulu pakai password lama
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
       await reauthenticateWithCredential(currentUser, credential);
-
-      // 2. Kalau sukses, baru ganti password
       await updatePassword(currentUser, newPass);
       
       showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
