@@ -972,27 +972,20 @@
             body: JSON.stringify({ action: 'send-link', email: email })
         });
         
-        const textResponse = await res.text();
-        console.log("Respon dari API:", textResponse); 
+        const data = await res.json(); // Pake ini aja karena API lu udah bener ngirim JSON
 
-        let data;
-        try {
-            data = JSON.parse(textResponse);
-        } catch (parseError) {
-            throw new Error(`API tidak mengembalikan JSON yang valid. Cek console!`);
-        }
-
-        if (data.ok) {
+        // Cek respon dari API lu
+        if (data && data.ok === true) {
             pendingAmEmail = email;
             document.getElementById("amTextEmail").textContent = email;
             document.getElementById("amStep1").style.display = "none";
             document.getElementById("amStep2").style.display = "block";
         } else {
-            showAlert("Gagal: " + (data.why || "Unknown Error"));
+            showAlert("Gagal: " + (data.why || "Respon API tidak valid"), "Gagal");
         }
     } catch (err) {
         console.error("Error asli:", err);
-        showAlert("Error sistem: " + err.message); 
+        showAlert("Error sistem: Gagal menghubungi server API.", "Gagal"); 
     } finally {
         btn.disabled = false;
         btn.textContent = currentLang === 'en' ? "Send Verification Link" : "Kirim Link Verifikasi";
