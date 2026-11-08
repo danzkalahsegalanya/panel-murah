@@ -957,9 +957,87 @@
     lastOrderTime = now;
   });
 
-  window.sendAmLink = async (event) => { playSound('click'); const email = document.getElementById("amEmail").value.trim(); if (!email) { showAlert("Masukkan email dulu!"); return; } const btn = event.target; btn.disabled = true; btn.textContent = "Mengirim..."; try { const res = await fetch('/api/am-automation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'send-link', email: email }) }); const data = await res.json(); if (data.ok) { pendingAmEmail = email; document.getElementById("amTextEmail").textContent = email; document.getElementById("amStep1").style.display = "none"; document.getElementById("amStep2").style.display = "block"; } else { showAlert("Gagal: " + data.why); } } catch (err) { showAlert("Error sistem."); } finally { btn.disabled = false; btn.textContent = currentLang === 'en' ? "Send Verification Link" : "Kirim Link Verifikasi"; } };
+  window.sendAmLink = async (event) => {
+    playSound('click');
+    const email = document.getElementById("amEmail").value.trim();
+    if (!email) { showAlert("Masukkan email dulu!"); return; }
 
-  window.verifyAmLink = async (event) => { playSound('click'); const linkInput = document.getElementById("amLink").value.trim(); if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; } const docRef = doc(db, "users", currentUser.uid); const docSnap = await getDoc(docRef); const saldo = docSnap.data().balance || 0; const harga = 5000; if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; } document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`; document.getElementById("confirmPurchaseBtn").onclick = async () => { document.getElementById("confirmModal").classList.remove('active'); const btn = document.getElementById("amBtnActivate"); btn.disabled = true; btn.textContent = "Memverifikasi..."; try { const res = await fetch('/api/am-automation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput }) }); const data = await res.json(); if (data.ok) { await updateDoc(docRef, { balance: saldo - harga }); await updateUserBalanceUI(currentUser.uid); await setDoc(doc(collection(db, "transactions")), { uid: currentUser.uid, email: currentUser.email, produk: "am", mode: "new", namaPanel: "Alight Motion Premium", emailAm: pendingAmEmail, ram: "1 Tahun", harga: harga, createdAt: Date.now() }); playSound('success'); showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda.", "Berhasil!"); loadUserDashboard(); switchMainTab('dashboard'); } else { showAlert("Gagal Verifikasi: " + data.why, "Gagal"); } } catch (err) { showAlert("Error sistem."); } finally { btn.disabled = false; btn.textContent = currentLang === 'en' ? "Activate Premium (Rp 5,000)" : "Aktifkan Premium (Rp 5.000)"; } }; document.getElementById("confirmModal").classList.add("active"); };
+    const btn = event.target;
+    btn.disabled = true; btn.textContent = "Mengirim...";
+
+    try {
+        const res = await fetch('/api/am-automation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'send-link', email: email })
+        });
+        
+        const textResponse = await res.text();
+        console.log("Respon dari API:", textResponse); 
+
+        let data;
+        try {
+            data = JSON.parse(textResponse);
+        } catch (parseError) {
+            throw new Error(`API tidak mengembalikan JSON yang valid. Cek console!`);
+        }
+
+        if (data.ok) {
+            pendingAmEmail = email;
+            document.getElementById("amTextEmail").textContent = email;
+            document.getElementById("amStep1").style.display = "none";
+            document.getElementById("amStep2").style.display = "block";
+        } else {
+            showAlert("Gagal: " + (data.why || "Unknown Error"));
+        }
+    } catch (err) {
+        console.error("Error asli:", err);
+        showAlert("Error sistem: " + err.message); 
+    } finally {
+        btn.disabled = false;
+        btn.textContent = currentLang === 'en' ? "Send Verification Link" : "Kirim Link Verifikasi";
+    }
+  };
+
+  window.verifyAmLink = async (event) => { 
+    playSound('click'); 
+    const linkInput = document.getElementById("amLink").value.trim(); 
+    if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; } 
+    const docRef = doc(db, "users", currentUser.uid); 
+    const docSnap = await getDoc(docRef); 
+    const saldo = docSnap.data().balance || 0; 
+    const harga = 5000; 
+    if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; } 
+    document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`; 
+    document.getElementById("confirmPurchaseBtn").onclick = async () => { 
+      document.getElementById("confirmModal").classList.remove('active'); 
+      const btn = document.getElementById("amBtnActivate"); 
+      btn.disabled = true; btn.textContent = "Memverifikasi..."; 
+      try { 
+        const res = await fetch('/api/am-automation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput }) }); 
+        const textResponse = await res.text();
+        console.log("Respon dari API:", textResponse);
+        let data;
+        try { data = JSON.parse(textResponse); } catch(e) { throw new Error("API tidak mengembalikan JSON."); }
+
+        if (data.ok) { 
+          await updateDoc(docRef, { balance: saldo - harga }); 
+          await updateUserBalanceUI(currentUser.uid); 
+          await setDoc(doc(collection(db, "transactions")), { uid: currentUser.uid, email: currentUser.email, produk: "am", mode: "new", namaPanel: "Alight Motion Premium", emailAm: pendingAmEmail, ram: "1 Tahun", harga: harga, createdAt: Date.now() }); 
+          playSound('success'); 
+          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda.", "Berhasil!"); 
+          loadUserDashboard(); switchMainTab('dashboard'); 
+        } else { 
+          showAlert("Gagal Verifikasi: " + (data.why || "Unknown Error"), "Gagal"); 
+        } 
+      } catch (err) { 
+        showAlert("Error sistem: " + err.message); 
+      } finally { 
+        btn.disabled = false; btn.textContent = currentLang === 'en' ? "Activate Premium (Rp 5,000)" : "Aktifkan Premium (Rp 5.000)"; 
+      } 
+    }; 
+    document.getElementById("confirmModal").classList.add("active"); 
+  };
 
   window.executePurchase = async () => {
     document.getElementById("confirmModal").classList.remove("active");
