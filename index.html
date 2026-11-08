@@ -5,32 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kitzune Store - Premium Digital Products</title>
 
+<!-- FAVICON -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#9d00ff">
+<link rel="manifest" href="/site.webmanifest">
 
-<meta name="description" content="Kitzune Store - Jual Panel Bot WA Murah & Alight Motion Premium. Unlimited cuma Rp 2.000!">
-<meta name="keywords" content="panel wa, bot wa, alight motion premium, panel murah, kitzune store">
+<!-- OPEN GRAPH -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kitzunemarket.biz.id/">
 <meta property="og:title" content="Kitzune Store - Premium Digital Products">
 <meta property="og:description" content="Bikin Bot WA Tanpa Batas. Unlimited cuma Rp 2.000 aja! Juga tersedia Alight Motion Premium.">
 <meta property="og:image" content="https://kitzunemarket.biz.id/banner.jpg">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Store",
-  "name": "Kitzune Store",
-  "url": "https://kitzunemarket.biz.id",
-  "description": "Toko digital produk premium: Panel Bot WA & Alight Motion.",
-  "telephone": "+6288906198025",
-  "priceRange": "Rp 300 - Rp 5000"
-}
-</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,462 +25,497 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #05030a; --card: #0d0815; --border: #23153a; 
-    --text: #f0f4f8; --muted: #9a8eb0; --neon: #9d00ff; 
-    --neon-hover: #b533ff; --neon-glow: rgba(157, 0, 255, 0.3);
-    --neon-soft: rgba(157, 0, 255, 0.1); --danger: #ef4444; --success: #10b981;
-    --warning: #f59e0b;
+    --bg: #08050f; 
+    --card: #110b1c; 
+    --border: #2a1a3a; 
+    --text: #f0f4f8; 
+    --muted: #9a8eb0; 
+    --neon: #9d00ff; 
+    --neon-hover: #b533ff;
+    --neon-glow: rgba(157, 0, 255, 0.2);
+    --neon-soft: rgba(157, 0, 255, 0.1);
+    --danger: #ef4444; 
+    --success: #10b981;
   }
-
-  body.light-mode {
-    --bg: #f3f4f6; --card: #ffffff; --border: #e5e7eb; 
-    --text: #111827; --muted: #6b7280; 
-    --neon: #9d00ff; --neon-hover: #b533ff; 
-    --neon-glow: rgba(157, 0, 255, 0.15);
-    --neon-soft: rgba(157, 0, 255, 0.05);
-  }
-  body.light-mode .top-header { background: rgba(255, 255, 255, 0.7); }
-  body.light-mode .top-header.scrolled { background: rgba(255, 255, 255, 0.95); }
-  body.light-mode .profile-info strong, body.light-mode .balance-info strong,
-  body.light-mode .auth-box h2, body.light-mode .brand-content h1,
-  body.light-mode .info-section h1, body.light-mode .dash-card h3,
-  body.light-mode .panel-details h4, body.light-mode .catalog-card h4,
-  body.light-mode .faq-question, body.light-mode .history-header strong,
-  body.light-mode .modal-content h3 { color: var(--text); }
 
   html, body {
     -webkit-user-select: none; -moz-user-select: none; user-select: none;
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
-    scroll-behavior: smooth; transition: background-color 0.3s, color 0.3s;
+    
     background-image: 
-      linear-gradient(rgba(157, 0, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(157, 0, 255, 0.05) 1px, transparent 1px),
-      radial-gradient(circle at 50% 0%, rgba(157, 0, 255, 0.15) 0%, transparent 60%);
-    background-size: 40px 40px, 40px 40px, 100% 100%;
-    background-position: center center;
+      linear-gradient(to bottom, rgba(8, 5, 15, 0.8), rgba(8, 5, 15, 0.95)),
+      url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
-  body.light-mode {
-    background-image: 
-      linear-gradient(rgba(157, 0, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(157, 0, 255, 0.03) 1px, transparent 1px),
-      radial-gradient(circle at 50% 0%, rgba(157, 0, 255, 0.08) 0%, transparent 60%);
-  }
-
-  #loadingScreen { position: fixed; inset: 0; background: var(--bg); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
-  #loadingScreen.hidden { opacity: 0; pointer-events: none; }
-  .loader-logo { font-size: 32px; font-weight: 800; color: var(--neon); animation: pulseGlow 1.5s infinite alternate; }
-  @keyframes pulseGlow { 0% { text-shadow: 0 0 10px var(--neon-glow); transform: scale(1); } 100% { text-shadow: 0 0 30px var(--neon); transform: scale(1.05); } }
-  .loader-bar { width: 200px; height: 4px; background: var(--border); border-radius: 2px; margin-top: 20px; overflow: hidden; }
-  .loader-bar::after { content: ''; display: block; width: 50%; height: 100%; background: var(--neon); border-radius: 2px; animation: slideBar 1.2s infinite ease-in-out; }
-  @keyframes slideBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
-
-  .cursor-glow { position: fixed; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, var(--neon-glow) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: opacity 0.3s; opacity: 0; mix-blend-mode: screen; }
-  body:hover .cursor-glow { opacity: 1; }
-
-  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-  .reveal.active { opacity: 1; transform: translateY(0); }
-  .reveal.delay-1 { transition-delay: 0.1s; }
-  .reveal.delay-2 { transition-delay: 0.2s; }
 
   .hover-card { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-  .hover-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 40px -15px var(--neon-glow); border-color: rgba(157, 0, 255, 0.6); }
+  .hover-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -10px var(--neon-glow);
+    border-color: rgba(157, 0, 255, 0.5);
+  }
 
-  button, .auth-btn { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
-  button:hover, .auth-btn:hover { box-shadow: 0 0 25px -5px var(--neon-glow); transform: translateY(-2px); }
-  button:active, .auth-btn:active { transform: scale(0.95) !important; }
+  button { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+  button:active { transform: scale(0.96) !important; }
 
-  .skeleton { background: #1a1025; background-image: linear-gradient(90deg, #1a1025 0px, #2d1a40 40px, #1a1025 80px); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; border-radius: 8px; }
+  .skeleton {
+    background: #1f1530;
+    background-image: linear-gradient(90deg, #1f1530 0px, #3a2559 40px, #1f1530 80px);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 8px;
+  }
   @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
   .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
   .skeleton-text.short { width: 60%; }
 
-  #authScreen { position: fixed; inset: 0; background: rgba(5, 3, 10, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
-  body.light-mode #authScreen { background: rgba(243, 244, 246, 0.8); }
+  #authScreen { position: fixed; inset: 0; background: rgba(8, 5, 15, 0.85); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
-  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; }
+  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
   .brand-content { position: relative; z-index: 1; max-width: 400px; }
-  .brand-content h1 { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-  .brand-content h1 span { color: var(--neon); text-shadow: 0 0 30px var(--neon-glow); }
-  .brand-content p { font-size: 16px; color: var(--muted); line-height: 1.6; }
+  .brand-content h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+  .brand-content h1 span { color: var(--neon); }
+  .brand-content p { font-size: 16px; color: #e2e8f0; line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
   
   .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
-  .auth-box { width: 100%; max-width: 380px; background: var(--card); border: 1px solid var(--border); padding: 40px 32px; border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7); }
-  .auth-box h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .auth-box { width: 100%; max-width: 380px; background: var(--card); border: 1px solid var(--border); padding: 40px 32px; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+  .auth-box h2 { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
   .auth-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
   .auth-field { margin-bottom: 20px; }
-  .auth-field label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+  .auth-field label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
   
-  .glass-input { width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 12px; outline: none; transition: all 0.3s; font-family: inherit; }
+  .glass-input {
+    width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500;
+    background: #0a0612; color: #fff; border: 1px solid var(--border); 
+    border-radius: 12px; outline: none; transition: all 0.3s; font-family: inherit;
+  }
   .glass-input:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
-  .glass-input::placeholder { color: var(--muted); opacity: 0.6; }
+  .glass-input::placeholder { color: #5a4b73; }
 
   .auth-btn { width: 100%; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; position: relative; overflow: hidden; }
+  .auth-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
   #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   
-  .top-header { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; z-index: 100; background: rgba(5, 3, 10, 0.6); backdrop-filter: blur(20px); border-bottom: 1px solid transparent; transition: all 0.3s; }
-  .top-header.scrolled { border-bottom: 1px solid var(--border); background: rgba(5, 3, 10, 0.9); }
+  /* HEADER */
+  .top-header {
+    position: sticky; top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 24px; z-index: 100;
+    background: rgba(8, 5, 15, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  }
   
   .profile-card { display: flex; align-items: center; gap: 12px; }
   .header-logo { width: 32px; height: 32px; object-fit: contain; margin-right: 4px; }
-  .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--neon), #5a00e0); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 16px; box-shadow: 0 0 15px var(--neon-glow); }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--neon), #5a00e0);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #fff; font-size: 16px; box-shadow: 0 0 10px var(--neon-glow);
+  }
   .profile-info { display: flex; flex-direction: column; }
   .profile-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
-  .profile-info strong { font-size: 14px; color: var(--text); font-weight: 700; }
+  .profile-info strong { font-size: 14px; color: #fff; font-weight: 700; }
 
   .header-right { display: flex; align-items: center; gap: 12px; }
-  .balance-info { display: flex; flex-direction: column; text-align: right; margin-right: 4px; }
+  .balance-info { display: flex; flex-direction: column; text-align: right; }
   .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
-  .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; text-shadow: 0 0 10px rgba(16,185,129,0.3); }
+  .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; }
+  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; }
+  .topup-btn:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
   
-  .icon-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
-  .icon-btn:hover { background: var(--neon-soft); border-color: var(--neon); color: var(--neon); }
-  .icon-btn svg { width: 18px; height: 18px; }
-
-  .lang-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 12px; font-weight: 700; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-family: inherit; }
-  .lang-btn:hover { background: var(--neon-soft); border-color: var(--neon); color: var(--neon); }
-
-  .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 16px; border-radius: 99px; text-transform: uppercase; }
+  /* Burger Button */
+  .burger-btn {
+    background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px;
+    padding: 8px; border-radius: 8px; z-index: 105; justify-content: center; align-items: center;
+  }
+  .burger-btn:hover { background: rgba(255,255,255,0.1); }
+  .burger-btn span { display: block; width: 22px; height: 2px; background: #fff; transition: 0.3s; border-radius: 2px; }
   
-  .burger-btn { background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 8px; border-radius: 8px; z-index: 105; }
-  .burger-btn span { display: block; width: 24px; height: 2px; background: var(--text); transition: 0.3s; border-radius: 2px; }
-  
-  .sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100vh; background: var(--card); border-left: 1px solid var(--border); z-index: 200; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; padding: 32px 24px; box-shadow: -20px 0 50px rgba(0,0,0,0.8); }
+  /* Sidebar Menu */
+  .sidebar {
+    position: fixed; top: 0; right: -300px; width: 280px; height: 100vh;
+    background: var(--card); border-left: 1px solid var(--border);
+    z-index: 200; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex; flex-direction: column; padding: 24px;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+  }
   .sidebar.active { right: 0; }
   .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
-  .sidebar-header h2 { font-size: 18px; color: var(--neon); font-weight: 800; letter-spacing: 1px; }
-  .close-btn { background: transparent; border: none; color: var(--muted); font-size: 32px; cursor: pointer; line-height: 1; }
+  .sidebar-header h2 { font-size: 18px; color: var(--neon); font-weight: 800; }
+  .close-btn { background: transparent; border: none; color: var(--muted); font-size: 28px; cursor: pointer; line-height: 1; }
   
-  .sidebar-menu { display: flex; flex-direction: column; gap: 6px; }
-  .sidebar-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: transparent; border: none; color: var(--muted); font-size: 14.5px; font-weight: 600; border-radius: 12px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; font-family: inherit; }
-  .sidebar-item:hover { background: var(--neon-soft); color: var(--text); }
-  .sidebar-item.active { background: var(--neon-soft); color: var(--neon); border: 1px solid rgba(157, 0, 255, 0.3); }
+  .sidebar-menu { display: flex; flex-direction: column; gap: 8px; }
+  .sidebar-item {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    background: transparent; border: none; color: var(--text); font-size: 14px; font-weight: 600;
+    border-radius: 12px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; font-family: inherit;
+  }
+  .sidebar-item:hover { background: rgba(255,255,255,0.05); }
+  .sidebar-item.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
   .sidebar-item svg { width: 20px; height: 20px; }
   
-  .sidebar-footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 24px; }
-  .logout-btn { width: 100%; background: transparent; color: var(--danger); border: 1px solid rgba(239,68,68,.3); font-size: 13px; font-weight: 700; cursor: pointer; padding: 14px; border-radius: 12px; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-  .logout-btn:hover { background: rgba(239,68,68,.1); }
+  .sidebar-footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 16px; }
+  .logout-btn { width: 100%; background: rgba(239,68,68,.1); color: #fca5a5; border: 1px solid rgba(239,68,68,.2); font-size: 13px; font-weight: 700; cursor: pointer; padding: 12px; border-radius: 10px; transition: all 0.2s; }
+  .logout-btn:hover { background: var(--danger); color: white; }
   
-  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 150; opacity: 0; pointer-events: none; transition: 0.3s; }
+  /* Overlay */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 150; opacity: 0; pointer-events: none; transition: 0.3s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
-  .main-container { flex: 1; display: flex; flex-direction: column; padding: 120px 24px 60px; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+  .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
   
-  #tabContentSettings, #tabContentFaq, #tabContentCaraPakai { display: none; }
-  #tabContentOrder { display: none; }
+  /* Content Tab Settings */
+  #tabContentSettings { display: none; }
   
-  .wrapper-order { display: flex; gap: 48px; align-items: flex-start; justify-content: center; }
-  .info-section { flex: 1; max-width: 500px; }
-  .info-section h1 { font-size: 56px; font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 24px; }
+  #tabContentOrder, #adminTabContentOrder { display: none; }
+  .wrapper-order { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
+  .info-section { flex: 1; max-width: 520px; }
+  .info-section h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
   .info-section h1 span { color: var(--neon); }
-  .info-section p { font-size: 17px; color: var(--muted); line-height: 1.6; margin-bottom: 40px; }
+  .info-section p { font-size: 16px; color: #cbd5e1; line-height: 1.6; margin-bottom: 32px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-  .form-section { flex: 1; max-width: 480px; padding: 40px 32px; border-radius: 24px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8); }
+  .form-section { flex: 1; max-width: 460px; padding: 36px 32px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   
-  .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; perspective: 1000px; }
-  .catalog-card { background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 24px; cursor: pointer; transition: all 0.3s; text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; }
-  .catalog-card.active { border-color: var(--neon); background: var(--neon-soft); box-shadow: 0 0 30px -10px var(--neon-glow); }
-  
-  .css-logo-panel { width: 70px; height: 70px; margin-bottom: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--neon); position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px -5px var(--neon-glow), inset 0 0 15px -5px var(--neon-glow); overflow: hidden; }
-  .css-logo-panel::before { content: ''; position: absolute; width: 100%; height: 100%; background-image: linear-gradient(rgba(157,0,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(157,0,255,0.3) 1px, transparent 1px); background-size: 15px 15px; transform: perspective(100px) rotateX(20deg); }
-  .css-logo-panel::after { content: 'P'; font-weight: 800; font-size: 28px; color: var(--text); text-shadow: 0 0 10px var(--neon); z-index: 2; }
-
-  .css-logo-am { width: 70px; height: 70px; margin-bottom: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--neon); position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px -5px var(--neon-glow); overflow: hidden; }
-  .css-logo-am::before { content: ''; position: absolute; width: 40px; height: 40px; border: 4px solid var(--neon); border-radius: 50%; border-left-color: transparent; border-bottom-color: transparent; transform: rotate(45deg); }
-  .css-logo-am::after { content: ''; position: absolute; width: 20px; height: 20px; border: 4px solid var(--neon); border-radius: 50%; border-right-color: transparent; border-top-color: transparent; transform: rotate(45deg); }
-
-  .catalog-card h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-  .catalog-card p { font-size: 12px; color: var(--neon); font-weight: 600; }
+  .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .catalog-card {
+    background: #0a0612; border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px; cursor: pointer; transition: all 0.3s; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .catalog-card:hover { border-color: var(--neon); transform: translateY(-4px); box-shadow: 0 10px 20px -10px var(--neon-glow); }
+  .catalog-card img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 12px; border-radius: 8px; }
+  .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; }
   
   .product-content { display: none; }
-  .product-content.active { display: block; animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-  @keyframes slideUpFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+  .product-content.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-  .tab-menu-inner { display: flex; gap: 8px; margin-bottom: 24px; background: var(--bg); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
+  .tab-menu-inner { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
   .tab-btn-inner { flex: 1; padding: 12px; background: transparent; border: none; color: var(--muted); font-weight: 700; font-size: 13px; border-radius: 10px; cursor: pointer; font-family: inherit; text-transform: uppercase; }
-  .tab-btn-inner.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
-  .field { margin-bottom: 24px; }
-  .field > label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .input-group { display: flex; align-items: stretch; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .input-group input { flex: 1; border: none; background: transparent; padding: 16px; font-size: 15px; color: var(--text); outline: none; font-family: inherit; }
-  .input-group .suffix { padding: 0 16px; color: var(--muted); font-size: 14px; background: var(--card); border-left: 1px solid var(--border); display: flex; align-items: center; font-weight: 600; }
+  .tab-btn-inner:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  .tab-btn-inner.active { background: var(--neon); color: #fff; }
+  .field { margin-bottom: 20px; }
+  .field > label { display: block; font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; }
+  .input-group { display: flex; align-items: stretch; background: #0a0612; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .input-group input { flex: 1; border: none; background: transparent; padding: 14px 16px; font-size: 14.5px; color: #fff; outline: none; }
+  .input-group .suffix { padding: 0 16px; color: var(--muted); font-size: 13.5px; background: #110b1c; border-left: 1px solid var(--border); display: flex; align-items: center; font-weight: 600; }
   
-  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 10px; }
+  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
   .ram-item input { position: absolute; opacity: 0; }
-  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 4px; text-align: center; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.2s; }
-  .ram-item .ram-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; background: #0a0612; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
+  .ram-item .ram-name { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; color: #fff; }
   .ram-item .price-new { font-size: 11px; font-weight: 700; color: var(--muted); }
-  .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); transform: translateY(-2px) scale(1.02); box-shadow: 0 0 20px -5px var(--neon-glow); }
+  .ram-item input:checked + label { border-color: var(--neon); background: var(--neon-soft); transform: translateY(-2px) scale(1.02); box-shadow: 0 0 15px var(--neon-glow); }
   .ram-item input:checked + label .price-new { color: var(--neon); }
+  .ram-item label:hover { border-color: rgba(157, 0, 255, 0.5); }
 
-  .total { margin-top: 32px; padding: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; display: flex; justify-content: space-between; align-items: center; }
+  .total { margin-top: 24px; padding: 16px; background: #0a0612; border: 1px solid var(--border); border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
   .total span:first-child { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
-  .total-price { font-size: 28px; font-weight: 800; color: var(--neon); text-shadow: 0 0 20px var(--neon-glow); }
+  .total-price { font-size: 24px; font-weight: 800; color: var(--neon); }
+  button[type="submit"], .auth-btn.am-btn { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; }
+  button[type="submit"]:hover, .auth-btn.am-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   
-  button[type="submit"], .auth-btn.am-btn { width: 100%; margin-top: 24px; padding: 16px; background: var(--neon); color: #fff; font-weight: 800; font-size: 16px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; }
-  button[type="submit"]:hover, .auth-btn.am-btn:hover { background: var(--neon-hover); box-shadow: 0 10px 30px -10px var(--neon-glow); }
-
-  #tabContentDashboard { display: block; }
-  .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-  .dash-card { padding: 32px; border-radius: 24px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6); }
-  .dash-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 24px; color: var(--text); display: flex; align-items: center; gap: 10px; }
-  .dash-card h3 svg { width: 20px; height: 20px; color: var(--neon); }
+  #tabContentDashboard, #adminTabContentDashboard { display: block; }
+  .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .dash-card { padding: 24px; border-radius: 16px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+  .dash-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .dash-card h3 svg { width: 18px; height: 18px; color: var(--neon); }
   
-  .panel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .panel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); }
   .panel-list-item:last-child { border-bottom: none; }
-  .panel-details h4 { font-size: 16px; font-weight: 700; color: var(--text); }
-  .panel-details p { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .panel-details h4 { font-size: 15px; font-weight: 700; color: #fff; }
+  .panel-details p { font-size: 12px; color: var(--muted); margin-top: 4px; }
   
-  .panel-actions { display: flex; align-items: center; gap: 8px; }
-  .panel-status { padding: 6px 12px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
-  .status-active { background: rgba(16,185,129,0.1); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
-  .status-am { background: rgba(157, 0, 255, 0.1); color: #d8b4fe; border: 1px solid rgba(157, 0, 255, 0.3); }
+  .panel-actions { display: flex; align-items: center; gap: 12px; }
+  .panel-status { padding: 5px 12px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  .status-active { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .status-am { background: rgba(157, 0, 255, 0.15); color: #d8b4fe; border: 1px solid rgba(157, 0, 255, 0.3); }
   
-  .btn-manage { background: transparent; color: var(--neon); border: 1px solid var(--neon); padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
-  .btn-extend { background: rgba(16,185,129,0.1); color: var(--success); border: 1px solid var(--success); padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+  .btn-manage { background: var(--neon); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+  .btn-manage:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: 0 4px 10px var(--neon-glow); }
 
-  .history-item { padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.2s; }
-  .history-item:hover { background: rgba(157,0,255,0.05); border-radius: 8px; padding-left: 8px; }
+  .history-item { padding: 14px 0; border-bottom: 1px solid var(--border); }
   .history-item:last-child { border-bottom: none; }
-  .history-header { display: flex; justify-content: space-between; margin-bottom: 6px; }
-  .history-header strong { font-size: 15px; color: var(--text); }
-  .history-header span { font-size: 13px; color: var(--success); font-weight: 700; }
+  .history-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .history-header strong { font-size: 14px; color: #fff; }
+  .history-header span { font-size: 12px; color: var(--neon); font-weight: 700; }
   .history-details { display: flex; justify-content: space-between; align-items: center; }
   .history-details p { font-size: 12px; color: var(--muted); }
-  .history-date { font-size: 11px; color: var(--muted); opacity: 0.7; }
+  .history-date { font-size: 11px; color: #5a4b73; }
 
-  .testimoni-section { margin-top: 32px; }
-  .testimoni-section h2 { font-size: 20px; font-weight: 800; margin-bottom: 16px; color: var(--text); }
-  .testimoni-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-  .testi-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; position: relative; }
-  .testi-stars { color: #fbbf24; font-size: 14px; margin-bottom: 10px; letter-spacing: 2px; }
-  .testi-text { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; font-style: italic; }
-  .testi-user { display: flex; align-items: center; gap: 10px; }
-  .testi-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--neon), #5a00e0); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 13px; }
-  .testi-name { font-size: 13px; font-weight: 700; color: var(--text); }
-  .testi-badge { font-size: 10px; color: var(--success); font-weight: 600; }
-
-  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
   .admin-header h1 { font-size: 28px; font-weight: 800; color: var(--neon); }
-  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
-  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
-  .stat-value { font-size: 24px; font-weight: 800; color: var(--text); }
-  .stat-value.purple { color: var(--neon); }
-  .stat-value.green { color: var(--success); }
-  
-  .table-card { border-radius: 24px; padding: 24px; overflow-x: auto; background: var(--card); border: 1px solid var(--border); }
+  .table-card { border-radius: 16px; padding: 24px; overflow-x: auto; background: var(--card); border: 1px solid var(--border); }
   table { width: 100%; border-collapse: collapse; text-align: left; }
-  th { padding: 14px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 12px; text-transform: uppercase; }
-  td { padding: 14px; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text); }
-  .btn-action { padding: 8px 14px; background: var(--success); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: bold; }
+  th { padding: 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 13px; text-transform: uppercase; }
+  td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .btn-action { padding: 6px 12px; background: var(--success); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
+  .btn-action:hover { background: #34d399; transform: scale(1.05); }
 
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
   .modal-overlay.active { display: flex; }
-  .modal-content { padding: 36px 28px; border-radius: 24px; width: 90%; max-width: 440px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--card); border: 1px solid var(--border); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.9); max-height: 90vh; overflow-y: auto; }
+  .modal-content { padding: 32px; border-radius: 20px; width: 90%; max-width: 420px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   @keyframes popIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-  .modal-content h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: var(--text); }
-  .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
-  .modal-input { width: 100%; padding: 14px; font-size: 15px; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 12px; outline: none; margin-bottom: 20px; text-align: center; }
+  .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+  .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+  .modal-input { width: 100%; padding: 14px; font-size: 15px; background: #0a0612; color: #fff; border: 1px solid var(--border); border-radius: 12px; outline: none; margin-bottom: 20px; text-align: center; }
   
-  .panel-data-box { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; color: var(--text); }
+  .panel-data-box { background: #0a0612; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; user-select: text; -webkit-user-select: text; }
   .panel-data-box .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
   .panel-data-box .label { color: var(--muted); }
   .panel-data-box .value { color: var(--neon); font-weight: 700; }
-  .warning-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 13px; padding: 14px; border-radius: 12px; margin-bottom: 20px; font-weight: 600; line-height: 1.5; }
+  .warning-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
-  .modal-actions { display: flex; gap: 12px; justify-content: center; }
-  .btn-modal { flex: 1; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; }
+  .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
   .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-cancel:hover { background: rgba(255,255,255,0.05); }
   .btn-confirm { background: var(--neon); color: #fff; }
-
-  .faq-item { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; overflow: hidden; }
-  .faq-question { padding: 18px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; color: var(--text); }
-  .faq-icon { font-size: 20px; color: var(--neon); font-weight: 800; transition: transform 0.3s; }
-  .faq-item.open .faq-icon { transform: rotate(45deg); }
-  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 20px; }
-  .faq-item.open .faq-answer { max-height: 500px; padding: 0 20px 18px 20px; }
-  .faq-answer p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-  .step-item { display: flex; gap: 16px; margin-bottom: 20px; }
-  .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--neon-soft); border: 1px solid var(--neon); color: var(--neon); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; }
-  .step-content h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-  .step-content p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-  .notif-banner { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); color: #d97706; padding: 12px 20px; border-radius: 12px; margin-bottom: 24px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-
-  .referral-box { background: var(--bg); border: 1px dashed var(--neon); border-radius: 16px; padding: 20px; margin-top: 16px; text-align: center; }
-  .referral-box h4 { font-size: 14px; color: var(--text); margin-bottom: 8px; font-weight: 700; }
-  .referral-box p { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
-  .referral-code { font-size: 18px; font-weight: 800; color: var(--neon); letter-spacing: 2px; margin-bottom: 12px; padding: 10px; background: var(--card); border-radius: 8px; border: 1px solid var(--border); user-select: text; }
-  .btn-copy-referral { background: var(--neon); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
 
   @media (max-width: 900px) {
+    html, body {
+      background-image: 
+        linear-gradient(to bottom, rgba(8, 5, 15, 0.95), rgba(8, 5, 15, 0.98)),
+        url('https://plus.unsplash.com/premium_photo-1661964177687-57387c2cbd14?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D');
+    }
+
     .auth-brand { display: none; } 
-    .auth-box { background: var(--card); padding: 32px 24px; }
-    .top-header { padding: 14px 16px; gap: 8px; }
+    .auth-box { background: var(--card); padding: 30px 24px; }
+    
+    .top-header { flex-direction: row; padding: 10px 14px; gap: 8px; }
     .profile-card { gap: 8px; }
     .header-logo { width: 28px; height: 28px; }
-    .avatar { width: 34px; height: 34px; font-size: 14px; }
+    .avatar { width: 32px; height: 32px; font-size: 14px; }
     .profile-info span { display: none; }
     .profile-info strong { font-size: 13px; }
+    
     .header-right { gap: 8px; }
     .balance-info span { display: none; }
-    .balance-info strong { font-size: 13px; }
-    .lang-btn { padding: 6px 8px; font-size: 11px; }
-    .topup-btn { padding: 8px 10px; font-size: 10.5px; }
+    .balance-info strong { font-size: 13.5px; }
+    .topup-btn { padding: 6px 10px; font-size: 11px; }
+    .burger-btn { padding: 6px; }
     .burger-btn span { width: 20px; }
-    .main-container { padding: 100px 16px 40px; }
-    .wrapper-order { flex-direction: column; gap: 24px; }
-    .info-section h1 { font-size: 32px; text-align: center; letter-spacing: -1px; }
-    .info-section p { font-size: 14px; text-align: center; margin-bottom: 24px; }
-    .form-section { width: 100%; padding: 24px 20px; }
-    .dash-card { padding: 24px 20px; }
-    .dashboard-grid { grid-template-columns: 1fr; gap: 20px; }
+    
+    .main-container { padding: 16px; }
+    
+    .wrapper-order { flex-direction: column; gap: 16px; }
+    .info-section h1 { font-size: 26px; text-align: center; margin-bottom: 8px; }
+    .info-section p { font-size: 13px; text-align: center; margin-bottom: 0; }
+    
+    .form-section { width: 100%; padding: 20px 16px; }
+    .dash-card { padding: 20px 16px; }
+    
+    .dashboard-grid { grid-template-columns: 1fr; gap: 16px; }
+    
     .catalog-grid { grid-template-columns: 1fr; gap: 12px; }
-    .catalog-card { padding: 20px; flex-direction: row; text-align: left; gap: 20px; }
-    .css-logo-panel, .css-logo-am { width: 60px; height: 60px; margin-bottom: 0; flex-shrink: 0; }
-    .catalog-card h4 { font-size: 16px; }
-    .ram-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .ram-item .ram-name { font-size: 13px; }
+    .catalog-card { padding: 16px; flex-direction: row; text-align: left; gap: 16px; align-items: center; }
+    .catalog-card img { width: 80px; height: 80px; margin-bottom: 0; }
+    .catalog-card h4 { font-size: 15px; margin-bottom: 2px; }
+    
+    .ram-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .ram-item .ram-name { font-size: 12.5px; }
     .ram-item .price-new { font-size: 10px; }
-    .panel-list-item { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .panel-actions { width: 100%; justify-content: space-between; margin-top: 8px; }
+    
+    .panel-list-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .panel-actions { width: 100%; justify-content: space-between; margin-top: 4px; }
+    
     .admin-header { flex-direction: column; gap: 16px; align-items: flex-start; }
-    .stat-grid { grid-template-columns: 1fr; gap: 12px; }
     .table-card { padding: 16px; }
-    th, td { font-size: 12px; padding: 10px 6px; }
-    .modal-content { padding: 28px 20px; }
-    .panel-data-box { font-size: 13px; padding: 16px; }
+    th, td { font-size: 12px; padding: 10px 8px; }
+    
+    .modal-content { padding: 24px 20px; }
+    .panel-data-box { font-size: 12px; padding: 16px; }
+
     .hover-card:hover { transform: none; box-shadow: none; border-color: var(--border); }
-    .sidebar { width: 100%; right: -100%; padding: 24px 20px 40px 20px; overflow-y: auto; }
+
+    .sidebar { width: 100%; right: -100%; padding: 20px 20px 40px 20px; overflow-y: auto; }
     .sidebar.active { right: 0; }
-    .sidebar-footer { margin-top: 32px; padding-bottom: 20px; }
-    .cursor-glow { display: none; }
-    .testimoni-grid { grid-template-columns: 1fr; }
+    .sidebar-footer { margin-top: 40px; padding-bottom: 20px; }
   }
 </style>
 </head>
 <body>
 
-<div id="loadingScreen"><div class="loader-logo">Kitzune Store</div><div class="loader-bar"></div></div>
-<div class="cursor-glow" id="cursorGlow"></div>
-
+<!-- AUTH SECTION -->
 <div id="authScreen">
   <div class="auth-container">
     <div class="auth-brand">
-      <div class="brand-content reveal active">
-        <h1 id="authTitle"></h1>
-        <p data-i18n="authDesc">The most affordable and reliable digital products in the market.</p>
+      <div class="brand-content">
+        <h1>Welcome to <br><span>Kitzune Store.</span></h1>
+        <p>The most affordable and reliable digital products in the market.</p>
       </div>
     </div>
     <div class="auth-form-area">
-      <div class="auth-box hover-card reveal active delay-1">
+      <div class="auth-box hover-card">
         <div id="loginForm">
-          <h2 data-i18n="signInTitle">Sign In</h2>
+          <h2>Sign In</h2>
           <div class="error-msg" id="loginError"></div>
-          <div class="auth-field"><label data-i18n="email">Email</label><input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email"></div>
-          <div class="auth-field"><label data-i18n="password">Password</label><input type="password" id="loginPassword" class="glass-input" placeholder="Enter password"></div>
-          <button class="auth-btn" id="btnLogin" onclick="doLogin(event)" data-i18n="btnLogin">Log In</button>
-          <div style="text-align: right; margin-top: 12px;"><a onclick="openForgotPassword()" style="color: var(--muted); font-size: 12px; cursor: pointer;">Lupa Password?</a></div>
-          <div class="auth-switch"><span data-i18n="noAccount">Don't have an account?</span> <a onclick="toggleAuth('register')" data-i18n="createOne">Create one</a></div>
+          <div class="auth-field"><label>Email</label><input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email"></div>
+          <div class="auth-field"><label>Password</label><input type="password" id="loginPassword" class="glass-input" placeholder="Enter password"></div>
+          <button class="auth-btn" id="btnLogin" onclick="doLogin(event)">Log In</button>
+          <div class="auth-switch">Don't have an account? <a onclick="toggleAuth('register')">Create one</a></div>
         </div>
         <div id="registerForm" style="display: none;">
-          <h2 data-i18n="createAccTitle">Create Account</h2>
+          <h2>Create Account</h2>
           <div class="error-msg" id="regError"></div>
-          <div class="auth-field"><label data-i18n="email">Email</label><input type="text" id="regEmail" class="glass-input" placeholder="Enter your email"></div>
-          <div class="auth-field"><label data-i18n="password">Password</label><input type="password" id="regPassword" class="glass-input" placeholder="Create a password"></div>
-          <div class="auth-field"><label data-i18n="confirmPass">Confirm Password</label><input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password"></div>
-          <div class="auth-field"><label>Kode Referral (Opsional)</label><input type="text" id="regReferral" class="glass-input" placeholder="Kode ajak teman"></div>
-          <button class="auth-btn" id="btnRegister" onclick="doRegister(event)" data-i18n="btnRegister">Register & Login</button>
-          <div class="auth-switch"><span data-i18n="haveAccount">Already have an account?</span> <a onclick="toggleAuth('login')" data-i18n="logInHere">Log in here</a></div>
+          <div class="auth-field"><label>Email</label><input type="text" id="regEmail" class="glass-input" placeholder="Enter your email"></div>
+          <div class="auth-field"><label>Password</label><input type="password" id="regPassword" class="glass-input" placeholder="Create a password"></div>
+          <div class="auth-field"><label>Confirm Password</label><input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password"></div>
+          <button class="auth-btn" id="btnRegister" onclick="doRegister(event)">Register & Login</button>
+          <div class="auth-switch">Already have an account? <a onclick="toggleAuth('login')">Log in here</a></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- MAIN APP (USER) -->
 <div id="mainApp">
-  <div class="top-header" id="topHeader">
+  <div class="top-header">
     <div class="profile-card">
       <img src="/favicon.png" alt="Logo" class="header-logo">
       <div class="avatar" id="userAvatar">U</div>
-      <div class="profile-info"><span data-i18n="loggedInAs">Logged in as</span><strong id="displayUser">User</strong></div>
+      <div class="profile-info">
+        <span>Logged in as</span>
+        <strong id="displayUser">User</strong>
+      </div>
     </div>
+
     <div class="header-right">
-      <div class="balance-info"><span data-i18n="myBalance">My Balance</span><strong id="displayBalance">Rp 0</strong></div>
-      <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme">
-        <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-        <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <div class="balance-info">
+        <span>My Balance</span>
+        <strong id="displayBalance">Rp 0</strong>
+      </div>
+      <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
+      
+      <button class="burger-btn" onclick="toggleSidebar(true)">
+        <span></span><span></span><span></span>
       </button>
-      <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">ID</button>
-      <button class="topup-btn" onclick="openTopupModal()" data-i18n="topupBtn">+ Topup</button>
-      <button class="burger-btn" onclick="toggleSidebar(true)"><span></span><span></span><span></span></button>
     </div>
   </div>
 
+  <!-- SIDEBAR MENU -->
   <div class="overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
   <div class="sidebar" id="sidebarMenu">
-    <div class="sidebar-header"><h2 data-i18n="menu">Menu</h2><button class="close-btn" onclick="toggleSidebar(false)">&times;</button></div>
-    <div class="sidebar-menu">
-      <button class="sidebar-item active" id="navDash" onclick="switchMainTab('dashboard')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span data-i18n="dashboard">Dashboard</span></button>
-      <button class="sidebar-item" id="navOrder" onclick="switchMainTab('order')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg><span data-i18n="catalog">Product Catalog</span></button>
-      <button class="sidebar-item" id="navSettings" onclick="switchMainTab('settings')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-i18n="settings">Settings</span></button>
-      <button class="sidebar-item" id="navCaraPakai" onclick="switchMainTab('carapakai')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg><span>Cara Pakai</span></button>
-      <button class="sidebar-item" id="navFaq" onclick="switchMainTab('faq')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>FAQ / Bantuan</span></button>
+    <div class="sidebar-header">
+      <h2>Menu</h2>
+      <button class="close-btn" onclick="toggleSidebar(false)">&times;</button>
     </div>
-    <div class="sidebar-footer"><button class="logout-btn" onclick="confirmLogout()" data-i18n="logoutBtn">Logout</button></div>
+    
+    <div class="sidebar-menu">
+      <button class="sidebar-item active" id="navDash" onclick="switchMainTab('dashboard')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        Dashboard
+      </button>
+      <button class="sidebar-item" id="navOrder" onclick="switchMainTab('order')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        Katalog Produk
+      </button>
+      <button class="sidebar-item" id="navSettings" onclick="switchMainTab('settings')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        Settings
+      </button>
+    </div>
+    
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="confirmLogout()">Logout</button>
+    </div>
   </div>
 
   <div class="main-container">
+    
+    <!-- TAB CONTENT: DASHBOARD -->
     <div id="tabContentDashboard">
-      <div id="notifBanner" class="notif-banner" style="display: none;"></div>
       <div class="dashboard-grid">
-        <div class="dash-card hover-card reveal active">
-          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg><span data-i18n="activeProducts">Active Products</span></h3>
-          <div id="listPanelAktif"><div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div><div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div><div class="skeleton skeleton-text" style="width: 90%;"></div></div>
-          <div class="referral-box">
-            <h4>Ajak Teman, Dapet Saldo!</h4>
-            <p>Bagikan kode ini ke temanmu. Kalau mereka daftar, kalian berdua dapet bonus saldo.</p>
-            <div class="referral-code" id="referralCode">LOADING...</div>
-            <button class="btn-copy-referral" onclick="copyReferral()">Salin Kode</button>
+        <div class="dash-card hover-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Produk Aktif
+          </h3>
+          <div id="listPanelAktif">
+            <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text" style="width: 90%;"></div>
           </div>
         </div>
-        <div class="dash-card hover-card reveal active delay-1">
-          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span data-i18n="history">Transaction History</span></h3>
-          <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;"><div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div><div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div><div class="skeleton skeleton-text" style="width: 50%;"></div></div>
-        </div>
-      </div>
-      <div class="testimoni-section reveal active delay-2">
-        <h2>Apa Kata Mereka?</h2>
-        <div class="testimoni-grid">
-          <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Gila sih ini murah banget, panelnya lancar jaya. Adminnya fast respon pula!"</p><div class="testi-user"><div class="testi-avatar">R</div><div><div class="testi-name">Rizky</div><div class="testi-badge">Verified Buyer</div></div></div></div>
-          <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Beli panel unlimited di sini cuma 2rb, di tempat lain bisa 5rb. Worth it banget."</p><div class="testi-user"><div class="testi-avatar">A</div><div><div class="testi-name">Andini</div><div class="testi-badge">Verified Buyer</div></div></div></div>
-          <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Alight Motion premiumnya awet, udah 3 bulan gak ada masalah. Recommended."</p><div class="testi-user"><div class="testi-avatar">B</div><div><div class="testi-name">Bagas</div><div class="testi-badge">Verified Buyer</div></div></div></div>
-          <div class="testi-card"><div class="testi-stars">★★★★☆</div><p class="testi-text">"Prosesnya cepet, tinggal bayar langsung dapet panel. Pokoknya mantap!"</p><div class="testi-user"><div class="testi-avatar">S</div><div><div class="testi-name">Sinta</div><div class="testi-badge">Verified Buyer</div></div></div></div>
+
+        <div class="dash-card hover-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Riwayat Transaksi
+          </h3>
+          <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
+            <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+            <div class="skeleton skeleton-text" style="width: 50%;"></div>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- TAB CONTENT: ORDER -->
     <div id="tabContentOrder">
       <div class="wrapper-order">
-        <div class="info-section reveal active"><h1 id="orderTitle"></h1><p data-i18n="catalogDesc">Pilih dari katalog produk premium kami di bawah ini.</p></div>
-        <div class="form-section hover-card reveal active delay-1">
+        <div class="info-section">
+          <h1>Pilih Produk <br><span>Digital Kamu.</span></h1>
+          <p>Pilih dari katalog produk premium kami di bawah ini.</p>
+        </div>
+        <div class="form-section hover-card">
+          
           <div class="catalog-grid">
-            <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')"><div class="css-logo-panel"></div><div><h4 data-i18n="waBotPanel">WA Bot Panel</h4><p data-i18n="startFrom">Mulai Rp 300</p></div></div>
-            <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')"><div class="css-logo-am"></div><div><h4 data-i18n="alightMotion">Alight Motion</h4><p data-i18n="amPrice">Rp 5.000 / Tahun</p></div></div>
+            <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
+              <img src="/media/panel.png" alt="WA Bot Panel">
+              <div>
+                <h4>WA Bot Panel</h4>
+                <p>Mulai Rp 300</p>
+              </div>
+            </div>
+            <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')">
+              <img src="/media/am.png" alt="Alight Motion">
+              <div>
+                <h4>Alight Motion</h4>
+                <p>Rp 5.000 / Tahun</p>
+              </div>
+            </div>
           </div>
+
           <div id="productWaBot" class="product-content active">
-            <div class="tab-menu-inner"><button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')" data-i18n="newPanel">New Panel</button><button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')" data-i18n="addServer">Add Server</button></div>
+            <div class="tab-menu-inner">
+              <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
+              <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
+            </div>
+
             <form id="orderForm">
-              <div class="field" id="fieldName"><label data-i18n="panelName">Panel Name (No Spaces)</label><input type="text" id="customName" class="glass-input" placeholder="Nama panel kamu" required oninput="this.value = this.value.replace(/\s+/g, '')"></div>
-              <div class="field" id="fieldAddUser" style="display: none;"><label data-i18n="panelUsername">Your Panel Username</label><div class="input-group"><input type="text" id="addUsername" placeholder="Username panel kamu" oninput="this.value = this.value.replace(/\s+/g, '')"><span class="suffix">@kitzunemarket.com</span></div></div>
-              <div class="field"><label data-i18n="nodeVersion">Node.js Version</label><input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;"></div>
-              <div class="field"><label data-i18n="selectRam">Select RAM Capacity</label>
+              <div class="field" id="fieldName">
+                <label>Panel Name (No Spaces)</label>
+                <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+              </div>
+
+              <div class="field" id="fieldAddUser" style="display: none;">
+                <label>Your Panel Username</label>
+                <div class="input-group">
+                  <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+                  <span class="suffix">@kitzunemarket.com</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Node.js Version</label>
+                <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+              </div>
+              
+              <div class="field">
+                <label>Select RAM Capacity</label>
                 <div class="ram-grid">
                   <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
@@ -503,110 +525,204 @@
                   <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
                 </div>
               </div>
-              <div class="field"><label>Kode Promo (Opsional)</label><div style="display: flex; gap: 8px;"><input type="text" id="voucherCode" class="glass-input" placeholder="Masukkan kode promo" style="flex: 1;"><button type="button" onclick="applyVoucher()" style="padding: 0 16px; background: var(--neon); color: #fff; border: none; border-radius: 12px; font-weight: 700; cursor: pointer;">Pakai</button></div><div id="voucherMsg" style="font-size: 12px; margin-top: 6px;"></div></div>
-              <div class="total"><span data-i18n="totalPayment">Total Pembayaran</span><span class="total-price" id="totalText">Rp 300</span></div>
-              <button type="submit" id="submitBtn" onclick="createRipple(event)" data-i18n="btnBuyPanel">Beli Panel</button>
+              
+              <div class="total">
+                <span>Total Pembayaran</span>
+                <span class="total-price" id="totalText">Rp 300</span>
+              </div>
+              
+              <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
             </form>
           </div>
+
           <div id="productAm" class="product-content">
-            <div id="amStep1"><div class="field"><label data-i18n="amEmail">Email Alight Motion Kamu</label><input type="email" id="amEmail" class="glass-input" placeholder="Email kamu" required></div><button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)" data-i18n="btnSendLink">Kirim Link Verifikasi</button></div>
-            <div id="amStep2" style="display: none;"><p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;" data-i18n="amInbox">Cek inbox/spam email Anda. Copy link verifikasi dari email, lalu paste di bawah ini.</p><div class="field"><label data-i18n="amLinkLabel">Paste Link Verifikasi</label><textarea id="amLink" class="glass-input" placeholder="Tempel link verifikasi di sini" rows="3" style="resize: none; font-size: 13px;"></textarea></div><button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);" data-i18n="btnActivateAm">Aktifkan Premium (Rp 5.000)</button></div>
+            <div id="amStep1">
+              <div class="field">
+                <label>Email Alight Motion Kamu</label>
+                <input type="email" id="amEmail" class="glass-input" placeholder="contoh@gmail.com" required>
+              </div>
+              <button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)">Kirim Link Verifikasi</button>
+            </div>
+
+            <div id="amStep2" style="display: none;">
+              <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;">Cek inbox/spam email <b id="amTextEmail"></b>. Copy link verifikasi dari email, lalu paste di bawah ini.</p>
+              <div class="field">
+                <label>Paste Link Verifikasi</label>
+                <textarea id="amLink" class="glass-input" placeholder="https://alightcreative.app.link/..." rows="3" style="resize: none; font-size: 13px;"></textarea>
+              </div>
+              <button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);">Aktifkan Premium (Rp 5.000)</button>
+            </div>
           </div>
+
         </div>
       </div>
     </div>
 
+    <!-- TAB CONTENT: SETTINGS -->
     <div id="tabContentSettings">
       <div class="wrapper-order">
-        <div class="info-section reveal active"><h1 id="settingsTitle"></h1><p data-i18n="settingsDesc">Ubah email dan password akun Kitzune Store Anda.</p></div>
-        <div class="form-section hover-card reveal active delay-1">
-          <div class="field"><label data-i18n="currentEmail">Email Saat Ini</label><input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;"></div>
-          <div class="field"><label data-i18n="currentPassEmail">Password Saat Ini (Wajib)</label><input type="password" id="currentPassEmail" class="glass-input" placeholder="Masukkan password Anda"></div>
-          <div class="field"><label data-i18n="newEmail">Email Baru</label><input type="email" id="newEmail" class="glass-input" placeholder="Masukkan email baru"></div>
-          <button type="button" class="auth-btn am-btn" onclick="changeEmail(event)" style="background: var(--neon); margin-bottom: 24px;" data-i18n="btnChangeEmail">Ubah Email</button>
+        <div class="info-section">
+          <h1>Account <br><span>Settings.</span></h1>
+          <p>Ubah email dan password akun Kitzune Store Anda.</p>
+        </div>
+        <div class="form-section hover-card">
+          
+          <!-- Form Ubah Email -->
+          <div class="field">
+            <label>Email Saat Ini</label>
+            <input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+          </div>
+          <div class="field">
+            <label>Password Saat Ini (Wajib)</label>
+            <input type="password" id="currentPassEmail" class="glass-input" placeholder="Masukkan password Anda">
+          </div>
+          <div class="field">
+            <label>Email Baru</label>
+            <input type="email" id="newEmail" class="glass-input" placeholder="Masukkan email baru">
+          </div>
+          <button type="button" class="auth-btn am-btn" onclick="changeEmail(event)" style="background: var(--neon); margin-bottom: 24px;">Ubah Email</button>
+
           <hr style="border: 1px solid var(--border); margin: 24px 0;">
-          <div class="field"><label data-i18n="currentPass">Password Saat Ini (Wajib)</label><input type="password" id="currentPassPassword" class="glass-input" placeholder="Masukkan password lama Anda"></div>
-          <div class="field"><label data-i18n="newPass">Password Baru</label><input type="password" id="newPassword" class="glass-input" placeholder="Masukkan password baru"></div>
-          <div class="field"><label data-i18n="confirmNewPass">Konfirmasi Password Baru</label><input type="password" id="confirmNewPassword" class="glass-input" placeholder="Ulangi password baru"></div>
-          <button type="button" class="auth-btn am-btn" onclick="changePassword(event)" style="background: var(--success);" data-i18n="btnChangePass">Ubah Password</button>
+
+          <!-- Form Ubah Password -->
+          <div class="field">
+            <label>Password Saat Ini (Wajib)</label>
+            <input type="password" id="currentPassPassword" class="glass-input" placeholder="Masukkan password lama Anda">
+          </div>
+          <div class="field">
+            <label>Password Baru</label>
+            <input type="password" id="newPassword" class="glass-input" placeholder="Masukkan password baru">
+          </div>
+          <div class="field">
+            <label>Konfirmasi Password Baru</label>
+            <input type="password" id="confirmNewPassword" class="glass-input" placeholder="Ulangi password baru">
+          </div>
+          <button type="button" class="auth-btn am-btn" onclick="changePassword(event)" style="background: var(--success);">Ubah Password</button>
+          
         </div>
       </div>
     </div>
 
-    <div id="tabContentCaraPakai">
-      <div class="wrapper-order">
-        <div class="info-section reveal active"><h1>Cara <br><span>Pakai.</span></h1><p>Panduan langkah demi langkah untuk memaksimalkan produk dari Kitzune Store.</p></div>
-        <div class="form-section hover-card reveal active delay-1">
-          <div class="step-item"><div class="step-num">1</div><div class="step-content"><h4>Topup Saldo Dulu</h4><p>Klik tombol "+ Topup" di pojok kanan atas. Masukkan nominal minimal Rp 400, lalu konfirmasi via WhatsApp ke Admin. Saldo akan ditambahkan setelah pembayaran dikonfirmasi.</p></div></div>
-          <div class="step-item"><div class="step-num">2</div><div class="step-content"><h4>Pilih Produk di Katalog</h4><p>Buka menu "Katalog Produk". Pilih antara WA Bot Panel atau Alight Motion Premium. Setelah itu pilih paket RAM (untuk WA Bot) sesuai kebutuhanmu.</p></div></div>
-          <div class="step-item"><div class="step-num">3</div><div class="step-content"><h4>Isi Data dan Bayar</h4><p>Masukkan nama panel yang diinginkan (tanpa spasi). Klik "Beli Panel" dan konfirmasi. Saldo akan otomatis terpotong dan data login akan muncul. <b>Salin dan simpan data login tersebut!</b></p></div></div>
-          <div class="step-item"><div class="step-num">4</div><div class="step-content"><h4>Login ke Panel</h4><p>Buka dashboard, klik tombol "Manage" di produk aktif. Username akan otomatis ter-copy. Buka link panel yang muncul dan login menggunakan username + password yang sudah didapat.</p></div></div>
-          <div class="step-item"><div class="step-num">5</div><div class="step-content"><h4>Untuk Alight Motion</h4><p>Masukkan email kamu, lalu klik "Kirim Link Verifikasi". Buka email, copy link verifikasi, paste di form, dan klik "Aktifkan Premium". Akun Alight Motion kamu otomatis jadi premium.</p></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="tabContentFaq">
-      <div class="wrapper-order">
-        <div class="info-section reveal active"><h1>Frequently Asked <br><span>Questions.</span></h1><p>Pertanyaan yang sering ditanyakan. Klik untuk lihat jawabannya.</p></div>
-        <div class="form-section hover-card reveal active delay-1">
-          <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Bagaimana cara topup saldo?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>Klik tombol <b>+ Topup</b> di pojok kanan atas. Masukkan nominal (minimal Rp 400), lalu kirim pesan ke Admin via WhatsApp. Admin akan memproses saldo lu dalam waktu 1x24 jam.</p></div></div>
-          <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Berapa lama panel WA Bot aktif?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>Panel WA Bot aktif selama <b>30 hari</b> sejak pembelian. Sisa hari bisa dilihat di Dashboard, dan kamu bisa klik tombol "Perpanjang" untuk menambah 30 hari lagi.</p></div></div>
-          <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Bagaimana cara login ke panel?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>Setelah pembelian berhasil, lu akan mendapat data login (Username + Password). Buka dashboard, klik tombol <b>Manage</b> di produk aktif. Username otomatis ter-copy, lalu login di link yang disediakan.</p></div></div>
-          <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Apa itu Alight Motion Premium?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>Alight Motion Premium adalah versi berbayar dari aplikasi edit video Alight Motion. Dengan premium, lu bisa akses semua fitur tanpa watermark dan tanpa iklan, selama 1 tahun.</p></div></div>
-          <div class="faq-item"><div class="faq-question" onclick="toggleFaq(this)"><span>Kenapa panel saya hilang dari dashboard?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>Panel bisa hilang kalau masa aktif habis atau dihapus oleh Admin (misal melanggar aturan). Hubungi Admin via WhatsApp kalau ada masalah.</p></div></div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
+<!-- ADMIN APP -->
 <div id="adminApp">
   <div class="top-header">
-    <div class="profile-card"><img src="/favicon.png" alt="Logo" class="header-logo"><div class="avatar" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div><div class="profile-info"><span>Logged in as</span><strong>Administrator</strong></div></div>
-    <div class="header-right"><button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;">Logout</button></div>
+    <div class="profile-card">
+      <img src="/favicon.png" alt="Logo" class="header-logo">
+      <div class="avatar" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
+      <div class="profile-info">
+        <span>Logged in as</span>
+        <strong>Administrator</strong>
+      </div>
+    </div>
+    
+    <div class="header-right">
+      <button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;">Logout</button>
+    </div>
   </div>
+
   <div class="main-container">
     <div id="adminTabContentDashboard">
-      <div class="admin-header reveal active"><h1>Admin Dashboard</h1></div>
-      <div class="stat-grid reveal active">
-        <div class="stat-card"><div class="stat-label">Total Users</div><div class="stat-value purple" id="statUsers">-</div></div>
-        <div class="stat-card"><div class="stat-label">Total Revenue</div><div class="stat-value green" id="statRevenue">-</div></div>
-        <div class="stat-card"><div class="stat-label">Total Transactions</div><div class="stat-value" id="statTransactions">-</div></div>
+      <div class="admin-header">
+        <h1>User Management</h1>
       </div>
-      <div class="table-card hover-card reveal active delay-1">
-        <h3 style="font-size:16px;margin-bottom:16px;">User List</h3>
-        <table><thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead><tbody id="userTableBody"></tbody></table>
+      <div class="table-card hover-card">
+        <h3>User List</h3>
+        <br>
+        <table>
+          <thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead>
+          <tbody id="userTableBody"></tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
 
-<div id="topupModal" class="modal-overlay"><div class="modal-content"><h3 data-i18n="topupTitle">Topup Saldo</h3><p data-i18n="topupDesc">Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.</p><input type="number" id="topupAmount" class="modal-input" placeholder="Nominal topup" min="400"><div class="modal-actions"><button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')" data-i18n="cancel">Batal</button><button class="btn-modal btn-confirm" onclick="proceedTopup()" data-i18n="topupBtn">+ Topup</button></div></div></div>
+<!-- MODAL TOPUP -->
+<div id="topupModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Topup Balance</h3>
+    <p>Enter amount (Min. Rp 400), then send message to Admin via WhatsApp.</p>
+    <input type="number" id="topupAmount" class="modal-input" placeholder="Ex: 500" min="400">
+    <div class="modal-actions">
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')">Cancel</button>
+      <button class="btn-modal btn-confirm" onclick="proceedTopup()">Topup via WA</button>
+    </div>
+  </div>
+</div>
 
-<div id="confirmModal" class="modal-overlay"><div class="modal-content"><h3 data-i18n="confirmTitle">Konfirmasi</h3><p id="confirmText">Apakah anda yakin?</p><div class="modal-actions"><button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')" data-i18n="cancel">Batal</button><button class="btn-modal btn-confirm" id="confirmPurchaseBtn" onclick="executePurchase()" data-i18n="yesContinue">Ya, Lanjutkan</button></div></div></div>
+<!-- MODAL KONFIRMASI -->
+<div id="confirmModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Konfirmasi</h3>
+    <p id="confirmText">Apakah anda yakin?</p>
+    <div class="modal-actions">
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
+      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
+    </div>
+  </div>
+</div>
 
-<div id="logoutModal" class="modal-overlay"><div class="modal-content"><h3 data-i18n="logoutTitle">Konfirmasi Logout</h3><p data-i18n="logoutDesc">Apakah Anda yakin ingin keluar dari akun ini?</p><div class="modal-actions"><button class="btn-modal btn-cancel" onclick="document.getElementById('logoutModal').classList.remove('active')" data-i18n="cancel">Batal</button><button class="btn-modal btn-confirm" style="background: var(--danger);" onclick="executeLogout()" data-i18n="yesLogout">Ya, Logout</button></div></div></div>
+<!-- MODAL KONFIRMASI LOGOUT -->
+<div id="logoutModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Konfirmasi Logout</h3>
+    <p>Apakah Anda yakin ingin keluar dari akun ini?</p>
+    <div class="modal-actions">
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('logoutModal').classList.remove('active')">Batal</button>
+      <button class="btn-modal btn-confirm" style="background: var(--danger);" onclick="executeLogout()">Ya, Logout</button>
+    </div>
+  </div>
+</div>
 
-<div id="successModal" class="modal-overlay"><div class="modal-content"><h3 id="successTitle">Berhasil!</h3><p id="successDesc">Pesanan diproses.</p><div class="panel-data-box" id="panelDataBox"><div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div><div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div><div class="row" id="rowPassword"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div><div class="row" id="rowAmEmail" style="display: none;"><span class="label">Email:</span> <span class="value" id="resAmEmail">-</span></div></div><div class="warning-box" id="warningText">PENTING: Simpan data ini.</div><div class="modal-actions"><button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()" data-i18n="copyData">Salin Data (Copy)</button><button class="btn-modal btn-cancel" onclick="closeSuccessModal()" data-i18n="close">Tutup</button></div></div></div>
+<!-- MODAL SUKSES -->
+<div id="successModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3 id="successTitle">Berhasil!</h3>
+    <p id="successDesc">Pesanan diproses.</p>
+    
+    <div class="panel-data-box" id="panelDataBox">
+      <div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div>
+      <div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div>
+      <div class="row" id="rowPassword"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
+      <div class="row" id="rowAmEmail" style="display: none;"><span class="label">Email:</span> <span class="value" id="resAmEmail">-</span></div>
+    </div>
 
-<div id="customAlert" class="modal-overlay"><div class="modal-content" style="max-width: 360px;"><h3 id="alertTitle" data-i18n="notif">Notifikasi</h3><p id="alertMessage">Pesan notifikasi.</p><div class="modal-actions"><button class="btn-modal btn-confirm" style="flex: 1;" onclick="document.getElementById('customAlert').classList.remove('active')">OK</button></div></div></div>
+    <div class="warning-box" id="warningText">
+      PENTING: Simpan data ini.
+    </div>
 
-<div id="forgotPasswordModal" class="modal-overlay"><div class="modal-content"><h3>Lupa Password?</h3><p>Masukkan email akun lu. Kami akan kirim link buat reset password.</p><div class="error-msg" id="forgotError"></div><input type="email" id="forgotEmail" class="modal-input" placeholder="Masukkan email"><div class="modal-actions"><button class="btn-modal btn-cancel" onclick="document.getElementById('forgotPasswordModal').classList.remove('active')">Batal</button><button class="btn-modal btn-confirm" onclick="sendResetEmail()">Kirim Link</button></div></div></div>
+    <div class="modal-actions">
+      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
+      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Tutup</button>
+    </div>
+  </div>
+</div>
 
-<div id="historyDetailModal" class="modal-overlay"><div class="modal-content"><h3>Detail Transaksi</h3><div class="panel-data-box" id="historyDetailBox" style="margin-bottom:24px;"></div><div class="modal-actions"><button class="btn-modal btn-confirm" style="flex:1;" onclick="document.getElementById('historyDetailModal').classList.remove('active')">Tutup</button></div></div></div>
+<!-- CUSTOM ALERT -->
+<div id="customAlert" class="modal-overlay">
+  <div class="modal-content" style="max-width: 360px;">
+    <h3 id="alertTitle">Notifikasi</h3>
+    <p id="alertMessage">Pesan notifikasi.</p>
+    <div class="modal-actions">
+      <button class="btn-modal btn-confirm" style="flex: 1;" onclick="document.getElementById('customAlert').classList.remove('active')">OK</button>
+    </div>
+  </div>
+</div>
 
-<div id="extendModal" class="modal-overlay"><div class="modal-content"><h3>Perpanjang Panel</h3><p>Pilih paket RAM untuk perpanjangan 30 hari ke depan.</p><div style="text-align:left;margin-bottom:20px;"><label style="font-size:12px;color:var(--muted);font-weight:700;">Nama Panel</label><input type="text" id="extendName" class="modal-input" readonly style="background:var(--bg);color:var(--muted);"><label style="font-size:12px;color:var(--muted);font-weight:700;">Pilih RAM</label><select id="extendRam" class="modal-input" style="text-align:left;padding:14px;"><option value="1GB" data-harga="300">1 GB - Rp 300</option><option value="2GB" data-harga="450">2 GB - Rp 450</option><option value="3GB" data-harga="600">3 GB - Rp 600</option><option value="4GB" data-harga="750">4 GB - Rp 750</option><option value="5GB" data-harga="900">5 GB - Rp 900</option><option value="6GB" data-harga="1050">6 GB - Rp 1.050</option><option value="7GB" data-harga="1200">7 GB - Rp 1.200</option><option value="8GB" data-harga="1350">8 GB - Rp 1.350</option><option value="9GB" data-harga="1500">9 GB - Rp 1.500</option><option value="10GB" data-harga="1700">10 GB - Rp 1.700</option><option value="Unlimited" data-harga="2000">Unlimited - Rp 2.000</option></select></div><div class="modal-actions"><button class="btn-modal btn-cancel" onclick="document.getElementById('extendModal').classList.remove('active')">Batal</button><button class="btn-modal btn-confirm" onclick="executeExtend()">Perpanjang</button></div></div></div>
 
+<!-- FIREBASE SDK & LOGIC -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCjhtqP_oVnT9C_fgu1FFlKCDxnlEIrWM4",
@@ -621,101 +737,175 @@
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db = getFirestore(app);
-
+  
   const ADMIN_EMAIL = "upiljaranmmbu@gmail.com";
   const ADMIN_WA = "6288906198025";
-  const PROMO_CODES = { "KITZUNE10": { type: "percent", value: 10 }, "HEMAT500": { type: "fixed", value: 500 } };
-
   let currentUser = null;
   let pendingOrder = null;
   let currentMode = "new"; 
   let currentCatalog = "wabot";
   let pendingAmEmail = "";
-  let currentLang = 'en';
-  let currentVoucher = null;
-  let isProcessing = false;
-  let lastOrderTime = 0;
-  let audioCtx = null;
-  let currentExtendPanel = null;
 
-  const translations = {
-    en: { authDesc: "The most affordable and reliable digital products in the market.", authTitle: "Welcome to <br><span>Kitzune Store.</span>", signInTitle: "Sign In", email: "Email", password: "Password", btnLogin: "Log In", noAccount: "Don't have an account?", createOne: "Create one", createAccTitle: "Create Account", confirmPass: "Confirm Password", btnRegister: "Register & Login", haveAccount: "Already have an account?", logInHere: "Log in here", loggedInAs: "Logged in as", myBalance: "My Balance", topupBtn: "+ Topup", menu: "Menu", dashboard: "Dashboard", catalog: "Product Catalog", settings: "Settings", logoutBtn: "Logout", activeProducts: "Active Products", history: "Transaction History", catalogDesc: "Choose from our premium product catalog below.", orderTitle: "Choose Your <br><span>Digital Products.</span>", waBotPanel: "WA Bot Panel", startFrom: "From Rp 300", alightMotion: "Alight Motion", amPrice: "Rp 5,000 / Year", newPanel: "New Panel", addServer: "Add Server", panelName: "Panel Name (No Spaces)", panelUsername: "Your Panel Username", nodeVersion: "Node.js Version", selectRam: "Select RAM Capacity", totalPayment: "Total Payment", btnBuyPanel: "Buy Panel", amEmail: "Your Alight Motion Email", btnSendLink: "Send Verification Link", amInbox: "Check your inbox/spam. Copy the verification link and paste it below.", amLinkLabel: "Paste Verification Link", btnActivateAm: "Activate Premium (Rp 5,000)", settingsTitle: "Account <br><span>Settings.</span>", settingsDesc: "Change your Kitzune Store account email and password.", currentEmail: "Current Email", currentPassEmail: "Current Password (Required)", newEmail: "New Email", btnChangeEmail: "Change Email", currentPass: "Current Password (Required)", newPass: "New Password", confirmNewPass: "Confirm New Password", btnChangePass: "Change Password", topupTitle: "Topup Balance", topupDesc: "Enter amount (Min. Rp 400), then send message to Admin via WhatsApp.", cancel: "Cancel", confirmTitle: "Confirmation", yesContinue: "Yes, Continue", logoutTitle: "Logout Confirmation", logoutDesc: "Are you sure you want to log out of this account?", yesLogout: "Yes, Logout", copyData: "Copy Data", close: "Close", notif: "Notification" },
-    id: { authDesc: "Produk digital paling murah dan terpercaya di pasaran.", authTitle: "Selamat Datang di <br><span>Kitzune Store.</span>", signInTitle: "Masuk", email: "Email", password: "Password", btnLogin: "Masuk", noAccount: "Belum punya akun?", createOne: "Daftar di sini", createAccTitle: "Buat Akun", confirmPass: "Konfirmasi Password", btnRegister: "Daftar & Masuk", haveAccount: "Sudah punya akun?", logInHere: "Masuk di sini", loggedInAs: "Masuk sebagai", myBalance: "Saldo Saya", topupBtn: "+ Topup", menu: "Menu", dashboard: "Dashboard", catalog: "Katalog Produk", settings: "Pengaturan", logoutBtn: "Keluar", activeProducts: "Produk Aktif", history: "Riwayat Transaksi", catalogDesc: "Pilih dari katalog produk premium kami di bawah ini.", orderTitle: "Pilih Produk <br><span>Digital Kamu.</span>", waBotPanel: "WA Bot Panel", startFrom: "Mulai Rp 300", alightMotion: "Alight Motion", amPrice: "Rp 5.000 / Tahun", newPanel: "Panel Baru", addServer: "Tambah Server", panelName: "Nama Panel (Tanpa Spasi)", panelUsername: "Username Panel Kamu", nodeVersion: "Versi Node.js", selectRam: "Pilih Kapasitas RAM", totalPayment: "Total Pembayaran", btnBuyPanel: "Beli Panel", amEmail: "Email Alight Motion Kamu", btnSendLink: "Kirim Link Verifikasi", amInbox: "Cek inbox/spam email Anda. Copy link verifikasi dari email, lalu paste di bawah ini.", amLinkLabel: "Paste Link Verifikasi", btnActivateAm: "Aktifkan Premium (Rp 5.000)", settingsTitle: "Pengaturan <br><span>Akun.</span>", settingsDesc: "Ubah email dan password akun Kitzune Store Anda.", currentEmail: "Email Saat Ini", currentPassEmail: "Password Saat Ini (Wajib)", newEmail: "Email Baru", btnChangeEmail: "Ubah Email", currentPass: "Password Saat Ini (Wajib)", newPass: "Password Baru", confirmNewPass: "Konfirmasi Password Baru", btnChangePass: "Ubah Password", topupTitle: "Topup Saldo", topupDesc: "Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.", cancel: "Batal", confirmTitle: "Konfirmasi", yesContinue: "Ya, Lanjutkan", logoutTitle: "Konfirmasi Logout", logoutDesc: "Apakah Anda yakin ingin keluar dari akun ini?", yesLogout: "Ya, Keluar", copyData: "Salin Data", close: "Tutup", notif: "Notifikasi" }
+  // --- CUSTOM ALERT HELPER ---
+  window.showAlert = function(message, title = "Notifikasi") {
+    document.getElementById('alertTitle').textContent = title;
+    document.getElementById('alertMessage').innerHTML = message;
+    document.getElementById('customAlert').classList.add('active');
   };
 
-  function playSound(type = 'click') { try { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain(); osc.connect(gain); gain.connect(audioCtx.destination); if (type === 'success') { osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2); } else { osc.frequency.setValueAtTime(440, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(330, audioCtx.currentTime + 0.1); } gain.gain.setValueAtTime(0.05, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3); osc.start(); osc.stop(audioCtx.currentTime + 0.3); } catch(e) {} }
+  // --- SIDEBAR MENU LOGIC ---
+  window.toggleSidebar = (show) => {
+    const sidebar = document.getElementById('sidebarMenu');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (show) {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+    } else {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    }
+  };
 
-  window.toggleTheme = () => { playSound('click'); const isLight = document.body.classList.toggle('light-mode'); localStorage.setItem('theme', isLight ? 'light' : 'dark'); document.getElementById('iconMoon').style.display = isLight ? 'none' : 'block'; document.getElementById('iconSun').style.display = isLight ? 'block' : 'none'; };
-  if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); document.getElementById('iconMoon').style.display = 'none'; document.getElementById('iconSun').style.display = 'block'; }
+  // --- LOGOUT CONFIRMATION ---
+  window.confirmLogout = () => {
+    toggleSidebar(false);
+    document.getElementById('logoutModal').classList.add('active');
+  };
 
-  function applyLanguage(lang) { currentLang = lang; const lt = document.getElementById('langToggle'); if (lt) lt.textContent = lang === 'en' ? 'ID' : 'EN'; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (translations[lang][key]) el.innerHTML = translations[lang][key]; }); const at = document.getElementById('authTitle'); const ot = document.getElementById('orderTitle'); const st = document.getElementById('settingsTitle'); if (at) at.innerHTML = translations[lang].authTitle; if (ot) ot.innerHTML = translations[lang].orderTitle; if (st) st.innerHTML = translations[lang].settingsTitle; }
-  window.toggleLanguage = () => { playSound('click'); applyLanguage(currentLang === 'en' ? 'id' : 'en'); };
+  window.executeLogout = () => {
+    document.getElementById('logoutModal').classList.remove('active');
+    signOut(auth);
+  };
 
-  window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loadingScreen').classList.add('hidden'); }, 1200); });
-  const cursor = document.getElementById('cursorGlow'); document.addEventListener('mousemove', (e) => { if (cursor) { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; } });
-  window.addEventListener('scroll', () => { const header = document.getElementById('topHeader'); if (header) { if (window.scrollY > 50) header.classList.add('scrolled'); else header.classList.remove('scrolled'); } });
-  window.toggleFaq = (el) => { playSound('click'); el.parentElement.classList.toggle('open'); };
+  // --- RIPPLE ANIMATION ---
+  window.createRipple = function(event) {
+    const btn = event.currentTarget;
+    const circle = document.createElement("span");
+    const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+    const radius = diameter / 2;
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - btn.getBoundingClientRect().left - radius}px`;
+    circle.style.top = `${event.clientY - btn.getBoundingClientRect().top - radius}px`;
+    circle.classList.add("ripple");
+    const ripple = btn.getElementsByClassName("ripple")[0];
+    if (ripple) { ripple.remove(); }
+    btn.appendChild(circle);
+  };
 
-  window.openForgotPassword = () => { playSound('click'); document.getElementById('forgotPasswordModal').classList.add('active'); };
-  window.sendResetEmail = async () => { const email = document.getElementById('forgotEmail').value.trim(); const err = document.getElementById('forgotError'); err.style.display = 'none'; if (!email) { err.textContent = "Masukkan email dulu!"; err.style.display = 'block'; return; } try { await sendPasswordResetEmail(auth, email); document.getElementById('forgotPasswordModal').classList.remove('active'); showAlert("Link reset password sudah dikirim ke email lu. Cek inbox/spam.", "Berhasil"); playSound('success'); } catch (error) { err.textContent = error.message; err.style.display = 'block'; } };
+  window.toggleAuth = (type) => {
+    document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
+    document.getElementById('loginError').style.display = 'none';
+    document.getElementById('regError').style.display = 'none';
+  }
 
-  document.querySelectorAll('.catalog-card').forEach(card => { card.addEventListener('mousemove', (e) => { const rect = card.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top; const centerX = rect.width / 2; const centerY = rect.height / 2; const rotateX = ((y - centerY) / centerY) * -10; const rotateY = ((x - centerX) / centerX) * 10; card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`; }); card.addEventListener('mouseleave', () => { card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`; }); });
+  // --- SWITCH CATALOG ---
+  window.switchCatalog = (cat) => {
+    currentCatalog = cat;
+    document.querySelectorAll('.catalog-card').forEach(card => card.classList.remove('active'));
+    document.querySelectorAll('.product-content').forEach(el => el.classList.remove('active'));
 
-  const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 }); document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    if (cat === 'wabot') {
+      document.getElementById('productWaBot').classList.add('active');
+    } else {
+      document.getElementById('productAm').classList.add('active');
+    }
+  };
 
-  window.showAlert = function(message, title = "Notifikasi") { document.getElementById('alertTitle').textContent = title; document.getElementById('alertMessage').innerHTML = message; document.getElementById('customAlert').classList.add('active'); };
-  window.toggleSidebar = (show) => { const sidebar = document.getElementById('sidebarMenu'); const overlay = document.getElementById('sidebarOverlay'); if (show) { sidebar.classList.add('active'); overlay.classList.add('active'); } else { sidebar.classList.remove('active'); overlay.classList.remove('active'); } };
-  window.confirmLogout = () => { toggleSidebar(false); document.getElementById('logoutModal').classList.add('active'); };
-  window.executeLogout = () => { document.getElementById('logoutModal').classList.remove('active'); signOut(auth); };
-  window.createRipple = function(event) { const btn = event.currentTarget; const circle = document.createElement("span"); const diameter = Math.max(btn.clientWidth, btn.clientHeight); const radius = diameter / 2; circle.style.width = circle.style.height = `${diameter}px`; circle.style.left = `${event.clientX - btn.getBoundingClientRect().left - radius}px`; circle.style.top = `${event.clientY - btn.getBoundingClientRect().top - radius}px`; circle.classList.add("ripple"); const ripple = btn.getElementsByClassName("ripple")[0]; if (ripple) { ripple.remove(); } btn.appendChild(circle); };
-  window.toggleAuth = (type) => { document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none'; document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none'; document.getElementById('loginError').style.display = 'none'; document.getElementById('regError').style.display = 'none'; };
+  // --- USER NAVIGATION ---
+  window.switchMainTab = (tab) => {
+    toggleSidebar(false);
+    document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+    
+    document.getElementById('tabContentDashboard').style.display = 'none';
+    document.getElementById('tabContentOrder').style.display = 'none';
+    document.getElementById('tabContentSettings').style.display = 'none';
+    
+    if (tab === 'dashboard') {
+      document.getElementById('navDash').classList.add('active');
+      document.getElementById('tabContentDashboard').style.display = 'block';
+      loadUserDashboard(); 
+    } else if (tab === 'order') {
+      document.getElementById('navOrder').classList.add('active');
+      document.getElementById('tabContentOrder').style.display = 'block';
+    } else if (tab === 'settings') {
+      document.getElementById('navSettings').classList.add('active');
+      document.getElementById('tabContentSettings').style.display = 'block';
+      document.getElementById('currentEmailDisplay').value = currentUser.email;
+    }
+  };
 
-  window.switchCatalog = (cat) => { playSound('click'); currentCatalog = cat; document.querySelectorAll('.catalog-card').forEach(card => card.classList.remove('active')); document.querySelectorAll('.product-content').forEach(el => el.classList.remove('active')); if (cat === 'wabot') { document.getElementById('catWaBot').classList.add('active'); document.getElementById('productWaBot').classList.add('active'); } else { document.getElementById('catAmPremium').classList.add('active'); document.getElementById('productAm').classList.add('active'); } };
-  window.switchMainTab = (tab) => { playSound('click'); toggleSidebar(false); document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active')); document.getElementById('tabContentDashboard').style.display = 'none'; document.getElementById('tabContentOrder').style.display = 'none'; document.getElementById('tabContentSettings').style.display = 'none'; document.getElementById('tabContentFaq').style.display = 'none'; document.getElementById('tabContentCaraPakai').style.display = 'none'; if (tab === 'dashboard') { document.getElementById('navDash').classList.add('active'); document.getElementById('tabContentDashboard').style.display = 'block'; loadUserDashboard(); } else if (tab === 'order') { document.getElementById('navOrder').classList.add('active'); document.getElementById('tabContentOrder').style.display = 'block'; } else if (tab === 'settings') { document.getElementById('navSettings').classList.add('active'); document.getElementById('tabContentSettings').style.display = 'block'; if (currentUser) document.getElementById('currentEmailDisplay').value = currentUser.email; } else if (tab === 'faq') { document.getElementById('navFaq').classList.add('active'); document.getElementById('tabContentFaq').style.display = 'block'; } else if (tab === 'carapakai') { document.getElementById('navCaraPakai').classList.add('active'); document.getElementById('tabContentCaraPakai').style.display = 'block'; } };
-  window.switchOrderTab = (mode) => { playSound('click'); currentMode = mode; if (mode === 'new') { document.getElementById('tabNew').classList.add('active'); document.getElementById('tabAdd').classList.remove('active'); document.getElementById('fieldName').style.display = 'block'; document.getElementById('fieldAddUser').style.display = 'none'; document.getElementById('submitBtn').textContent = currentLang === 'en' ? "Buy Panel" : "Beli Panel"; } else { document.getElementById('tabNew').classList.remove('active'); document.getElementById('tabAdd').classList.add('active'); document.getElementById('fieldName').style.display = 'none'; document.getElementById('fieldAddUser').style.display = 'block'; document.getElementById('submitBtn').textContent = currentLang === 'en' ? "Add Server" : "Tambah Server"; } };
+  window.switchOrderTab = (mode) => {
+    currentMode = mode;
+    if (mode === 'new') {
+      document.getElementById('tabNew').classList.add('active');
+      document.getElementById('tabAdd').classList.remove('active');
+      document.getElementById('fieldName').style.display = 'block';
+      document.getElementById('fieldAddUser').style.display = 'none';
+      document.getElementById('submitBtn').textContent = "Beli Panel";
+    } else {
+      document.getElementById('tabNew').classList.remove('active');
+      document.getElementById('tabAdd').classList.add('active');
+      document.getElementById('fieldName').style.display = 'none';
+      document.getElementById('fieldAddUser').style.display = 'block';
+      document.getElementById('submitBtn').textContent = "Add Server";
+    }
+  }
 
+  // --- AUTH LOGIC ---
   window.doRegister = async (event) => {
-    if(event) createRipple(event); playSound('click');
+    if(event) createRipple(event);
     const email = document.getElementById('regEmail').value.trim();
     const pass = document.getElementById('regPassword').value;
     const confirm = document.getElementById('regConfirmPassword').value;
-    const refCode = document.getElementById('regReferral').value.trim().toUpperCase();
     const err = document.getElementById('regError');
+
     if (pass !== confirm) { err.textContent = "Passwords do not match!"; err.style.display = "block"; return; }
+
     document.getElementById('btnRegister').disabled = true;
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-      let initialBalance = 0;
-      let myRefCode = email.split('@')[0].toUpperCase() + Math.floor(Math.random()*1000);
-      
-      if (refCode) {
-        const q = query(collection(db, "users"), where("referralCode", "==", refCode));
-        const snap = await getDocs(q);
-        if (!snap.empty) {
-           const referrerData = snap.docs[0].data();
-           const referrerRef = doc(db, "users", snap.docs[0].id);
-           await updateDoc(referrerRef, { balance: (referrerData.balance || 0) + 300 });
-           initialBalance = 200;
-        }
-      }
-
       await setDoc(doc(db, "users", userCredential.user.uid), {
-        email: email, balance: initialBalance, referralCode: myRefCode
+        email: email,
+        balance: 0
       });
     } catch (error) {
       err.textContent = error.message; err.style.display = "block";
       document.getElementById('btnRegister').disabled = false;
     }
-  };
+  }
 
-  window.doLogin = async (event) => { if(event) createRipple(event); playSound('click'); const email = document.getElementById('loginEmail').value.trim(); const pass = document.getElementById('loginPassword').value; const err = document.getElementById('loginError'); document.getElementById('btnLogin').disabled = true; try { await signInWithEmailAndPassword(auth, email, pass); } catch (error) { err.textContent = "Invalid email or password."; err.style.display = "block"; document.getElementById('btnLogin').disabled = false; } };
-  window.openTopupModal = () => { playSound('click'); document.getElementById('topupModal').classList.add('active'); };
-  window.proceedTopup = () => { playSound('click'); const amount = document.getElementById('topupAmount').value; if (amount < 400) { showAlert("Minimal topup Rp 400"); return; } const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${parseInt(amount).toLocaleString()}\n\nMohon diproses.`; window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank"); document.getElementById('topupModal').classList.remove('active'); };
+  window.doLogin = async (event) => {
+    if(event) createRipple(event);
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass = document.getElementById('loginPassword').value;
+    const err = document.getElementById('loginError');
+
+    document.getElementById('btnLogin').disabled = true;
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } catch (error) {
+      err.textContent = "Invalid email or password."; err.style.display = "block";
+      document.getElementById('btnLogin').disabled = false;
+    }
+  }
+
+  window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
+  
+  window.proceedTopup = () => {
+    const amount = document.getElementById('topupAmount').value;
+    if (amount < 400) { showAlert("Minimal topup Rp 400"); return; }
+    
+    const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${parseInt(amount).toLocaleString()}\n\nMohon diproses.`;
+    window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
+    document.getElementById('topupModal').classList.remove('active');
+  }
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
       document.getElementById('authScreen').style.display = 'none';
+
       if (user.email === ADMIN_EMAIL) {
         document.getElementById('adminApp').style.display = 'flex';
         document.getElementById('mainApp').style.display = 'none';
@@ -723,14 +913,15 @@
       } else {
         document.getElementById('mainApp').style.display = 'flex';
         document.getElementById('adminApp').style.display = 'none';
+        
         const username = user.email.split('@')[0];
         document.getElementById('displayUser').textContent = username;
         document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
+        
         await updateUserBalanceUI(user.uid);
         switchMainTab('dashboard'); 
       }
     } else {
-      currentUser = null;
       document.getElementById('authScreen').style.display = 'flex';
       document.getElementById('mainApp').style.display = 'none';
       document.getElementById('adminApp').style.display = 'none';
@@ -743,37 +934,110 @@
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      const data = docSnap.data();
-      document.getElementById('displayBalance').textContent = "Rp " + (data.balance || 0).toLocaleString();
-      document.getElementById('referralCode').textContent = data.referralCode || "N/A";
+      document.getElementById('displayBalance').textContent = "Rp " + (docSnap.data().balance || 0).toLocaleString();
     }
   }
 
-  window.copyReferral = () => {
-    playSound('click');
-    const code = document.getElementById('referralCode').textContent;
-    if(code === "LOADING..." || code === "N/A") return;
-    navigator.clipboard.writeText(code).then(() => {
-      showAlert("Kode referral berhasil disalin!", "Berhasil");
-      playSound('success');
-    });
+  // --- ACCOUNT SETTINGS (RE-AUTH WITH OLD PASSWORD) ---
+  window.changeEmail = async (event) => {
+    const oldPass = document.getElementById('currentPassEmail').value;
+    const newEmail = document.getElementById('newEmail').value.trim();
+
+    if (!oldPass || !newEmail) { showAlert("Isi password saat ini dan email baru!"); return; }
+
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Memproses...";
+
+    try {
+      // 1. Re-autentikasi dulu pakai password lama
+      const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
+      await reauthenticateWithCredential(currentUser, credential);
+
+      // 2. Kalau sukses, baru ganti email
+      await updateEmail(currentUser, newEmail);
+      
+      // 3. Update email di database Firestore juga
+      const docRef = doc(db, "users", currentUser.uid);
+      await updateDoc(docRef, { email: newEmail });
+
+      showAlert("Email berhasil diubah! Silakan login ulang.", "Berhasil");
+      setTimeout(() => signOut(auth), 2000);
+
+    } catch (error) {
+      if (error.code === 'auth/wrong-password') {
+        showAlert("Password saat ini salah!", "Gagal");
+      } else {
+        showAlert(error.message, "Gagal");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Ubah Email";
+    }
   };
 
-  window.changeEmail = async (event) => { const oldPass = document.getElementById('currentPassEmail').value; const newEmail = document.getElementById('newEmail').value.trim(); if (!oldPass || !newEmail) { showAlert("Isi password saat ini dan email baru!"); return; } const btn = event.target; btn.disabled = true; btn.textContent = "Memproses..."; try { const credential = EmailAuthProvider.credential(currentUser.email, oldPass); await reauthenticateWithCredential(currentUser, credential); await updateEmail(currentUser, newEmail); const docRef = doc(db, "users", currentUser.uid); await updateDoc(docRef, { email: newEmail }); showAlert("Email berhasil diubah! Silakan login ulang.", "Berhasil"); playSound('success'); setTimeout(() => signOut(auth), 2000); } catch (error) { if (error.code === 'auth/wrong-password') showAlert("Password saat ini salah!", "Gagal"); else showAlert(error.message, "Gagal"); } finally { btn.disabled = false; btn.textContent = currentLang === 'en' ? "Change Email" : "Ubah Email"; } };
-  window.changePassword = async (event) => { const oldPass = document.getElementById('currentPassPassword').value; const newPass = document.getElementById('newPassword').value; const confirmPass = document.getElementById('confirmNewPassword').value; if (!oldPass || !newPass || !confirmPass) { showAlert("Semua kolom wajib diisi!"); return; } if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; } if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; } const btn = event.target; btn.disabled = true; btn.textContent = "Memproses..."; try { const credential = EmailAuthProvider.credential(currentUser.email, oldPass); await reauthenticateWithCredential(currentUser, credential); await updatePassword(currentUser, newPass); showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil"); playSound('success'); document.getElementById('currentPassPassword').value = ""; document.getElementById('newPassword').value = ""; document.getElementById('confirmNewPassword').value = ""; } catch (error) { if (error.code === 'auth/wrong-password') showAlert("Password saat ini salah!", "Gagal"); else showAlert(error.message, "Gagal"); } finally { btn.disabled = false; btn.textContent = currentLang === 'en' ? "Change Password" : "Ubah Password"; } };
+  window.changePassword = async (event) => {
+    const oldPass = document.getElementById('currentPassPassword').value;
+    const newPass = document.getElementById('newPassword').value;
+    const confirmPass = document.getElementById('confirmNewPassword').value;
+    
+    if (!oldPass || !newPass || !confirmPass) { showAlert("Semua kolom wajib diisi!"); return; }
+    if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; }
+    if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; }
 
+    const btn = event.target;
+    btn.disabled = true;
+    btn.textContent = "Memproses...";
+
+    try {
+      // 1. Re-autentikasi dulu pakai password lama
+      const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
+      await reauthenticateWithCredential(currentUser, credential);
+
+      // 2. Kalau sukses, baru ganti password
+      await updatePassword(currentUser, newPass);
+      
+      showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
+      document.getElementById('currentPassPassword').value = "";
+      document.getElementById('newPassword').value = "";
+      document.getElementById('confirmNewPassword').value = "";
+
+    } catch (error) {
+      if (error.code === 'auth/wrong-password') {
+        showAlert("Password saat ini salah!", "Gagal");
+      } else {
+        showAlert(error.message, "Gagal");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Ubah Password";
+    }
+  };
+
+  // --- USER DASHBOARD ---
   async function loadUserDashboard() {
     if (!currentUser) return;
-    document.getElementById('listPanelAktif').innerHTML = `<div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div><div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div><div class="skeleton skeleton-text" style="width: 90%;"></div>`;
-    document.getElementById('listRiwayat').innerHTML = `<div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div><div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div><div class="skeleton skeleton-text" style="width: 50%;"></div>`;
+
+    document.getElementById('listPanelAktif').innerHTML = `
+      <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text" style="width: 90%;"></div>
+    `;
+    document.getElementById('listRiwayat').innerHTML = `
+      <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
+      <div class="skeleton skeleton-text" style="width: 50%;"></div>
+    `;
 
     try {
       const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
       const querySnapshot = await getDocs(q);
       
-      let htmlRiwayat = ""; let htmlPanel = ""; let totalPanel = 0; let expiringSoon = 0;
+      let htmlRiwayat = "";
+      let htmlPanel = "";
+      let totalPanel = 0;
 
-      let docs = querySnapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      let docs = querySnapshot.docs.map(d => d.data());
       docs.sort((a, b) => b.createdAt - a.createdAt);
 
       let panelUsernames = docs.filter(d => {
@@ -783,159 +1047,167 @@
       }).map(d => d.namaPanel);
 
       let serverStatus = {};
+      
       if (panelUsernames.length > 0) {
         try {
           const checkRes = await fetch('/api/check-panel', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ users: panelUsernames })
           });
           const checkData = await checkRes.json();
-          if (checkData.success) checkData.data.forEach(item => serverStatus[item.username] = item.exists);
+          if (checkData.success) {
+            checkData.data.forEach(item => {
+              serverStatus[item.username] = item.exists;
+            });
+          }
         } catch (err) {}
       }
 
       docs.forEach(data => {
-        const dateStr = new Date(data.createdAt).toLocaleDateString('id-ID');
         htmlRiwayat += `
-          <div class="history-item" onclick="showHistoryDetail('${data.id}')">
-            <div class="history-header"><strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? 'Panel Baru' : 'Add Server')}</strong><span>Rp ${data.harga.toLocaleString()}</span></div>
-            <div class="history-details"><p>${data.namaPanel} [${data.ram || '1 Tahun'}]</p><span class="history-date">${dateStr}</span></div>
+          <div class="history-item">
+            <div class="history-header">
+              <strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? 'Panel Baru' : 'Add Server')}</strong>
+              <span>Rp ${data.harga.toLocaleString()}</span>
+            </div>
+            <div class="history-details">
+              <p>${data.namaPanel} [${data.ram || '1 Tahun'}]</p>
+              <span class="history-date">${new Date(data.createdAt).toLocaleDateString('id-ID')}</span>
+            </div>
           </div>
         `;
 
         if (data.produk === 'am') {
-          htmlPanel += `<div class="panel-list-item"><div class="panel-details"><h4>Alight Motion</h4><p>1 Tahun - ${data.emailAm}</p></div><div class="panel-actions"><div class="panel-status status-am">Active</div></div></div>`;
+          htmlPanel += `
+            <div class="panel-list-item">
+              <div class="panel-details">
+                <h4>Alight Motion</h4>
+                <p>1 Tahun • ${data.emailAm}</p>
+              </div>
+              <div class="panel-actions">
+                <div class="panel-status status-am">Active</div>
+              </div>
+            </div>
+          `;
           totalPanel++;
         } else {
-          const now = Date.now(); const msInDay = 24 * 60 * 60 * 1000;
+          const now = Date.now();
+          const msInDay = 24 * 60 * 60 * 1000;
           const daysPassed = Math.floor((now - data.createdAt) / msInDay);
           const daysLeft = 30 - daysPassed;
+
           if (daysLeft > 0) {
-            totalPanel++; if (daysLeft <= 3) expiringSoon++;
+            totalPanel++;
             const isExists = serverStatus[data.namaPanel] !== false; 
+
             if (isExists) {
               htmlPanel += `
                 <div class="panel-list-item">
-                  <div class="panel-details"><h4>${data.namaPanel}</h4><p style="color: ${daysLeft <= 3 ? 'var(--warning)' : 'var(--muted)'}">${data.ram} - Sisa ${daysLeft} Hari</p></div>
+                  <div class="panel-details">
+                    <h4>${data.namaPanel}</h4>
+                    <p>${data.ram} • Sisa ${daysLeft} Hari</p>
+                  </div>
                   <div class="panel-actions">
                     <div class="panel-status status-active">Active</div>
-                    <button class="btn-extend" onclick="openExtend('${data.namaPanel}')">Extend</button>
                     <button class="btn-manage" onclick="managePanel('wabot', '${data.namaPanel}')">Manage</button>
                   </div>
-                </div>`;
+                </div>
+              `;
             } else {
-              htmlPanel += `<div class="panel-list-item" style="opacity: 0.6;"><div class="panel-details"><h4 style="text-decoration: line-through;">${data.namaPanel}</h4><p>${data.ram} - Deleted by Admin</p></div><div class="panel-actions"><div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div></div></div>`;
+              htmlPanel += `
+                <div class="panel-list-item" style="opacity: 0.6;">
+                  <div class="panel-details">
+                    <h4 style="text-decoration: line-through;">${data.namaPanel}</h4>
+                    <p>${data.ram} • Deleted by Admin</p>
+                  </div>
+                  <div class="panel-actions">
+                    <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div>
+                  </div>
+                </div>
+              `;
             }
           }
         }
       });
 
-      if (totalPanel === 0) document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada produk aktif.</p>`;
-      else document.getElementById('listPanelAktif').innerHTML = htmlPanel;
+      if (totalPanel === 0) {
+        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada produk aktif.</p>`;
+      } else {
+        document.getElementById('listPanelAktif').innerHTML = htmlPanel;
+      }
 
-      if (docs.length === 0) document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada riwayat.</p>`;
-      else document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
+      if (docs.length === 0) {
+        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada riwayat.</p>`;
+      } else {
+        document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
+      }
 
-      const banner = document.getElementById('notifBanner');
-      if (expiringSoon > 0) { banner.style.display = 'flex'; banner.innerHTML = `<span style="font-size: 18px;">!</span> Ada <b>${expiringSoon} panel</b> lu yang mau habis (sisa <= 3 hari). Segera perpanjang!`; } else { banner.style.display = 'none'; }
-    } catch (error) { console.error(error); }
+    } catch (error) {
+      console.error("Error load dashboard:", error);
+    }
   }
-
-  window.showHistoryDetail = async (id) => {
-    playSound('click');
-    const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
-    const snap = await getDocs(q);
-    let data = null;
-    snap.forEach(d => { if(d.id === id) data = d.data(); });
-    if(!data) return;
-
-    const dateStr = new Date(data.createdAt).toLocaleString('id-ID');
-    document.getElementById('historyDetailBox').innerHTML = `
-      <div class="row"><span class="label">Produk:</span> <span class="value">${data.produk === 'am' ? 'Alight Motion' : 'WA Bot Panel'}</span></div>
-      <div class="row"><span class="label">Tipe:</span> <span class="value">${data.mode === 'new' ? 'Pembelian Baru' : 'Tambah Server'}</span></div>
-      <div class="row"><span class="label">Nama:</span> <span class="value">${data.namaPanel}</span></div>
-      <div class="row"><span class="label">Paket:</span> <span class="value">${data.ram || '1 Tahun'}</span></div>
-      <div class="row"><span class="label">Harga:</span> <span class="value">Rp ${data.harga.toLocaleString()}</span></div>
-      ${data.voucher ? `<div class="row"><span class="label">Voucher:</span> <span class="value">${data.voucher}</span></div>` : ''}
-      <div class="row"><span class="label">Tanggal:</span> <span class="value">${dateStr}</span></div>
-    `;
-    document.getElementById('historyDetailModal').classList.add('active');
-  };
 
   window.managePanel = (type, val) => {
     if (type === 'am') return; 
-    playSound('click');
     const textToCopy = `${val}@kitzunemarket.com`;
-    navigator.clipboard.writeText(textToCopy).then(() => { window.open("https://srv2.cristall.my.id", "_blank"); }).catch(err => { window.open("https://srv2.cristall.my.id", "_blank"); });
-  };
-
-  window.openExtend = (panelName) => {
-    playSound('click');
-    currentExtendPanel = panelName;
-    document.getElementById('extendName').value = panelName;
-    document.getElementById('extendModal').classList.add('active');
-  };
-
-  window.executeExtend = async () => {
-    if(!currentExtendPanel) return;
-    const select = document.getElementById('extendRam');
-    const ram = select.options[select.selectedIndex].value;
-    const harga = parseInt(select.options[select.selectedIndex].dataset.harga);
-    
-    playSound('click');
-    const docRef = doc(db, "users", currentUser.uid);
-    const docSnap = await getDoc(docRef);
-    const saldo = docSnap.data().balance || 0;
-
-    if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
-
-    const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid), where("namaPanel", "==", currentExtendPanel));
-    const snap = await getDocs(q);
-    if(snap.empty) { showAlert("Panel tidak ditemukan."); return; }
-
-    const txId = snap.docs[0].id;
-    await updateDoc(doc(db, "users", currentUser.uid), { balance: saldo - harga });
-    await updateDoc(doc(db, "transactions", txId), { 
-      createdAt: Date.now(),
-      ram: ram,
-      harga: harga
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      window.open("https://srv2.cristall.my.id", "_blank");
+    }).catch(err => {
+      window.open("https://srv2.cristall.my.id", "_blank");
     });
-    
-    document.getElementById('extendModal').classList.remove('active');
-    playSound('success');
-    showAlert("Panel berhasil diperpanjang 30 hari!", "Berhasil");
-    loadUserDashboard();
-    updateUserBalanceUI(currentUser.uid);
   };
 
-  window.applyVoucher = () => {
-    playSound('click');
-    const code = document.getElementById('voucherCode').value.trim().toUpperCase();
-    const msg = document.getElementById('voucherMsg');
-    if (!code) { msg.textContent = "Masukkan kode dulu."; msg.style.color = "var(--warning)"; return; }
-    if (PROMO_CODES[code]) {
-      currentVoucher = { code: code, ...PROMO_CODES[code] };
-      msg.textContent = `Voucher "${code}" berhasil dipakai!`; msg.style.color = "var(--success)"; updateTotalDisplay();
-    } else {
-      currentVoucher = null; msg.textContent = "Kode voucher tidak valid."; msg.style.color = "var(--danger)"; updateTotalDisplay();
-    }
-  };
+  // --- ADMIN DASHBOARD (USER TABLE) ---
+  async function loadAdminData() {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const tbody = document.getElementById('userTableBody');
+    tbody.innerHTML = '';
 
-  function updateTotalDisplay() {
-    const ramEl = document.querySelector('input[name="ram"]:checked'); if (!ramEl) return;
-    let harga = parseInt(ramEl.dataset.harga);
-    if (currentVoucher) { if (currentVoucher.type === 'percent') harga = Math.floor(harga - (harga * currentVoucher.value / 100)); else if (currentVoucher.type === 'fixed') harga = Math.max(0, harga - currentVoucher.value); }
-    document.getElementById('totalText').textContent = "Rp " + harga.toLocaleString();
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${data.email}</td>
+        <td>Rp ${(data.balance || 0).toLocaleString()}</td>
+        <td><button class="btn-action" onclick="addBalance('${doc.id}', '${data.email}')">Add Balance</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
   }
 
+  window.addBalance = async (uid, email) => {
+    const amountStr = prompt(`Add balance for ${email} (Enter amount, ex: 2000):`);
+    if (!amountStr) return;
+    const amount = parseInt(amountStr);
+    if (isNaN(amount) || amount <= 0) { showAlert("Nominal tidak valid"); return; }
+
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+    const currentBalance = docSnap.data().balance || 0;
+
+    await updateDoc(docRef, { balance: currentBalance + amount });
+    showAlert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${email}`);
+    loadAdminData();
+  }
+
+  // --- USER ORDER LOGIC (WA BOT) ---
   const orderForm = document.getElementById("orderForm");
-  orderForm.addEventListener("change", (e) => { if (e.target.name === "ram") updateTotalDisplay(); });
+  const totalText = document.getElementById("totalText");
+
+  orderForm.addEventListener("change", (e) => {
+    if (e.target.name === "ram") {
+      totalText.textContent = "Rp " + parseInt(e.target.dataset.harga).toLocaleString();
+    }
+  });
+
   orderForm.addEventListener("submit", async (e) => {
-    e.preventDefault(); if (!currentUser) return;
-    const now = Date.now();
-    if (now - lastOrderTime < 5000) { showAlert("Tunggu 5 detik sebelum order lagi."); return; }
-    playSound('click');
-    let finalUsername = ""; let displayConfirm = "";
+    e.preventDefault();
+    if (!currentUser) return;
+
+    let finalUsername = "";
+    let displayConfirm = "";
+
     if (currentMode === 'new') {
       finalUsername = document.getElementById("customName").value.trim();
       if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
@@ -945,152 +1217,225 @@
       if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
       displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${finalUsername}@kitzunemarket.com"</b>?`;
     }
+
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
-    let harga = parseInt(ramEl.dataset.harga);
-    if (currentVoucher) { if (currentVoucher.type === 'percent') harga = Math.floor(harga - (harga * currentVoucher.value / 100)); else if (currentVoucher.type === 'fixed') harga = Math.max(0, harga - currentVoucher.value); }
-    const docRef = doc(db, "users", currentUser.uid); const docSnap = await getDoc(docRef); const saldo = docSnap.data().balance || 0;
-    if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
-    pendingOrder = { produk: "wabot", mode: currentMode, username: finalUsername, ram: ramEl.value, harga: harga, docRef: docRef, saldo: saldo, voucher: currentVoucher ? currentVoucher.code : null };
-    document.getElementById("confirmText").innerHTML = `${displayConfirm}<br>Paket RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
-    document.getElementById("confirmPurchaseBtn").onclick = executePurchase;
+    const harga = parseInt(ramEl.dataset.harga);
+    
+    const docRef = doc(db, "users", currentUser.uid);
+    const docSnap = await getDoc(docRef);
+    const saldo = docSnap.data().balance || 0;
+
+    if (saldo < harga) {
+      showAlert("Saldo tidak cukup! Silakan topup dulu.");
+      return;
+    }
+
+    pendingOrder = {
+      produk: "wabot",
+      mode: currentMode,
+      username: finalUsername,
+      ram: ramEl.value,
+      harga: harga,
+      docRef: docRef,
+      saldo: saldo
+    };
+
+    document.getElementById("confirmText").innerHTML = 
+      `${displayConfirm}<br>Paket RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
     document.getElementById("confirmModal").classList.add("active");
-    lastOrderTime = now;
   });
 
-      window.sendAmLink = async (event) => {
-    playSound('click');
+  // --- LOGIC ALIGHT MOTION ---
+  window.sendAmLink = async (event) => {
     const email = document.getElementById("amEmail").value.trim();
     if (!email) { showAlert("Masukkan email dulu!"); return; }
 
     const btn = event.target;
-    btn.disabled = true; btn.textContent = "Mengirim...";
+    btn.disabled = true;
+    btn.textContent = "Mengirim...";
 
     try {
-        const res = await fetch('/api/am-automation', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'send-link', email: email })
-        });
-        
-        const textResponse = await res.text();
-        console.log("Raw Response:", textResponse);
+      const res = await fetch('/api/am-automation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'send-link', email: email })
+      });
+      const data = await res.json();
 
-        let data = {};
-        try {
-            data = JSON.parse(textResponse);
-        } catch (e) {
-            showAlert("API Error: Respon bukan JSON.<br>Isi: " + textResponse.substring(0, 100), "Debug");
-            return; 
-        }
-
-        // CEK SEMUA KEMUNGKINAN FORMAT RESPON
-        if (data && (data.ok === true || data.success === true || data.status === 'ok')) {
-            pendingAmEmail = email;
-            document.getElementById("amTextEmail").textContent = email;
-            document.getElementById("amStep1").style.display = "none";
-            document.getElementById("amStep2").style.display = "block";
-        } else {
-            showAlert("Gagal dari API: " + (data.why || data.message || "Tidak ada alasan"), "Gagal");
-        }
-
+      if (data.ok) {
+        pendingAmEmail = email;
+        document.getElementById("amTextEmail").textContent = email;
+        document.getElementById("amStep1").style.display = "none";
+        document.getElementById("amStep2").style.display = "block";
+      } else {
+        showAlert("Gagal: " + data.why);
+      }
     } catch (err) {
-        console.error("Fetch Error:", err);
-        showAlert("Network Error: " + err.message, "Gagal"); 
+      showAlert("Error sistem.");
     } finally {
-        btn.disabled = false;
-        btn.textContent = currentLang === 'en' ? "Send Verification Link" : "Kirim Link Verifikasi";
+      btn.disabled = false;
+      btn.textContent = "Kirim Link Verifikasi";
     }
   };
-  window.verifyAmLink = async (event) => { 
-    playSound('click'); 
-    const linkInput = document.getElementById("amLink").value.trim(); 
-    if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; } 
-    const docRef = doc(db, "users", currentUser.uid); 
-    const docSnap = await getDoc(docRef); 
-    const saldo = docSnap.data().balance || 0; 
-    const harga = 5000; 
-    if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; } 
-    document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`; 
-    document.getElementById("confirmPurchaseBtn").onclick = async () => { 
-      document.getElementById("confirmModal").classList.remove('active'); 
-      const btn = document.getElementById("amBtnActivate"); 
-      btn.disabled = true; btn.textContent = "Memverifikasi..."; 
-      try { 
-        const res = await fetch('/api/am-automation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput }) }); 
-        const textResponse = await res.text();
-        console.log("Respon dari API:", textResponse);
-        let data;
-        try { data = JSON.parse(textResponse); } catch(e) { throw new Error("API tidak mengembalikan JSON."); }
 
-        if (data.ok || data.success || data.status === 'ok') { 
-          await updateDoc(docRef, { balance: saldo - harga }); 
-          await updateUserBalanceUI(currentUser.uid); 
-          await setDoc(doc(collection(db, "transactions")), { uid: currentUser.uid, email: currentUser.email, produk: "am", mode: "new", namaPanel: "Alight Motion Premium", emailAm: pendingAmEmail, ram: "1 Tahun", harga: harga, createdAt: Date.now() }); 
-          playSound('success'); 
-          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda.", "Berhasil!"); 
-          loadUserDashboard(); switchMainTab('dashboard'); 
-        } else { 
-          showAlert("Gagal Verifikasi: " + (data.why || "Unknown Error"), "Gagal"); 
-        } 
-      } catch (err) { 
-        showAlert("Error sistem: " + err.message); 
-      } finally { 
-        btn.disabled = false; btn.textContent = currentLang === 'en' ? "Activate Premium (Rp 5,000)" : "Aktifkan Premium (Rp 5.000)"; 
-      } 
-    }; 
-    document.getElementById("confirmModal").classList.add("active"); 
+  window.verifyAmLink = async (event) => {
+    const linkInput = document.getElementById("amLink").value.trim();
+    if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; }
+
+    const docRef = doc(db, "users", currentUser.uid);
+    const docSnap = await getDoc(docRef);
+    const saldo = docSnap.data().balance || 0;
+    const harga = 5000;
+
+    if (saldo < harga) {
+      showAlert("Saldo tidak cukup! Silakan topup dulu.");
+      return;
+    }
+
+    document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`;
+    document.getElementById("confirmModal").classList.add("active");
+    
+    const confirmBtn = document.querySelector("#confirmModal .btn-confirm");
+    confirmBtn.onclick = async () => {
+      document.getElementById("confirmModal").classList.remove('active');
+      const btn = document.getElementById("amBtnActivate");
+      btn.disabled = true;
+      btn.textContent = "Memverifikasi...";
+
+      try {
+        const res = await fetch('/api/am-automation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
+        });
+        const data = await res.json();
+
+        if (data.ok) {
+          await updateDoc(docRef, { balance: saldo - harga });
+          await updateUserBalanceUI(currentUser.uid);
+
+          await setDoc(doc(collection(db, "transactions")), {
+            uid: currentUser.uid,
+            email: currentUser.email,
+            produk: "am",
+            mode: "new",
+            namaPanel: "Alight Motion Premium",
+            emailAm: pendingAmEmail,
+            ram: "1 Tahun",
+            harga: harga,
+            createdAt: Date.now()
+          });
+
+          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.", "Berhasil!");
+          loadUserDashboard();
+          switchMainTab('dashboard'); 
+        } else {
+          showAlert("Gagal Verifikasi: " + data.why, "Gagal");
+        }
+      } catch (err) {
+        showAlert("Error sistem.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Aktifkan Premium (Rp 5.000)";
+      }
+    };
   };
 
+  // --- EXECUTE PURCHASE (WA BOT ONLY) ---
   window.executePurchase = async () => {
     document.getElementById("confirmModal").classList.remove("active");
-    if (isProcessing) return; isProcessing = true;
-    const btn = document.getElementById("submitBtn"); btn.disabled = true; btn.textContent = "Memproses...";
+    
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.textContent = "Memproses...";
+
     try {
-      const response = await fetch('/api/create-panel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: pendingOrder.mode, email: currentUser.email, username: pendingOrder.username, ram: pendingOrder.ram }) });
-      const data = await response.json(); if (!data.success) throw new Error(data.error || "Gagal membuat panel.");
+      const response = await fetch('/api/create-panel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          mode: pendingOrder.mode,
+          email: currentUser.email, 
+          username: pendingOrder.username,
+          ram: pendingOrder.ram
+        })
+      });
+
+      const data = await response.json();
+      if (!data.success) throw new Error(data.error || "Gagal membuat panel.");
+
       await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
-      await setDoc(doc(collection(db, "transactions")), { uid: currentUser.uid, email: currentUser.email, produk: "wabot", mode: pendingOrder.mode, namaPanel: pendingOrder.username, ram: pendingOrder.ram, harga: pendingOrder.harga, voucher: pendingOrder.voucher, createdAt: Date.now() });
-      document.getElementById("resUsername").textContent = data.username; document.getElementById("rowPassword").style.display = "flex"; document.getElementById("rowAmEmail").style.display = "none"; document.getElementById("resPassword").textContent = data.password; document.getElementById("successTitle").textContent = "Panel Berhasil Dibuat!"; document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda."; document.getElementById("warningText").textContent = "PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!";
-      playSound('success');
+
+      await setDoc(doc(collection(db, "transactions")), {
+        uid: currentUser.uid,
+        email: currentUser.email,
+        produk: "wabot",
+        mode: pendingOrder.mode,
+        namaPanel: pendingOrder.username,
+        ram: pendingOrder.ram,
+        harga: pendingOrder.harga,
+        createdAt: Date.now()
+      });
+
+      document.getElementById("resUsername").textContent = data.username;
+      document.getElementById("rowPassword").style.display = "flex";
+      document.getElementById("rowAmEmail").style.display = "none";
+      document.getElementById("resPassword").textContent = data.password;
+      document.getElementById("successTitle").textContent = "Panel Berhasil Dibuat!";
+      document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda.";
+      document.getElementById("warningText").textContent = "PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!";
+      
       document.getElementById("successModal").classList.add("active");
-      loadUserDashboard(); switchMainTab('dashboard');
-    } catch (error) { showAlert("Error: " + error.message); } finally { btn.disabled = false; btn.textContent = currentMode === 'new' ? (currentLang === 'en' ? "Buy Panel" : "Beli Panel") : (currentLang === 'en' ? "Add Server" : "Tambah Server"); isProcessing = false; }
+      loadUserDashboard();
+      switchMainTab('dashboard');
+
+    } catch (error) {
+      showAlert("Error: " + error.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
+    }
   };
 
-  window.copyPanelData = () => { playSound('click'); let textToCopy = ""; if (pendingOrder && pendingOrder.produk === 'am') { textToCopy = `Email: ${pendingOrder.emailAm}\nPaket: Alight Motion Premium 1 Tahun`; } else { const user = document.getElementById("resUsername").textContent; const pass = document.getElementById("resPassword").textContent; textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`; if (pendingOrder && pendingOrder.mode === 'new') textToCopy += `\nPassword: ${pass}`; } navigator.clipboard.writeText(textToCopy).then(() => { const btn = document.getElementById("btnCopyData"); const originalText = btn.textContent; btn.textContent = "Berhasil Disalin!"; btn.style.background = "var(--success)"; setTimeout(() => { btn.textContent = originalText; btn.style.background = "var(--neon)"; }, 2000); }).catch(err => showAlert("Gagal menyalin: " + err)); };
-
-  window.closeSuccessModal = () => { document.getElementById("successModal").classList.remove("active"); document.getElementById("customName").value = ""; document.getElementById("addUsername").value = ""; document.getElementById("amEmail").value = ""; document.getElementById("amLink").value = ""; };
-
-  async function loadAdminData() {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const tbody = document.getElementById('userTableBody'); tbody.innerHTML = '';
-    let totalRev = 0; let totalTx = 0;
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${data.email}</td><td>Rp ${(data.balance || 0).toLocaleString()}</td><td><button class="btn-action" onclick="addBalance('${doc.id}', '${data.email}')">Add Balance</button></td>`;
-      tbody.appendChild(tr);
+  window.copyPanelData = () => {
+    let textToCopy = "";
+    
+    if (pendingOrder && pendingOrder.produk === 'am') {
+      textToCopy = `Email: ${pendingOrder.emailAm}\nPaket: Alight Motion Premium 1 Tahun`;
+    } else {
+      const user = document.getElementById("resUsername").textContent;
+      const pass = document.getElementById("resPassword").textContent;
+      textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`;
+      if (pendingOrder && pendingOrder.mode === 'new') {
+        textToCopy += `\nPassword: ${pass}`;
+      }
+    }
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const btn = document.getElementById("btnCopyData");
+      const originalText = btn.textContent;
+      btn.textContent = "Berhasil Disalin!";
+      btn.style.background = "var(--success)";
+      
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = "var(--neon)";
+      }, 2000);
+    }).catch(err => {
+      showAlert("Gagal menyalin: " + err);
     });
-    const txSnap = await getDocs(collection(db, "transactions"));
-    totalTx = txSnap.size;
-    txSnap.forEach(d => totalRev += (d.data().harga || 0));
-    document.getElementById('statUsers').textContent = querySnapshot.size;
-    document.getElementById('statRevenue').textContent = "Rp " + totalRev.toLocaleString();
-    document.getElementById('statTransactions').textContent = totalTx;
-  }
+  };
 
-  window.addBalance = async (uid, email) => {
-    const amountStr = prompt(`Add balance for ${email} (Enter amount):`);
-    if (!amountStr) return; const amount = parseInt(amountStr);
-    if (isNaN(amount) || amount <= 0) { showAlert("Nominal tidak valid"); return; }
-    const docRef = doc(db, "users", uid); const docSnap = await getDoc(docRef); const currentBalance = docSnap.data().balance || 0;
-    await updateDoc(docRef, { balance: currentBalance + amount });
-    playSound('success'); showAlert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${email}`); loadAdminData();
-  }
+  window.closeSuccessModal = () => {
+    document.getElementById("successModal").classList.remove("active");
+    document.getElementById("customName").value = "";
+    document.getElementById("addUsername").value = "";
+    document.getElementById("amEmail").value = "";
+    document.getElementById("amLink").value = "";
+  };
 
-  if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW failed:', err)); }); }
-  applyLanguage('en');
 </script>
+
 </body>
 </html>
