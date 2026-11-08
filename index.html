@@ -594,13 +594,13 @@
             <form id="orderForm">
               <div class="field" id="fieldName">
                 <label data-i18n="panelName">Panel Name (No Spaces)</label>
-                <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+                <input type="text" id="customName" class="glass-input" placeholder="Nama panel kamu" required oninput="this.value = this.value.replace(/\s+/g, '')">
               </div>
 
               <div class="field" id="fieldAddUser" style="display: none;">
                 <label data-i18n="panelUsername">Your Panel Username</label>
                 <div class="input-group">
-                  <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+                  <input type="text" id="addUsername" placeholder="Username panel kamu" oninput="this.value = this.value.replace(/\s+/g, '')">
                   <span class="suffix">@kitzunemarket.com</span>
                 </div>
               </div>
@@ -631,7 +631,7 @@
               <div class="field">
                 <label>Kode Promo (Opsional)</label>
                 <div style="display: flex; gap: 8px;">
-                  <input type="text" id="voucherCode" class="glass-input" placeholder="Ex: KITZUNE10" style="flex: 1;">
+                  <input type="text" id="voucherCode" class="glass-input" placeholder="Masukkan kode promo" style="flex: 1;">
                   <button type="button" onclick="applyVoucher()" style="padding: 0 16px; background: var(--neon); color: #fff; border: none; border-radius: 12px; font-weight: 700; cursor: pointer;">Pakai</button>
                 </div>
                 <div id="voucherMsg" style="font-size: 12px; margin-top: 6px;"></div>
@@ -650,7 +650,7 @@
             <div id="amStep1">
               <div class="field">
                 <label data-i18n="amEmail">Email Alight Motion Kamu</label>
-                <input type="email" id="amEmail" class="glass-input" placeholder="contoh@gmail.com" required>
+                <input type="email" id="amEmail" class="glass-input" placeholder="Email kamu" required>
               </div>
               <button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)" data-i18n="btnSendLink">Kirim Link Verifikasi</button>
             </div>
@@ -658,7 +658,7 @@
               <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;" data-i18n="amInbox">Cek inbox/spam email Anda. Copy link verifikasi dari email, lalu paste di bawah ini.</p>
               <div class="field">
                 <label data-i18n="amLinkLabel">Paste Link Verifikasi</label>
-                <textarea id="amLink" class="glass-input" placeholder="https://alightcreative.app.link/..." rows="3" style="resize: none; font-size: 13px;"></textarea>
+                <textarea id="amLink" class="glass-input" placeholder="Tempel link verifikasi di sini" rows="3" style="resize: none; font-size: 13px;"></textarea>
               </div>
               <button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);" data-i18n="btnActivateAm">Aktifkan Premium (Rp 5.000)</button>
             </div>
@@ -792,7 +792,7 @@
   <div class="modal-content">
     <h3 data-i18n="topupTitle">Topup Saldo</h3>
     <p data-i18n="topupDesc">Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.</p>
-    <input type="number" id="topupAmount" class="modal-input" placeholder="Ex: 500" min="400">
+    <input type="number" id="topupAmount" class="modal-input" placeholder="Nominal topup" min="400">
     <div class="modal-actions">
       <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')" data-i18n="cancel">Batal</button>
       <button class="btn-modal btn-confirm" onclick="proceedTopup()" data-i18n="topupBtn">+ Topup</button>
@@ -1468,7 +1468,7 @@
   }
 
   window.addBalance = async (uid, email) => {
-    const amountStr = prompt(`Add balance for ${email} (Enter amount, ex: 2000):`);
+    const amountStr = prompt(`Add balance for ${email} (Enter amount):`);
     if (!amountStr) return;
     const amount = parseInt(amountStr);
     if (isNaN(amount) || amount <= 0) { showAlert("Nominal tidak valid"); return; }
@@ -1484,7 +1484,6 @@
   window.applyVoucher = () => {
     const code = document.getElementById('voucherCode').value.trim().toUpperCase();
     const msg = document.getElementById('voucherMsg');
-    const totalText = document.getElementById('totalText');
     
     if (!code) { msg.textContent = "Masukkan kode dulu."; msg.style.color = "var(--warning)"; return; }
     
