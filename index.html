@@ -5,14 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kitzune Store - Premium Digital Products</title>
 
-<!-- FAVICON -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="manifest" href="/site.webmanifest">
 
-<!-- OPEN GRAPH -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kitzunemarket.biz.id/">
 <meta property="og:title" content="Kitzune Store - Premium Digital Products">
@@ -43,7 +41,6 @@
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
     scroll-behavior: smooth;
-    /* BACKGROUND GRID NEON MURNI CSS (ANTI GAGAL LOAD) */
     background-image: 
       linear-gradient(rgba(157, 0, 255, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(157, 0, 255, 0.05) 1px, transparent 1px),
@@ -52,7 +49,6 @@
     background-position: center center;
   }
 
-  /* CUSTOM CURSOR GLOW */
   .cursor-glow {
     position: fixed; width: 300px; height: 300px; border-radius: 50%;
     background: radial-gradient(circle, var(--neon-glow) 0%, transparent 70%);
@@ -61,7 +57,6 @@
   }
   body:hover .cursor-glow { opacity: 1; }
 
-  /* ANIMASI MASUK */
   .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
   .reveal.active { opacity: 1; transform: translateY(0); }
   .reveal.delay-1 { transition-delay: 0.1s; }
@@ -83,7 +78,6 @@
     transform: scale(0.95) !important;
   }
 
-  /* SKELETON */
   .skeleton {
     background: #1a1025;
     background-image: linear-gradient(90deg, #1a1025 0px, #2d1a40 40px, #1a1025 80px);
@@ -93,7 +87,6 @@
   .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
   .skeleton-text.short { width: 60%; }
 
-  /* AUTH */
   #authScreen { position: fixed; inset: 0; background: rgba(5, 3, 10, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
   .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; }
@@ -122,10 +115,8 @@
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
-  /* MAIN APP */
   #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   
-  /* HEADER */
   .top-header {
     position: fixed; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
@@ -152,7 +143,6 @@
   .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; text-shadow: 0 0 10px rgba(16,185,129,0.3); }
   
-  /* TOMBOL BAHASA */
   .lang-btn {
     background: rgba(255,255,255,0.05); border: 1px solid var(--border);
     color: #fff; font-size: 12px; font-weight: 700; padding: 8px 12px;
@@ -162,14 +152,12 @@
 
   .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 20px; border-radius: 99px; text-transform: uppercase; }
   
-  /* BURGER MENU */
   .burger-btn {
     background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px;
     padding: 8px; border-radius: 8px; z-index: 105;
   }
   .burger-btn span { display: block; width: 24px; height: 2px; background: #fff; transition: 0.3s; border-radius: 2px; }
   
-  /* SIDEBAR */
   .sidebar {
     position: fixed; top: 0; right: -320px; width: 300px; height: 100vh;
     background: var(--card); border-left: 1px solid var(--border);
@@ -199,7 +187,6 @@
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 150; opacity: 0; pointer-events: none; transition: 0.3s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
-  /* CONTENT */
   .main-container { flex: 1; display: flex; flex-direction: column; padding: 120px 24px 60px; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
   
   #tabContentSettings { display: none; }
@@ -213,7 +200,6 @@
 
   .form-section { flex: 1; max-width: 460px; padding: 40px 32px; border-radius: 24px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8); }
   
-  /* KATALOG */
   .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; perspective: 1000px; }
   .catalog-card {
     background: #090510; border: 1px solid var(--border); border-radius: 20px;
@@ -225,7 +211,49 @@
     background: var(--neon-soft);
     box-shadow: 0 0 30px -10px var(--neon-glow);
   }
-  .catalog-card img { width: 100%; height: 90px; object-fit: contain; margin-bottom: 16px; border-radius: 12px; }
+  
+  /* LOGO PTERODACTYL CSS */
+  .css-logo-panel {
+    width: 70px; height: 70px; margin-bottom: 16px; border-radius: 50%;
+    background: #0a0514; border: 2px solid var(--neon);
+    position: relative; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px -5px var(--neon-glow), inset 0 0 15px -5px var(--neon-glow);
+    overflow: hidden;
+  }
+  .css-logo-panel::before {
+    content: ''; position: absolute; width: 100%; height: 100%;
+    background-image: 
+      linear-gradient(rgba(157,0,255,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157,0,255,0.3) 1px, transparent 1px);
+    background-size: 15px 15px;
+    transform: perspective(100px) rotateX(20deg);
+  }
+  .css-logo-panel::after {
+    content: 'P'; font-weight: 800; font-size: 28px; color: #fff;
+    text-shadow: 0 0 10px var(--neon); z-index: 2;
+  }
+
+  /* LOGO AM CSS */
+  .css-logo-am {
+    width: 70px; height: 70px; margin-bottom: 16px; border-radius: 50%;
+    background: #0a0514; border: 2px solid var(--neon);
+    position: relative; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 20px -5px var(--neon-glow);
+    overflow: hidden;
+  }
+  .css-logo-am::before {
+    content: ''; position: absolute; width: 40px; height: 40px;
+    border: 4px solid var(--neon); border-radius: 50%;
+    border-left-color: transparent; border-bottom-color: transparent;
+    transform: rotate(45deg);
+  }
+  .css-logo-am::after {
+    content: ''; position: absolute; width: 20px; height: 20px;
+    border: 4px solid var(--neon); border-radius: 50%;
+    border-right-color: transparent; border-top-color: transparent;
+    transform: rotate(45deg);
+  }
+
   .catalog-card h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .catalog-card p { font-size: 12px; color: var(--neon); font-weight: 600; }
   
@@ -296,7 +324,6 @@
   .btn-action { padding: 8px 14px; background: var(--success); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: bold; transition: all 0.2s; }
   .btn-action:hover { background: #34d399; transform: translateY(-1px); }
 
-  /* MODAL SYSTEM */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 3000; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
   .modal-overlay.active { display: flex; }
   .modal-content { padding: 40px 32px; border-radius: 24px; width: 90%; max-width: 440px; text-align: center; animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); background: var(--card); border: 1px solid var(--border); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.9); }
@@ -319,7 +346,14 @@
   .btn-confirm { background: var(--neon); color: #fff; }
   .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
 
-  /* RESPONSIVE MOBILE */
+  .ripple {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    transform: scale(0); pointer-events: none;
+    animation: rippleEffect 0.6s linear;
+  }
+  @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+
   @media (max-width: 900px) {
     .auth-brand { display: none; } 
     .auth-box { background: var(--card); padding: 32px 24px; }
@@ -331,16 +365,17 @@
     .profile-info span { display: none; }
     .profile-info strong { font-size: 13px; }
     
-    .header-right { gap: 10px; }
+    .header-right { gap: 8px; }
     .balance-info span { display: none; }
-    .balance-info strong { font-size: 14px; }
-    .topup-btn { padding: 8px 12px; font-size: 11px; }
+    .balance-info strong { font-size: 13px; }
+    .lang-btn { padding: 6px 8px; font-size: 11px; }
+    .topup-btn { padding: 8px 10px; font-size: 10.5px; }
     .burger-btn span { width: 20px; }
     
     .main-container { padding: 100px 16px 40px; }
     
     .wrapper-order { flex-direction: column; gap: 24px; }
-    .info-section h1 { font-size: 36px; text-align: center; letter-spacing: -1px; }
+    .info-section h1 { font-size: 32px; text-align: center; letter-spacing: -1px; }
     .info-section p { font-size: 14px; text-align: center; margin-bottom: 24px; }
     
     .form-section { width: 100%; padding: 24px 20px; }
@@ -350,7 +385,7 @@
     
     .catalog-grid { grid-template-columns: 1fr; gap: 12px; }
     .catalog-card { padding: 20px; flex-direction: row; text-align: left; gap: 20px; }
-    .catalog-card img { width: 70px; height: 70px; margin-bottom: 0; }
+    .css-logo-panel, .css-logo-am { width: 60px; height: 60px; margin-bottom: 0; flex-shrink: 0; }
     .catalog-card h4 { font-size: 16px; }
     
     .ram-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
@@ -379,7 +414,6 @@
 </head>
 <body>
 
-<!-- CURSOR GLOW -->
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <!-- AUTH SECTION -->
@@ -443,7 +477,7 @@
     </div>
   </div>
 
-  <!-- SIDEBAR MENU -->
+  <!-- SIDEBAR -->
   <div class="overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
   <div class="sidebar" id="sidebarMenu">
     <div class="sidebar-header">
@@ -473,7 +507,7 @@
 
   <div class="main-container">
     
-    <!-- TAB CONTENT: DASHBOARD -->
+    <!-- DASHBOARD -->
     <div id="tabContentDashboard">
       <div class="dashboard-grid">
         <div class="dash-card hover-card reveal active">
@@ -502,7 +536,7 @@
       </div>
     </div>
 
-    <!-- TAB CONTENT: ORDER -->
+    <!-- ORDER / CATALOG -->
     <div id="tabContentOrder">
       <div class="wrapper-order">
         <div class="info-section reveal active">
@@ -513,14 +547,14 @@
           
           <div class="catalog-grid">
             <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
-              <img src="/media/panel.png" alt="WA Bot Panel">
+              <div class="css-logo-panel"></div>
               <div>
                 <h4 data-i18n="waBotPanel">WA Bot Panel</h4>
                 <p data-i18n="startFrom">Mulai Rp 300</p>
               </div>
             </div>
             <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')">
-              <img src="/media/am.png" alt="Alight Motion">
+              <div class="css-logo-am"></div>
               <div>
                 <h4 data-i18n="alightMotion">Alight Motion</h4>
                 <p data-i18n="amPrice">Rp 5.000 / Tahun</p>
@@ -564,8 +598,8 @@
                   <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
                 </div>
               </div>
@@ -602,7 +636,7 @@
       </div>
     </div>
 
-    <!-- TAB CONTENT: SETTINGS -->
+    <!-- SETTINGS -->
     <div id="tabContentSettings">
       <div class="wrapper-order">
         <div class="info-section reveal active">
@@ -655,13 +689,13 @@
       <img src="/favicon.png" alt="Logo" class="header-logo">
       <div class="avatar" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
       <div class="profile-info">
-        <span data-i18n="loggedInAs">Logged in as</span>
+        <span>Logged in as</span>
         <strong>Administrator</strong>
       </div>
     </div>
     
     <div class="header-right">
-      <button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;" data-i18n="logoutBtn">Logout</button>
+      <button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;">Logout</button>
     </div>
   </div>
 
@@ -702,12 +736,12 @@
     <p id="confirmText">Apakah anda yakin?</p>
     <div class="modal-actions">
       <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')" data-i18n="cancel">Batal</button>
-      <button class="btn-modal btn-confirm" onclick="executePurchase()" data-i18n="yesContinue">Ya, Lanjutkan</button>
+      <button class="btn-modal btn-confirm" id="confirmPurchaseBtn" onclick="executePurchase()" data-i18n="yesContinue">Ya, Lanjutkan</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL KONFIRMASI LOGOUT -->
+<!-- MODAL LOGOUT -->
 <div id="logoutModal" class="modal-overlay">
   <div class="modal-content">
     <h3 data-i18n="logoutTitle">Konfirmasi Logout</h3>
@@ -784,7 +818,7 @@
   let pendingAmEmail = "";
   let currentLang = 'en';
 
-  // --- TRANSLATIONS ---
+  // ================= TRANSLATIONS =================
   const translations = {
     en: {
       authDesc: "The most affordable and reliable digital products in the market.",
@@ -920,7 +954,8 @@
 
   function applyLanguage(lang) {
     currentLang = lang;
-    document.getElementById('langToggle').textContent = lang === 'en' ? 'ID' : 'EN';
+    const lt = document.getElementById('langToggle');
+    if (lt) lt.textContent = lang === 'en' ? 'ID' : 'EN';
     
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
@@ -929,17 +964,24 @@
       }
     });
 
-    document.getElementById('authTitle').innerHTML = translations[lang].authTitle;
-    document.getElementById('orderTitle').innerHTML = translations[lang].orderTitle;
-    document.getElementById('settingsTitle').innerHTML = translations[lang].settingsTitle;
+    const at = document.getElementById('authTitle');
+    const ot = document.getElementById('orderTitle');
+    const st = document.getElementById('settingsTitle');
+    if (at) at.innerHTML = translations[lang].authTitle;
+    if (ot) ot.innerHTML = translations[lang].orderTitle;
+    if (st) st.innerHTML = translations[lang].settingsTitle;
     
-    document.getElementById('loginEmail').placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
-    document.getElementById('loginPassword').placeholder = lang === 'en' ? "Enter password" : "Masukkan password";
-    document.getElementById('regEmail').placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
-    document.getElementById('regPassword').placeholder = lang === 'en' ? "Create a password" : "Buat password";
-    document.getElementById('regConfirmPassword').placeholder = lang === 'en' ? "Repeat password" : "Ulangi password";
-    document.getElementById('customName').placeholder = "Ex: BotJuragan";
-    document.getElementById('amEmail').placeholder = "contoh@gmail.com";
+    const le = document.getElementById('loginEmail');
+    const lp = document.getElementById('loginPassword');
+    const re = document.getElementById('regEmail');
+    const rp = document.getElementById('regPassword');
+    const rcp = document.getElementById('regConfirmPassword');
+    
+    if (le) le.placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
+    if (lp) lp.placeholder = lang === 'en' ? "Enter password" : "Masukkan password";
+    if (re) re.placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
+    if (rp) rp.placeholder = lang === 'en' ? "Create a password" : "Buat password";
+    if (rcp) rcp.placeholder = lang === 'en' ? "Repeat password" : "Ulangi password";
   }
 
   window.toggleLanguage = () => {
@@ -949,17 +991,18 @@
   // --- CUSTOM CURSOR ---
   const cursor = document.getElementById('cursorGlow');
   document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    if (cursor) {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    }
   });
 
   // --- STICKY HEADER ---
   window.addEventListener('scroll', () => {
     const header = document.getElementById('topHeader');
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+    if (header) {
+      if (window.scrollY > 50) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
     }
   });
 
@@ -998,7 +1041,7 @@
     document.getElementById('customAlert').classList.add('active');
   };
 
-  // --- SIDEBAR MENU LOGIC ---
+  // --- SIDEBAR ---
   window.toggleSidebar = (show) => {
     const sidebar = document.getElementById('sidebarMenu');
     const overlay = document.getElementById('sidebarOverlay');
@@ -1011,7 +1054,7 @@
     }
   };
 
-  // --- LOGOUT CONFIRMATION ---
+  // --- LOGOUT ---
   window.confirmLogout = () => {
     toggleSidebar(false);
     document.getElementById('logoutModal').classList.add('active');
@@ -1022,7 +1065,7 @@
     signOut(auth);
   };
 
-  // --- RIPPLE ANIMATION ---
+  // --- RIPPLE ---
   window.createRipple = function(event) {
     const btn = event.currentTarget;
     const circle = document.createElement("span");
@@ -1044,7 +1087,7 @@
     document.getElementById('regError').style.display = 'none';
   }
 
-  // --- SWITCH CATALOG ---
+  // --- CATALOG ---
   window.switchCatalog = (cat) => {
     currentCatalog = cat;
     document.querySelectorAll('.catalog-card').forEach(card => card.classList.remove('active'));
@@ -1059,7 +1102,7 @@
     }
   };
 
-  // --- USER NAVIGATION ---
+  // --- NAVIGATION ---
   window.switchMainTab = (tab) => {
     toggleSidebar(false);
     document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
@@ -1078,7 +1121,7 @@
     } else if (tab === 'settings') {
       document.getElementById('navSettings').classList.add('active');
       document.getElementById('tabContentSettings').style.display = 'block';
-      document.getElementById('currentEmailDisplay').value = currentUser.email;
+      if (currentUser) document.getElementById('currentEmailDisplay').value = currentUser.email;
     }
   };
 
@@ -1099,7 +1142,7 @@
     }
   }
 
-  // --- AUTH LOGIC ---
+  // --- AUTH ---
   window.doRegister = async (event) => {
     if(event) createRipple(event);
     const email = document.getElementById('regEmail').value.trim();
@@ -1169,6 +1212,7 @@
         switchMainTab('dashboard'); 
       }
     } else {
+      currentUser = null;
       document.getElementById('authScreen').style.display = 'flex';
       document.getElementById('mainApp').style.display = 'none';
       document.getElementById('adminApp').style.display = 'none';
@@ -1431,7 +1475,7 @@
     loadAdminData();
   }
 
-  // --- USER ORDER LOGIC (WA BOT) ---
+  // --- ORDER WA BOT ---
   const orderForm = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
 
@@ -1482,10 +1526,11 @@
 
     document.getElementById("confirmText").innerHTML = 
       `${displayConfirm}<br>Paket RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
+    document.getElementById("confirmPurchaseBtn").onclick = executePurchase;
     document.getElementById("confirmModal").classList.add("active");
   });
 
-  // --- LOGIC ALIGHT MOTION ---
+  // --- ALIGHT MOTION ---
   window.sendAmLink = async (event) => {
     const email = document.getElementById("amEmail").value.trim();
     if (!email) { showAlert("Masukkan email dulu!"); return; }
@@ -1533,10 +1578,7 @@
     }
 
     document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`;
-    document.getElementById("confirmModal").classList.add("active");
-    
-    const confirmBtn = document.querySelector("#confirmModal .btn-confirm");
-    confirmBtn.onclick = async () => {
+    document.getElementById("confirmPurchaseBtn").onclick = async () => {
       document.getElementById("confirmModal").classList.remove('active');
       const btn = document.getElementById("amBtnActivate");
       btn.disabled = true;
@@ -1566,7 +1608,7 @@
             createdAt: Date.now()
           });
 
-          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.", "Berhasil!");
+          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda.", "Berhasil!");
           loadUserDashboard();
           switchMainTab('dashboard'); 
         } else {
@@ -1579,9 +1621,10 @@
         btn.textContent = currentLang === 'en' ? "Activate Premium (Rp 5,000)" : "Aktifkan Premium (Rp 5.000)";
       }
     };
+    document.getElementById("confirmModal").classList.add("active");
   };
 
-  // --- EXECUTE PURCHASE (WA BOT ONLY) ---
+  // --- EXECUTE PURCHASE WA BOT ---
   window.executePurchase = async () => {
     document.getElementById("confirmModal").classList.remove("active");
     
@@ -1634,7 +1677,7 @@
       showAlert("Error: " + error.message);
     } finally {
       btn.disabled = false;
-      btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
+      btn.textContent = currentMode === 'new' ? (currentLang === 'en' ? "Buy Panel" : "Beli Panel") : (currentLang === 'en' ? "Add Server" : "Tambah Server");
     }
   };
 
@@ -1675,7 +1718,7 @@
     document.getElementById("amLink").value = "";
   };
 
-  // INITIALIZE LANGUAGE
+  // INIT
   applyLanguage('en');
 
 </script>
