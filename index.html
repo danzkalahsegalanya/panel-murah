@@ -42,63 +42,37 @@
     -webkit-user-select: none; -moz-user-select: none; user-select: none;
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
+    
+    /* Background pattern grid yang ringan & gak bikin glitch */
+    background-image: 
+      linear-gradient(rgba(157, 0, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157, 0, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center;
   }
 
-  /* === ANIMASI BACKGROUND AURORA === */
-  .bg-aurora {
-    position: fixed; inset: 0; z-index: -1; overflow: hidden;
-    background: var(--bg);
-  }
-  .bg-aurora::before, .bg-aurora::after {
-    content: ''; position: absolute; width: 60vw; height: 60vw;
-    border-radius: 50%; filter: blur(120px); opacity: 0.15;
-    animation: floatBlob 20s infinite alternate ease-in-out;
-  }
-  .bg-aurora::before {
-    background: var(--neon); top: -10%; left: -10%;
-  }
-  .bg-aurora::after {
-    background: #5a00e0; bottom: -10%; right: -10%;
-    animation-delay: -10s; animation-duration: 25s;
-  }
-  @keyframes floatBlob {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(10%, 10%) scale(1.2); }
-  }
-
-  /* === ANIMASI MASUK (STAGGERED) === */
+  /* === ANIMASI HALUS === */
   .animate-in {
-    opacity: 0; transform: translateY(20px);
+    opacity: 0; transform: translateY(15px);
     animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   .animate-in.delay-1 { animation-delay: 0.1s; }
   .animate-in.delay-2 { animation-delay: 0.2s; }
-  .animate-in.delay-3 { animation-delay: 0.3s; }
 
   @keyframes slideUpFade {
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* === HOVER & CLICK EFFECTS === */
   .hover-card { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
   .hover-card:hover {
-    transform: translateY(-4px) scale(1.01);
+    transform: translateY(-4px);
     box-shadow: 0 10px 30px -10px var(--neon-glow);
     border-color: rgba(157, 0, 255, 0.5);
   }
 
-  button, .auth-btn, .btn-manage, .btn-modal, .topup-btn {
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  button:hover, .auth-btn:hover, .btn-manage:hover, .btn-modal:hover, .topup-btn:hover {
-    box-shadow: 0 0 20px -5px var(--neon-glow);
-    transform: translateY(-2px);
-  }
-  button:active, .auth-btn:active, .btn-manage:active, .btn-modal:active, .topup-btn:active {
-    transform: scale(0.95) !important;
-  }
+  button { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+  button:active { transform: scale(0.96) !important; }
 
-  /* === SKELETON PULSE === */
   .skeleton {
     background: #1f1530;
     background-image: linear-gradient(90deg, #1f1530 0px, #3a2559 40px, #1f1530 80px);
@@ -107,11 +81,12 @@
     border-radius: 8px;
   }
   @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+  .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
+  .skeleton-text.short { width: 60%; }
 
-  /* === AUTH SECTION === */
-  #authScreen { position: fixed; inset: 0; background: rgba(8, 5, 15, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+  #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
-  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
+  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; overflow: hidden; background: linear-gradient(135deg, #0a0514 0%, #08050f 100%); }
   .brand-content { position: relative; z-index: 1; max-width: 400px; }
   .brand-content h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
   .brand-content h1 span { color: var(--neon); }
@@ -133,6 +108,7 @@
   .glass-input::placeholder { color: #5a4b73; }
 
   .auth-btn { width: 100%; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; text-transform: uppercase; position: relative; overflow: hidden; }
+  .auth-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   .auth-switch { margin-top: 24px; font-size: 13.5px; color: var(--muted); text-align: center; }
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
@@ -164,12 +140,14 @@
   .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; }
   .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 18px; border-radius: 99px; text-transform: uppercase; }
+  .topup-btn:hover { background: #34d399; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(16,185,129,0.4); }
   
   /* Burger Button */
   .burger-btn {
     background: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px;
     padding: 8px; border-radius: 8px; z-index: 105; justify-content: center; align-items: center;
   }
+  .burger-btn:hover { background: rgba(255,255,255,0.1); }
   .burger-btn span { display: block; width: 22px; height: 2px; background: #fff; transition: 0.3s; border-radius: 2px; }
   
   /* Sidebar Menu */
@@ -191,6 +169,7 @@
     background: transparent; border: none; color: var(--text); font-size: 14px; font-weight: 600;
     border-radius: 12px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; font-family: inherit;
   }
+  .sidebar-item:hover { background: rgba(255,255,255,0.05); }
   .sidebar-item.active { background: var(--neon); color: #fff; box-shadow: 0 4px 15px var(--neon-glow); }
   .sidebar-item svg { width: 20px; height: 20px; }
   
@@ -203,15 +182,14 @@
 
   .main-container { flex: 1; display: flex; flex-direction: column; padding: 40px 24px; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
   
-  /* Content Tab Settings */
   #tabContentSettings { display: none; }
-  
   #tabContentOrder, #adminTabContentOrder { display: none; }
+  
   .wrapper-order { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
   .info-section { flex: 1; max-width: 520px; }
-  .info-section h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+  .info-section h1 { font-size: 48px; font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; }
   .info-section h1 span { color: var(--neon); }
-  .info-section p { font-size: 16px; color: #cbd5e1; line-height: 1.6; margin-bottom: 32px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+  .info-section p { font-size: 16px; color: #cbd5e1; line-height: 1.6; margin-bottom: 32px; }
 
   .form-section { flex: 1; max-width: 460px; padding: 36px 32px; border-radius: 20px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
   
@@ -221,18 +199,13 @@
     padding: 20px; cursor: pointer; transition: all 0.3s; text-align: center;
     display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden;
   }
-  .catalog-card::before {
-    content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, var(--neon-glow) 0%, transparent 70%);
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .catalog-card:hover::before { opacity: 1; }
   .catalog-card:hover { border-color: var(--neon); transform: translateY(-4px); box-shadow: 0 10px 20px -10px var(--neon-glow); }
-  .catalog-card img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 12px; border-radius: 8px; position: relative; z-index: 1; }
-  .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; position: relative; z-index: 1; }
-  .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; position: relative; z-index: 1; }
+  .catalog-card img { width: 100%; height: 100px; object-fit: contain; margin-bottom: 12px; border-radius: 8px; }
+  .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; }
   
   .product-content { display: none; }
-  .product-content.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .product-content.active { display: block; animation: fadeIn 0.3s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
   .tab-menu-inner { display: flex; gap: 10px; margin-bottom: 24px; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 14px; border: 1px solid var(--border); }
@@ -258,6 +231,7 @@
   .total span:first-child { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
   .total-price { font-size: 24px; font-weight: 800; color: var(--neon); }
   button[type="submit"], .auth-btn.am-btn { width: 100%; margin-top: 20px; padding: 15px; background: var(--neon); color: #fff; font-weight: 800; font-size: 15px; border: none; border-radius: 12px; cursor: pointer; text-transform: uppercase; position: relative; overflow: hidden; }
+  button[type="submit"]:hover, .auth-btn.am-btn:hover { background: var(--neon-hover); box-shadow: 0 8px 20px var(--neon-glow); }
   
   #tabContentDashboard, #adminTabContentDashboard { display: block; }
   .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -309,18 +283,11 @@
   .warning-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 12.5px; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-weight: 600; }
 
   .modal-actions { display: flex; gap: 12px; justify-content: center; margin-top: 10px; }
-  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; }
+  .btn-modal { flex: 1; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; border: none; transition: all 0.2s; }
   .btn-cancel { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-cancel:hover { background: rgba(255,255,255,0.05); }
   .btn-confirm { background: var(--neon); color: #fff; }
-
-  /* RIPPLE ANIMASI TOMBOL */
-  .ripple {
-    position: absolute; border-radius: 50%;
-    background: rgba(255,255,255,0.4);
-    transform: scale(0); pointer-events: none;
-    animation: rippleEffect 0.6s linear;
-  }
-  @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+  .btn-confirm:hover { background: var(--neon-hover); box-shadow: 0 4px 15px var(--neon-glow); }
 
   @media (max-width: 900px) {
     .auth-brand { display: none; } 
@@ -380,9 +347,6 @@
 </head>
 <body>
 
-<!-- ANIMASI BACKGROUND -->
-<div class="bg-aurora"></div>
-
 <!-- AUTH SECTION -->
 <div id="authScreen">
   <div class="auth-container">
@@ -393,7 +357,7 @@
       </div>
     </div>
     <div class="auth-form-area">
-      <div class="auth-box hover-card animate-in delay-2">
+      <div class="auth-box hover-card animate-in delay-1">
         <div id="loginForm">
           <h2>Sign In</h2>
           <div class="error-msg" id="loginError"></div>
@@ -507,7 +471,7 @@
           <h1>Pilih Produk <br><span>Digital Kamu.</span></h1>
           <p>Pilih dari katalog produk premium kami di bawah ini.</p>
         </div>
-        <div class="form-section hover-card animate-in delay-2">
+        <div class="form-section hover-card animate-in delay-1">
           
           <div class="catalog-grid">
             <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
@@ -607,7 +571,7 @@
           <h1>Account <br><span>Settings.</span></h1>
           <p>Ubah email dan password akun Kitzune Store Anda.</p>
         </div>
-        <div class="form-section hover-card animate-in delay-2">
+        <div class="form-section hover-card animate-in delay-1">
           
           <div class="field">
             <label>Email Saat Ini</label>
