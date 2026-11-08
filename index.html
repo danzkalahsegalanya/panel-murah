@@ -45,7 +45,7 @@
     scroll-behavior: smooth;
   }
 
-  /* === CUSTOM CURSOR GLOW (PC) === */
+  /* CUSTOM CURSOR GLOW */
   .cursor-glow {
     position: fixed; width: 300px; height: 300px; border-radius: 50%;
     background: radial-gradient(circle, var(--neon-glow) 0%, transparent 70%);
@@ -54,14 +54,10 @@
   }
   body:hover .cursor-glow { opacity: 1; }
 
-  /* === PARTICLE BACKGROUND === */
   #particles-js { position: fixed; inset: 0; z-index: -1; }
 
-  /* === ANIMASI MASUK === */
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+  /* ANIMASI MASUK */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
   .reveal.active { opacity: 1; transform: translateY(0); }
   .reveal.delay-1 { transition-delay: 0.1s; }
   .reveal.delay-2 { transition-delay: 0.2s; }
@@ -82,7 +78,7 @@
     transform: scale(0.95) !important;
   }
 
-  /* === SKELETON === */
+  /* SKELETON */
   .skeleton {
     background: #1a1025;
     background-image: linear-gradient(90deg, #1a1025 0px, #2d1a40 40px, #1a1025 80px);
@@ -92,7 +88,7 @@
   .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
   .skeleton-text.short { width: 60%; }
 
-  /* === AUTH === */
+  /* AUTH */
   #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
   .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; background: linear-gradient(135deg, #0a0514 0%, var(--bg) 100%); }
@@ -121,10 +117,10 @@
   .auth-switch a { color: var(--neon); cursor: pointer; font-weight: 600; text-decoration: none; }
   .error-msg { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; font-size: 13px; padding: 10px; border-radius: 8px; margin-bottom: 20px; display: none; }
 
-  /* === MAIN APP === */
+  /* MAIN APP */
   #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   
-  /* HEADER STICKY GLASS */
+  /* HEADER */
   .top-header {
     position: fixed; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
@@ -150,6 +146,15 @@
   .balance-info { display: flex; flex-direction: column; text-align: right; }
   .balance-info span { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
   .balance-info strong { font-size: 16px; color: var(--success); font-weight: 800; text-shadow: 0 0 10px rgba(16,185,129,0.3); }
+  
+  /* TOMBOL BAHASA */
+  .lang-btn {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: #fff; font-size: 12px; font-weight: 700; padding: 8px 12px;
+    border-radius: 8px; cursor: pointer; font-family: inherit;
+  }
+  .lang-btn:hover { background: var(--neon-soft); border-color: var(--neon); color: var(--neon); }
+
   .topup-btn { background: var(--success); color: #fff; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; padding: 10px 20px; border-radius: 99px; text-transform: uppercase; }
   
   /* BURGER MENU */
@@ -203,22 +208,21 @@
 
   .form-section { flex: 1; max-width: 460px; padding: 40px 32px; border-radius: 24px; background: var(--card); border: 1px solid var(--border); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8); }
   
-  /* KATALOG CARD 3D */
+  /* KATALOG */
   .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; perspective: 1000px; }
   .catalog-card {
     background: #090510; border: 1px solid var(--border); border-radius: 20px;
     padding: 24px; cursor: pointer; transition: all 0.3s; text-align: center;
     display: flex; flex-direction: column; align-items: center; position: relative;
-    transform-style: preserve-3d;
   }
   .catalog-card.active {
     border-color: var(--neon);
     background: var(--neon-soft);
     box-shadow: 0 0 30px -10px var(--neon-glow);
   }
-  .catalog-card img { width: 100%; height: 90px; object-fit: contain; margin-bottom: 16px; border-radius: 12px; transform: translateZ(20px); }
-  .catalog-card h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; transform: translateZ(15px); }
-  .catalog-card p { font-size: 12px; color: var(--neon); font-weight: 600; transform: translateZ(10px); }
+  .catalog-card img { width: 100%; height: 90px; object-fit: contain; margin-bottom: 16px; border-radius: 12px; }
+  .catalog-card h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .catalog-card p { font-size: 12px; color: var(--neon); font-weight: 600; }
   
   .product-content { display: none; }
   .product-content.active { display: block; animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -381,28 +385,28 @@
   <div class="auth-container">
     <div class="auth-brand">
       <div class="brand-content reveal active">
-        <h1>Welcome to <br><span>Kitzune Store.</span></h1>
-        <p>The most affordable and reliable digital products in the market.</p>
+        <h1 id="authTitle"></h1>
+        <p data-i18n="authDesc">The most affordable and reliable digital products in the market.</p>
       </div>
     </div>
     <div class="auth-form-area">
       <div class="auth-box hover-card reveal active delay-1">
         <div id="loginForm">
-          <h2>Sign In</h2>
+          <h2 data-i18n="signInTitle">Sign In</h2>
           <div class="error-msg" id="loginError"></div>
-          <div class="auth-field"><label>Email</label><input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email"></div>
-          <div class="auth-field"><label>Password</label><input type="password" id="loginPassword" class="glass-input" placeholder="Enter password"></div>
-          <button class="auth-btn" id="btnLogin" onclick="doLogin(event)">Log In</button>
-          <div class="auth-switch">Don't have an account? <a onclick="toggleAuth('register')">Create one</a></div>
+          <div class="auth-field"><label data-i18n="email">Email</label><input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email"></div>
+          <div class="auth-field"><label data-i18n="password">Password</label><input type="password" id="loginPassword" class="glass-input" placeholder="Enter password"></div>
+          <button class="auth-btn" id="btnLogin" onclick="doLogin(event)" data-i18n="btnLogin">Log In</button>
+          <div class="auth-switch"><span data-i18n="noAccount">Don't have an account?</span> <a onclick="toggleAuth('register')" data-i18n="createOne">Create one</a></div>
         </div>
         <div id="registerForm" style="display: none;">
-          <h2>Create Account</h2>
+          <h2 data-i18n="createAccTitle">Create Account</h2>
           <div class="error-msg" id="regError"></div>
-          <div class="auth-field"><label>Email</label><input type="text" id="regEmail" class="glass-input" placeholder="Enter your email"></div>
-          <div class="auth-field"><label>Password</label><input type="password" id="regPassword" class="glass-input" placeholder="Create a password"></div>
-          <div class="auth-field"><label>Confirm Password</label><input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password"></div>
-          <button class="auth-btn" id="btnRegister" onclick="doRegister(event)">Register & Login</button>
-          <div class="auth-switch">Already have an account? <a onclick="toggleAuth('login')">Log in here</a></div>
+          <div class="auth-field"><label data-i18n="email">Email</label><input type="text" id="regEmail" class="glass-input" placeholder="Enter your email"></div>
+          <div class="auth-field"><label data-i18n="password">Password</label><input type="password" id="regPassword" class="glass-input" placeholder="Create a password"></div>
+          <div class="auth-field"><label data-i18n="confirmPass">Confirm Password</label><input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password"></div>
+          <button class="auth-btn" id="btnRegister" onclick="doRegister(event)" data-i18n="btnRegister">Register & Login</button>
+          <div class="auth-switch"><span data-i18n="haveAccount">Already have an account?</span> <a onclick="toggleAuth('login')" data-i18n="logInHere">Log in here</a></div>
         </div>
       </div>
     </div>
@@ -416,17 +420,21 @@
       <img src="/favicon.png" alt="Logo" class="header-logo">
       <div class="avatar" id="userAvatar">U</div>
       <div class="profile-info">
-        <span>Logged in as</span>
+        <span data-i18n="loggedInAs">Logged in as</span>
         <strong id="displayUser">User</strong>
       </div>
     </div>
 
     <div class="header-right">
       <div class="balance-info">
-        <span>My Balance</span>
+        <span data-i18n="myBalance">My Balance</span>
         <strong id="displayBalance">Rp 0</strong>
       </div>
-      <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
+      
+      <!-- TOMBOL BAHASA -->
+      <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">ID</button>
+
+      <button class="topup-btn" onclick="openTopupModal()" data-i18n="topupBtn">+ Topup</button>
       
       <button class="burger-btn" onclick="toggleSidebar(true)">
         <span></span><span></span><span></span>
@@ -438,27 +446,27 @@
   <div class="overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
   <div class="sidebar" id="sidebarMenu">
     <div class="sidebar-header">
-      <h2>Menu</h2>
+      <h2 data-i18n="menu">Menu</h2>
       <button class="close-btn" onclick="toggleSidebar(false)">&times;</button>
     </div>
     
     <div class="sidebar-menu">
       <button class="sidebar-item active" id="navDash" onclick="switchMainTab('dashboard')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-        Dashboard
+        <span data-i18n="dashboard">Dashboard</span>
       </button>
       <button class="sidebar-item" id="navOrder" onclick="switchMainTab('order')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-        Katalog Produk
+        <span data-i18n="catalog">Product Catalog</span>
       </button>
       <button class="sidebar-item" id="navSettings" onclick="switchMainTab('settings')">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        Settings
+        <span data-i18n="settings">Settings</span>
       </button>
     </div>
     
     <div class="sidebar-footer">
-      <button class="logout-btn" onclick="confirmLogout()">Logout</button>
+      <button class="logout-btn" onclick="confirmLogout()" data-i18n="logoutBtn">Logout</button>
     </div>
   </div>
 
@@ -470,7 +478,7 @@
         <div class="dash-card hover-card reveal active">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            Produk Aktif
+            <span data-i18n="activeProducts">Active Products</span>
           </h3>
           <div id="listPanelAktif">
             <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
@@ -482,7 +490,7 @@
         <div class="dash-card hover-card reveal active delay-1">
           <h3>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Riwayat Transaksi
+            <span data-i18n="history">Transaction History</span>
           </h3>
           <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
             <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
@@ -497,8 +505,8 @@
     <div id="tabContentOrder">
       <div class="wrapper-order">
         <div class="info-section reveal active">
-          <h1 id="typingText"></h1>
-          <p>Pilih dari katalog produk premium kami di bawah ini.</p>
+          <h1 id="orderTitle"></h1>
+          <p data-i18n="catalogDesc">Pilih dari katalog produk premium kami di bawah ini.</p>
         </div>
         <div class="form-section hover-card reveal active delay-1">
           
@@ -506,33 +514,33 @@
             <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
               <img src="/media/panel.png" alt="WA Bot Panel">
               <div>
-                <h4>WA Bot Panel</h4>
-                <p>Mulai Rp 300</p>
+                <h4 data-i18n="waBotPanel">WA Bot Panel</h4>
+                <p data-i18n="startFrom">Mulai Rp 300</p>
               </div>
             </div>
             <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')">
               <img src="/media/am.png" alt="Alight Motion">
               <div>
-                <h4>Alight Motion</h4>
-                <p>Rp 5.000 / Tahun</p>
+                <h4 data-i18n="alightMotion">Alight Motion</h4>
+                <p data-i18n="amPrice">Rp 5.000 / Tahun</p>
               </div>
             </div>
           </div>
 
           <div id="productWaBot" class="product-content active">
             <div class="tab-menu-inner">
-              <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
-              <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
+              <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')" data-i18n="newPanel">New Panel</button>
+              <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')" data-i18n="addServer">Add Server</button>
             </div>
 
             <form id="orderForm">
               <div class="field" id="fieldName">
-                <label>Panel Name (No Spaces)</label>
+                <label data-i18n="panelName">Panel Name (No Spaces)</label>
                 <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
               </div>
 
               <div class="field" id="fieldAddUser" style="display: none;">
-                <label>Your Panel Username</label>
+                <label data-i18n="panelUsername">Your Panel Username</label>
                 <div class="input-group">
                   <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
                   <span class="suffix">@kitzunemarket.com</span>
@@ -540,12 +548,12 @@
               </div>
 
               <div class="field">
-                <label>Node.js Version</label>
+                <label data-i18n="nodeVersion">Node.js Version</label>
                 <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
               </div>
               
               <div class="field">
-                <label>Select RAM Capacity</label>
+                <label data-i18n="selectRam">Select RAM Capacity</label>
                 <div class="ram-grid">
                   <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
@@ -562,30 +570,30 @@
               </div>
               
               <div class="total">
-                <span>Total Pembayaran</span>
+                <span data-i18n="totalPayment">Total Pembayaran</span>
                 <span class="total-price" id="totalText">Rp 300</span>
               </div>
               
-              <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
+              <button type="submit" id="submitBtn" onclick="createRipple(event)" data-i18n="btnBuyPanel">Beli Panel</button>
             </form>
           </div>
 
           <div id="productAm" class="product-content">
             <div id="amStep1">
               <div class="field">
-                <label>Email Alight Motion Kamu</label>
+                <label data-i18n="amEmail">Email Alight Motion Kamu</label>
                 <input type="email" id="amEmail" class="glass-input" placeholder="contoh@gmail.com" required>
               </div>
-              <button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)">Kirim Link Verifikasi</button>
+              <button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)" data-i18n="btnSendLink">Kirim Link Verifikasi</button>
             </div>
 
             <div id="amStep2" style="display: none;">
-              <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;">Cek inbox/spam email <b id="amTextEmail"></b>. Copy link verifikasi dari email, lalu paste di bawah ini.</p>
+              <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;" data-i18n="amInbox">Cek inbox/spam email Anda. Copy link verifikasi dari email, lalu paste di bawah ini.</p>
               <div class="field">
-                <label>Paste Link Verifikasi</label>
+                <label data-i18n="amLinkLabel">Paste Link Verifikasi</label>
                 <textarea id="amLink" class="glass-input" placeholder="https://alightcreative.app.link/..." rows="3" style="resize: none; font-size: 13px;"></textarea>
               </div>
-              <button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);">Aktifkan Premium (Rp 5.000)</button>
+              <button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);" data-i18n="btnActivateAm">Aktifkan Premium (Rp 5.000)</button>
             </div>
           </div>
 
@@ -597,40 +605,40 @@
     <div id="tabContentSettings">
       <div class="wrapper-order">
         <div class="info-section reveal active">
-          <h1>Account <br><span>Settings.</span></h1>
-          <p>Ubah email dan password akun Kitzune Store Anda.</p>
+          <h1 id="settingsTitle"></h1>
+          <p data-i18n="settingsDesc">Ubah email dan password akun Kitzune Store Anda.</p>
         </div>
         <div class="form-section hover-card reveal active delay-1">
           
           <div class="field">
-            <label>Email Saat Ini</label>
+            <label data-i18n="currentEmail">Email Saat Ini</label>
             <input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
           </div>
           <div class="field">
-            <label>Password Saat Ini (Wajib)</label>
+            <label data-i18n="currentPassEmail">Password Saat Ini (Wajib)</label>
             <input type="password" id="currentPassEmail" class="glass-input" placeholder="Masukkan password Anda">
           </div>
           <div class="field">
-            <label>Email Baru</label>
+            <label data-i18n="newEmail">Email Baru</label>
             <input type="email" id="newEmail" class="glass-input" placeholder="Masukkan email baru">
           </div>
-          <button type="button" class="auth-btn am-btn" onclick="changeEmail(event)" style="background: var(--neon); margin-bottom: 24px;">Ubah Email</button>
+          <button type="button" class="auth-btn am-btn" onclick="changeEmail(event)" style="background: var(--neon); margin-bottom: 24px;" data-i18n="btnChangeEmail">Ubah Email</button>
 
           <hr style="border: 1px solid var(--border); margin: 24px 0;">
 
           <div class="field">
-            <label>Password Saat Ini (Wajib)</label>
+            <label data-i18n="currentPass">Password Saat Ini (Wajib)</label>
             <input type="password" id="currentPassPassword" class="glass-input" placeholder="Masukkan password lama Anda">
           </div>
           <div class="field">
-            <label>Password Baru</label>
+            <label data-i18n="newPass">Password Baru</label>
             <input type="password" id="newPassword" class="glass-input" placeholder="Masukkan password baru">
           </div>
           <div class="field">
-            <label>Konfirmasi Password Baru</label>
+            <label data-i18n="confirmNewPass">Konfirmasi Password Baru</label>
             <input type="password" id="confirmNewPassword" class="glass-input" placeholder="Ulangi password baru">
           </div>
-          <button type="button" class="auth-btn am-btn" onclick="changePassword(event)" style="background: var(--success);">Ubah Password</button>
+          <button type="button" class="auth-btn am-btn" onclick="changePassword(event)" style="background: var(--success);" data-i18n="btnChangePass">Ubah Password</button>
           
         </div>
       </div>
@@ -646,13 +654,13 @@
       <img src="/favicon.png" alt="Logo" class="header-logo">
       <div class="avatar" style="background: linear-gradient(135deg, #ef4444, #b91c1c);">A</div>
       <div class="profile-info">
-        <span>Logged in as</span>
+        <span data-i18n="loggedInAs">Logged in as</span>
         <strong>Administrator</strong>
       </div>
     </div>
     
     <div class="header-right">
-      <button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;">Logout</button>
+      <button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;" data-i18n="logoutBtn">Logout</button>
     </div>
   </div>
 
@@ -676,12 +684,12 @@
 <!-- MODAL TOPUP -->
 <div id="topupModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Topup Balance</h3>
-    <p>Enter amount (Min. Rp 400), then send message to Admin via WhatsApp.</p>
+    <h3 data-i18n="topupTitle">Topup Saldo</h3>
+    <p data-i18n="topupDesc">Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.</p>
     <input type="number" id="topupAmount" class="modal-input" placeholder="Ex: 500" min="400">
     <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')">Cancel</button>
-      <button class="btn-modal btn-confirm" onclick="proceedTopup()">Topup via WA</button>
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')" data-i18n="cancel">Batal</button>
+      <button class="btn-modal btn-confirm" onclick="proceedTopup()" data-i18n="topupBtn">+ Topup</button>
     </div>
   </div>
 </div>
@@ -689,11 +697,11 @@
 <!-- MODAL KONFIRMASI -->
 <div id="confirmModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Konfirmasi</h3>
+    <h3 data-i18n="confirmTitle">Konfirmasi</h3>
     <p id="confirmText">Apakah anda yakin?</p>
     <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
-      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')" data-i18n="cancel">Batal</button>
+      <button class="btn-modal btn-confirm" onclick="executePurchase()" data-i18n="yesContinue">Ya, Lanjutkan</button>
     </div>
   </div>
 </div>
@@ -701,11 +709,11 @@
 <!-- MODAL KONFIRMASI LOGOUT -->
 <div id="logoutModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Konfirmasi Logout</h3>
-    <p>Apakah Anda yakin ingin keluar dari akun ini?</p>
+    <h3 data-i18n="logoutTitle">Konfirmasi Logout</h3>
+    <p data-i18n="logoutDesc">Apakah Anda yakin ingin keluar dari akun ini?</p>
     <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('logoutModal').classList.remove('active')">Batal</button>
-      <button class="btn-modal btn-confirm" style="background: var(--danger);" onclick="executeLogout()">Ya, Logout</button>
+      <button class="btn-modal btn-cancel" onclick="document.getElementById('logoutModal').classList.remove('active')" data-i18n="cancel">Batal</button>
+      <button class="btn-modal btn-confirm" style="background: var(--danger);" onclick="executeLogout()" data-i18n="yesLogout">Ya, Logout</button>
     </div>
   </div>
 </div>
@@ -728,8 +736,8 @@
     </div>
 
     <div class="modal-actions">
-      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
-      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Tutup</button>
+      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()" data-i18n="copyData">Salin Data (Copy)</button>
+      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()" data-i18n="close">Tutup</button>
     </div>
   </div>
 </div>
@@ -737,7 +745,7 @@
 <!-- CUSTOM ALERT -->
 <div id="customAlert" class="modal-overlay">
   <div class="modal-content" style="max-width: 360px;">
-    <h3 id="alertTitle">Notifikasi</h3>
+    <h3 id="alertTitle" data-i18n="notif">Notifikasi</h3>
     <p id="alertMessage">Pesan notifikasi.</p>
     <div class="modal-actions">
       <button class="btn-modal btn-confirm" style="flex: 1;" onclick="document.getElementById('customAlert').classList.remove('active')">OK</button>
@@ -773,6 +781,172 @@
   let currentMode = "new"; 
   let currentCatalog = "wabot";
   let pendingAmEmail = "";
+  let currentLang = 'en';
+
+  // --- TRANSLATIONS ---
+  const translations = {
+    en: {
+      authDesc: "The most affordable and reliable digital products in the market.",
+      authTitle: "Welcome to <br><span>Kitzune Store.</span>",
+      signInTitle: "Sign In",
+      email: "Email",
+      password: "Password",
+      btnLogin: "Log In",
+      noAccount: "Don't have an account?",
+      createOne: "Create one",
+      createAccTitle: "Create Account",
+      confirmPass: "Confirm Password",
+      btnRegister: "Register & Login",
+      haveAccount: "Already have an account?",
+      logInHere: "Log in here",
+      loggedInAs: "Logged in as",
+      myBalance: "My Balance",
+      topupBtn: "+ Topup",
+      menu: "Menu",
+      dashboard: "Dashboard",
+      catalog: "Product Catalog",
+      settings: "Settings",
+      logoutBtn: "Logout",
+      activeProducts: "Active Products",
+      history: "Transaction History",
+      catalogDesc: "Choose from our premium product catalog below.",
+      orderTitle: "Choose Your <br><span>Digital Products.</span>",
+      waBotPanel: "WA Bot Panel",
+      startFrom: "From Rp 300",
+      alightMotion: "Alight Motion",
+      amPrice: "Rp 5,000 / Year",
+      newPanel: "New Panel",
+      addServer: "Add Server",
+      panelName: "Panel Name (No Spaces)",
+      panelUsername: "Your Panel Username",
+      nodeVersion: "Node.js Version",
+      selectRam: "Select RAM Capacity",
+      totalPayment: "Total Payment",
+      btnBuyPanel: "Buy Panel",
+      amEmail: "Your Alight Motion Email",
+      btnSendLink: "Send Verification Link",
+      amInbox: "Check your inbox/spam. Copy the verification link and paste it below.",
+      amLinkLabel: "Paste Verification Link",
+      btnActivateAm: "Activate Premium (Rp 5,000)",
+      settingsTitle: "Account <br><span>Settings.</span>",
+      settingsDesc: "Change your Kitzune Store account email and password.",
+      currentEmail: "Current Email",
+      currentPassEmail: "Current Password (Required)",
+      newEmail: "New Email",
+      btnChangeEmail: "Change Email",
+      currentPass: "Current Password (Required)",
+      newPass: "New Password",
+      confirmNewPass: "Confirm New Password",
+      btnChangePass: "Change Password",
+      topupTitle: "Topup Balance",
+      topupDesc: "Enter amount (Min. Rp 400), then send message to Admin via WhatsApp.",
+      cancel: "Cancel",
+      confirmTitle: "Confirmation",
+      yesContinue: "Yes, Continue",
+      logoutTitle: "Logout Confirmation",
+      logoutDesc: "Are you sure you want to log out of this account?",
+      yesLogout: "Yes, Logout",
+      copyData: "Copy Data",
+      close: "Close",
+      notif: "Notification"
+    },
+    id: {
+      authDesc: "Produk digital paling murah dan terpercaya di pasaran.",
+      authTitle: "Selamat Datang di <br><span>Kitzune Store.</span>",
+      signInTitle: "Masuk",
+      email: "Email",
+      password: "Password",
+      btnLogin: "Masuk",
+      noAccount: "Belum punya akun?",
+      createOne: "Daftar di sini",
+      createAccTitle: "Buat Akun",
+      confirmPass: "Konfirmasi Password",
+      btnRegister: "Daftar & Masuk",
+      haveAccount: "Sudah punya akun?",
+      logInHere: "Masuk di sini",
+      loggedInAs: "Masuk sebagai",
+      myBalance: "Saldo Saya",
+      topupBtn: "+ Topup",
+      menu: "Menu",
+      dashboard: "Dashboard",
+      catalog: "Katalog Produk",
+      settings: "Pengaturan",
+      logoutBtn: "Keluar",
+      activeProducts: "Produk Aktif",
+      history: "Riwayat Transaksi",
+      catalogDesc: "Pilih dari katalog produk premium kami di bawah ini.",
+      orderTitle: "Pilih Produk <br><span>Digital Kamu.</span>",
+      waBotPanel: "WA Bot Panel",
+      startFrom: "Mulai Rp 300",
+      alightMotion: "Alight Motion",
+      amPrice: "Rp 5.000 / Tahun",
+      newPanel: "Panel Baru",
+      addServer: "Tambah Server",
+      panelName: "Nama Panel (Tanpa Spasi)",
+      panelUsername: "Username Panel Kamu",
+      nodeVersion: "Versi Node.js",
+      selectRam: "Pilih Kapasitas RAM",
+      totalPayment: "Total Pembayaran",
+      btnBuyPanel: "Beli Panel",
+      amEmail: "Email Alight Motion Kamu",
+      btnSendLink: "Kirim Link Verifikasi",
+      amInbox: "Cek inbox/spam email Anda. Copy link verifikasi dari email, lalu paste di bawah ini.",
+      amLinkLabel: "Paste Link Verifikasi",
+      btnActivateAm: "Aktifkan Premium (Rp 5.000)",
+      settingsTitle: "Pengaturan <br><span>Akun.</span>",
+      settingsDesc: "Ubah email dan password akun Kitzune Store Anda.",
+      currentEmail: "Email Saat Ini",
+      currentPassEmail: "Password Saat Ini (Wajib)",
+      newEmail: "Email Baru",
+      btnChangeEmail: "Ubah Email",
+      currentPass: "Password Saat Ini (Wajib)",
+      newPass: "Password Baru",
+      confirmNewPass: "Konfirmasi Password Baru",
+      btnChangePass: "Ubah Password",
+      topupTitle: "Topup Saldo",
+      topupDesc: "Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.",
+      cancel: "Batal",
+      confirmTitle: "Konfirmasi",
+      yesContinue: "Ya, Lanjutkan",
+      logoutTitle: "Konfirmasi Logout",
+      logoutDesc: "Apakah Anda yakin ingin keluar dari akun ini?",
+      yesLogout: "Ya, Keluar",
+      copyData: "Salin Data",
+      close: "Tutup",
+      notif: "Notifikasi"
+    }
+  };
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    document.getElementById('langToggle').textContent = lang === 'en' ? 'ID' : 'EN';
+    
+    // Update teks dengan atribut data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+
+    // Handle Judul yang ada HTML-nya
+    document.getElementById('authTitle').innerHTML = translations[lang].authTitle;
+    document.getElementById('orderTitle').innerHTML = translations[lang].orderTitle;
+    document.getElementById('settingsTitle').innerHTML = translations[lang].settingsTitle;
+    
+    // Placeholder update
+    document.getElementById('loginEmail').placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
+    document.getElementById('loginPassword').placeholder = lang === 'en' ? "Enter password" : "Masukkan password";
+    document.getElementById('regEmail').placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
+    document.getElementById('regPassword').placeholder = lang === 'en' ? "Create a password" : "Buat password";
+    document.getElementById('regConfirmPassword').placeholder = lang === 'en' ? "Repeat password" : "Ulangi password";
+    document.getElementById('customName').placeholder = "Ex: BotJuragan";
+    document.getElementById('amEmail').placeholder = "contoh@gmail.com";
+  }
+
+  window.toggleLanguage = () => {
+    applyLanguage(currentLang === 'en' ? 'id' : 'en');
+  };
 
   // --- CUSTOM CURSOR ---
   const cursor = document.getElementById('cursorGlow');
@@ -790,30 +964,6 @@
       header.classList.remove('scrolled');
     }
   });
-
-  // --- TYPING EFFECT ---
-  const textElement = document.getElementById('typingText');
-  const textToType = "Pilih Produk <br><span>Digital Kamu.</span>";
-  let i = 0;
-  function typeWriter() {
-    if (i < textToType.length) {
-      if (textToType.substring(i, i+4) === "<br>") {
-        textElement.innerHTML += "<br>";
-        i += 4;
-      } else if (textToType.substring(i, i+4) === "<spa") {
-        textElement.innerHTML += "<span>";
-        i += 5;
-      } else if (textToType.substring(i, i+7) === "</span>") {
-        textElement.innerHTML += "</span>";
-        i += 7;
-      } else {
-        textElement.innerHTML += textToType.charAt(i);
-        i++;
-      }
-      setTimeout(typeWriter, 40);
-    }
-  }
-  setTimeout(typeWriter, 500);
 
   // --- 3D TILT CARD ---
   document.querySelectorAll('.catalog-card').forEach(card => {
@@ -941,13 +1091,13 @@
       document.getElementById('tabAdd').classList.remove('active');
       document.getElementById('fieldName').style.display = 'block';
       document.getElementById('fieldAddUser').style.display = 'none';
-      document.getElementById('submitBtn').textContent = "Beli Panel";
+      document.getElementById('submitBtn').textContent = currentLang === 'en' ? "Buy Panel" : "Beli Panel";
     } else {
       document.getElementById('tabNew').classList.remove('active');
       document.getElementById('tabAdd').classList.add('active');
       document.getElementById('fieldName').style.display = 'none';
       document.getElementById('fieldAddUser').style.display = 'block';
-      document.getElementById('submitBtn').textContent = "Add Server";
+      document.getElementById('submitBtn').textContent = currentLang === 'en' ? "Add Server" : "Tambah Server";
     }
   }
 
@@ -1067,7 +1217,7 @@
       }
     } finally {
       btn.disabled = false;
-      btn.textContent = "Ubah Email";
+      btn.textContent = currentLang === 'en' ? "Change Email" : "Ubah Email";
     }
   };
 
@@ -1102,7 +1252,7 @@
       }
     } finally {
       btn.disabled = false;
-      btn.textContent = "Ubah Password";
+      btn.textContent = currentLang === 'en' ? "Change Password" : "Ubah Password";
     }
   };
 
@@ -1366,7 +1516,7 @@
       showAlert("Error sistem.");
     } finally {
       btn.disabled = false;
-      btn.textContent = "Kirim Link Verifikasi";
+      btn.textContent = currentLang === 'en' ? "Send Verification Link" : "Kirim Link Verifikasi";
     }
   };
 
@@ -1428,7 +1578,7 @@
         showAlert("Error sistem.");
       } finally {
         btn.disabled = false;
-        btn.textContent = "Aktifkan Premium (Rp 5.000)";
+        btn.textContent = currentLang === 'en' ? "Activate Premium (Rp 5,000)" : "Aktifkan Premium (Rp 5.000)";
       }
     };
   };
@@ -1526,6 +1676,9 @@
     document.getElementById("amEmail").value = "";
     document.getElementById("amLink").value = "";
   };
+
+  // INITIALIZE LANGUAGE
+  applyLanguage('en');
 
   // PARTICLES JS INIT
   particlesJS("particles-js", {
