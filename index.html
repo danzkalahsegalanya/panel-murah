@@ -972,20 +972,29 @@
             body: JSON.stringify({ action: 'send-link', email: email })
         });
         
-        const data = await res.json(); // Pake ini aja karena API lu udah bener ngirim JSON
+        const textResponse = await res.text();
+        console.log("Raw Response:", textResponse); // Cek di Console (F12)
 
-        // Cek respon dari API lu
-        if (data && data.ok === true) {
+        let data = {};
+        try {
+            data = JSON.parse(textResponse);
+        } catch (e) {
+            showAlert("API Error: Respon bukan JSON.<br>Isi: " + textResponse.substring(0, 100), "Debug");
+            return; 
+        }
+
+        if (data && (data.ok === true || data.success === true || data.status === 'ok')) {
             pendingAmEmail = email;
             document.getElementById("amTextEmail").textContent = email;
             document.getElementById("amStep1").style.display = "none";
             document.getElementById("amStep2").style.display = "block";
         } else {
-            showAlert("Gagal: " + (data.why || "Respon API tidak valid"), "Gagal");
+            showAlert("Gagal dari API: " + (data.why || "Tidak ada alasan"), "Gagal");
         }
+
     } catch (err) {
-        console.error("Error asli:", err);
-        showAlert("Error sistem: Gagal menghubungi server API.", "Gagal"); 
+        console.error("Fetch Error:", err);
+        showAlert("Network Error: " + err.message, "Gagal"); 
     } finally {
         btn.disabled = false;
         btn.textContent = currentLang === 'en' ? "Send Verification Link" : "Kirim Link Verifikasi";
@@ -1013,7 +1022,7 @@
         let data;
         try { data = JSON.parse(textResponse); } catch(e) { throw new Error("API tidak mengembalikan JSON."); }
 
-        if (data.ok) { 
+        if (data.ok || data.success || data.status === 'ok') { 
           await updateDoc(docRef, { balance: saldo - harga }); 
           await updateUserBalanceUI(currentUser.uid); 
           await setDoc(doc(collection(db, "transactions")), { uid: currentUser.uid, email: currentUser.email, produk: "am", mode: "new", namaPanel: "Alight Motion Premium", emailAm: pendingAmEmail, ram: "1 Tahun", harga: harga, createdAt: Date.now() }); 
