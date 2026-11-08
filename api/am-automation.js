@@ -4,7 +4,6 @@ const crypto = require('crypto');
 const cfg = {
   key: 'AIzaSyDtG1AU22ErnQD60AzBAcaknySiz9_CEq0',
   idt: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty',
-  stk: 'https://securetoken.googleapis.com/v1/token',
   vfy: 'https://us-central1-alight-creative.cloudfunctions.net/verifyPurchase'
 };
 
@@ -18,19 +17,29 @@ const bad = e => {
   return d ? (typeof d === 'object' ? JSON.stringify(d) : String(d)) : e.message; 
 };
 
-// Tambahkan timeout agar tidak menggantung kelamaan dan memicu HTML Error 504
-const axiosConfig = { timeout: 15000 }; 
+// Timeout 10 detik agar server hosting tidak memutus koneksi duluan
+const axiosConfig = { timeout: 10000 }; 
 
 async function sendLink(email){
+  // Google API membutuhkan parameter yang persis sama
   const c1 = { identifier: email, continueUri: 'http://localhost' };
-  const c2 = { requestType: 6, email: email, androidInstallApp: true, canHandleCodeInApp: true, continueUrl: 'https://alightcreative.com?ui_sid=0366624874&ui_sd=0', iosBundleId: 'com.alightcreative.motion', androidPackageName: 'com.alightcreative.motion', androidMinimumVersion: '585', clientType: 'CLIENT_TYPE_ANDROID' };
+  const c2 = { 
+    requestType: 6, 
+    email: email, 
+    androidInstallApp: true, 
+    canHandleCodeInApp: true, 
+    continueUrl: 'https://alightcreative.com?ui_sid=0366624874&ui_sd=0', 
+    iosBundleId: 'com.alightcreative.motion', 
+    // HAPUS androidPackageName dan androidMinimumVersion jika API Key kamu error
+    clientType: 'CLIENT_TYPE_ANDROID' 
+  };
   
   try { 
-    // Gunakan config timeout
     await axios.post(`${cfg.idt}/createAuthUri?key=${cfg.key}`, c1, { headers: sp(h1), ...axiosConfig }); 
     await axios.post(`${cfg.idt}/getOobConfirmationCode?key=${cfg.key}`, c2, { headers: sp(h1), ...axiosConfig }); 
-    return { ok: true }; 
+    return { ok: true, message: "Email terkirim" }; 
   } catch(e) { 
+    // Jika Google error, kita kembalikan pesan aslinya, TAPI frontend tidak akan peduli
     return { ok: false, why: bad(e) }; 
   }
 }
@@ -85,7 +94,6 @@ async function processPremium(id, customId){
 }
 
 module.exports = async (req, res) => {
-  // Set header JSON dari awal agar frontend tidak bingung jika ada error
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -99,15 +107,13 @@ module.exports = async (req, res) => {
 
     if (action === 'send-link') {
       if (!email) return res.status(400).json({ ok: false, why: "Email required" });
-      
       const r = await sendLink(email);
-      // PENTING: Kirim response 200 OK jika sukses, atau 400 jika gagal
-      return res.status(r.ok ? 200 : 400).json(r);
+      // Selalu kirim status 200 agar frontend sukses membaca JSON
+      return res.status(200).json(r); 
     } 
     
     if (action === 'verify') {
       if (!email || !verifyUrl) return res.status(400).json({ ok: false, why: "Email and link required" });
-      
       const v = await verifyLogin(email, verifyUrl);
       if (!v.ok) return res.status(400).json(v);
       
@@ -122,7 +128,6 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, why: "Invalid action" });
   } catch (error) {
     console.error("Server Error:", error);
-    // Selalu balas dengan JSON jika terjadi crash tak terduga
     return res.status(500).json({ ok: false, why: error.message || "Internal Server Error" });
   }
 };
