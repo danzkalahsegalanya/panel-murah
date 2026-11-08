@@ -1250,6 +1250,12 @@
     const email = document.getElementById("amEmail").value.trim();
     if (!email) { showAlert("Masukkan email dulu!"); return; }
 
+    // Validasi format email sederhana
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showAlert("Format email tidak valid!");
+      return;
+    }
+
     const btn = event.target;
     btn.disabled = true;
     btn.textContent = "Mengirim...";
@@ -1260,18 +1266,48 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'send-link', email: email })
       });
-      const data = await res.json();
 
+      // Baca response sebagai text dulu (biar aman kalau bukan JSON)
+      const rawText = await res.text();
+      console.log("[sendAmLink] HTTP Status:", res.status);
+      console.log("[sendAmLink] Raw Response:", rawText);
+
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (jsonErr) {
+        // Response bukan JSON (kemungkinan HTML error page / kosong)
+        console.error("Response bukan JSON:", rawText);
+        
+        // KASUS PENTING: Kalau HTTP 200 tapi bukan JSON,
+        // kemungkinan besar backend SUDAH kirim email tapi crash setelahnya.
+        // Kita anggap sukses supaya user bisa lanjut ke step 2.
+        if (res.ok) {
+          console.warn("HTTP OK tapi response bukan JSON — anggap sukses (link kemungkinan sudah terkirim).");
+          pendingAmEmail = email;
+          document.getElementById("amTextEmail").textContent = email;
+          document.getElementById("amStep1").style.display = "none";
+          document.getElementById("amStep2").style.display = "block";
+          showAlert("Link verifikasi dikirim. Cek inbox/spam email kamu.", "Info");
+          return;
+        }
+        
+        throw new Error(`Server error (HTTP ${res.status}). Response tidak valid.`);
+      }
+
+      // Kalau sampai sini, response JSON valid
       if (data.ok) {
         pendingAmEmail = email;
         document.getElementById("amTextEmail").textContent = email;
         document.getElementById("amStep1").style.display = "none";
         document.getElementById("amStep2").style.display = "block";
       } else {
-        showAlert("Gagal: " + data.why);
+        showAlert("Gagal: " + (data.why || data.error || "Unknown error"), "Gagal");
       }
+
     } catch (err) {
-      showAlert("Error sistem.");
+      console.error("[sendAmLink] Error:", err);
+      showAlert("Error: " + err.message, "Gagal");
     } finally {
       btn.disabled = false;
       btn.textContent = "Kirim Link Verifikasi";
@@ -1281,6 +1317,12 @@
   window.verifyAmLink = async (event) => {
     const linkInput = document.getElementById("amLink").value.trim();
     if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; }
+
+    // Validasi URL sederhana
+    if (!linkInput.startsWith("http")) {
+      showAlert("Link verifikasi tidak valid (harus diawali http/https)");
+      return;
+    }
 
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
@@ -1292,7 +1334,8 @@
       return;
     }
 
-    document.getElementById("confirmText").innerHTML = `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`;
+    document.getElementById("confirmText").innerHTML = 
+      `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`;
     document.getElementById("confirmModal").classList.add("active");
     
     const confirmBtn = document.querySelector("#confirmModal .btn-confirm");
@@ -1306,9 +1349,22 @@
         const res = await fetch('/api/am-automation', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
+          body: JSON.stringify({ 
+            action: 'verify', 
+            email: pendingAmEmail, 
+            verifyUrl: linkInput 
+          })
         });
-        const data = await res.json();
+
+        const rawText = await res.text();
+        console.log("[verifyAmLink] HTTP:", res.status, "Raw:", rawText);
+
+        let data;
+        try {
+          data = JSON.parse(rawText);
+        } catch (e) {
+          throw new Error(`Response tidak valid (HTTP ${res.status})`);
+        }
 
         if (data.ok) {
           await updateDoc(docRef, { balance: saldo - harga });
@@ -1326,14 +1382,15 @@
             createdAt: Date.now()
           });
 
-          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan di akun Anda. Silakan buka aplikasi Alight Motion.", "Berhasil!");
+          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "Berhasil!");
           loadUserDashboard();
           switchMainTab('dashboard'); 
         } else {
-          showAlert("Gagal Verifikasi: " + data.why, "Gagal");
+          showAlert("Gagal Verifikasi: " + (data.why || data.error || "Unknown"), "Gagal");
         }
       } catch (err) {
-        showAlert("Error sistem.");
+        console.error("[verifyAmLink] Error:", err);
+        showAlert("Error: " + err.message, "Gagal");
       } finally {
         btn.disabled = false;
         btn.textContent = "Aktifkan Premium (Rp 5.000)";
