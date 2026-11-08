@@ -61,6 +61,10 @@
 
   button { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
   button:active { transform: scale(0.96) !important; }
+  button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.35); transform: scale(0); animation: rippleAnim 0.6s linear; pointer-events: none; }
+  @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
 
   .skeleton {
     background: #1f1530;
@@ -92,6 +96,7 @@
     width: 100%; padding: 14px 16px; font-size: 14.5px; font-weight: 500;
     background: #0a0612; color: #fff; border: 1px solid var(--border); 
     border-radius: 12px; outline: none; transition: all 0.3s; font-family: inherit;
+    -webkit-user-select: text; user-select: text;
   }
   .glass-input:focus { border-color: var(--neon); box-shadow: 0 0 0 3px var(--neon-glow); }
   .glass-input::placeholder { color: #5a4b73; }
@@ -206,10 +211,11 @@
   .field { margin-bottom: 20px; }
   .field > label { display: block; font-size: 12.5px; font-weight: 700; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; }
   .input-group { display: flex; align-items: stretch; background: #0a0612; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  .input-group input { flex: 1; border: none; background: transparent; padding: 14px 16px; font-size: 14.5px; color: #fff; outline: none; }
+  .input-group input { flex: 1; border: none; background: transparent; padding: 14px 16px; font-size: 14.5px; color: #fff; outline: none; -webkit-user-select: text; user-select: text; }
   .input-group .suffix { padding: 0 16px; color: var(--muted); font-size: 13.5px; background: #110b1c; border-left: 1px solid var(--border); display: flex; align-items: center; font-weight: 600; }
   
   .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 8px; }
+  .ram-item { position: relative; }
   .ram-item input { position: absolute; opacity: 0; }
   .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; text-align: center; background: #0a0612; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
   .ram-item .ram-name { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; color: #fff; }
@@ -267,7 +273,7 @@
   @keyframes popIn { from { opacity: 0; transform: scale(0.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
   .modal-content h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: #fff; }
   .modal-content p { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
-  .modal-input { width: 100%; padding: 14px; font-size: 15px; background: #0a0612; color: #fff; border: 1px solid var(--border); border-radius: 12px; outline: none; margin-bottom: 20px; text-align: center; }
+  .modal-input { width: 100%; padding: 14px; font-size: 15px; background: #0a0612; color: #fff; border: 1px solid var(--border); border-radius: 12px; outline: none; margin-bottom: 20px; text-align: center; -webkit-user-select: text; user-select: text; }
   
   .panel-data-box { background: #0a0612; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: left; margin-bottom: 20px; font-family: monospace; font-size: 14px; user-select: text; -webkit-user-select: text; }
   .panel-data-box .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
@@ -525,8 +531,8 @@
                   <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
+                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
                   <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
                 </div>
               </div>
@@ -547,6 +553,7 @@
                 <input type="email" id="amEmail" class="glass-input" placeholder="contoh@gmail.com" required>
               </div>
               <button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)">Kirim Link Verifikasi</button>
+              <button type="button" id="amSkipBtn" class="auth-btn am-btn" style="display:none; background: transparent; border: 1px solid var(--border);" onclick="goAmStep2()">Link sudah masuk di email? Lanjut</button>
             </div>
 
             <div id="amStep2" style="display: none;">
@@ -665,7 +672,7 @@
     <p id="confirmText">Apakah anda yakin?</p>
     <div class="modal-actions">
       <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
-      <button class="btn-modal btn-confirm" onclick="executePurchase()">Ya, Lanjutkan</button>
+      <button class="btn-modal btn-confirm" onclick="runPendingAction()">Ya, Lanjutkan</button>
     </div>
   </div>
 </div>
@@ -745,6 +752,25 @@
   let currentMode = "new"; 
   let currentCatalog = "wabot";
   let pendingAmEmail = "";
+  let pendingAction = null;
+
+  // --- HELPERS ---
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  // Baca respons API dengan aman, terima format ok / success
+  async function readApiResponse(res) {
+    const raw = await res.text();
+    let data = null;
+    try { data = JSON.parse(raw); } catch (e) {}
+    const success = !!data && (data.ok === true || data.success === true || data.status === "success");
+    const reason = data ? (data.why || data.error || data.message || "") : "";
+    return { raw, data, success, reason, status: res.status, httpOk: res.ok };
+  }
+
+  window.runPendingAction = () => {
+    document.getElementById("confirmModal").classList.remove("active");
+    if (typeof pendingAction === "function") pendingAction();
+  };
 
   // --- CUSTOM ALERT HELPER ---
   window.showAlert = function(message, title = "Notifikasi") {
@@ -893,10 +919,10 @@
   window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
   
   window.proceedTopup = () => {
-    const amount = document.getElementById('topupAmount').value;
-    if (amount < 400) { showAlert("Minimal topup Rp 400"); return; }
+    const amount = parseInt(document.getElementById('topupAmount').value);
+    if (isNaN(amount) || amount < 400) { showAlert("Minimal topup Rp 400"); return; }
     
-    const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${parseInt(amount).toLocaleString()}\n\nMohon diproses.`;
+    const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${amount.toLocaleString()}\n\nMohon diproses.`;
     window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
     document.getElementById('topupModal').classList.remove('active');
   }
@@ -939,25 +965,24 @@
   }
 
   // --- ACCOUNT SETTINGS (RE-AUTH WITH OLD PASSWORD) ---
+  const isWrongPassword = (code) => code === 'auth/wrong-password' || code === 'auth/invalid-credential';
+
   window.changeEmail = async (event) => {
     const oldPass = document.getElementById('currentPassEmail').value;
     const newEmail = document.getElementById('newEmail').value.trim();
 
     if (!oldPass || !newEmail) { showAlert("Isi password saat ini dan email baru!"); return; }
 
-    const btn = event.target;
+    const btn = event.currentTarget;
     btn.disabled = true;
     btn.textContent = "Memproses...";
 
     try {
-      // 1. Re-autentikasi dulu pakai password lama
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
       await reauthenticateWithCredential(currentUser, credential);
 
-      // 2. Kalau sukses, baru ganti email
       await updateEmail(currentUser, newEmail);
       
-      // 3. Update email di database Firestore juga
       const docRef = doc(db, "users", currentUser.uid);
       await updateDoc(docRef, { email: newEmail });
 
@@ -965,10 +990,10 @@
       setTimeout(() => signOut(auth), 2000);
 
     } catch (error) {
-      if (error.code === 'auth/wrong-password') {
+      if (isWrongPassword(error.code)) {
         showAlert("Password saat ini salah!", "Gagal");
       } else {
-        showAlert(error.message, "Gagal");
+        showAlert(esc(error.message), "Gagal");
       }
     } finally {
       btn.disabled = false;
@@ -985,16 +1010,14 @@
     if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; }
     if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; }
 
-    const btn = event.target;
+    const btn = event.currentTarget;
     btn.disabled = true;
     btn.textContent = "Memproses...";
 
     try {
-      // 1. Re-autentikasi dulu pakai password lama
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
       await reauthenticateWithCredential(currentUser, credential);
 
-      // 2. Kalau sukses, baru ganti password
       await updatePassword(currentUser, newPass);
       
       showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
@@ -1003,10 +1026,10 @@
       document.getElementById('confirmNewPassword').value = "";
 
     } catch (error) {
-      if (error.code === 'auth/wrong-password') {
+      if (isWrongPassword(error.code)) {
         showAlert("Password saat ini salah!", "Gagal");
       } else {
-        showAlert(error.message, "Gagal");
+        showAlert(esc(error.message), "Gagal");
       }
     } finally {
       btn.disabled = false;
@@ -1072,7 +1095,7 @@
               <span>Rp ${data.harga.toLocaleString()}</span>
             </div>
             <div class="history-details">
-              <p>${data.namaPanel} [${data.ram || '1 Tahun'}]</p>
+              <p>${esc(data.namaPanel)} [${esc(data.ram || '1 Tahun')}]</p>
               <span class="history-date">${new Date(data.createdAt).toLocaleDateString('id-ID')}</span>
             </div>
           </div>
@@ -1083,7 +1106,7 @@
             <div class="panel-list-item">
               <div class="panel-details">
                 <h4>Alight Motion</h4>
-                <p>1 Tahun • ${data.emailAm}</p>
+                <p>1 Tahun • ${esc(data.emailAm)}</p>
               </div>
               <div class="panel-actions">
                 <div class="panel-status status-am">Active</div>
@@ -1105,12 +1128,12 @@
               htmlPanel += `
                 <div class="panel-list-item">
                   <div class="panel-details">
-                    <h4>${data.namaPanel}</h4>
-                    <p>${data.ram} • Sisa ${daysLeft} Hari</p>
+                    <h4>${esc(data.namaPanel)}</h4>
+                    <p>${esc(data.ram)} • Sisa ${daysLeft} Hari</p>
                   </div>
                   <div class="panel-actions">
                     <div class="panel-status status-active">Active</div>
-                    <button class="btn-manage" onclick="managePanel('wabot', '${data.namaPanel}')">Manage</button>
+                    <button class="btn-manage" onclick="managePanel('wabot', '${esc(data.namaPanel)}')">Manage</button>
                   </div>
                 </div>
               `;
@@ -1118,8 +1141,8 @@
               htmlPanel += `
                 <div class="panel-list-item" style="opacity: 0.6;">
                   <div class="panel-details">
-                    <h4 style="text-decoration: line-through;">${data.namaPanel}</h4>
-                    <p>${data.ram} • Deleted by Admin</p>
+                    <h4 style="text-decoration: line-through;">${esc(data.namaPanel)}</h4>
+                    <p>${esc(data.ram)} • Deleted by Admin</p>
                   </div>
                   <div class="panel-actions">
                     <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div>
@@ -1164,13 +1187,13 @@
     const tbody = document.getElementById('userTableBody');
     tbody.innerHTML = '';
 
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
+    querySnapshot.forEach((d) => {
+      const data = d.data();
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${data.email}</td>
+        <td>${esc(data.email)}</td>
         <td>Rp ${(data.balance || 0).toLocaleString()}</td>
-        <td><button class="btn-action" onclick="addBalance('${doc.id}', '${data.email}')">Add Balance</button></td>
+        <td><button class="btn-action" onclick="addBalance('${esc(d.id)}', '${esc(data.email)}')">Add Balance</button></td>
       `;
       tbody.appendChild(tr);
     });
@@ -1187,7 +1210,7 @@
     const currentBalance = docSnap.data().balance || 0;
 
     await updateDoc(docRef, { balance: currentBalance + amount });
-    showAlert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${email}`);
+    showAlert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${esc(email)}`);
     loadAdminData();
   }
 
@@ -1211,11 +1234,11 @@
     if (currentMode === 'new') {
       finalUsername = document.getElementById("customName").value.trim();
       if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
-      displayConfirm = `Yakin beli <b>Panel Baru</b> dengan nama <b>"${finalUsername}"</b>?`;
+      displayConfirm = `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
     } else {
       finalUsername = document.getElementById("addUsername").value.trim();
       if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
-      displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${finalUsername}@kitzunemarket.com"</b>?`;
+      displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`;
     }
 
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
@@ -1240,107 +1263,77 @@
       saldo: saldo
     };
 
+    pendingAction = executePurchase;
+
     document.getElementById("confirmText").innerHTML = 
-      `${displayConfirm}<br>Paket RAM <b>${ramEl.value}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
+      `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
     document.getElementById("confirmModal").classList.add("active");
   });
 
   // --- LOGIC ALIGHT MOTION ---
+  window.goAmStep2 = () => {
+    document.getElementById("amTextEmail").textContent = pendingAmEmail;
+    document.getElementById("amStep1").style.display = "none";
+    document.getElementById("amStep2").style.display = "block";
+  };
+
   window.sendAmLink = async (event) => {
     const email = document.getElementById("amEmail").value.trim();
     if (!email) { showAlert("Masukkan email dulu!"); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAlert("Format email tidak valid!"); return; }
 
-    // Validasi format email sederhana
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showAlert("Format email tidak valid!");
-      return;
-    }
-
-    const btn = event.target;
+    const btn = event.currentTarget;
+    const skipBtn = document.getElementById("amSkipBtn");
     btn.disabled = true;
     btn.textContent = "Mengirim...";
+    skipBtn.style.display = "none";
+    pendingAmEmail = email;
 
     try {
       const res = await fetch('/api/am-automation', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'send-link', email: email })
+        body: JSON.stringify({ action: 'send-link', email })
       });
+      const r = await readApiResponse(res);
+      console.log("[sendAmLink]", r.status, r.raw);
 
-      // Baca response sebagai text dulu (biar aman kalau bukan JSON)
-      const rawText = await res.text();
-      console.log("[sendAmLink] HTTP Status:", res.status);
-      console.log("[sendAmLink] Raw Response:", rawText);
-
-      let data;
-      try {
-        data = JSON.parse(rawText);
-      } catch (jsonErr) {
-        // Response bukan JSON (kemungkinan HTML error page / kosong)
-        console.error("Response bukan JSON:", rawText);
-        
-        // KASUS PENTING: Kalau HTTP 200 tapi bukan JSON,
-        // kemungkinan besar backend SUDAH kirim email tapi crash setelahnya.
-        // Kita anggap sukses supaya user bisa lanjut ke step 2.
-        if (res.ok) {
-          console.warn("HTTP OK tapi response bukan JSON — anggap sukses (link kemungkinan sudah terkirim).");
-          pendingAmEmail = email;
-          document.getElementById("amTextEmail").textContent = email;
-          document.getElementById("amStep1").style.display = "none";
-          document.getElementById("amStep2").style.display = "block";
-          showAlert("Link verifikasi dikirim. Cek inbox/spam email kamu.", "Info");
-          return;
-        }
-        
-        throw new Error(`Server error (HTTP ${res.status}). Response tidak valid.`);
+      // Sukses: format ok/success, atau HTTP 200 dengan body bukan JSON
+      if (r.success || (r.httpOk && !r.data)) {
+        goAmStep2();
+        if (!r.success) showAlert("Link verifikasi dikirim. Cek inbox/spam email kamu.", "Info");
+        return;
       }
 
-      // Kalau sampai sini, response JSON valid
-      if (data.ok) {
-        pendingAmEmail = email;
-        document.getElementById("amTextEmail").textContent = email;
-        document.getElementById("amStep1").style.display = "none";
-        document.getElementById("amStep2").style.display = "block";
-      } else {
-        showAlert("Gagal: " + (data.why || data.error || "Unknown error"), "Gagal");
-      }
+      // Gagal: tampilkan alasan asli dan beri jalan lanjut manual
+      const reason = r.reason || `Server error (HTTP ${r.status})`;
+      showAlert(`Gagal: ${esc(reason)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
+      skipBtn.style.display = "block";
 
     } catch (err) {
       console.error("[sendAmLink] Error:", err);
-      showAlert("Error: " + err.message, "Gagal");
+      showAlert(`Error: ${esc(err.message)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
+      skipBtn.style.display = "block";
     } finally {
       btn.disabled = false;
       btn.textContent = "Kirim Link Verifikasi";
     }
   };
 
-  window.verifyAmLink = async (event) => {
+  window.verifyAmLink = async () => {
     const linkInput = document.getElementById("amLink").value.trim();
     if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; }
-
-    // Validasi URL sederhana
-    if (!linkInput.startsWith("http")) {
-      showAlert("Link verifikasi tidak valid (harus diawali http/https)");
-      return;
-    }
+    if (!linkInput.startsWith("http")) { showAlert("Link verifikasi tidak valid (harus diawali http/https)"); return; }
 
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
     const saldo = docSnap.data().balance || 0;
     const harga = 5000;
 
-    if (saldo < harga) {
-      showAlert("Saldo tidak cukup! Silakan topup dulu.");
-      return;
-    }
+    if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
 
-    document.getElementById("confirmText").innerHTML = 
-      `Yakin aktifkan Alight Motion Premium seharga Rp 5.000?`;
-    document.getElementById("confirmModal").classList.add("active");
-    
-    const confirmBtn = document.querySelector("#confirmModal .btn-confirm");
-    confirmBtn.onclick = async () => {
-      document.getElementById("confirmModal").classList.remove('active');
+    // Simpan aksi, jangan timpa onclick tombol konfirmasi
+    pendingAction = async () => {
       const btn = document.getElementById("amBtnActivate");
       btn.disabled = true;
       btn.textContent = "Memverifikasi...";
@@ -1349,59 +1342,56 @@
         const res = await fetch('/api/am-automation', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            action: 'verify', 
-            email: pendingAmEmail, 
-            verifyUrl: linkInput 
-          })
+          body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
+        });
+        const r = await readApiResponse(res);
+        console.log("[verifyAmLink]", r.status, r.raw);
+
+        if (!r.success) {
+          throw new Error(r.reason || `Verifikasi gagal (HTTP ${r.status})`);
+        }
+
+        // Ambil saldo terbaru supaya tidak pakai nilai lama
+        const fresh = await getDoc(docRef);
+        const saldoNow = fresh.data().balance || 0;
+        await updateDoc(docRef, { balance: saldoNow - harga });
+        await updateUserBalanceUI(currentUser.uid);
+
+        await setDoc(doc(collection(db, "transactions")), {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          produk: "am",
+          mode: "new",
+          namaPanel: "Alight Motion Premium",
+          emailAm: pendingAmEmail,
+          ram: "1 Tahun",
+          harga: harga,
+          createdAt: Date.now()
         });
 
-        const rawText = await res.text();
-        console.log("[verifyAmLink] HTTP:", res.status, "Raw:", rawText);
+        document.getElementById("amLink").value = "";
+        document.getElementById("amEmail").value = "";
+        document.getElementById("amStep2").style.display = "none";
+        document.getElementById("amStep1").style.display = "block";
+        document.getElementById("amSkipBtn").style.display = "none";
 
-        let data;
-        try {
-          data = JSON.parse(rawText);
-        } catch (e) {
-          throw new Error(`Response tidak valid (HTTP ${res.status})`);
-        }
-
-        if (data.ok) {
-          await updateDoc(docRef, { balance: saldo - harga });
-          await updateUserBalanceUI(currentUser.uid);
-
-          await setDoc(doc(collection(db, "transactions")), {
-            uid: currentUser.uid,
-            email: currentUser.email,
-            produk: "am",
-            mode: "new",
-            namaPanel: "Alight Motion Premium",
-            emailAm: pendingAmEmail,
-            ram: "1 Tahun",
-            harga: harga,
-            createdAt: Date.now()
-          });
-
-          showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "Berhasil!");
-          loadUserDashboard();
-          switchMainTab('dashboard'); 
-        } else {
-          showAlert("Gagal Verifikasi: " + (data.why || data.error || "Unknown"), "Gagal");
-        }
+        showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "Berhasil!");
+        switchMainTab('dashboard');
       } catch (err) {
         console.error("[verifyAmLink] Error:", err);
-        showAlert("Error: " + err.message, "Gagal");
+        showAlert("Gagal Verifikasi: " + esc(err.message), "Gagal");
       } finally {
         btn.disabled = false;
         btn.textContent = "Aktifkan Premium (Rp 5.000)";
       }
     };
+
+    document.getElementById("confirmText").innerHTML = "Yakin aktifkan Alight Motion Premium seharga Rp 5.000?";
+    document.getElementById("confirmModal").classList.add("active");
   };
 
   // --- EXECUTE PURCHASE (WA BOT ONLY) ---
-  window.executePurchase = async () => {
-    document.getElementById("confirmModal").classList.remove("active");
-    
+  async function executePurchase() {
     const btn = document.getElementById("submitBtn");
     btn.disabled = true;
     btn.textContent = "Memproses...";
@@ -1421,7 +1411,9 @@
       const data = await response.json();
       if (!data.success) throw new Error(data.error || "Gagal membuat panel.");
 
-      await updateDoc(pendingOrder.docRef, { balance: pendingOrder.saldo - pendingOrder.harga });
+      const fresh = await getDoc(pendingOrder.docRef);
+      const saldoNow = fresh.data().balance || 0;
+      await updateDoc(pendingOrder.docRef, { balance: saldoNow - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
 
       await setDoc(doc(collection(db, "transactions")), {
@@ -1448,25 +1440,21 @@
       switchMainTab('dashboard');
 
     } catch (error) {
-      showAlert("Error: " + error.message);
+      showAlert("Error: " + esc(error.message));
     } finally {
       btn.disabled = false;
       btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
     }
-  };
+  }
 
   window.copyPanelData = () => {
     let textToCopy = "";
     
-    if (pendingOrder && pendingOrder.produk === 'am') {
-      textToCopy = `Email: ${pendingOrder.emailAm}\nPaket: Alight Motion Premium 1 Tahun`;
-    } else {
-      const user = document.getElementById("resUsername").textContent;
-      const pass = document.getElementById("resPassword").textContent;
-      textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`;
-      if (pendingOrder && pendingOrder.mode === 'new') {
-        textToCopy += `\nPassword: ${pass}`;
-      }
+    const user = document.getElementById("resUsername").textContent;
+    const pass = document.getElementById("resPassword").textContent;
+    textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`;
+    if (pendingOrder && pendingOrder.mode === 'new') {
+      textToCopy += `\nPassword: ${pass}`;
     }
     
     navigator.clipboard.writeText(textToCopy).then(() => {
@@ -1480,7 +1468,7 @@
         btn.style.background = "var(--neon)";
       }, 2000);
     }).catch(err => {
-      showAlert("Gagal menyalin: " + err);
+      showAlert("Gagal menyalin: " + esc(err));
     });
   };
 
