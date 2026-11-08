@@ -213,6 +213,14 @@
   .logo-am .bar.b2 { height: 28px; opacity: 0.7; }
   .logo-am .tri { display: block; width: 0; height: 0; border-style: solid; border-width: 15px 0 15px 26px; border-color: transparent transparent transparent #fff; margin-left: 2px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25)); }
 
+  /* LANGUAGE SWITCH */
+  .lang-btn { display: inline-flex; align-items: center; gap: 2px; background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 99px; padding: 3px; cursor: pointer; font-family: inherit; }
+  .lang-btn .lg { padding: 5px 10px; border-radius: 99px; font-size: 11px; font-weight: 800; color: var(--muted); }
+  .lang-btn .lg.active { background: var(--neon); color: #fff; }
+  .auth-lang { position: absolute; top: 20px; right: 20px; z-index: 5; }
+  .side-lang { width: 100%; justify-content: center; margin-bottom: 12px; }
+  @media (max-width: 900px) { .header-right .lang-btn { display: none; } }
+
   .product-content { display: none; }
   .product-content.active { display: block; animation: fadeIn 0.3s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -369,6 +377,7 @@
 
 <!-- AUTH SECTION -->
 <div id="authScreen">
+  <button type="button" class="lang-btn auth-lang" onclick="toggleLang()" aria-label="Language"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
   <div class="auth-container">
     <div class="auth-brand">
       <div class="brand-content">
@@ -417,6 +426,7 @@
         <span>My Balance</span>
         <strong id="displayBalance">Rp 0</strong>
       </div>
+      <button type="button" class="lang-btn head-lang" onclick="toggleLang()" aria-label="Language"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
       <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
       
       <button class="burger-btn" onclick="toggleSidebar(true)">
@@ -449,6 +459,7 @@
     </div>
     
     <div class="sidebar-footer">
+      <button type="button" class="lang-btn side-lang" onclick="toggleLang()" aria-label="Language"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
       <button class="logout-btn" onclick="confirmLogout()">Logout</button>
     </div>
   </div>
@@ -769,6 +780,151 @@
   let pendingAmEmail = "";
   let pendingAction = null;
 
+  // --- I18N (ID / EN) ---
+  let currentLang = 'id';
+  try { currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'id'; } catch (e) {}
+
+  // [Indonesia, English]
+  const PAIRS = [
+    ["Selamat datang di", "Welcome to"],
+    ["Produk digital paling terjangkau dan terpercaya di pasaran.", "The most affordable and reliable digital products in the market."],
+    ["Masuk", "Sign In"], ["Login", "Log In"],
+    ["Belum punya akun?", "Don't have an account?"], ["Buat akun", "Create one"],
+    ["Buat Akun", "Create Account"], ["Konfirmasi Password", "Confirm Password"],
+    ["Daftar & Masuk", "Register & Login"], ["Sudah punya akun?", "Already have an account?"],
+    ["Masuk di sini", "Log in here"],
+    ["Masukkan email kamu", "Enter your email"], ["Masukkan password", "Enter password"],
+    ["Buat password", "Create a password"], ["Ulangi password", "Repeat password"],
+    ["Masuk sebagai", "Logged in as"], ["Saldo Saya", "My Balance"],
+    ["Katalog Produk", "Product Catalog"], ["Pengaturan", "Settings"], ["Keluar", "Logout"],
+    ["Produk Aktif", "Active Products"], ["Riwayat Transaksi", "Transaction History"],
+    ["Pilih Produk", "Choose Your"], ["Digital Kamu.", "Digital Product."],
+    ["Pilih dari katalog produk premium kami di bawah ini.", "Choose from our premium product catalog below."],
+    ["Mulai Rp 300", "From Rp 300"], ["Rp 5.000 / Tahun", "Rp 5,000 / Year"],
+    ["Panel Baru", "New Panel"], ["Tambah Server", "Add Server"],
+    ["Nama Panel (Tanpa Spasi)", "Panel Name (No Spaces)"], ["Username Panel Kamu", "Your Panel Username"],
+    ["Versi Node.js", "Node.js Version"], ["Pilih Kapasitas RAM", "Select RAM Capacity"],
+    ["Total Pembayaran", "Total Payment"], ["Beli Panel", "Buy Panel"],
+    ["Email Alight Motion Kamu", "Your Alight Motion Email"], ["contoh@gmail.com", "example@gmail.com"],
+    ["Kirim Link Verifikasi", "Send Verification Link"],
+    ["Link sudah masuk di email? Lanjut", "Link already in your email? Continue"],
+    ["Cek inbox/spam email", "Check the inbox/spam of"],
+    [". Copy link verifikasi dari email, lalu paste di bawah ini.", ". Copy the verification link from the email, then paste it below."],
+    ["Paste Link Verifikasi", "Paste Verification Link"],
+    ["Aktifkan Premium (Rp 5.000)", "Activate Premium (Rp 5,000)"],
+    ["Akun", "Account"], ["Pengaturan.", "Settings."],
+    ["Ubah email dan password akun Kitzune Store Anda.", "Change your Kitzune Store account email and password."],
+    ["Email Saat Ini", "Current Email"], ["Password Saat Ini (Wajib)", "Current Password (Required)"],
+    ["Email Baru", "New Email"], ["Ubah Email", "Change Email"],
+    ["Password Baru", "New Password"], ["Konfirmasi Password Baru", "Confirm New Password"],
+    ["Ubah Password", "Change Password"],
+    ["Masukkan password Anda", "Enter your password"], ["Masukkan email baru", "Enter new email"],
+    ["Masukkan password lama Anda", "Enter your old password"], ["Masukkan password baru", "Enter new password"],
+    ["Ulangi password baru", "Repeat new password"],
+    ["Isi Saldo", "Topup Balance"],
+    ["Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.", "Enter amount (Min. Rp 400), then send message to Admin via WhatsApp."],
+    ["Batal", "Cancel"], ["Konfirmasi", "Confirm"], ["Apakah anda yakin?", "Are you sure?"],
+    ["Ya, Lanjutkan", "Yes, Continue"], ["Konfirmasi Logout", "Confirm Logout"],
+    ["Apakah Anda yakin ingin keluar dari akun ini?", "Are you sure you want to log out of this account?"],
+    ["Ya, Keluar", "Yes, Log Out"],
+    ["Berhasil!", "Success!"], ["Berhasil", "Success"], ["Gagal", "Failed"], ["Notifikasi", "Notification"],
+    ["Pesanan diproses.", "Order is being processed."], ["Pesan notifikasi.", "Notification message."],
+    ["PENTING: Simpan data ini.", "IMPORTANT: Save this data."],
+    ["Salin Data (Copy)", "Copy Data"], ["Tutup", "Close"],
+    ["Panel Berhasil Dibuat!", "Panel Created Successfully!"],
+    ["Berikut adalah data login panel Anda.", "Here is your panel login data."],
+    ["PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!", "IMPORTANT: We only send this data ONCE. Please save/copy it now!"],
+    ["Berhasil Disalin!", "Copied!"],
+    ["Mengirim...", "Sending..."], ["Memproses...", "Processing..."], ["Memverifikasi...", "Verifying..."],
+    ["Password tidak cocok!", "Passwords do not match!"], ["Email atau password salah.", "Invalid email or password."],
+    ["Minimal topup Rp 400", "Minimum topup is Rp 400"],
+    ["Isi password saat ini dan email baru!", "Fill in your current password and new email!"],
+    ["Email berhasil diubah! Silakan login ulang.", "Email changed successfully! Please log in again."],
+    ["Password saat ini salah!", "Current password is wrong!"],
+    ["Semua kolom wajib diisi!", "All fields are required!"],
+    ["Konfirmasi password tidak cocok!", "Password confirmation does not match!"],
+    ["Password minimal 6 karakter!", "Password must be at least 6 characters!"],
+    ["Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Password changed successfully! Use your new password next time you log in."],
+    ["Nama panel wajib diisi!", "Panel name is required!"], ["Username wajib diisi!", "Username is required!"],
+    ["Saldo tidak cukup! Silakan topup dulu.", "Insufficient balance! Please top up first."],
+    ["Nominal tidak valid", "Invalid amount"],
+    ["Masukkan email dulu!", "Please enter your email first!"], ["Format email tidak valid!", "Invalid email format!"],
+    ["Link verifikasi dikirim. Cek inbox/spam email kamu.", "Verification link sent. Check your inbox/spam."],
+    ["Paste link verifikasinya dulu!", "Paste the verification link first!"],
+    ["Link verifikasi tidak valid (harus diawali http/https)", "Invalid verification link (must start with http/https)"],
+    ["SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "SUCCESS! Alight Motion Premium has been activated. Please open the Alight Motion app."],
+    ["Yakin aktifkan Alight Motion Premium seharga Rp 5.000?", "Activate Alight Motion Premium for Rp 5,000?"],
+    ["Belum ada produk aktif.", "No active products yet."], ["Belum ada riwayat.", "No history yet."],
+    ["1 Tahun", "1 Year"], ["Aktif", "Active"], ["Dihapus", "Deleted"], ["Dihapus oleh Admin", "Deleted by Admin"],
+    ["Kelola", "Manage"]
+  ];
+
+  // Potongan teks (untuk pesan yang berisi variabel)
+  const PARTIALS = [
+    ["Gagal Verifikasi: ", "Verification Failed: "],
+    ["Gagal: ", "Failed: "],
+    ["Gagal menyalin: ", "Failed to copy: "],
+    ["Gagal membuat panel.", "Failed to create panel."],
+    ["Verifikasi gagal (HTTP", "Verification failed (HTTP"],
+    [`Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, `If the link is already in your email, click <b>"Link already in your email? Continue"</b>.`]
+  ];
+
+  const REV = {};
+  PAIRS.forEach(p => { REV[p[0]] = p; REV[p[1]] = p; });
+  const langIdx = () => (currentLang === 'en' ? 1 : 0);
+
+  const tr = (str) => {
+    const e = REV[str];
+    if (e) return e[langIdx()];
+    if (currentLang === 'en' && typeof str === 'string') {
+      for (const [a, b] of PARTIALS) if (str.includes(a)) str = str.split(a).join(b);
+    }
+    return str;
+  };
+
+  function applyLang() {
+    document.documentElement.lang = currentLang;
+    const idx = langIdx();
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => {
+        const p = n.parentElement;
+        if (!p || /^(SCRIPT|STYLE|TEXTAREA)$/.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+        if (p.closest('#listPanelAktif, #listRiwayat, #userTableBody')) return NodeFilter.FILTER_REJECT;
+        return n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(node => {
+      const raw = node.nodeValue;
+      const key = raw.trim();
+      const e = REV[key];
+      if (e && e[idx] !== key) node.nodeValue = raw.replace(key, () => e[idx]);
+    });
+
+    document.querySelectorAll('[placeholder]').forEach(el => {
+      const e = REV[el.getAttribute('placeholder')];
+      if (e) el.setAttribute('placeholder', e[idx]);
+    });
+
+    document.querySelectorAll('.lang-btn .lg').forEach(sp => sp.classList.toggle('active', sp.dataset.l === currentLang));
+
+    // render ulang dashboard supaya isi dinamisnya ikut berganti bahasa
+    const mainApp = document.getElementById('mainApp');
+    const dash = document.getElementById('tabContentDashboard');
+    if (currentUser && currentUser.email !== ADMIN_EMAIL && mainApp.style.display === 'flex' && dash.style.display !== 'none') {
+      loadUserDashboard();
+    }
+  }
+
+  window.toggleLang = () => {
+    currentLang = currentLang === 'id' ? 'en' : 'id';
+    try { localStorage.setItem('lang', currentLang); } catch (e) {}
+    applyLang();
+  };
+
   // --- HELPERS ---
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -789,8 +945,8 @@
 
   // --- CUSTOM ALERT HELPER ---
   window.showAlert = function(message, title = "Notifikasi") {
-    document.getElementById('alertTitle').textContent = title;
-    document.getElementById('alertMessage').innerHTML = message;
+    document.getElementById('alertTitle').textContent = tr(title);
+    document.getElementById('alertMessage').innerHTML = tr(message);
     document.getElementById('customAlert').classList.add('active');
   };
 
@@ -883,13 +1039,13 @@
       document.getElementById('tabAdd').classList.remove('active');
       document.getElementById('fieldName').style.display = 'block';
       document.getElementById('fieldAddUser').style.display = 'none';
-      document.getElementById('submitBtn').textContent = "Beli Panel";
+      document.getElementById('submitBtn').textContent = tr("Beli Panel");
     } else {
       document.getElementById('tabNew').classList.remove('active');
       document.getElementById('tabAdd').classList.add('active');
       document.getElementById('fieldName').style.display = 'none';
       document.getElementById('fieldAddUser').style.display = 'block';
-      document.getElementById('submitBtn').textContent = "Add Server";
+      document.getElementById('submitBtn').textContent = tr("Add Server");
     }
   }
 
@@ -901,7 +1057,7 @@
     const confirm = document.getElementById('regConfirmPassword').value;
     const err = document.getElementById('regError');
 
-    if (pass !== confirm) { err.textContent = "Passwords do not match!"; err.style.display = "block"; return; }
+    if (pass !== confirm) { err.textContent = tr("Passwords do not match!"); err.style.display = "block"; return; }
 
     document.getElementById('btnRegister').disabled = true;
     try {
@@ -926,7 +1082,7 @@
     try {
       await signInWithEmailAndPassword(auth, email, pass);
     } catch (error) {
-      err.textContent = "Invalid email or password."; err.style.display = "block";
+      err.textContent = tr("Invalid email or password."); err.style.display = "block";
       document.getElementById('btnLogin').disabled = false;
     }
   }
@@ -990,7 +1146,7 @@
 
     const btn = event.currentTarget;
     btn.disabled = true;
-    btn.textContent = "Memproses...";
+    btn.textContent = tr("Memproses...");
 
     try {
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
@@ -1012,7 +1168,7 @@
       }
     } finally {
       btn.disabled = false;
-      btn.textContent = "Ubah Email";
+      btn.textContent = tr("Ubah Email");
     }
   };
 
@@ -1027,7 +1183,7 @@
 
     const btn = event.currentTarget;
     btn.disabled = true;
-    btn.textContent = "Memproses...";
+    btn.textContent = tr("Memproses...");
 
     try {
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
@@ -1048,7 +1204,7 @@
       }
     } finally {
       btn.disabled = false;
-      btn.textContent = "Ubah Password";
+      btn.textContent = tr("Ubah Password");
     }
   };
 
@@ -1106,12 +1262,12 @@
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
-              <strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? 'Panel Baru' : 'Add Server')}</strong>
+              <strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? tr('Panel Baru') : tr('Add Server'))}</strong>
               <span>Rp ${data.harga.toLocaleString()}</span>
             </div>
             <div class="history-details">
-              <p>${esc(data.namaPanel)} [${esc(data.ram || '1 Tahun')}]</p>
-              <span class="history-date">${new Date(data.createdAt).toLocaleDateString('id-ID')}</span>
+              <p>${esc(data.namaPanel)} [${esc(tr(data.ram || '1 Tahun'))}]</p>
+              <span class="history-date">${new Date(data.createdAt).toLocaleDateString(currentLang === 'en' ? 'en-US' : 'id-ID')}</span>
             </div>
           </div>
         `;
@@ -1121,10 +1277,10 @@
             <div class="panel-list-item">
               <div class="panel-details">
                 <h4>Alight Motion</h4>
-                <p>1 Tahun • ${esc(data.emailAm)}</p>
+                <p>${tr('1 Tahun')} • ${esc(data.emailAm)}</p>
               </div>
               <div class="panel-actions">
-                <div class="panel-status status-am">Active</div>
+                <div class="panel-status status-am">${tr('Aktif')}</div>
               </div>
             </div>
           `;
@@ -1144,11 +1300,11 @@
                 <div class="panel-list-item">
                   <div class="panel-details">
                     <h4>${esc(data.namaPanel)}</h4>
-                    <p>${esc(data.ram)} • Sisa ${daysLeft} Hari</p>
+                    <p>${esc(data.ram)} • ${currentLang === 'en' ? daysLeft + ' days left' : 'Sisa ' + daysLeft + ' Hari'}</p>
                   </div>
                   <div class="panel-actions">
-                    <div class="panel-status status-active">Active</div>
-                    <button class="btn-manage" onclick="managePanel('wabot', '${esc(data.namaPanel)}')">Manage</button>
+                    <div class="panel-status status-active">${tr('Aktif')}</div>
+                    <button class="btn-manage" onclick="managePanel('wabot', '${esc(data.namaPanel)}')">${tr('Kelola')}</button>
                   </div>
                 </div>
               `;
@@ -1157,10 +1313,10 @@
                 <div class="panel-list-item" style="opacity: 0.6;">
                   <div class="panel-details">
                     <h4 style="text-decoration: line-through;">${esc(data.namaPanel)}</h4>
-                    <p>${esc(data.ram)} • Deleted by Admin</p>
+                    <p>${esc(data.ram)} • ${tr('Dihapus oleh Admin')}</p>
                   </div>
                   <div class="panel-actions">
-                    <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">Deleted</div>
+                    <div class="panel-status" style="background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3);">${tr('Dihapus')}</div>
                   </div>
                 </div>
               `;
@@ -1170,13 +1326,13 @@
       });
 
       if (totalPanel === 0) {
-        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada produk aktif.</p>`;
+        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">${tr('Belum ada produk aktif.')}</p>`;
       } else {
         document.getElementById('listPanelAktif').innerHTML = htmlPanel;
       }
 
       if (docs.length === 0) {
-        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">Belum ada riwayat.</p>`;
+        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">${tr('Belum ada riwayat.')}</p>`;
       } else {
         document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
       }
@@ -1249,11 +1405,11 @@
     if (currentMode === 'new') {
       finalUsername = document.getElementById("customName").value.trim();
       if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
-      displayConfirm = `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
+      displayConfirm = currentLang === 'en' ? `Are you sure you want to buy a <b>New Panel</b> named <b>"${esc(finalUsername)}"</b>?` : `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
     } else {
       finalUsername = document.getElementById("addUsername").value.trim();
       if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
-      displayConfirm = `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`;
+      displayConfirm = currentLang === 'en' ? `Are you sure you want to <b>Add Server</b> to account <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?` : `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`;
     }
 
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
@@ -1281,7 +1437,7 @@
     pendingAction = executePurchase;
 
     document.getElementById("confirmText").innerHTML = 
-      `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`;
+      (currentLang === 'en' ? `${displayConfirm}<br>RAM package <b>${esc(ramEl.value)}</b> priced at <b>Rp ${harga.toLocaleString()}</b>.` : `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`);
     document.getElementById("confirmModal").classList.add("active");
   });
 
@@ -1300,7 +1456,7 @@
     const btn = event.currentTarget;
     const skipBtn = document.getElementById("amSkipBtn");
     btn.disabled = true;
-    btn.textContent = "Mengirim...";
+    btn.textContent = tr("Mengirim...");
     skipBtn.style.display = "none";
     pendingAmEmail = email;
 
@@ -1331,7 +1487,7 @@
       skipBtn.style.display = "block";
     } finally {
       btn.disabled = false;
-      btn.textContent = "Kirim Link Verifikasi";
+      btn.textContent = tr("Kirim Link Verifikasi");
     }
   };
 
@@ -1351,7 +1507,7 @@
     pendingAction = async () => {
       const btn = document.getElementById("amBtnActivate");
       btn.disabled = true;
-      btn.textContent = "Memverifikasi...";
+      btn.textContent = tr("Memverifikasi...");
 
       try {
         const res = await fetch('/api/am-automation', {
@@ -1397,11 +1553,11 @@
         showAlert("Gagal Verifikasi: " + esc(err.message), "Gagal");
       } finally {
         btn.disabled = false;
-        btn.textContent = "Aktifkan Premium (Rp 5.000)";
+        btn.textContent = tr("Aktifkan Premium (Rp 5.000)");
       }
     };
 
-    document.getElementById("confirmText").innerHTML = "Yakin aktifkan Alight Motion Premium seharga Rp 5.000?";
+    document.getElementById("confirmText").innerHTML = tr("Yakin aktifkan Alight Motion Premium seharga Rp 5.000?");
     document.getElementById("confirmModal").classList.add("active");
   };
 
@@ -1409,7 +1565,7 @@
   async function executePurchase() {
     const btn = document.getElementById("submitBtn");
     btn.disabled = true;
-    btn.textContent = "Memproses...";
+    btn.textContent = tr("Memproses...");
 
     try {
       const response = await fetch('/api/create-panel', {
@@ -1446,9 +1602,9 @@
       document.getElementById("rowPassword").style.display = "flex";
       document.getElementById("rowAmEmail").style.display = "none";
       document.getElementById("resPassword").textContent = data.password;
-      document.getElementById("successTitle").textContent = "Panel Berhasil Dibuat!";
-      document.getElementById("successDesc").textContent = "Berikut adalah data login panel Anda.";
-      document.getElementById("warningText").textContent = "PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!";
+      document.getElementById("successTitle").textContent = tr("Panel Berhasil Dibuat!");
+      document.getElementById("successDesc").textContent = tr("Berikut adalah data login panel Anda.");
+      document.getElementById("warningText").textContent = tr("PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!");
       
       document.getElementById("successModal").classList.add("active");
       loadUserDashboard();
@@ -1458,7 +1614,7 @@
       showAlert("Error: " + esc(error.message));
     } finally {
       btn.disabled = false;
-      btn.textContent = currentMode === 'new' ? "Beli Panel" : "Add Server";
+      btn.textContent = tr(currentMode === 'new' ? "Beli Panel" : "Add Server");
     }
   }
 
@@ -1475,7 +1631,7 @@
     navigator.clipboard.writeText(textToCopy).then(() => {
       const btn = document.getElementById("btnCopyData");
       const originalText = btn.textContent;
-      btn.textContent = "Berhasil Disalin!";
+      btn.textContent = tr("Berhasil Disalin!");
       btn.style.background = "var(--success)";
       
       setTimeout(() => {
@@ -1494,6 +1650,8 @@
     document.getElementById("amEmail").value = "";
     document.getElementById("amLink").value = "";
   };
+
+  applyLang();
 
 </script>
 
