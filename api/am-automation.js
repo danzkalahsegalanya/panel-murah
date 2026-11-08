@@ -9,52 +9,105 @@ const cfg = {
 };
 
 const dip = () => [crypto.randomInt(1,255), crypto.randomInt(0,255), crypto.randomInt(1,255)].join('.');
-const sp = h => ({...h, 'x-forwarded-for': dip(), 'x-real-ip': dip() });
+const sp = h => ({...h, 'x-forwarded-for': dip(), 'x-real-ip': dip()});
 const h1 = { 'content-type': 'application/json', 'x-android-package': 'com.alightcreative.motion', 'x-android-cert': 'ECA6BF91B8715A6F810ED0BBFC65B6CD578F52A8', 'user-agent': 'dalvik/2.1.0 (linux; u; android 15; 23127pn0cc build/bp1a.250505.005)' };
 const h2 = { 'content-type': 'application/json; charset=utf-8', 'user-agent': 'okhttp/3.12.1' };
-const bad = e => { const d = e.response?.data; return d? (typeof d === 'object'? JSON.stringify(d) : String(d)) : e.message; };
+
+const bad = e => { 
+  const d = e.response?.data; 
+  return d ? (typeof d === 'object' ? JSON.stringify(d) : String(d)) : e.message; 
+};
+
+// Tambahkan timeout agar tidak menggantung kelamaan dan memicu HTML Error 504
+const axiosConfig = { timeout: 15000 }; 
 
 async function sendLink(email){
-  const c1={identifier:email,continueUri:'http://localhost'};
-  const c2={requestType:6,email:email,androidInstallApp:true,canHandleCodeInApp:true,continueUrl:'https://alightcreative.com?ui_sid=0366624874&ui_sd=0',iosBundleId:'com.alightcreative.motion',androidPackageName:'com.alightcreative.motion',androidMinimumVersion:'585',clientType:'CLIENT_TYPE_ANDROID'};
-  try{ await axios.post(`${cfg.idt}/createAuthUri?key=${cfg.key}`,c1,{headers:sp(h1)}); const r=await axios.post(`${cfg.idt}/getOobConfirmationCode?key=${cfg.key}`,c2,{headers:sp(h1)}); return {ok:true}; }catch(e){ return {ok:false,why:bad(e)}; }
+  const c1 = { identifier: email, continueUri: 'http://localhost' };
+  const c2 = { requestType: 6, email: email, androidInstallApp: true, canHandleCodeInApp: true, continueUrl: 'https://alightcreative.com?ui_sid=0366624874&ui_sd=0', iosBundleId: 'com.alightcreative.motion', androidPackageName: 'com.alightcreative.motion', androidMinimumVersion: '585', clientType: 'CLIENT_TYPE_ANDROID' };
+  
+  try { 
+    // Gunakan config timeout
+    await axios.post(`${cfg.idt}/createAuthUri?key=${cfg.key}`, c1, { headers: sp(h1), ...axiosConfig }); 
+    await axios.post(`${cfg.idt}/getOobConfirmationCode?key=${cfg.key}`, c2, { headers: sp(h1), ...axiosConfig }); 
+    return { ok: true }; 
+  } catch(e) { 
+    return { ok: false, why: bad(e) }; 
+  }
 }
 
 function extractCode(raw){
-  if(!raw) return null; let s=String(raw); try{s=decodeURIComponent(s)}catch{} try{ const u=new URL(s); let c=u.searchParams.get('oobCode'); if(!c){ const n=u.searchParams.get('link')||u.searchParams.get('q'); if(n){ try{c=new URL(n).searchParams.get('oobCode')}catch{} } } if(c) return c; }catch{} const m=s.match(/oobCode=([a-zA-Z0-9_-]+)/i); return m?m[1]:null;
+  if(!raw) return null; 
+  let s = String(raw); 
+  try { s = decodeURIComponent(s) } catch {} 
+  try { 
+    const u = new URL(s); 
+    let c = u.searchParams.get('oobCode'); 
+    if(!c){ 
+      const n = u.searchParams.get('link') || u.searchParams.get('q'); 
+      if(n){ try { c = new URL(n).searchParams.get('oobCode') } catch {} } 
+    } 
+    if(c) return c; 
+  } catch {} 
+  const m = s.match(/oobCode=([a-zA-Z0-9_-]+)/i); 
+  return m ? m[1] : null;
 }
 
-async function verifyLogin(email,raw){
-  const c=extractCode(raw); if(!c) return {ok:false,why:'Code tidak ditemukan'};
-  try{ const a=await axios.post(`${cfg.idt}/emailLinkSignin?key=${cfg.key}`,{email:email,oobCode:c,clientType:'CLIENT_TYPE_ANDROID'},{headers:sp(h1)}); return {ok:true,id:a.data.idToken,ref:a.data.refreshToken}; }catch(e){ return {ok:false,why:bad(e)}; }
+async function verifyLogin(email, raw){
+  const c = extractCode(raw); 
+  if(!c) return { ok: false, why: 'Code tidak ditemukan' };
+  
+  try { 
+    const a = await axios.post(`${cfg.idt}/emailLinkSignin?key=${cfg.key}`, { email: email, oobCode: c, clientType: 'CLIENT_TYPE_ANDROID' }, { headers: sp(h1), ...axiosConfig }); 
+    return { ok: true, id: a.data.idToken, ref: a.data.refreshToken }; 
+  } catch(e) { 
+    return { ok: false, why: bad(e) }; 
+  }
 }
 
-async function processPremium(id,customId){
-  const o=customId||('neo-'+crypto.randomBytes(6).toString('hex')); 
-  const b={data:{productId:'am.full.sub.annual.19q4',token:'mmgaobamlahbbeccfplmbkbb.AO-J1OzqG0or_GJJIx-ms8GrTm-jaglCRfhQSRPUZKpl2YspYS-oN7_94uv8RC5vQbvd_Ios2pPDStZ2n7F0hLE3FiOU7HS3R6Fquulv5xLXFECSv4ctElw',skuType:'subs',orderId:o}};
-  const h={...h2,authorization:'Bearer '+id,'firebase-instance-id-token':'cSDnCyp3T-uwp07z3tL86T:APA91bFkmvvsHw5nnqa1SBFci-99DRsKClLiETdRrVcJjS5yBx1v_FbCb1d8WhBuea_zmwnYBktyTIzcRhN4b6uNOUur9wPc0gKXmJDoZic0LhNq5V2s0xI'};
-  try{ await axios.post(cfg.vfy,b,{headers:sp(h)}); return {ok:true,order:o}; }catch(e){ return {ok:false,why:bad(e)}; }
+async function processPremium(id, customId){
+  const o = customId || ('neo-' + crypto.randomBytes(6).toString('hex')); 
+  const b = {
+    data: {
+      productId: 'am.full.sub.annual.19q4',
+      token: 'mmgaobamlahbbeccfplmbkbb.AO-J1OzqG0or_GJJIx-ms8GrTm-jaglCRfhQSRPUZKpl2YspYS-oN7_94uv8RC5vQbvd_Ios2pPDStZ2n7F0hLE3FiOU7HS3R6Fquulv5xLXFECSv4ctElw',
+      skuType: 'subs',
+      orderId: o
+    }
+  };
+  const h = { ...h2, authorization: 'Bearer ' + id, 'firebase-instance-id-token': 'cSDnCyp3T-uwp07z3tL86T:APA91bFkmvvsHw5nnqa1SBFci-99DRsKClLiETdRrVcJjS5yBx1v_FbCb1d8WhBuea_zmwnYBktyTIzcRhN4b6uNOUur9wPc0gKXmJDoZic0LhNq5V2s0xI' };
+  
+  try { 
+    await axios.post(cfg.vfy, b, { headers: sp(h), ...axiosConfig }); 
+    return { ok: true, order: o }; 
+  } catch(e) { 
+    return { ok: false, why: bad(e) }; 
+  }
 }
 
 module.exports = async (req, res) => {
+  // Set header JSON dari awal agar frontend tidak bingung jika ada error
+  res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== 'POST') return res.status(405).json({ ok: false, why: "Method not allowed" });
   
   try {
     const { action, email, verifyUrl } = req.body;
 
     if (action === 'send-link') {
       if (!email) return res.status(400).json({ ok: false, why: "Email required" });
+      
       const r = await sendLink(email);
-      return res.status(200).json(r);
+      // PENTING: Kirim response 200 OK jika sukses, atau 400 jika gagal
+      return res.status(r.ok ? 200 : 400).json(r);
     } 
     
     if (action === 'verify') {
       if (!email || !verifyUrl) return res.status(400).json({ ok: false, why: "Email and link required" });
+      
       const v = await verifyLogin(email, verifyUrl);
       if (!v.ok) return res.status(400).json(v);
       
@@ -66,8 +119,10 @@ module.exports = async (req, res) => {
       }
     }
 
-    return res.status(400).json({ error: "Invalid action" });
+    return res.status(400).json({ ok: false, why: "Invalid action" });
   } catch (error) {
-    return res.status(500).json({ ok: false, why: error.message });
+    console.error("Server Error:", error);
+    // Selalu balas dengan JSON jika terjadi crash tak terduga
+    return res.status(500).json({ ok: false, why: error.message || "Internal Server Error" });
   }
 };
