@@ -43,6 +43,13 @@
     -webkit-tap-highlight-color: transparent; font-family: 'Inter', -apple-system, sans-serif;
     background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
     scroll-behavior: smooth;
+    /* BACKGROUND GRID NEON MURNI CSS (ANTI GAGAL LOAD) */
+    background-image: 
+      linear-gradient(rgba(157, 0, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157, 0, 255, 0.05) 1px, transparent 1px),
+      radial-gradient(circle at 50% 0%, rgba(157, 0, 255, 0.15) 0%, transparent 60%);
+    background-size: 40px 40px, 40px 40px, 100% 100%;
+    background-position: center center;
   }
 
   /* CUSTOM CURSOR GLOW */
@@ -53,8 +60,6 @@
     transition: opacity 0.3s; opacity: 0; mix-blend-mode: screen;
   }
   body:hover .cursor-glow { opacity: 1; }
-
-  #particles-js { position: fixed; inset: 0; z-index: -1; }
 
   /* ANIMASI MASUK */
   .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -89,9 +94,9 @@
   .skeleton-text.short { width: 60%; }
 
   /* AUTH */
-  #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; }
+  #authScreen { position: fixed; inset: 0; background: rgba(5, 3, 10, 0.8); backdrop-filter: blur(10px); z-index: 1000; display: flex; align-items: center; justify-content: center; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
-  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; background: linear-gradient(135deg, #0a0514 0%, var(--bg) 100%); }
+  .auth-brand { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px; border-right: 1px solid var(--border); position: relative; }
   .brand-content { position: relative; z-index: 1; max-width: 400px; }
   .brand-content h1 { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
   .brand-content h1 span { color: var(--neon); text-shadow: 0 0 30px var(--neon-glow); }
@@ -195,7 +200,7 @@
   .overlay.active { opacity: 1; pointer-events: auto; }
 
   /* CONTENT */
-  .main-container { flex: 1; display: flex; flex-direction: column; padding: 120px 24px 60px; max-width: 1100px; margin: 0 auto; width: 100%; }
+  .main-container { flex: 1; display: flex; flex-direction: column; padding: 120px 24px 60px; max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
   
   #tabContentSettings { display: none; }
   #tabContentOrder { display: none; }
@@ -377,9 +382,6 @@
 <!-- CURSOR GLOW -->
 <div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- PARTICLES BACKGROUND -->
-<div id="particles-js"></div>
-
 <!-- AUTH SECTION -->
 <div id="authScreen">
   <div class="auth-container">
@@ -431,7 +433,6 @@
         <strong id="displayBalance">Rp 0</strong>
       </div>
       
-      <!-- TOMBOL BAHASA -->
       <button class="lang-btn" id="langToggle" onclick="toggleLanguage()">ID</button>
 
       <button class="topup-btn" onclick="openTopupModal()" data-i18n="topupBtn">+ Topup</button>
@@ -921,7 +922,6 @@
     currentLang = lang;
     document.getElementById('langToggle').textContent = lang === 'en' ? 'ID' : 'EN';
     
-    // Update teks dengan atribut data-i18n
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (translations[lang][key]) {
@@ -929,12 +929,10 @@
       }
     });
 
-    // Handle Judul yang ada HTML-nya
     document.getElementById('authTitle').innerHTML = translations[lang].authTitle;
     document.getElementById('orderTitle').innerHTML = translations[lang].orderTitle;
     document.getElementById('settingsTitle').innerHTML = translations[lang].settingsTitle;
     
-    // Placeholder update
     document.getElementById('loginEmail').placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
     document.getElementById('loginPassword').placeholder = lang === 'en' ? "Enter password" : "Masukkan password";
     document.getElementById('regEmail').placeholder = lang === 'en' ? "Enter your email" : "Masukkan email";
@@ -1680,25 +1678,7 @@
   // INITIALIZE LANGUAGE
   applyLanguage('en');
 
-  // PARTICLES JS INIT
-  particlesJS("particles-js", {
-    "particles": {
-      "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-      "color": { "value": "#9d00ff" },
-      "shape": { "type": "circle" },
-      "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.1, "sync": false } },
-      "size": { "value": 3, "random": true },
-      "line_linked": { "enable": false },
-      "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-    },
-    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-    "retina_detect": true
-  });
-
 </script>
-
-<!-- CDN PARTICLES JS -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 </body>
 </html>
