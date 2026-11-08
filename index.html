@@ -200,6 +200,19 @@
   .catalog-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
   .catalog-card p { font-size: 11px; color: var(--neon); font-weight: 600; }
   
+  /* LOGO CSS (tanpa gambar) */
+  .catalog-card .logo-wrap { width: 100%; height: 100px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
+  .logo-icon { width: 84px; height: 84px; border-radius: 22px; position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px -6px var(--neon-glow), inset 0 1px 0 rgba(255,255,255,0.25); flex-shrink: 0; }
+  .logo-panel { background: linear-gradient(135deg, #b533ff, #5a00e0); flex-direction: column; gap: 6px; }
+  .logo-panel .srv { position: relative; width: 52px; height: 12px; background: rgba(255,255,255,0.92); border-radius: 4px; }
+  .logo-panel .srv::after { content: ""; position: absolute; right: 5px; top: 4px; width: 4px; height: 4px; border-radius: 50%; background: #10b981; box-shadow: 0 0 6px #10b981; }
+  .logo-panel .srv::before { content: ""; position: absolute; left: 5px; top: 5px; width: 14px; height: 2px; border-radius: 2px; background: rgba(90,0,224,0.55); }
+  .logo-am { background: linear-gradient(135deg, #ff2d95, #9d00ff); gap: 5px; }
+  .logo-am .bar { display: block; width: 5px; border-radius: 3px; background: #fff; }
+  .logo-am .bar.b1 { height: 18px; opacity: 0.4; }
+  .logo-am .bar.b2 { height: 28px; opacity: 0.7; }
+  .logo-am .tri { display: block; width: 0; height: 0; border-style: solid; border-width: 15px 0 15px 26px; border-color: transparent transparent transparent #fff; margin-left: 2px; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25)); }
+
   .product-content { display: none; }
   .product-content.active { display: block; animation: fadeIn 0.3s ease; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -326,6 +339,8 @@
     .catalog-grid { grid-template-columns: 1fr; gap: 12px; }
     .catalog-card { padding: 16px; flex-direction: row; text-align: left; gap: 16px; align-items: center; }
     .catalog-card img { width: 80px; height: 80px; margin-bottom: 0; }
+    .catalog-card .logo-wrap { width: 80px; height: 80px; margin-bottom: 0; flex-shrink: 0; }
+    .logo-icon { transform: scale(0.92); }
     .catalog-card h4 { font-size: 15px; margin-bottom: 2px; }
     
     .ram-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
@@ -480,14 +495,14 @@
           
           <div class="catalog-grid">
             <div class="catalog-card" id="catWaBot" onclick="switchCatalog('wabot')">
-              <img src="/media/panel.png" alt="WA Bot Panel">
+              <div class="logo-wrap"><div class="logo-icon logo-panel"><span class="srv"></span><span class="srv"></span><span class="srv"></span></div></div>
               <div>
                 <h4>WA Bot Panel</h4>
                 <p>Mulai Rp 300</p>
               </div>
             </div>
             <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')">
-              <img src="/media/am.png" alt="Alight Motion">
+              <div class="logo-wrap"><div class="logo-icon logo-am"><span class="bar b1"></span><span class="bar b2"></span><span class="tri"></span></div></div>
               <div>
                 <h4>Alight Motion</h4>
                 <p>Rp 5.000 / Tahun</p>
