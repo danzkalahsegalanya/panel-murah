@@ -5,8 +5,17 @@ export default async function handler(req, res) {
 
   const { users } = req.body; // Array of usernames
 
-  const DOMAIN = "https://srv2.cristall.my.id";
-  const API_KEY = "ptla_grahKdZyOpmLrn8AlagBblMEd22PPplOUf662TqtrlR";
+  // Panggil dari Environment Variables Vercel
+  const DOMAIN = process.env.PTERO_PANEL_URL;
+  const API_KEY = process.env.PTERO_APPLICATION_API_KEY;
+
+  if (!DOMAIN || !API_KEY) {
+    return res.status(500).json({ success: false, error: "Konfigurasi env belum lengkap." });
+  }
+
+  if (!users || !Array.isArray(users) || users.length === 0) {
+    return res.status(200).json({ success: true, data: [] });
+  }
 
   try {
     // Ambil semua user di Pterodactyl
@@ -14,20 +23,31 @@ export default async function handler(req, res) {
       headers: { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' }
     });
 
-    const existingUsernames = allUsersRes.data.data.map(u => u.attributes.username.toLowerCase());
+    // Simpan username yang ada di panel ke dalam Set biar pencariannya instan (O(1))
+    const existingUsernames = new Set(
+      allUsersRes.data.data.map(u => u.attributes.username.toLowerCase())
+    );
 
     // Cek mana aja yang masih ada
     const result = users.map(username => {
-      const cleanUser = username.toLowerCase().replace(/[^a-z0-9]/g, '');
+      // Bersihin username (sama persis kayak waktu create-panel)
+      const cleanUser = username.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+      
       return {
-        username: username,
-        exists: existingUsernames.includes(cleanUser)
+        username: username, // Balikin nama asli buat dicocokin di frontend
+        exists: existingUsernames.has(cleanUser)
       };
     });
 
     return res.status(200).json({ success: true, data: result });
 
   } catch (error) {
-    return res.status(500).json({ success: false, error: error.message });
+    let errorMsg = "Unknown error";
+    if (error.response?.data?.errors) {
+      errorMsg = error.response.data.errors.map(e => `${e.code}: ${e.detail}`).join(" | ");
+    } else {
+      errorMsg = error.message;
+    }
+    return res.status(500).json({ success: false, error: errorMsg });
   }
 }
