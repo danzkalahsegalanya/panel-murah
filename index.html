@@ -163,6 +163,17 @@
   .ram-item input:checked + label { background: var(--amber); box-shadow: 2px 2px 0 var(--ink); }
   .ram-item input:checked + label .price-new { color: var(--ink); }
   .ram-item input:focus-visible + label { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+  /* EGG GRID BARU */
+  .egg-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .egg-item { position: relative; }
+  .egg-item input { position: absolute; opacity: 0; }
+  .egg-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; background: #fff; border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; text-align: center; height: 100%; }
+  .egg-item .egg-name { font-size: 13px; font-weight: 800; line-height: 1.2; }
+  .egg-item .egg-id { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 4px; }
+  .egg-item input:checked + label { background: var(--amber); box-shadow: 2px 2px 0 var(--ink); }
+  .egg-item input:focus-visible + label { outline: 3px solid var(--amber); outline-offset: 2px; }
+
   .total { margin-top: 20px; padding: 14px 16px; background: var(--bg); border: 2px solid var(--ink); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
   .total span:first-child { font-size: 14px; color: var(--muted); font-weight: 600; }
   .total-price { font-size: 26px; font-weight: 800; }
@@ -235,6 +246,8 @@
     .catalog-card { flex-direction: row; text-align: left; gap: 14px; padding: 12px; }
     .catalog-card .logo-wrap { width: 68px; height: 68px; margin: 0; flex-shrink: 0; }
     .ram-grid { grid-template-columns: repeat(3, 1fr); }
+    .egg-grid { grid-template-columns: 1fr; }
+    .egg-item label { flex-direction: row; justify-content: space-between; padding: 12px; }
     .panel-list-item { flex-direction: column; align-items: flex-start; gap: 8px; }
     .panel-actions { width: 100%; justify-content: space-between; }
     .admin-header { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -413,9 +426,32 @@
                 </div>
               </div>
 
+              <!-- BAGIAN EGG YANG BARU -->
               <div class="field">
-                <label>Node.js Version</label>
-                <input type="text" value="Node.js v1 (Stable)" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
+                <label>Pilih Tipe Server (Egg)</label>
+                <div class="egg-grid">
+                  <div class="egg-item">
+                    <input type="radio" name="egg" id="egg_15" value="15" data-nest="5" checked>
+                    <label for="egg_15">
+                      <span class="egg-name">Node.js v1</span>
+                      <span class="egg-id">Egg ID: 15</span>
+                    </label>
+                  </div>
+                  <div class="egg-item">
+                    <input type="radio" name="egg" id="egg_16" value="16" data-nest="5">
+                    <label for="egg_16">
+                      <span class="egg-name">Python</span>
+                      <span class="egg-id">Egg ID: 16</span>
+                    </label>
+                  </div>
+                  <div class="egg-item">
+                    <input type="radio" name="egg" id="egg_17" value="17" data-nest="5">
+                    <label for="egg_17">
+                      <span class="egg-name">Node.js v2</span>
+                      <span class="egg-id">Egg ID: 17</span>
+                    </label>
+                  </div>
+                </div>
               </div>
               
               <div class="field">
@@ -674,6 +710,7 @@
     ["Mulai Rp 300", "From Rp 300"], ["Rp 5.000 / Tahun", "Rp 5,000 / Year"],
     ["Panel Baru", "New Panel"], ["Tambah Server", "Add Server"],
     ["Nama Panel (Tanpa Spasi)", "Panel Name (No Spaces)"], ["Username Panel Kamu", "Your Panel Username"],
+    ["Pilih Tipe Server (Egg)", "Select Server Type (Egg)"],
     ["Versi Node.js", "Node.js Version"], ["Pilih Kapasitas RAM", "Select RAM Capacity"],
     ["Total Pembayaran", "Total Payment"], ["Beli Panel", "Buy Panel"],
     ["Email Alight Motion Kamu", "Your Alight Motion Email"], ["contoh@gmail.com", "example@gmail.com"],
@@ -799,7 +836,15 @@
   // --- HELPERS ---
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-  // Baca respons API dengan aman, terima format ok / success
+  async function authedFetch(url, body) {
+    const token = await currentUser.getIdToken();
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify(body)
+    });
+  }
+
   async function readApiResponse(res) {
     const raw = await res.text();
     let data = null;
@@ -814,14 +859,12 @@
     if (typeof pendingAction === "function") pendingAction();
   };
 
-  // --- CUSTOM ALERT HELPER ---
   window.showAlert = function(message, title = "Notifikasi") {
     document.getElementById('alertTitle').textContent = tr(title);
     document.getElementById('alertMessage').innerHTML = tr(message);
     document.getElementById('customAlert').classList.add('active');
   };
 
-  // --- SIDEBAR MENU LOGIC ---
   window.toggleSidebar = (show) => {
     const sidebar = document.getElementById('sidebarMenu');
     const overlay = document.getElementById('sidebarOverlay');
@@ -834,7 +877,6 @@
     }
   };
 
-  // --- LOGOUT CONFIRMATION ---
   window.confirmLogout = () => {
     toggleSidebar(false);
     document.getElementById('logoutModal').classList.add('active');
@@ -845,7 +887,6 @@
     signOut(auth);
   };
 
-  // --- RIPPLE ANIMATION ---
   window.createRipple = function(event) {
     const btn = event.currentTarget;
     const circle = document.createElement("span");
@@ -867,7 +908,6 @@
     document.getElementById('regError').style.display = 'none';
   }
 
-  // --- SWITCH CATALOG ---
   window.switchCatalog = (cat) => {
     currentCatalog = cat;
     document.querySelectorAll('.catalog-card').forEach(card => card.classList.remove('active'));
@@ -881,7 +921,6 @@
     }
   };
 
-  // --- USER NAVIGATION ---
   window.switchMainTab = (tab) => {
     toggleSidebar(false);
     document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
@@ -917,11 +956,10 @@
       document.getElementById('tabAdd').classList.add('active');
       document.getElementById('fieldName').style.display = 'none';
       document.getElementById('fieldAddUser').style.display = 'block';
-      document.getElementById('submitBtn').textContent = tr("Add Server");
+      document.getElementById('submitBtn').textContent = tr("Tambah Server");
     }
   }
 
-  // --- AUTH LOGIC ---
   window.doRegister = async (event) => {
     if(event) createRipple(event);
     const email = document.getElementById('regEmail').value.trim();
@@ -1007,7 +1045,6 @@
     }
   }
 
-  // --- ACCOUNT SETTINGS (RE-AUTH WITH OLD PASSWORD) ---
   const isWrongPassword = (code) => code === 'auth/wrong-password' || code === 'auth/invalid-credential';
 
   window.changeEmail = async (event) => {
@@ -1080,7 +1117,6 @@
     }
   };
 
-  // --- USER DASHBOARD ---
   async function loadUserDashboard() {
     if (!currentUser) return;
 
@@ -1134,7 +1170,7 @@
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
-              <strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? tr('Panel Baru') : tr('Add Server'))}</strong>
+              <strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? tr('Panel Baru') : tr('Tambah Server'))}</strong>
               <span>Rp ${data.harga.toLocaleString()}</span>
             </div>
             <div class="history-details">
@@ -1224,7 +1260,6 @@
     });
   };
 
-  // --- ADMIN DASHBOARD (USER TABLE) ---
   async function loadAdminData() {
     const querySnapshot = await getDocs(collection(db, "users"));
     const tbody = document.getElementById('userTableBody');
@@ -1257,7 +1292,6 @@
     loadAdminData();
   }
 
-  // --- USER ORDER LOGIC (WA BOT) ---
   const orderForm = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
 
@@ -1296,6 +1330,10 @@
       return;
     }
 
+    const eggEl = orderForm.querySelector('input[name="egg"]:checked');
+    const eggId = eggEl ? eggEl.value : "15";
+    const nestId = eggEl ? eggEl.dataset.nest : "5";
+
     pendingOrder = {
       produk: "wabot",
       mode: currentMode,
@@ -1303,7 +1341,9 @@
       ram: ramEl.value,
       harga: harga,
       docRef: docRef,
-      saldo: saldo
+      saldo: saldo,
+      egg_id: eggId,
+      nest_id: nestId
     };
 
     pendingAction = executePurchase;
@@ -1313,7 +1353,6 @@
     document.getElementById("confirmModal").classList.add("active");
   });
 
-  // --- LOGIC ALIGHT MOTION ---
   window.goAmStep2 = () => {
     document.getElementById("amTextEmail").textContent = pendingAmEmail;
     document.getElementById("amStep1").style.display = "none";
@@ -1341,14 +1380,12 @@
       const r = await readApiResponse(res);
       console.log("[sendAmLink]", r.status, r.raw);
 
-      // Sukses: format ok/success, atau HTTP 200 dengan body bukan JSON
       if (r.success || (r.httpOk && !r.data)) {
         goAmStep2();
         if (!r.success) showAlert("Link verifikasi dikirim. Cek inbox/spam email kamu.", "Info");
         return;
       }
 
-      // Gagal: tampilkan alasan asli dan beri jalan lanjut manual
       const reason = r.reason || `Server error (HTTP ${r.status})`;
       showAlert(`Gagal: ${esc(reason)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
       skipBtn.style.display = "block";
@@ -1375,7 +1412,6 @@
 
     if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
 
-    // Simpan aksi, jangan timpa onclick tombol konfirmasi
     pendingAction = async () => {
       const btn = document.getElementById("amBtnActivate");
       btn.disabled = true;
@@ -1394,7 +1430,6 @@
           throw new Error(r.reason || `Verifikasi gagal (HTTP ${r.status})`);
         }
 
-        // Ambil saldo terbaru supaya tidak pakai nilai lama
         const fresh = await getDoc(docRef);
         const saldoNow = fresh.data().balance || 0;
         await updateDoc(docRef, { balance: saldoNow - harga });
@@ -1433,7 +1468,6 @@
     document.getElementById("confirmModal").classList.add("active");
   };
 
-  // --- EXECUTE PURCHASE (WA BOT ONLY) ---
   async function executePurchase() {
     const btn = document.getElementById("submitBtn");
     btn.disabled = true;
@@ -1447,7 +1481,9 @@
           mode: pendingOrder.mode,
           email: currentUser.email, 
           username: pendingOrder.username,
-          ram: pendingOrder.ram
+          ram: pendingOrder.ram,
+          egg_id: pendingOrder.egg_id,
+          nest_id: pendingOrder.nest_id
         })
       });
 
@@ -1486,7 +1522,7 @@
       showAlert("Error: " + esc(error.message));
     } finally {
       btn.disabled = false;
-      btn.textContent = tr(currentMode === 'new' ? "Beli Panel" : "Add Server");
+      btn.textContent = tr(currentMode === 'new' ? "Beli Panel" : "Tambah Server");
     }
   }
 
