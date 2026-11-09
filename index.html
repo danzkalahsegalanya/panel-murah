@@ -819,7 +819,6 @@
 
     document.querySelectorAll('.lang-btn .lg').forEach(sp => sp.classList.toggle('active', sp.dataset.l === currentLang));
 
-    // render ulang dashboard supaya isi dinamisnya ikut berganti bahasa
     const mainApp = document.getElementById('mainApp');
     const dash = document.getElementById('tabContentDashboard');
     if (currentUser && currentUser.email !== ADMIN_EMAIL && mainApp.style.display === 'flex' && dash.style.display !== 'none') {
@@ -1120,6 +1119,7 @@
   async function loadUserDashboard() {
     if (!currentUser) return;
 
+    // Tampilkan loading
     document.getElementById('listPanelAktif').innerHTML = `
       <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
       <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
@@ -1132,6 +1132,7 @@
     `;
 
     try {
+      // Ambil data transaksi dari Firebase
       const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
       const querySnapshot = await getDocs(q);
       
@@ -1150,6 +1151,7 @@
 
       let serverStatus = {};
       
+      // Cek status panel ke API (TAPI JANGAN SAMPAI BIKIN LOADING TERUS KALAU ERROR)
       if (panelUsernames.length > 0) {
         try {
           const checkRes = await fetch('/api/check-panel', {
@@ -1157,16 +1159,24 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ users: panelUsernames })
           });
-          const checkData = await checkRes.json();
-          if (checkData.success) {
-            checkData.data.forEach(item => {
-              serverStatus[item.username] = item.exists;
-            });
+          
+          if (checkRes.ok) { // Pastikan response 200 OK
+            const checkData = await checkRes.json();
+            if (checkData.success && checkData.data) {
+              checkData.data.forEach(item => {
+                serverStatus[item.username] = item.exists;
+              });
+            }
           }
-        } catch (err) {}
+        } catch (err) {
+          console.warn("Gagal cek status panel (abaikan saja):", err);
+          // Kalau error, kita biarkan serverStatus kosong (default anggap aktif)
+        }
       }
 
+      // Render HTML
       docs.forEach(data => {
+        // Render Riwayat
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
@@ -1180,6 +1190,7 @@
           </div>
         `;
 
+        // Render Produk Aktif
         if (data.produk === 'am') {
           htmlPanel += `
             <div class="panel-list-item">
@@ -1201,6 +1212,7 @@
 
           if (daysLeft > 0) {
             totalPanel++;
+            // Kalau serverStatus kosong (API gagal), default-nya kita anggap true (aktif)
             const isExists = serverStatus[data.namaPanel] !== false; 
 
             if (isExists) {
@@ -1247,6 +1259,9 @@
 
     } catch (error) {
       console.error("Error load dashboard:", error);
+      // KALAU DATABASE ERROR, TAMPILKAN PESAN, JANGAN LOADING TERUS
+      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data. Cek Console (F12).</p>`;
+      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data. Cek Console (F12).</p>`;
     }
   }
 
