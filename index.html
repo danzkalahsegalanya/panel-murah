@@ -629,7 +629,7 @@
     <p id="successDesc">Pesanan diproses.</p>
     
     <div class="panel-data-box" id="panelDataBox">
-      <div class="row"><span class="label">Link:</span> <span class="value">https://srv2.cristall.my.id</span></div>
+      <div class="row"><span class="label">Link:</span> <span class="value">https://kitzunepanel.danzzhost.web.id</span></div>
       <div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div>
       <div class="row" id="rowPassword"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
       <div class="row" id="rowAmEmail" style="display: none;"><span class="label">Email:</span> <span class="value" id="resAmEmail">-</span></div>
@@ -1254,9 +1254,9 @@
     if (type === 'am') return; 
     const textToCopy = `${val}@kitzunemarket.com`;
     navigator.clipboard.writeText(textToCopy).then(() => {
-      window.open("https://srv2.cristall.my.id", "_blank");
+      window.open("https://kitzunepanel.danzzhost.web.id", "_blank");
     }).catch(err => {
-      window.open("https://srv2.cristall.my.id", "_blank");
+      window.open("https://kitzunepanel.danzzhost.web.id", "_blank");
     });
   };
 
@@ -1531,7 +1531,7 @@
     
     const user = document.getElementById("resUsername").textContent;
     const pass = document.getElementById("resPassword").textContent;
-    textToCopy = `Link: https://srv2.cristall.my.id\nUsername: ${user}`;
+    textToCopy = `Link: https://kitzunepanel.danzzhost.web.id\nUsername: ${user}`;
     if (pendingOrder && pendingOrder.mode === 'new') {
       textToCopy += `\nPassword: ${pass}`;
     }
