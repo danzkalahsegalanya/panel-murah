@@ -3,23 +3,41 @@ import axios from 'axios';
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: "Method not allowed" });
 
-  const { mode, email, username, ram } = req.body;
+  const { mode, email, username, ram, egg_id } = req.body;
 
-  // ================= KONFIGURASI LU =================
-  const DOMAIN = "https://srv2.cristall.my.id";
-  const API_KEY = "ptla_grahKdZyOpmLrn8AlagBblMEd22PPplOUf662TqtrlR";
-  const NEST_ID = 5; 
-  const EGG_ID = 15; 
-  const LOC_ID = 1;
-  // ===================================================
+  // ================= KONFIGURASI DARI ENV VERCEL =================
+  const DOMAIN = process.env.PTERO_PANEL_URL;
+  const API_KEY = process.env.PTERO_APPLICATION_API_KEY;
+  
+  const NEST_ID = process.env.NEST_ID || 5;
+  const LOC_ID = process.env.LOCATION_ID || 1;
+  
+  // Default ke Node.js v1 (15) kalau frontend tidak ngirim
+  const EGG_ID = egg_id ? parseInt(egg_id) : (process.env.EGG_NODEJS_V1 || 15);
+  // ===============================================================
+
+  if (!DOMAIN || !API_KEY) {
+    return res.status(500).json({ success: false, error: "Konfigurasi server (env) belum lengkap." });
+  }
+
+  // VALIDASI HARGA DI SERVER (Mencegah manipulasi harga dari Inspect Element)
+  const HARGA_VALID = {
+    "1GB": 300, "2GB": 450, "3GB": 600, "4GB": 750, "5GB": 900,
+    "6GB": 1050, "7GB": 1200, "8GB": 1350, "9GB": 1500, "10GB": 1700, "Unlimited": 2000
+  };
+  
+  if (!HARGA_VALID[ram]) {
+    return res.status(400).json({ success: false, error: "Paket RAM tidak valid." });
+  }
 
   try {
     let targetUser = null;
-    const password = Math.random().toString(36).slice(-8) + "A1!"; // Buat user baru
+    const password = Math.random().toString(36).slice(-8) + "A1!"; 
 
     // --- TENTUKAN SPESIFIKASI RAM ---
     let mem = 1000, disk = 1000, cpu = 40;
     const ramStr = ram.toString().toLowerCase();
+    
     if (ramStr === "unlimited" || ramStr === "unli") {
       mem = 0; disk = 0; cpu = 0;
     } else {
@@ -60,20 +78,32 @@ export default async function handler(req, res) {
       if (!findUserRes.data.data || findUserRes.data.data.length === 0) {
         throw new Error(`Akun dengan username "${username}" tidak ditemukan di panel.`);
       }
-      targetUser = findUserRes.data.data[0].attributes; // Ambil user pertama yang ketemu
+      targetUser = findUserRes.data.data[0].attributes; 
     }
 
     if (!targetUser) throw new Error("Gagal mendapatkan data user.");
 
-    // --- AMBIL STARTUP CMD ---
-    const eggRes = await axios.get(`${DOMAIN}/api/application/nests/${NEST_ID}/eggs/${EGG_ID}`, {
+    // --- AMBIL DATA EGG (Startup CMD, Docker Image, & Environment) ---
+    const eggRes = await axios.get(`${DOMAIN}/api/application/nests/${NEST_ID}/eggs/${EGG_ID}?include=variables`, {
       headers: { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' }
     });
-    const startup_cmd = eggRes.data.attributes.startup;
+    
+    const eggData = eggRes.data.attributes;
+    const startup_cmd = eggData.startup;
+    
+    // Ambil Docker Image default dari Egg
+    const dockerImage = eggData.docker_images[Object.keys(eggData.docker_images)[0]];
+    
+    // Ambil Environment default dari Egg (PENTING buat Python)
+    let envVars = {};
+    if (eggData.relationships && eggData.relationships.variables) {
+        eggData.relationships.variables.data.forEach(v => {
+            envVars[v.attributes.env_variable] = v.attributes.default_value;
+        });
+    }
 
     // --- FORMAT NAMA SERVER ---
     const paketLabel = ramStr === "unlimited" || ramStr === "unli" ? "UNLI" : ramStr.toUpperCase();
-    // Kasih embel-embel "ADD" kalau dia nambah server, biar gampang dibedain
     const serverName = mode === "addserver" ? `${targetUser.username} [${paketLabel}] ADD` : `${targetUser.username} [${paketLabel}]`;
 
     // --- BUAT SERVER ---
@@ -82,9 +112,9 @@ export default async function handler(req, res) {
       description: "BY KITZUNE MARKET",
       user: targetUser.id,
       egg: EGG_ID,
-      docker_image: "ghcr.io/parkervcp/yolks:nodejs_18",
+      docker_image: dockerImage, // <--- Otomatis nyesuaiin Egg
       startup: startup_cmd,
-      environment: { "INST": "npm", "USER_UPLOAD": "0", "AUTO_UPDATE": "0", "CMD_RUN": "npm start" },
+      environment: envVars, // <--- Otomatis nyesuaiin Egg
       limits: { memory: mem, swap: 0, disk: disk, io: 500, cpu: cpu },
       feature_limits: { databases: 5, backups: 5, allocations: 5 },
       deploy: { locations: [LOC_ID], dedicated_ip: false, port_range: [] }
