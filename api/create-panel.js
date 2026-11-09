@@ -32,7 +32,11 @@ export default async function handler(req, res) {
 
   try {
     let targetUser = null;
-    const password = Math.random().toString(36).slice(-8) + "A1!"; 
+    
+    // --- FORMAT PASSWORD BARU: {username}{4 angka random} ---
+    const cleanUsername = username.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const randomNumbers = Math.floor(1000 + Math.random() * 9000); // 4 digit acak
+    const password = `${cleanUsername}${randomNumbers}`; 
 
     // --- TENTUKAN SPESIFIKASI RAM ---
     let mem = 1000, disk = 1000, cpu = 40;
@@ -49,7 +53,6 @@ export default async function handler(req, res) {
     // MODE 1: BUAT PANEL BARU (Bikin User + Server)
     // ==========================================
     if (mode === "new") {
-      const cleanUsername = username.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
       const newEmail = `${cleanUsername}@kitzunemarket.com`;
 
       // 1. Buat User
@@ -70,7 +73,7 @@ export default async function handler(req, res) {
     // ==========================================
     } else if (mode === "addserver") {
       // Cari ID User berdasarkan Email
-      const searchEmail = `${username.toLowerCase()}@kitzunemarket.com`;
+      const searchEmail = `${cleanUsername}@kitzunemarket.com`;
       const findUserRes = await axios.get(`${DOMAIN}/api/application/users?filter[email]=${searchEmail}`, {
         headers: { 'Authorization': `Bearer ${API_KEY}`, 'Accept': 'application/json' }
       });
