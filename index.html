@@ -3,21 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kitzune Store - Premium Digital Products</title>
-
-<!-- FAVICON -->
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
-<link rel="manifest" href="/site.webmanifest">
-
-<!-- OPEN GRAPH -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://kitzunemarket.biz.id/">
-<meta property="og:title" content="Kitzune Store - Premium Digital Products">
-<meta property="og:description" content="Bikin Bot WA Tanpa Batas. Unlimited cuma Rp 2.000 aja! Juga tersedia Alight Motion Premium.">
-<meta property="og:image" content="https://kitzunemarket.biz.id/banner.jpg">
+<title>Gojo Satoru - Premium Digital Products</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,14 +11,15 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg: #edf0f5; --card: #fff; --ink: #101828; --muted: #5b6577; --soft: #d5dbe6;
-    --amber: #ffb400; --amber-d: #e69d00; --ok: #0e9f6e; --bad: #d92d20; --r: 8px; --hard: 3px 3px 0 var(--ink);
+    --bg: #eaf6ff; --card: #fff; --ink: #0a1a2f; --muted: #5b6b82; --soft: #d0e2f2;
+    --amber: #6cd4ff; --amber-d: #3fbfff; --ok: #0e9f6e; --bad: #d92d20; --r: 8px; --hard: 3px 3px 0 var(--ink);
     --neon: var(--amber); --neon-hover: var(--amber-d); --border: var(--ink); --success: var(--ok); --danger: var(--bad); --text: var(--ink);
+    --gojo-glow: #b8e9ff;
   }
   html, body {
     -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
     font-family: 'Figtree', system-ui, sans-serif; font-size: 15px; line-height: 1.45;
-    background-color: var(--bg); background-image: radial-gradient(rgba(16,24,40,.13) 1px, transparent 1px); background-size: 20px 20px;
+    background-color: var(--bg); background-image: radial-gradient(rgba(10,26,47,.12) 1px, transparent 1px); background-size: 20px 20px;
     color: var(--ink); min-height: 100vh; overflow-x: hidden;
   }
   h1, h2, h3, h4, .total-price, .avatar, .balance-info strong { font-family: 'Bricolage Grotesque', 'Figtree', sans-serif; }
@@ -40,7 +27,7 @@
   button { font-family: inherit; color: inherit; }
   button:disabled { opacity: .55; cursor: not-allowed; }
   .ripple { display: none; }
-  .skeleton { background: linear-gradient(90deg, #dfe4ed 0, #eef1f6 40px, #dfe4ed 80px); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; border-radius: 6px; }
+  .skeleton { background: linear-gradient(90deg, #d6e8f5 0, #eaf6ff 40px, #d6e8f5 80px); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; border-radius: 6px; }
   @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
   .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
   .skeleton-text.short { width: 60%; }
@@ -54,8 +41,21 @@
 
   #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
-  .auth-brand { flex: 1.1; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px; background: var(--amber); border-right: 2px solid var(--ink); }
-  .brand-content { max-width: 460px; }
+  .auth-brand {
+    flex: 1.1; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px;
+    background: linear-gradient(160deg, #a5e5ff 0%, #6cd4ff 45%, #eaf6ff 100%);
+    border-right: 2px solid var(--ink); position: relative; overflow: hidden;
+  }
+  .auth-brand::before {
+    content: ""; position: absolute; top: -40px; right: -40px; width: 260px; height: 260px;
+    border-radius: 50%; background: radial-gradient(circle, rgba(108,212,255,.55), transparent 70%);
+    pointer-events: none;
+  }
+  .auth-brand::after {
+    content: "∞"; position: absolute; top: 8px; right: 22px; font-size: 140px; font-weight: 800;
+    color: rgba(10,26,47,.10); line-height: 1; pointer-events: none; font-family: 'Bricolage Grotesque', sans-serif;
+  }
+  .brand-content { max-width: 460px; position: relative; z-index: 2; }
   .brand-content h1 { font-size: 66px; font-weight: 800; line-height: .96; letter-spacing: -.035em; margin-bottom: 18px; }
   .brand-content p { font-size: 18px; max-width: 32ch; }
   .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; }
@@ -90,7 +90,7 @@
   .balance-info { text-align: right; }
   .balance-info strong { font-size: 18px; font-weight: 800; }
   .topup-btn { background: var(--ink); color: #fff; border: 2px solid var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; padding: 8px 14px; border-radius: 6px; box-shadow: 2px 2px 0 var(--amber); }
-  .topup-btn:hover { background: #243049; }
+  .topup-btn:hover { background: #14253f; }
   .burger-btn { background: transparent; border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 9px 8px; justify-content: center; align-items: center; }
   .burger-btn span { display: block; width: 18px; height: 2px; background: var(--ink); }
 
@@ -107,7 +107,7 @@
   .sidebar-footer { margin-top: auto; border-top: 2px solid var(--ink); padding-top: 16px; }
   .logout-btn { width: 100%; background: #fff; color: var(--bad); border: 2px solid var(--bad); font-size: 14px; font-weight: 700; cursor: pointer; padding: 10px; border-radius: 6px; }
   .logout-btn:hover { background: var(--bad); color: #fff; }
-  .overlay { position: fixed; inset: 0; background: rgba(16,24,40,.5); z-index: 150; opacity: 0; pointer-events: none; transition: opacity .25s; }
+  .overlay { position: fixed; inset: 0; background: rgba(10,26,47,.5); z-index: 150; opacity: 0; pointer-events: none; transition: opacity .25s; }
   .overlay.active { opacity: 1; pointer-events: auto; }
 
   .main-container { flex: 1; display: flex; flex-direction: column; padding: 36px 24px; max-width: 1080px; margin: 0 auto; width: 100%; }
@@ -116,13 +116,14 @@
   .wrapper-order { display: flex; gap: 48px; align-items: flex-start; justify-content: center; }
   .info-section { flex: 1; max-width: 440px; padding-top: 12px; }
   .info-section h1 { font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -.035em; margin-bottom: 14px; }
+  .info-section h1 span { background: linear-gradient(90deg, #3fbfff, #6cd4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .info-section p { font-size: 17px; color: var(--muted); max-width: 32ch; }
   .form-section { flex: 1; max-width: 480px; padding: 28px; border-radius: var(--r); background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
 
   .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
   .catalog-card { background: #fff; border: 2px solid var(--ink); border-radius: var(--r); padding: 16px; cursor: pointer; text-align: center; display: flex; flex-direction: column; align-items: center; }
   .catalog-card:hover { background: var(--bg); }
-  .catalog-card.active { background: #fff3d1; box-shadow: var(--hard); }
+  .catalog-card.active { background: #dcf3ff; box-shadow: var(--hard); }
   .catalog-card h4 { font-size: 15px; font-weight: 800; }
   .catalog-card p { font-size: 13px; color: var(--muted); font-weight: 600; }
   .catalog-card .logo-wrap { width: 100%; height: 84px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
@@ -202,7 +203,7 @@
   td { padding: 10px 12px; border-bottom: 1px solid var(--soft); font-size: 14px; }
   .btn-action { padding: 6px 12px; background: var(--amber); color: var(--ink); border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 700; box-shadow: 2px 2px 0 var(--ink); }
 
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(16,24,40,.55); z-index: 3000; align-items: center; justify-content: center; }
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,26,47,.55); z-index: 3000; align-items: center; justify-content: center; }
   .modal-overlay.active { display: flex; }
   .modal-content { padding: 28px; border-radius: var(--r); width: 90%; max-width: 420px; text-align: center; background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); animation: pop .2s ease; }
   @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -213,7 +214,7 @@
   .panel-data-box .row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; word-break: break-all; }
   .panel-data-box .label { color: var(--muted); }
   .panel-data-box .value { font-weight: 700; }
-  .warning-box { background: #fff3d1; border: 2px solid var(--ink); font-size: 13px; padding: 10px; border-radius: 6px; margin-bottom: 16px; font-weight: 600; }
+  .warning-box { background: #dcf3ff; border: 2px solid var(--ink); font-size: 13px; padding: 10px; border-radius: 6px; margin-bottom: 16px; font-weight: 600; }
   .modal-actions { display: flex; gap: 10px; justify-content: center; margin-top: 8px; }
   .btn-modal { flex: 1; padding: 11px; border-radius: 6px; font-weight: 700; font-size: 15px; cursor: pointer; border: 2px solid var(--ink); }
   .btn-cancel { background: #fff; color: var(--ink); }
@@ -258,8 +259,8 @@
   <div class="auth-container">
     <div class="auth-brand">
       <div class="brand-content">
-        <h1>Welcome to <br><span>Kitzune Store.</span></h1>
-        <p>The most affordable and reliable digital products in the market.</p>
+        <h1>Welcome to <br><span>Gojo Satoru.</span></h1>
+        <p>Produk digital paling terjangkau dan terpercaya di pasaran. "Throughout Heaven and Earth, I alone am the honored one."</p>
       </div>
     </div>
     <div class="auth-form-area">
@@ -290,7 +291,7 @@
 <div id="mainApp">
   <div class="top-header">
     <div class="profile-card">
-      <div class="avatar" id="userAvatar">U</div>
+      <div class="avatar" id="userAvatar">G</div>
       <div class="profile-info">
         <span>Logged in as</span>
         <strong id="displayUser">User</strong>
@@ -403,7 +404,6 @@
               <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
             </div>
 
-            <!-- PERBAIKAN: tambah novalidate dan hapus required di customName -->
             <form id="orderForm" novalidate>
               <div class="field" id="fieldName">
                 <label>Panel Name (No Spaces)</label>
@@ -414,7 +414,7 @@
                 <label>Your Panel Username</label>
                 <div class="input-group">
                   <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
-                  <span class="suffix">@kitzunemarket.com</span>
+                  <span class="suffix">@gojomarket.com</span>
                 </div>
               </div>
 
@@ -500,7 +500,7 @@
       <div class="wrapper-order">
         <div class="info-section">
           <h1>Account <br><span>Settings.</span></h1>
-          <p>Ubah email dan password akun Kitzune Store Anda.</p>
+          <p>Ubah email dan password akun Gojo Store Anda.</p>
         </div>
         <div class="form-section hover-card">
           
@@ -618,7 +618,7 @@
     <p id="successDesc">Pesanan diproses.</p>
     
     <div class="panel-data-box" id="panelDataBox">
-      <div class="row"><span class="label">Link:</span> <span class="value">https://panel-kitzunepremium.danzzhost.web.id</span></div>
+      <div class="row"><span class="label">Link:</span> <span class="value">https://panel-gojopremium.danzzhost.web.id</span></div>
       <div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div>
       <div class="row" id="rowPassword"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
       <div class="row" id="rowAmEmail" style="display: none;"><span class="label">Email:</span> <span class="value" id="resAmEmail">-</span></div>
@@ -646,8 +646,6 @@
   </div>
 </div>
 
-
-<!-- FIREBASE SDK & LOGIC -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -676,7 +674,6 @@
   let pendingAmEmail = "";
   let pendingAction = null;
 
-  // --- I18N (ID / EN) ---
   let currentLang = 'id';
   try { currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'id'; } catch (e) {}
 
@@ -709,7 +706,7 @@
     ["Paste Link Verifikasi", "Paste Verification Link"],
     ["Aktifkan Premium (Rp 5.000)", "Activate Premium (Rp 5,000)"],
     ["Akun", "Account"], ["Pengaturan.", "Settings."],
-    ["Ubah email dan password akun Kitzune Store Anda.", "Change your Kitzune Store account email and password."],
+    ["Ubah email dan password akun Gojo Store Anda.", "Change your Gojo Store account email and password."],
     ["Email Saat Ini", "Current Email"], ["Password Saat Ini (Wajib)", "Current Password (Required)"],
     ["Email Baru", "New Email"], ["Ubah Email", "Change Email"],
     ["Password Baru", "New Password"], ["Konfirmasi Password Baru", "Confirm New Password"],
@@ -825,7 +822,6 @@
     applyLang();
   };
 
-  // --- HELPERS ---
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   async function readApiResponse(res) {
@@ -843,13 +839,11 @@
   };
 
   window.showAlert = function(message, title = "Notifikasi") {
-    console.log("[showAlert]", title, "|", message);
     try {
       document.getElementById('alertTitle').textContent = tr(title);
       document.getElementById('alertMessage').innerHTML = tr(message);
       document.getElementById('customAlert').classList.add('active');
     } catch (e) {
-      // Fallback kalau DOM alert hilang
       alert(title + "\n\n" + message);
     }
   };
@@ -876,46 +870,27 @@
     signOut(auth);
   };
 
-  window.createRipple = function(event) {
-    try {
-      const btn = event.currentTarget;
-      const circle = document.createElement("span");
-      const diameter = Math.max(btn.clientWidth, btn.clientHeight);
-      const radius = diameter / 2;
-      circle.style.width = circle.style.height = `${diameter}px`;
-      circle.style.left = `${event.clientX - btn.getBoundingClientRect().left - radius}px`;
-      circle.style.top = `${event.clientY - btn.getBoundingClientRect().top - radius}px`;
-      circle.classList.add("ripple");
-      const ripple = btn.getElementsByClassName("ripple")[0];
-      if (ripple) { ripple.remove(); }
-      btn.appendChild(circle);
-    } catch (e) {}
-  };
+  window.createRipple = function(event) { /* dipertahankan kompatibilitas */ };
 
   window.toggleAuth = (type) => {
     document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
     document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
     document.getElementById('loginError').style.display = 'none';
     document.getElementById('regError').style.display = 'none';
-  }
+  };
 
   window.switchCatalog = (cat) => {
     currentCatalog = cat;
     document.querySelectorAll('.catalog-card').forEach(card => card.classList.remove('active'));
     document.getElementById(cat === 'wabot' ? 'catWaBot' : 'catAmPremium').classList.add('active');
     document.querySelectorAll('.product-content').forEach(el => el.classList.remove('active'));
-
-    if (cat === 'wabot') {
-      document.getElementById('productWaBot').classList.add('active');
-    } else {
-      document.getElementById('productAm').classList.add('active');
-    }
+    if (cat === 'wabot') document.getElementById('productWaBot').classList.add('active');
+    else document.getElementById('productAm').classList.add('active');
   };
 
   window.switchMainTab = (tab) => {
     toggleSidebar(false);
     document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
-    
     document.getElementById('tabContentDashboard').style.display = 'none';
     document.getElementById('tabContentOrder').style.display = 'none';
     document.getElementById('tabContentSettings').style.display = 'none';
@@ -935,7 +910,6 @@
   };
 
   window.switchOrderTab = (mode) => {
-    console.log("[switchOrderTab]", mode);
     currentMode = mode;
     if (mode === 'new') {
       document.getElementById('tabNew').classList.add('active');
@@ -952,36 +926,28 @@
       document.getElementById('submitBtn').textContent = tr("Tambah Server");
       document.getElementById('customName').value = '';
     }
-  }
+  };
 
   window.doRegister = async (event) => {
-    if(event) createRipple(event);
     const email = document.getElementById('regEmail').value.trim();
     const pass = document.getElementById('regPassword').value;
     const confirm = document.getElementById('regConfirmPassword').value;
     const err = document.getElementById('regError');
-
     if (pass !== confirm) { err.textContent = tr("Passwords do not match!"); err.style.display = "block"; return; }
-
     document.getElementById('btnRegister').disabled = true;
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-      await setDoc(doc(db, "users", userCredential.user.uid), {
-        email: email,
-        balance: 0
-      });
+      await setDoc(doc(db, "users", userCredential.user.uid), { email: email, balance: 0 });
     } catch (error) {
       err.textContent = error.message; err.style.display = "block";
       document.getElementById('btnRegister').disabled = false;
     }
-  }
+  };
 
   window.doLogin = async (event) => {
-    if(event) createRipple(event);
     const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPassword').value;
     const err = document.getElementById('loginError');
-
     document.getElementById('btnLogin').disabled = true;
     try {
       await signInWithEmailAndPassword(auth, email, pass);
@@ -989,24 +955,22 @@
       err.textContent = tr("Invalid email or password."); err.style.display = "block";
       document.getElementById('btnLogin').disabled = false;
     }
-  }
+  };
 
   window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
   
   window.proceedTopup = () => {
     const amount = parseInt(document.getElementById('topupAmount').value);
     if (isNaN(amount) || amount < 400) { showAlert("Minimal topup Rp 400"); return; }
-    
     const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${amount.toLocaleString()}\n\nMohon diproses.`;
     window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
     document.getElementById('topupModal').classList.remove('active');
-  }
+  };
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
       document.getElementById('authScreen').style.display = 'none';
-
       if (user.email === ADMIN_EMAIL) {
         document.getElementById('adminApp').style.display = 'flex';
         document.getElementById('mainApp').style.display = 'none';
@@ -1014,11 +978,9 @@
       } else {
         document.getElementById('mainApp').style.display = 'flex';
         document.getElementById('adminApp').style.display = 'none';
-        
         const username = user.email.split('@')[0];
         document.getElementById('displayUser').textContent = username;
         document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
-        
         await updateUserBalanceUI(user.uid);
         switchMainTab('dashboard'); 
       }
@@ -1044,31 +1006,21 @@
   window.changeEmail = async (event) => {
     const oldPass = document.getElementById('currentPassEmail').value;
     const newEmail = document.getElementById('newEmail').value.trim();
-
     if (!oldPass || !newEmail) { showAlert("Isi password saat ini dan email baru!"); return; }
-
     const btn = event.currentTarget;
     btn.disabled = true;
     btn.textContent = tr("Memproses...");
-
     try {
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
       await reauthenticateWithCredential(currentUser, credential);
-
       await updateEmail(currentUser, newEmail);
-      
       const docRef = doc(db, "users", currentUser.uid);
       await updateDoc(docRef, { email: newEmail });
-
       showAlert("Email berhasil diubah! Silakan login ulang.", "Berhasil");
       setTimeout(() => signOut(auth), 2000);
-
     } catch (error) {
-      if (isWrongPassword(error.code)) {
-        showAlert("Password saat ini salah!", "Gagal");
-      } else {
-        showAlert(esc(error.message), "Gagal");
-      }
+      if (isWrongPassword(error.code)) showAlert("Password saat ini salah!", "Gagal");
+      else showAlert(esc(error.message), "Gagal");
     } finally {
       btn.disabled = false;
       btn.textContent = tr("Ubah Email");
@@ -1079,32 +1031,23 @@
     const oldPass = document.getElementById('currentPassPassword').value;
     const newPass = document.getElementById('newPassword').value;
     const confirmPass = document.getElementById('confirmNewPassword').value;
-    
     if (!oldPass || !newPass || !confirmPass) { showAlert("Semua kolom wajib diisi!"); return; }
     if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; }
     if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; }
-
     const btn = event.currentTarget;
     btn.disabled = true;
     btn.textContent = tr("Memproses...");
-
     try {
       const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
       await reauthenticateWithCredential(currentUser, credential);
-
       await updatePassword(currentUser, newPass);
-      
       showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
       document.getElementById('currentPassPassword').value = "";
       document.getElementById('newPassword').value = "";
       document.getElementById('confirmNewPassword').value = "";
-
     } catch (error) {
-      if (isWrongPassword(error.code)) {
-        showAlert("Password saat ini salah!", "Gagal");
-      } else {
-        showAlert(esc(error.message), "Gagal");
-      }
+      if (isWrongPassword(error.code)) showAlert("Password saat ini salah!", "Gagal");
+      else showAlert(esc(error.message), "Gagal");
     } finally {
       btn.disabled = false;
       btn.textContent = tr("Ubah Password");
@@ -1113,7 +1056,6 @@
 
   async function loadUserDashboard() {
     if (!currentUser) return;
-
     document.getElementById('listPanelAktif').innerHTML = `
       <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
       <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
@@ -1124,26 +1066,20 @@
       <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
       <div class="skeleton skeleton-text" style="width: 50%;"></div>
     `;
-
     try {
       const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
       const querySnapshot = await getDocs(q);
-      
       let htmlRiwayat = "";
       let htmlPanel = "";
       let totalPanel = 0;
-
       let docs = querySnapshot.docs.map(d => d.data());
       docs.sort((a, b) => b.createdAt - a.createdAt);
-
       let panelUsernames = docs.filter(d => {
         if(d.produk !== 'wabot') return false;
         const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
         return (30 - daysPassed) > 0;
       }).map(d => d.namaPanel);
-
       let serverStatus = {};
-      
       if (panelUsernames.length > 0) {
         try {
           const checkRes = await fetch('/api/check-panel', {
@@ -1151,20 +1087,14 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ users: panelUsernames })
           });
-          
           if (checkRes.ok) {
             const checkData = await checkRes.json();
             if (checkData.success && checkData.data) {
-              checkData.data.forEach(item => {
-                serverStatus[item.username] = item.exists;
-              });
+              checkData.data.forEach(item => { serverStatus[item.username] = item.exists; });
             }
           }
-        } catch (err) {
-          console.warn("Gagal cek status panel (abaikan saja):", err);
-        }
+        } catch (err) { console.warn("Gagal cek status panel:", err); }
       }
-
       docs.forEach(data => {
         htmlRiwayat += `
           <div class="history-item">
@@ -1178,7 +1108,6 @@
             </div>
           </div>
         `;
-
         if (data.produk === 'am') {
           htmlPanel += `
             <div class="panel-list-item">
@@ -1197,11 +1126,9 @@
           const msInDay = 24 * 60 * 60 * 1000;
           const daysPassed = Math.floor((now - data.createdAt) / msInDay);
           const daysLeft = 30 - daysPassed;
-
           if (daysLeft > 0) {
             totalPanel++;
             const isExists = serverStatus[data.namaPanel] !== false; 
-
             if (isExists) {
               htmlPanel += `
                 <div class="panel-list-item">
@@ -1231,33 +1158,30 @@
           }
         }
       });
-
       if (totalPanel === 0) {
         document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">${tr('Belum ada produk aktif.')}</p>`;
       } else {
         document.getElementById('listPanelAktif').innerHTML = htmlPanel;
       }
-
       if (docs.length === 0) {
         document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">${tr('Belum ada riwayat.')}</p>`;
       } else {
         document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
       }
-
     } catch (error) {
       console.error("Error load dashboard:", error);
-      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data. Cek Console (F12).</p>`;
-      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data. Cek Console (F12).</p>`;
+      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
+      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
     }
   }
 
   window.managePanel = (type, val) => {
     if (type === 'am') return; 
-    const textToCopy = `${val}@kitzunemarket.com`;
+    const textToCopy = `${val}@gojomarket.com`;
     navigator.clipboard.writeText(textToCopy).then(() => {
-      window.open("https://panel-kitzunepremium.danzzhost.web.id", "_blank");
+      window.open("https://panel-gojopremium.danzzhost.web.id", "_blank");
     }).catch(err => {
-      window.open("https://panel-kitzunepremium.danzzhost.web.id", "_blank");
+      window.open("https://panel-gojopremium.danzzhost.web.id", "_blank");
     });
   };
 
@@ -1265,7 +1189,6 @@
     const querySnapshot = await getDocs(collection(db, "users"));
     const tbody = document.getElementById('userTableBody');
     tbody.innerHTML = '';
-
     querySnapshot.forEach((d) => {
       const data = d.data();
       const trEl = document.createElement('tr');
@@ -1283,11 +1206,9 @@
     if (!amountStr) return;
     const amount = parseInt(amountStr);
     if (isNaN(amount) || amount <= 0) { showAlert("Nominal tidak valid"); return; }
-
     const docRef = doc(db, "users", uid);
     const docSnap = await getDoc(docRef);
     const currentBalance = docSnap.data().balance || 0;
-
     await updateDoc(docRef, { balance: currentBalance + amount });
     showAlert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${esc(email)}`);
     loadAdminData();
@@ -1295,7 +1216,6 @@
 
   const orderForm = document.getElementById("orderForm");
   const totalText = document.getElementById("totalText");
-
   orderForm.addEventListener("change", (e) => {
     if (e.target.name === "ram") {
       totalText.textContent = "Rp " + parseInt(e.target.dataset.harga).toLocaleString();
@@ -1304,104 +1224,61 @@
 
   orderForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    console.log("=== SUBMIT TRIGGERED ===", "mode:", currentMode, "| user:", currentUser?.email);
-
-    if (!currentUser) {
-      showAlert("Kamu belum login. Refresh halaman.");
-      return;
-    }
-
+    if (!currentUser) { showAlert("Kamu belum login. Refresh halaman."); return; }
     try {
       let finalUsername = "";
       let displayConfirm = "";
-
       if (currentMode === 'new') {
         finalUsername = document.getElementById("customName").value.trim();
         if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
-        if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) {
-          showAlert("Nama panel hanya boleh huruf & angka (tanpa spasi/simbol)!");
-          return;
-        }
+        if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) { showAlert("Nama panel hanya boleh huruf & angka!"); return; }
         displayConfirm = currentLang === 'en'
           ? `Are you sure you want to buy a <b>New Panel</b> named <b>"${esc(finalUsername)}"</b>?`
           : `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
       } else {
         finalUsername = document.getElementById("addUsername").value.trim();
         if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
-        if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) {
-          showAlert("Username hanya boleh huruf & angka!");
-          return;
-        }
-
-        console.log("[addserver] Cek panel milik user...");
-        // Query sederhana (tanpa composite index)
+        if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) { showAlert("Username hanya boleh huruf & angka!"); return; }
         const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
         const snap = await getDocs(q);
-        console.log("[addserver] Total transaksi user:", snap.size);
-
-        const ownedPanels = snap.docs
-          .map(d => d.data())
+        const ownedPanels = snap.docs.map(d => d.data())
           .filter(d => d.produk === "wabot")
           .filter(d => {
             const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
             return (30 - daysPassed) > 0;
           })
           .map(d => (d.namaPanel || "").toLowerCase());
-
-        console.log("[addserver] Owned panels:", ownedPanels);
-
         if (!ownedPanels.includes(finalUsername.toLowerCase())) {
-          showAlert(
-            currentLang === 'en'
-              ? `You don't have an active panel named "<b>${esc(finalUsername)}</b>". Please create a new panel first.`
-              : `Kamu tidak punya panel aktif bernama "<b>${esc(finalUsername)}</b>". Buat panel baru dulu.`
-          );
+          showAlert(currentLang === 'en'
+            ? `You don't have an active panel named "<b>${esc(finalUsername)}</b>". Please create a new panel first.`
+            : `Kamu tidak punya panel aktif bernama "<b>${esc(finalUsername)}</b>". Buat panel baru dulu.`);
           return;
         }
-
         displayConfirm = currentLang === 'en'
-          ? `Are you sure you want to <b>Add Server</b> to account <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`
-          : `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`;
+          ? `Are you sure you want to <b>Add Server</b> to account <b>"${esc(finalUsername)}@gojomarket.com"</b>?`
+          : `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@gojomarket.com"</b>?`;
       }
-
       const ramEl = orderForm.querySelector('input[name="ram"]:checked');
       if (!ramEl) { showAlert("Pilih paket RAM dulu!"); return; }
       const harga = parseInt(ramEl.dataset.harga);
-
       const docRef = doc(db, "users", currentUser.uid);
       const docSnap = await getDoc(docRef);
       const saldo = docSnap.data()?.balance || 0;
-
-      if (saldo < harga) {
-        showAlert("Saldo tidak cukup! Silakan topup dulu.");
-        return;
-      }
-
+      if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
       const eggEl = orderForm.querySelector('input[name="egg"]:checked');
       const eggId = eggEl ? eggEl.value : "15";
       const nestId = eggEl ? eggEl.dataset.nest : "5";
-
       pendingOrder = {
-        produk: "wabot",
-        mode: currentMode,
-        username: finalUsername,
-        ram: ramEl.value,
-        harga: harga,
-        docRef: docRef,
-        saldo: saldo,
-        egg_id: eggId,
-        nest_id: nestId
+        produk: "wabot", mode: currentMode, username: finalUsername,
+        ram: ramEl.value, harga: harga, docRef: docRef, saldo: saldo,
+        egg_id: eggId, nest_id: nestId
       };
-
       pendingAction = executePurchase;
-
       document.getElementById("confirmText").innerHTML =
         (currentLang === 'en'
           ? `${displayConfirm}<br>RAM package <b>${esc(ramEl.value)}</b> priced at <b>Rp ${harga.toLocaleString()}</b>.`
           : `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`);
       document.getElementById("confirmModal").classList.add("active");
-      console.log("[submit] Modal konfirmasi dibuka");
-
     } catch (err) {
       console.error("[submit] ERROR:", err);
       showAlert("Error: " + esc(err.message));
@@ -1418,14 +1295,12 @@
     const email = document.getElementById("amEmail").value.trim();
     if (!email) { showAlert("Masukkan email dulu!"); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAlert("Format email tidak valid!"); return; }
-
     const btn = event.currentTarget;
     const skipBtn = document.getElementById("amSkipBtn");
     btn.disabled = true;
     btn.textContent = tr("Mengirim...");
     skipBtn.style.display = "none";
     pendingAmEmail = email;
-
     try {
       const res = await fetch('/api/am-automation', {
         method: 'POST',
@@ -1433,20 +1308,15 @@
         body: JSON.stringify({ action: 'send-link', email })
       });
       const r = await readApiResponse(res);
-      console.log("[sendAmLink]", r.status, r.raw);
-
       if (r.success || (r.httpOk && !r.data)) {
         goAmStep2();
         if (!r.success) showAlert("Link verifikasi dikirim. Cek inbox/spam email kamu.", "Info");
         return;
       }
-
       const reason = r.reason || `Server error (HTTP ${r.status})`;
       showAlert(`Gagal: ${esc(reason)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
       skipBtn.style.display = "block";
-
     } catch (err) {
-      console.error("[sendAmLink] Error:", err);
       showAlert(`Error: ${esc(err.message)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
       skipBtn.style.display = "block";
     } finally {
@@ -1459,19 +1329,15 @@
     const linkInput = document.getElementById("amLink").value.trim();
     if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; }
     if (!linkInput.startsWith("http")) { showAlert("Link verifikasi tidak valid (harus diawali http/https)"); return; }
-
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
     const saldo = docSnap.data().balance || 0;
     const harga = 5000;
-
     if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
-
     pendingAction = async () => {
       const btn = document.getElementById("amBtnActivate");
       btn.disabled = true;
       btn.textContent = tr("Memverifikasi...");
-
       try {
         const res = await fetch('/api/am-automation', {
           method: 'POST',
@@ -1479,46 +1345,30 @@
           body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
         });
         const r = await readApiResponse(res);
-        console.log("[verifyAmLink]", r.status, r.raw);
-
-        if (!r.success) {
-          throw new Error(r.reason || `Verifikasi gagal (HTTP ${r.status})`);
-        }
-
+        if (!r.success) throw new Error(r.reason || `Verifikasi gagal (HTTP ${r.status})`);
         const fresh = await getDoc(docRef);
         const saldoNow = fresh.data().balance || 0;
         await updateDoc(docRef, { balance: saldoNow - harga });
         await updateUserBalanceUI(currentUser.uid);
-
         await setDoc(doc(collection(db, "transactions")), {
-          uid: currentUser.uid,
-          email: currentUser.email,
-          produk: "am",
-          mode: "new",
-          namaPanel: "Alight Motion Premium",
-          emailAm: pendingAmEmail,
-          ram: "1 Tahun",
-          harga: harga,
-          createdAt: Date.now()
+          uid: currentUser.uid, email: currentUser.email, produk: "am", mode: "new",
+          namaPanel: "Alight Motion Premium", emailAm: pendingAmEmail, ram: "1 Tahun",
+          harga: harga, createdAt: Date.now()
         });
-
         document.getElementById("amLink").value = "";
         document.getElementById("amEmail").value = "";
         document.getElementById("amStep2").style.display = "none";
         document.getElementById("amStep1").style.display = "block";
         document.getElementById("amSkipBtn").style.display = "none";
-
         showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "Berhasil!");
         switchMainTab('dashboard');
       } catch (err) {
-        console.error("[verifyAmLink] Error:", err);
         showAlert("Gagal Verifikasi: " + esc(err.message), "Gagal");
       } finally {
         btn.disabled = false;
         btn.textContent = tr("Aktifkan Premium (Rp 5.000)");
       }
     };
-
     document.getElementById("confirmText").innerHTML = tr("Yakin aktifkan Alight Motion Premium seharga Rp 5.000?");
     document.getElementById("confirmModal").classList.add("active");
   };
@@ -1527,59 +1377,35 @@
     const btn = document.getElementById("submitBtn");
     btn.disabled = true;
     btn.textContent = tr("Memproses...");
-
     try {
-      console.log("[executePurchase] Sending to /api/create-panel:", pendingOrder);
       const response = await fetch('/api/create-panel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          mode: pendingOrder.mode,
-          email: currentUser.email,
-          username: pendingOrder.username,
-          ram: pendingOrder.ram,
-          egg_id: pendingOrder.egg_id,
-          nest_id: pendingOrder.nest_id
+          mode: pendingOrder.mode, email: currentUser.email, username: pendingOrder.username,
+          ram: pendingOrder.ram, egg_id: pendingOrder.egg_id, nest_id: pendingOrder.nest_id
         })
       });
-
       const data = await response.json();
-      console.log("[executePurchase] Response:", data);
-
       if (!data.success) {
         let errMsg = data.error || "Gagal membuat panel.";
-
         if (pendingOrder.mode === 'addserver') {
           if (/not found|tidak ditemukan|no user/i.test(errMsg)) {
-            errMsg = currentLang === 'en'
-              ? "Panel username not found on server. Make sure the username is correct."
-              : "Username panel tidak ditemukan di server. Pastikan username benar.";
+            errMsg = currentLang === 'en' ? "Panel username not found on server." : "Username panel tidak ditemukan di server.";
           } else if (/already|sudah ada|exists/i.test(errMsg)) {
-            errMsg = currentLang === 'en'
-              ? "This server already exists. Try different egg/RAM."
-              : "Server ini sudah ada. Coba egg/RAM berbeda.";
+            errMsg = currentLang === 'en' ? "This server already exists." : "Server ini sudah ada.";
           }
         }
-
         throw new Error(errMsg);
       }
-
       const fresh = await getDoc(pendingOrder.docRef);
       const saldoNow = fresh.data().balance || 0;
       await updateDoc(pendingOrder.docRef, { balance: saldoNow - pendingOrder.harga });
       await updateUserBalanceUI(currentUser.uid);
-
       await setDoc(doc(collection(db, "transactions")), {
-        uid: currentUser.uid,
-        email: currentUser.email,
-        produk: "wabot",
-        mode: pendingOrder.mode,
-        namaPanel: pendingOrder.username,
-        ram: pendingOrder.ram,
-        harga: pendingOrder.harga,
-        createdAt: Date.now()
+        uid: currentUser.uid, email: currentUser.email, produk: "wabot", mode: pendingOrder.mode,
+        namaPanel: pendingOrder.username, ram: pendingOrder.ram, harga: pendingOrder.harga, createdAt: Date.now()
       });
-
       if (pendingOrder.mode === 'addserver') {
         document.getElementById("resUsername").textContent = data.username || pendingOrder.username;
         document.getElementById("rowPassword").style.display = "none";
@@ -1596,13 +1422,10 @@
         document.getElementById("successDesc").textContent = tr("Berikut adalah data login panel Anda.");
         document.getElementById("warningText").textContent = tr("PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!");
       }
-
       document.getElementById("successModal").classList.add("active");
       loadUserDashboard();
       switchMainTab('dashboard');
-
     } catch (error) {
-      console.error("[executePurchase] ERROR:", error);
       showAlert("Error: " + esc(error.message));
     } finally {
       btn.disabled = false;
@@ -1613,12 +1436,8 @@
   window.copyPanelData = () => {
     const user = document.getElementById("resUsername").textContent;
     const pass = document.getElementById("resPassword").textContent;
-
-    let textToCopy = `Link: https://panel-kitzunepremium.danzzhost.web.id\nUsername: ${user}`;
-    if (pendingOrder && pendingOrder.mode === 'new') {
-      textToCopy += `\nPassword: ${pass}`;
-    }
-
+    let textToCopy = `Link: https://panel-gojopremium.danzzhost.web.id\nUsername: ${user}`;
+    if (pendingOrder && pendingOrder.mode === 'new') textToCopy += `\nPassword: ${pass}`;
     navigator.clipboard.writeText(textToCopy).then(() => {
       const btn = document.getElementById("btnCopyData");
       const originalText = btn.textContent;
@@ -1628,9 +1447,7 @@
         btn.textContent = originalText;
         btn.style.background = "var(--neon)";
       }, 2000);
-    }).catch(err => {
-      showAlert("Gagal menyalin: " + esc(err));
-    });
+    }).catch(err => showAlert("Gagal menyalin: " + esc(err)));
   };
 
   window.closeSuccessModal = () => {
