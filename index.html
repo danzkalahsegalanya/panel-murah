@@ -27,7 +27,6 @@
   :root {
     --bg: #edf0f5; --card: #fff; --ink: #101828; --muted: #5b6577; --soft: #d5dbe6;
     --amber: #ffb400; --amber-d: #e69d00; --ok: #0e9f6e; --bad: #d92d20; --r: 8px; --hard: 3px 3px 0 var(--ink);
-    /* nama lama dipakai JS/inline */
     --neon: var(--amber); --neon-hover: var(--amber-d); --border: var(--ink); --success: var(--ok); --danger: var(--bad); --text: var(--ink);
   }
   html, body {
@@ -46,7 +45,6 @@
   .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
   .skeleton-text.short { width: 60%; }
 
-  /* tombol utama */
   .auth-btn, button[type="submit"], .btn-confirm { background: var(--amber); color: var(--ink); font-weight: 700; font-size: 15px; border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: var(--hard); position: relative; }
   .auth-btn:hover, button[type="submit"]:hover, .btn-confirm:hover { background: var(--amber-d); }
   .auth-btn:active, button[type="submit"]:active, .btn-confirm:active, .topup-btn:active, .btn-manage:active, .btn-action:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
@@ -54,7 +52,6 @@
   button[type="submit"], .auth-btn.am-btn { width: 100%; margin-top: 16px; padding: 13px; }
   [style*="--danger"] { color: #fff; }
 
-  /* login */
   #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; }
   .auth-container { display: flex; width: 100%; height: 100vh; }
   .auth-brand { flex: 1.1; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px; background: var(--amber); border-right: 2px solid var(--ink); }
@@ -74,7 +71,6 @@
   .auth-switch a { color: var(--ink); font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
   .error-msg { background: #fde8e6; border: 2px solid var(--bad); color: #8a1c13; font-size: 13px; padding: 10px; border-radius: 6px; margin-bottom: 16px; display: none; }
 
-  /* bahasa */
   .lang-btn { display: inline-flex; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; background: #fff; cursor: pointer; padding: 0; }
   .lang-btn .lg { padding: 5px 10px; font-size: 12px; font-weight: 800; }
   .lang-btn .lg.active { background: var(--ink); color: #fff; }
@@ -82,7 +78,6 @@
   .side-lang { width: 100%; margin-bottom: 12px; }
   .side-lang .lg { flex: 1; text-align: center; padding: 8px; }
 
-  /* shell */
   #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
   .top-header { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; z-index: 100; background: var(--card); border-bottom: 2px solid var(--ink); }
   .profile-card { display: flex; align-items: center; gap: 10px; }
@@ -124,7 +119,6 @@
   .info-section p { font-size: 17px; color: var(--muted); max-width: 32ch; }
   .form-section { flex: 1; max-width: 480px; padding: 28px; border-radius: var(--r); background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
 
-  /* katalog */
   .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
   .catalog-card { background: #fff; border: 2px solid var(--ink); border-radius: var(--r); padding: 16px; cursor: pointer; text-align: center; display: flex; flex-direction: column; align-items: center; }
   .catalog-card:hover { background: var(--bg); }
@@ -164,7 +158,6 @@
   .ram-item input:checked + label .price-new { color: var(--ink); }
   .ram-item input:focus-visible + label { outline: 3px solid var(--amber); outline-offset: 2px; }
 
-  /* EGG GRID BARU */
   .egg-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
   .egg-item { position: relative; }
   .egg-item input { position: absolute; opacity: 0; }
@@ -178,7 +171,6 @@
   .total span:first-child { font-size: 14px; color: var(--muted); font-weight: 600; }
   .total-price { font-size: 26px; font-weight: 800; }
 
-  /* dashboard */
   .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
   .dash-card { padding: 22px; border-radius: var(--r); background: var(--card); border: 2px solid var(--ink); }
   .dash-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
@@ -210,7 +202,6 @@
   td { padding: 10px 12px; border-bottom: 1px solid var(--soft); font-size: 14px; }
   .btn-action { padding: 6px 12px; background: var(--amber); color: var(--ink); border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 700; box-shadow: 2px 2px 0 var(--ink); }
 
-  /* modal */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(16,24,40,.55); z-index: 3000; align-items: center; justify-content: center; }
   .modal-overlay.active { display: flex; }
   .modal-content { padding: 28px; border-radius: var(--r); width: 90%; max-width: 420px; text-align: center; background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); animation: pop .2s ease; }
@@ -415,18 +406,17 @@
             <form id="orderForm">
               <div class="field" id="fieldName">
                 <label>Panel Name (No Spaces)</label>
-                <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/\s+/g, '')">
+                <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" required oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
               </div>
 
               <div class="field" id="fieldAddUser" style="display: none;">
                 <label>Your Panel Username</label>
                 <div class="input-group">
-                  <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/\s+/g, '')">
+                  <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
                   <span class="suffix">@kitzunemarket.com</span>
                 </div>
               </div>
 
-              <!-- BAGIAN EGG YANG BARU -->
               <div class="field">
                 <label>Pilih Tipe Server (Egg)</label>
                 <div class="egg-grid">
@@ -513,7 +503,6 @@
         </div>
         <div class="form-section hover-card">
           
-          <!-- Form Ubah Email -->
           <div class="field">
             <label>Email Saat Ini</label>
             <input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
@@ -530,7 +519,6 @@
 
           <hr style="border: 1px solid var(--border); margin: 24px 0;">
 
-          <!-- Form Ubah Password -->
           <div class="field">
             <label>Password Saat Ini (Wajib)</label>
             <input type="password" id="currentPassPassword" class="glass-input" placeholder="Masukkan password lama Anda">
@@ -691,7 +679,6 @@
   let currentLang = 'id';
   try { currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'id'; } catch (e) {}
 
-  // [Indonesia, English]
   const PAIRS = [
     ["Selamat datang di", "Welcome to"],
     ["Produk digital paling terjangkau dan terpercaya di pasaran.", "The most affordable and reliable digital products in the market."],
@@ -764,10 +751,15 @@
     ["Yakin aktifkan Alight Motion Premium seharga Rp 5.000?", "Activate Alight Motion Premium for Rp 5,000?"],
     ["Belum ada produk aktif.", "No active products yet."], ["Belum ada riwayat.", "No history yet."],
     ["1 Tahun", "1 Year"], ["Aktif", "Active"], ["Dihapus", "Deleted"], ["Dihapus oleh Admin", "Deleted by Admin"],
-    ["Kelola", "Manage"]
+    ["Kelola", "Manage"],
+    ["Nama panel hanya boleh huruf & angka (tanpa spasi/simbol)!", "Panel name can only contain letters & numbers (no spaces/symbols)!"],
+    ["Username hanya boleh huruf & angka!", "Username can only contain letters & numbers!"],
+    ["Gagal validasi panel. Coba lagi.", "Failed to validate panel. Try again."],
+    ["Server Berhasil Ditambahkan!", "Server Added Successfully!"],
+    ["Server baru sudah aktif di panel Anda.", "The new server is now active on your panel."],
+    ["Gunakan password panel lama Anda untuk login.", "Use your old panel password to log in."]
   ];
 
-  // Potongan teks (untuk pesan yang berisi variabel)
   const PARTIALS = [
     ["Gagal Verifikasi: ", "Verification Failed: "],
     ["Gagal: ", "Failed: "],
@@ -950,12 +942,14 @@
       document.getElementById('fieldName').style.display = 'block';
       document.getElementById('fieldAddUser').style.display = 'none';
       document.getElementById('submitBtn').textContent = tr("Beli Panel");
+      document.getElementById('addUsername').value = '';
     } else {
       document.getElementById('tabNew').classList.remove('active');
       document.getElementById('tabAdd').classList.add('active');
       document.getElementById('fieldName').style.display = 'none';
       document.getElementById('fieldAddUser').style.display = 'block';
       document.getElementById('submitBtn').textContent = tr("Tambah Server");
+      document.getElementById('customName').value = '';
     }
   }
 
@@ -1119,7 +1113,6 @@
   async function loadUserDashboard() {
     if (!currentUser) return;
 
-    // Tampilkan loading
     document.getElementById('listPanelAktif').innerHTML = `
       <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
       <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
@@ -1132,7 +1125,6 @@
     `;
 
     try {
-      // Ambil data transaksi dari Firebase
       const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
       const querySnapshot = await getDocs(q);
       
@@ -1151,7 +1143,6 @@
 
       let serverStatus = {};
       
-      // Cek status panel ke API (TAPI JANGAN SAMPAI BIKIN LOADING TERUS KALAU ERROR)
       if (panelUsernames.length > 0) {
         try {
           const checkRes = await fetch('/api/check-panel', {
@@ -1160,7 +1151,7 @@
             body: JSON.stringify({ users: panelUsernames })
           });
           
-          if (checkRes.ok) { // Pastikan response 200 OK
+          if (checkRes.ok) {
             const checkData = await checkRes.json();
             if (checkData.success && checkData.data) {
               checkData.data.forEach(item => {
@@ -1170,13 +1161,10 @@
           }
         } catch (err) {
           console.warn("Gagal cek status panel (abaikan saja):", err);
-          // Kalau error, kita biarkan serverStatus kosong (default anggap aktif)
         }
       }
 
-      // Render HTML
       docs.forEach(data => {
-        // Render Riwayat
         htmlRiwayat += `
           <div class="history-item">
             <div class="history-header">
@@ -1190,7 +1178,6 @@
           </div>
         `;
 
-        // Render Produk Aktif
         if (data.produk === 'am') {
           htmlPanel += `
             <div class="panel-list-item">
@@ -1212,7 +1199,6 @@
 
           if (daysLeft > 0) {
             totalPanel++;
-            // Kalau serverStatus kosong (API gagal), default-nya kita anggap true (aktif)
             const isExists = serverStatus[data.namaPanel] !== false; 
 
             if (isExists) {
@@ -1259,7 +1245,6 @@
 
     } catch (error) {
       console.error("Error load dashboard:", error);
-      // KALAU DATABASE ERROR, TAMPILKAN PESAN, JANGAN LOADING TERUS
       document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data. Cek Console (F12).</p>`;
       document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data. Cek Console (F12).</p>`;
     }
@@ -1282,13 +1267,13 @@
 
     querySnapshot.forEach((d) => {
       const data = d.data();
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
+      const trEl = document.createElement('tr');
+      trEl.innerHTML = `
         <td>${esc(data.email)}</td>
         <td>Rp ${(data.balance || 0).toLocaleString()}</td>
         <td><button class="btn-action" onclick="addBalance('${esc(d.id)}', '${esc(data.email)}')">Add Balance</button></td>
       `;
-      tbody.appendChild(tr);
+      tbody.appendChild(trEl);
     });
   }
 
@@ -1326,16 +1311,59 @@
     if (currentMode === 'new') {
       finalUsername = document.getElementById("customName").value.trim();
       if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
-      displayConfirm = currentLang === 'en' ? `Are you sure you want to buy a <b>New Panel</b> named <b>"${esc(finalUsername)}"</b>?` : `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
+      if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) {
+        showAlert("Nama panel hanya boleh huruf & angka (tanpa spasi/simbol)!");
+        return;
+      }
+      displayConfirm = currentLang === 'en'
+        ? `Are you sure you want to buy a <b>New Panel</b> named <b>"${esc(finalUsername)}"</b>?`
+        : `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
     } else {
       finalUsername = document.getElementById("addUsername").value.trim();
       if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
-      displayConfirm = currentLang === 'en' ? `Are you sure you want to <b>Add Server</b> to account <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?` : `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`;
+      if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) {
+        showAlert("Username hanya boleh huruf & angka!");
+        return;
+      }
+
+      // Validasi: pastikan user punya panel aktif dengan username tersebut
+      try {
+        const q = query(
+          collection(db, "transactions"),
+          where("uid", "==", currentUser.uid),
+          where("produk", "==", "wabot")
+        );
+        const snap = await getDocs(q);
+        const ownedPanels = snap.docs
+          .map(d => d.data())
+          .filter(d => {
+            const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
+            return (30 - daysPassed) > 0;
+          })
+          .map(d => d.namaPanel.toLowerCase());
+
+        if (!ownedPanels.includes(finalUsername.toLowerCase())) {
+          showAlert(
+            currentLang === 'en'
+              ? `You don't have an active panel named "<b>${esc(finalUsername)}</b>". Please create a new panel first.`
+              : `Kamu tidak punya panel aktif bernama "<b>${esc(finalUsername)}</b>". Buat panel baru dulu.`
+          );
+          return;
+        }
+      } catch (err) {
+        console.error("Validasi addserver error:", err);
+        showAlert("Gagal validasi panel. Coba lagi.");
+        return;
+      }
+
+      displayConfirm = currentLang === 'en'
+        ? `Are you sure you want to <b>Add Server</b> to account <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`
+        : `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@kitzunemarket.com"</b>?`;
     }
 
     const ramEl = orderForm.querySelector('input[name="ram"]:checked');
     const harga = parseInt(ramEl.dataset.harga);
-    
+
     const docRef = doc(db, "users", currentUser.uid);
     const docSnap = await getDoc(docRef);
     const saldo = docSnap.data().balance || 0;
@@ -1363,8 +1391,10 @@
 
     pendingAction = executePurchase;
 
-    document.getElementById("confirmText").innerHTML = 
-      (currentLang === 'en' ? `${displayConfirm}<br>RAM package <b>${esc(ramEl.value)}</b> priced at <b>Rp ${harga.toLocaleString()}</b>.` : `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`);
+    document.getElementById("confirmText").innerHTML =
+      (currentLang === 'en'
+        ? `${displayConfirm}<br>RAM package <b>${esc(ramEl.value)}</b> priced at <b>Rp ${harga.toLocaleString()}</b>.`
+        : `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`);
     document.getElementById("confirmModal").classList.add("active");
   });
 
@@ -1492,9 +1522,9 @@
       const response = await fetch('/api/create-panel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           mode: pendingOrder.mode,
-          email: currentUser.email, 
+          email: currentUser.email,
           username: pendingOrder.username,
           ram: pendingOrder.ram,
           egg_id: pendingOrder.egg_id,
@@ -1503,7 +1533,24 @@
       });
 
       const data = await response.json();
-      if (!data.success) throw new Error(data.error || "Gagal membuat panel.");
+
+      if (!data.success) {
+        let errMsg = data.error || "Gagal membuat panel.";
+
+        if (pendingOrder.mode === 'addserver') {
+          if (/not found|tidak ditemukan|no user/i.test(errMsg)) {
+            errMsg = currentLang === 'en'
+              ? "Panel username not found on server. Make sure the username is correct."
+              : "Username panel tidak ditemukan di server. Pastikan username benar.";
+          } else if (/already|sudah ada|exists/i.test(errMsg)) {
+            errMsg = currentLang === 'en'
+              ? "This server already exists. Try different egg/RAM."
+              : "Server ini sudah ada. Coba egg/RAM berbeda.";
+          }
+        }
+
+        throw new Error(errMsg);
+      }
 
       const fresh = await getDoc(pendingOrder.docRef);
       const saldoNow = fresh.data().balance || 0;
@@ -1521,14 +1568,23 @@
         createdAt: Date.now()
       });
 
-      document.getElementById("resUsername").textContent = data.username;
-      document.getElementById("rowPassword").style.display = "flex";
-      document.getElementById("rowAmEmail").style.display = "none";
-      document.getElementById("resPassword").textContent = data.password;
-      document.getElementById("successTitle").textContent = tr("Panel Berhasil Dibuat!");
-      document.getElementById("successDesc").textContent = tr("Berikut adalah data login panel Anda.");
-      document.getElementById("warningText").textContent = tr("PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!");
-      
+      if (pendingOrder.mode === 'addserver') {
+        document.getElementById("resUsername").textContent = data.username || pendingOrder.username;
+        document.getElementById("rowPassword").style.display = "none";
+        document.getElementById("rowAmEmail").style.display = "none";
+        document.getElementById("successTitle").textContent = tr("Server Berhasil Ditambahkan!");
+        document.getElementById("successDesc").textContent = tr("Server baru sudah aktif di panel Anda.");
+        document.getElementById("warningText").textContent = tr("Gunakan password panel lama Anda untuk login.");
+      } else {
+        document.getElementById("resUsername").textContent = data.username;
+        document.getElementById("rowPassword").style.display = "flex";
+        document.getElementById("rowAmEmail").style.display = "none";
+        document.getElementById("resPassword").textContent = data.password;
+        document.getElementById("successTitle").textContent = tr("Panel Berhasil Dibuat!");
+        document.getElementById("successDesc").textContent = tr("Berikut adalah data login panel Anda.");
+        document.getElementById("warningText").textContent = tr("PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!");
+      }
+
       document.getElementById("successModal").classList.add("active");
       loadUserDashboard();
       switchMainTab('dashboard');
@@ -1542,21 +1598,19 @@
   }
 
   window.copyPanelData = () => {
-    let textToCopy = "";
-    
     const user = document.getElementById("resUsername").textContent;
     const pass = document.getElementById("resPassword").textContent;
-    textToCopy = `Link: https://panel-kitzunepremium.danzzhost.web.id\nUsername: ${user}`;
+
+    let textToCopy = `Link: https://panel-kitzunepremium.danzzhost.web.id\nUsername: ${user}`;
     if (pendingOrder && pendingOrder.mode === 'new') {
       textToCopy += `\nPassword: ${pass}`;
     }
-    
+
     navigator.clipboard.writeText(textToCopy).then(() => {
       const btn = document.getElementById("btnCopyData");
       const originalText = btn.textContent;
       btn.textContent = tr("Berhasil Disalin!");
       btn.style.background = "var(--success)";
-      
       setTimeout(() => {
         btn.textContent = originalText;
         btn.style.background = "var(--neon)";
