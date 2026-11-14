@@ -1,1465 +1,1064 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gojo Satoru - Premium Digital Products</title>
-
+<title>Gojo Satoru — Premium Digital Store</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #eaf6ff; --card: #fff; --ink: #0a1a2f; --muted: #5b6b82; --soft: #d0e2f2;
-    --amber: #6cd4ff; --amber-d: #3fbfff; --ok: #0e9f6e; --bad: #d92d20; --r: 8px; --hard: 3px 3px 0 var(--ink);
-    --neon: var(--amber); --neon-hover: var(--amber-d); --border: var(--ink); --success: var(--ok); --danger: var(--bad); --text: var(--ink);
-    --gojo-glow: #b8e9ff;
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg-0:#05060d; --bg-1:#0a0d1a; --bg-2:#101524; --bg-3:#161c30;
+    --card:#0d1220; --card-2:#131a2c;
+    --ink:#eaf2ff; --muted:#7d8bb0; --soft:#1d253d;
+    --cyan:#39d6ff; --cyan-d:#12b8e6; --cyan-glow:rgba(57,214,255,.35);
+    --purple:#a06bff; --purple-glow:rgba(160,107,255,.3);
+    --danger:#ff4d6d; --ok:#2ee6a0;
+    --border:#243056;
+    --r:14px; --r-sm:10px; --r-lg:20px;
+    --shadow-glow:0 0 0 1px rgba(57,214,255,.25), 0 8px 32px rgba(57,214,255,.12);
+    --shadow-card:0 8px 30px rgba(0,0,0,.5);
+    --font-h:'Space Grotesk',sans-serif; --font-b:'Inter',sans-serif;
   }
-  html, body {
-    -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
-    font-family: 'Figtree', system-ui, sans-serif; font-size: 15px; line-height: 1.45;
-    background-color: var(--bg); background-image: radial-gradient(rgba(10,26,47,.12) 1px, transparent 1px); background-size: 20px 20px;
-    color: var(--ink); min-height: 100vh; overflow-x: hidden;
+  html,body{-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:var(--font-b);font-size:15px;line-height:1.5;background:var(--bg-0);color:var(--ink);min-height:100vh;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 15% 10%,rgba(57,214,255,.10),transparent 45%),radial-gradient(circle at 85% 90%,rgba(160,107,255,.10),transparent 45%),radial-gradient(circle at 50% 50%,rgba(10,13,26,.9),var(--bg-0) 80%)}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;background-image:radial-gradient(rgba(120,160,255,.18) 1px,transparent 1px);background-size:26px 26px}
+  #authScreen,#mainApp,#adminApp{position:relative;z-index:1}
+  h1,h2,h3,h4,.total-price,.avatar,.balance-info strong{font-family:var(--font-h);letter-spacing:-.02em}
+  :focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+  button{font-family:inherit;color:inherit;cursor:pointer}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  input,textarea{font-family:inherit}
+  .skeleton{background:linear-gradient(90deg,#131a2c 0,#1c2540 40px,#131a2c 80px);background-size:200% 100%;animation:shimmer 1.4s infinite linear;border-radius:8px}
+  @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+  .skeleton-text{height:13px;margin-bottom:9px;width:100%}
+  .skeleton-text.short{width:60%}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:999px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);font-weight:600;font-size:15px;font-family:var(--font-h);letter-spacing:.2px;transition:.2s ease;position:relative}
+  .btn:hover{background:rgba(57,214,255,.08);box-shadow:0 0 20px var(--cyan-glow)}
+  .btn-primary{background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:#031018;border:none;box-shadow:0 4px 20px var(--cyan-glow)}
+  .btn-primary:hover{box-shadow:0 6px 30px var(--cyan-glow);transform:translateY(-1px)}
+  .btn-primary:active{transform:translateY(1px)}
+  .btn-ghost{border-color:var(--border);color:var(--muted)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .btn-danger{border-color:var(--danger);color:var(--danger)}
+  .btn-danger:hover{background:rgba(255,77,109,.1);box-shadow:0 0 20px rgba(255,77,109,.25)}
+  .btn-success{border-color:var(--ok);color:var(--ok)}
+  .btn-success:hover{background:rgba(46,230,160,.1)}
+  .btn-block{width:100%}
+  #authScreen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+  .auth-wrap{display:grid;grid-template-columns:1.15fr 1fr;width:100%;max-width:1100px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-glow),0 30px 80px rgba(0,0,0,.6);background:var(--card)}
+  .auth-hero{padding:56px 48px;display:flex;flex-direction:column;justify-content:space-between;gap:32px;position:relative;overflow:hidden;background:radial-gradient(circle at 20% 15%,rgba(57,214,255,.18),transparent 55%),radial-gradient(circle at 90% 95%,rgba(160,107,255,.16),transparent 50%),linear-gradient(160deg,#0a0f1e,#05060d)}
+  .auth-hero::before{content:"∞";position:absolute;right:-20px;bottom:-60px;font-size:340px;line-height:1;font-family:var(--font-h);font-weight:700;background:linear-gradient(180deg,rgba(57,214,255,.22),rgba(160,107,255,.05));-webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none}
+  .auth-hero .eyebrow{font-family:var(--font-h);font-size:13px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;font-weight:600}
+  .auth-hero h1{font-size:56px;line-height:1.02;margin:14px 0 18px;font-weight:700}
+  .auth-hero h1 .accent{background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .auth-hero .quote{font-size:16px;color:var(--muted);max-width:34ch;line-height:1.6;font-style:italic;border-left:2px solid var(--cyan);padding-left:14px}
+  .auth-hero .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+  .badge{padding:6px 12px;border-radius:999px;border:1px solid var(--border);font-size:12px;color:var(--muted);font-weight:500;background:rgba(13,18,32,.6)}
+  .badge b{color:var(--cyan);font-weight:700}
+  .auth-form-area{padding:48px 44px;display:flex;flex-direction:column;justify-content:center;background:var(--card-2)}
+  .auth-box h2{font-size:30px;margin-bottom:6px;font-weight:700}
+  .auth-box .sub{font-size:14px;color:var(--muted);margin-bottom:28px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:12px;font-weight:600;margin-bottom:7px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+  .inp{width:100%;padding:13px 15px;font-size:15px;background:var(--bg-2);color:var(--ink);border:1px solid var(--border);border-radius:var(--r-sm);outline:none;transition:.2s;-webkit-user-select:text;user-select:text}
+  .inp::placeholder{color:#4b5878}
+  .inp:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(57,214,255,.14)}
+  .inp:read-only{opacity:.6;cursor:not-allowed}
+  .auth-switch{margin-top:22px;font-size:14px;color:var(--muted);text-align:center}
+  .auth-switch a{color:var(--cyan);font-weight:600;cursor:pointer;text-decoration:none;margin-left:4px}
+  .auth-switch a:hover{text-decoration:underline}
+  .error-msg{background:rgba(255,77,109,.1);border:1px solid var(--danger);color:#ffb3c0;font-size:13px;padding:11px 13px;border-radius:var(--r-sm);margin-bottom:16px;display:none}
+  .lang-btn{display:inline-flex;border:1px solid var(--border);border-radius:999px;overflow:hidden;background:var(--bg-2);cursor:pointer;padding:0}
+  .lang-btn .lg{padding:6px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--muted);font-family:var(--font-h)}
+  .lang-btn .lg.active{background:var(--cyan);color:#031018}
+  .auth-lang{position:absolute;top:20px;right:20px;z-index:5}
+  .side-lang{width:100%;margin-bottom:12px}
+  .side-lang .lg{flex:1;text-align:center;padding:9px}
+  #mainApp,#adminApp{display:none;flex-direction:column;min-height:100vh}
+  .top-header{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:rgba(10,13,26,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+  .profile-card{display:flex;align-items:center;gap:12px}
+  .avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:#031018;background:linear-gradient(135deg,var(--cyan),var(--purple));box-shadow:0 0 0 2px var(--bg-0),0 0 18px var(--cyan-glow)}
+  .profile-info,.balance-info{display:flex;flex-direction:column;line-height:1.25}
+  .profile-info span,.balance-info span{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .profile-info strong{font-size:15px;font-weight:600;font-family:var(--font-h)}
+  .header-right{display:flex;align-items:center;gap:14px}
+  .balance-info{text-align:right}
+  .balance-info strong{font-size:18px;font-weight:700;background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--border);background:var(--bg-2);display:flex;align-items:center;justify-content:center;transition:.2s;color:var(--muted)}
+  .icon-btn:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 14px var(--cyan-glow)}
+  .icon-btn svg{width:20px;height:20px}
+  .burger-btn{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center}
+  .burger-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px}
+  .overlay{position:fixed;inset:0;background:rgba(3,6,15,.75);backdrop-filter:blur(4px);z-index:150;opacity:0;pointer-events:none;transition:.25s}
+  .overlay.active{opacity:1;pointer-events:auto}
+  .sidebar{position:fixed;top:0;right:0;width:340px;max-width:90vw;height:100vh;z-index:200;background:var(--bg-1);border-left:1px solid var(--border);display:flex;flex-direction:column;padding:26px 22px;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,.5)}
+  .sidebar.active{transform:translateX(0)}
+  .sidebar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+  .sidebar-header h2{font-size:20px;font-weight:700}
+  .close-btn{background:transparent;border:none;color:var(--muted);font-size:30px;line-height:1;transition:.2s}
+  .close-btn:hover{color:var(--cyan)}
+  .sidebar-menu{display:flex;flex-direction:column;gap:6px}
+  .sidebar-item{display:flex;align-items:center;gap:14px;padding:13px 16px;border-radius:var(--r-sm);background:transparent;border:1px solid transparent;color:var(--muted);font-size:15px;font-weight:500;text-align:left;width:100%;transition:.2s;font-family:var(--font-h)}
+  .sidebar-item svg{width:20px;height:20px;flex-shrink:0}
+  .sidebar-item:hover{background:var(--bg-2);color:var(--ink)}
+  .sidebar-item.active{background:linear-gradient(135deg,rgba(57,214,255,.16),rgba(160,107,255,.12));border-color:rgba(57,214,255,.4);color:var(--cyan);box-shadow:inset 0 0 20px rgba(57,214,255,.08),0 0 20px rgba(57,214,255,.12)}
+  .sidebar-footer{margin-top:auto;border-top:1px solid var(--border);padding-top:18px}
+  .main-container{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:40px 28px}
+  .page-head{margin-bottom:34px}
+  .page-head .eyebrow{font-family:var(--font-h);font-size:12px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+  .page-head h1{font-size:44px;line-height:1.05;font-weight:700}
+  .page-head h1 .accent{background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .page-head p{font-size:16px;color:var(--muted);margin-top:10px;max-width:52ch}
+  #tabContentSettings,#tabContentOrder,#adminTabContentOrder{display:none}
+  #tabContentDashboard,#adminTabContentDashboard{display:block}
+  .card{position:relative;background:linear-gradient(160deg,var(--card-2),var(--card));border:1px solid var(--border);border-radius:var(--r);padding:26px;box-shadow:var(--shadow-card);overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.6}
+  .card h3{font-size:17px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:10px;font-family:var(--font-h)}
+  .card h3 svg{width:18px;height:18px;color:var(--cyan)}
+  .dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  .panel-list-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--soft)}
+  .panel-list-item:last-child{border-bottom:none;padding-bottom:0}
+  .panel-details h4{font-size:15px;font-weight:600;font-family:var(--font-h)}
+  .panel-details p{font-size:13px;color:var(--muted);margin-top:3px}
+  .panel-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .status{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid}
+  .status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+  .status-active{color:var(--ok);border-color:rgba(46,230,160,.3);background:rgba(46,230,160,.08)}
+  .status-am{color:var(--purple);border-color:rgba(160,107,255,.3);background:rgba(160,107,255,.08)}
+  .status-del{color:var(--danger);border-color:rgba(255,77,109,.3);background:rgba(255,77,109,.08)}
+  .btn-manage{padding:6px 14px;border-radius:999px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);font-size:12px;font-weight:600;transition:.2s}
+  .btn-manage:hover{background:rgba(57,214,255,.12);box-shadow:0 0 14px var(--cyan-glow)}
+  .history-item{padding:14px 0;border-bottom:1px solid var(--soft)}
+  .history-item:last-child{border-bottom:none}
+  .history-header{display:flex;justify-content:space-between;margin-bottom:4px}
+  .history-header strong{font-size:14px;font-family:var(--font-h)}
+  .history-header span{font-size:14px;font-weight:700;color:var(--cyan)}
+  .history-details{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .history-details p,.history-date{font-size:12px;color:var(--muted)}
+  .order-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:36px;align-items:start}
+  .catalog-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+  .catalog-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:20px 14px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg-2);cursor:pointer;transition:.2s}
+  .catalog-card:hover{border-color:rgba(57,214,255,.5);transform:translateY(-2px)}
+  .catalog-card.active{border-color:var(--cyan);background:linear-gradient(160deg,rgba(57,214,255,.1),rgba(160,107,255,.06));box-shadow:0 0 0 1px var(--cyan),0 0 30px var(--cyan-glow)}
+  .catalog-card h4{font-size:15px;font-weight:700;font-family:var(--font-h);margin-top:12px}
+  .catalog-card p{font-size:12px;color:var(--muted);font-weight:500;margin-top:3px}
+  .logo-wrap{height:64px;display:flex;align-items:center;justify-content:center}
+  .logo-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;position:relative;border:1px solid rgba(57,214,255,.3)}
+  .logo-panel{background:linear-gradient(135deg,#0a0f1e,#161c30);flex-direction:column;gap:4px}
+  .logo-panel .srv{position:relative;width:34px;height:8px;background:var(--cyan);border-radius:2px;box-shadow:0 0 8px var(--cyan-glow)}
+  .logo-panel .srv::after{content:"";position:absolute;right:3px;top:2px;width:4px;height:4px;border-radius:50%;background:#031018}
+  .logo-am{background:linear-gradient(135deg,var(--purple),#6a3fe0);gap:3px;border-color:rgba(160,107,255,.4)}
+  .logo-am .bar{display:block;width:3px;border-radius:2px;background:#fff}
+  .logo-am .bar.b1{height:12px;opacity:.6}
+  .logo-am .bar.b2{height:20px}
+  .logo-am .tri{display:block;width:0;height:0;border-style:solid;border-width:10px 0 10px 17px;border-color:transparent transparent transparent #fff;margin-left:2px}
+  .tab-menu-inner{display:flex;gap:6px;padding:5px;margin-bottom:22px;border-radius:999px;border:1px solid var(--border);background:var(--bg-2)}
+  .tab-btn-inner{flex:1;padding:10px;border:none;background:transparent;border-radius:999px;font-weight:600;font-size:13px;color:var(--muted);transition:.2s;font-family:var(--font-h)}
+  .tab-btn-inner.active{background:linear-gradient(135deg,var(--cyan),var(--cyan-d));color:#031018;box-shadow:0 2px 14px var(--cyan-glow)}
+  .tab-btn-inner:not(.active):hover{color:var(--ink)}
+  .input-group{display:flex;align-items:stretch;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;transition:.2s}
+  .input-group:focus-within{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(57,214,255,.14)}
+  .input-group input{flex:1;min-width:0;border:none;background:transparent;padding:13px 15px;font-size:15px;color:var(--ink);outline:none;-webkit-user-select:text;user-select:text}
+  .input-group .suffix{padding:0 14px;font-size:12px;background:var(--bg-3);border-left:1px solid var(--border);display:flex;align-items:center;font-weight:600;color:var(--muted);font-family:monospace}
+  .ram-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+  .ram-item{position:relative}
+  .ram-item input{position:absolute;opacity:0;pointer-events:none}
+  .ram-item label{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:.15s}
+  .ram-item label:hover{border-color:rgba(57,214,255,.4)}
+  .ram-item .ram-name{font-size:13px;font-weight:700;font-family:var(--font-h)}
+  .ram-item .price-new{font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}
+  .ram-item input:checked + label{border-color:var(--cyan);background:linear-gradient(160deg,rgba(57,214,255,.15),rgba(57,214,255,.05));box-shadow:0 0 16px var(--cyan-glow)}
+  .ram-item input:checked + label .price-new{color:var(--cyan)}
+  .ram-item input:focus-visible + label{outline:2px solid var(--cyan);outline-offset:2px}
+  .egg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .egg-item{position:relative}
+  .egg-item input{position:absolute;opacity:0;pointer-events:none}
+  .egg-item label{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 6px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;text-align:center;height:100%;transition:.15s}
+  .egg-item label:hover{border-color:rgba(57,214,255,.4)}
+  .egg-item .egg-name{font-size:13px;font-weight:700;font-family:var(--font-h);line-height:1.2}
+  .egg-item .egg-id{font-size:10px;color:var(--muted);font-weight:500;letter-spacing:.05em}
+  .egg-item input:checked + label{border-color:var(--cyan);background:linear-gradient(160deg,rgba(57,214,255,.15),rgba(57,214,255,.05));box-shadow:0 0 16px var(--cyan-glow)}
+  .egg-item input:checked + label .egg-id{color:var(--cyan)}
+  .total{margin-top:22px;padding:18px 20px;border-radius:var(--r-sm);background:linear-gradient(135deg,rgba(57,214,255,.08),rgba(160,107,255,.08));border:1px solid rgba(57,214,255,.3);display:flex;justify-content:space-between;align-items:center}
+  .total span:first-child{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+  .total-price{font-size:26px;font-weight:700;background:linear-gradient(90deg,var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:14px}
+  .admin-header h1{font-size:30px;font-weight:700}
+  .table-card{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;text-align:left}
+  th{padding:12px;border-bottom:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-family:var(--font-h)}
+  td{padding:14px 12px;border-bottom:1px solid var(--soft);font-size:14px}
+  tr:hover td{background:rgba(57,214,255,.03)}
+  .btn-action{padding:7px 14px;border-radius:999px;border:1px solid var(--cyan);background:transparent;color:var(--cyan);font-size:12px;font-weight:600;transition:.2s}
+  .btn-action:hover{background:rgba(57,214,255,.12);box-shadow:0 0 14px var(--cyan-glow)}
+  .modal-overlay{display:none;position:fixed;inset:0;z-index:3000;padding:20px;background:rgba(3,6,15,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center}
+  .modal-overlay.active{display:flex}
+  .modal-content{width:100%;max-width:440px;padding:30px 28px;border-radius:var(--r-lg);background:linear-gradient(160deg,var(--card-2),var(--card));border:1px solid var(--border);box-shadow:var(--shadow-glow),0 30px 80px rgba(0,0,0,.6);animation:pop .22s cubic-bezier(.4,0,.2,1);text-align:center}
+  @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+  .modal-content h3{font-size:22px;font-weight:700;margin-bottom:8px}
+  .modal-content p{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+  .modal-input{width:100%;padding:14px;font-size:16px;background:var(--bg-2);color:var(--ink);border:1px solid var(--border);border-radius:var(--r-sm);outline:none;margin-bottom:18px;text-align:center;font-family:var(--font-h);font-weight:600;-webkit-user-select:text;user-select:text}
+  .modal-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(57,214,255,.14)}
+  .modal-actions{display:flex;gap:10px;margin-top:10px}
+  .modal-actions .btn{flex:1;padding:12px}
+  .panel-data-box{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-sm);padding:16px;text-align:left;margin-bottom:16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;user-select:text;-webkit-user-select:text}
+  .panel-data-box .row{display:flex;justify-content:space-between;gap:12px;margin-bottom:9px;word-break:break-all}
+  .panel-data-box .row:last-child{margin-bottom:0}
+  .panel-data-box .label{color:var(--muted)}
+  .panel-data-box .value{font-weight:700;color:var(--cyan)}
+  .warning-box{background:rgba(57,214,255,.08);border:1px solid rgba(57,214,255,.35);font-size:13px;padding:12px 14px;border-radius:var(--r-sm);margin-bottom:18px;font-weight:500;color:#b8e9ff;text-align:left}
+  @media(max-width:900px){
+    .auth-wrap{grid-template-columns:1fr;max-width:440px}
+    .auth-hero{display:none}
+    .auth-form-area{padding:36px 26px}
+    .main-container{padding:26px 18px}
+    .page-head h1{font-size:32px}
+    .order-wrap,.dashboard-grid,.catalog-grid{grid-template-columns:1fr;gap:20px}
+    .catalog-grid{gap:12px}
+    .catalog-card{flex-direction:row;text-align:left;padding:14px;gap:14px}
+    .catalog-card .logo-wrap{height:56px;flex-shrink:0}
+    .logo-wrap{width:56px}
+    .catalog-card h4{margin-top:0}
+    .ram-grid{grid-template-columns:repeat(3,1fr)}
+    .egg-grid{grid-template-columns:1fr}
+    .egg-item label{flex-direction:row;justify-content:space-between;padding:12px}
+    .egg-item label .egg-name,.egg-item label .egg-id{text-align:left}
+    .panel-list-item{flex-direction:column;align-items:flex-start}
+    .panel-actions{width:100%;justify-content:space-between}
+    .top-header{padding:12px 16px}
+    .profile-info span,.balance-info span{display:none}
+    .balance-info strong{font-size:15px}
+    .avatar{width:38px;height:38px}
+    .modal-content{padding:24px 20px}
+    .admin-header{flex-direction:column;align-items:flex-start}
+    th,td{font-size:12px;padding:9px 8px}
   }
-  h1, h2, h3, h4, .total-price, .avatar, .balance-info strong { font-family: 'Bricolage Grotesque', 'Figtree', sans-serif; }
-  :focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
-  button { font-family: inherit; color: inherit; }
-  button:disabled { opacity: .55; cursor: not-allowed; }
-  .ripple { display: none; }
-  .skeleton { background: linear-gradient(90deg, #d6e8f5 0, #eaf6ff 40px, #d6e8f5 80px); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; border-radius: 6px; }
-  @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-  .skeleton-text { height: 14px; margin-bottom: 8px; width: 100%; }
-  .skeleton-text.short { width: 60%; }
-
-  .auth-btn, button[type="submit"], .btn-confirm { background: var(--amber); color: var(--ink); font-weight: 700; font-size: 15px; border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; box-shadow: var(--hard); position: relative; }
-  .auth-btn:hover, button[type="submit"]:hover, .btn-confirm:hover { background: var(--amber-d); }
-  .auth-btn:active, button[type="submit"]:active, .btn-confirm:active, .topup-btn:active, .btn-manage:active, .btn-action:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
-  .auth-btn { width: 100%; padding: 13px; margin-top: 8px; }
-  button[type="submit"], .auth-btn.am-btn { width: 100%; margin-top: 16px; padding: 13px; }
-  [style*="--danger"] { color: #fff; }
-
-  #authScreen { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; }
-  .auth-container { display: flex; width: 100%; height: 100vh; }
-  .auth-brand {
-    flex: 1.1; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px;
-    background: linear-gradient(160deg, #a5e5ff 0%, #6cd4ff 45%, #eaf6ff 100%);
-    border-right: 2px solid var(--ink); position: relative; overflow: hidden;
-  }
-  .auth-brand::before {
-    content: ""; position: absolute; top: -40px; right: -40px; width: 260px; height: 260px;
-    border-radius: 50%; background: radial-gradient(circle, rgba(108,212,255,.55), transparent 70%);
-    pointer-events: none;
-  }
-  .auth-brand::after {
-    content: "∞"; position: absolute; top: 8px; right: 22px; font-size: 140px; font-weight: 800;
-    color: rgba(10,26,47,.10); line-height: 1; pointer-events: none; font-family: 'Bricolage Grotesque', sans-serif;
-  }
-  .brand-content { max-width: 460px; position: relative; z-index: 2; }
-  .brand-content h1 { font-size: 66px; font-weight: 800; line-height: .96; letter-spacing: -.035em; margin-bottom: 18px; }
-  .brand-content p { font-size: 18px; max-width: 32ch; }
-  .auth-form-area { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px; }
-  .auth-box { width: 100%; max-width: 380px; background: var(--card); border: 2px solid var(--ink); border-radius: var(--r); padding: 32px 28px; box-shadow: 6px 6px 0 var(--ink); }
-  .auth-box h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; letter-spacing: -.02em; }
-  .auth-field { margin-bottom: 16px; }
-  .auth-field label, .field > label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-  .field { margin-bottom: 18px; }
-  .glass-input { width: 100%; padding: 12px 14px; font-size: 15px; background: #fff; color: var(--ink); border: 2px solid var(--ink); border-radius: 6px; outline: none; font-family: inherit; -webkit-user-select: text; user-select: text; }
-  .glass-input:focus { box-shadow: 3px 3px 0 var(--amber); }
-  .glass-input::placeholder { color: #8b94a5; }
-  .auth-switch { margin-top: 20px; font-size: 14px; color: var(--muted); text-align: center; }
-  .auth-switch a { color: var(--ink); font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-  .error-msg { background: #fde8e6; border: 2px solid var(--bad); color: #8a1c13; font-size: 13px; padding: 10px; border-radius: 6px; margin-bottom: 16px; display: none; }
-
-  .lang-btn { display: inline-flex; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; background: #fff; cursor: pointer; padding: 0; }
-  .lang-btn .lg { padding: 5px 10px; font-size: 12px; font-weight: 800; }
-  .lang-btn .lg.active { background: var(--ink); color: #fff; }
-  .auth-lang { position: absolute; top: 20px; right: 20px; z-index: 5; }
-  .side-lang { width: 100%; margin-bottom: 12px; }
-  .side-lang .lg { flex: 1; text-align: center; padding: 8px; }
-
-  #mainApp, #adminApp { display: none; flex-direction: column; min-height: 100vh; }
-  .top-header { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; z-index: 100; background: var(--card); border-bottom: 2px solid var(--ink); }
-  .profile-card { display: flex; align-items: center; gap: 10px; }
-  .header-logo { width: 30px; height: 30px; object-fit: contain; }
-  .avatar { width: 36px; height: 36px; border-radius: 6px; background: var(--amber); border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; }
-  .profile-info, .balance-info { display: flex; flex-direction: column; line-height: 1.2; }
-  .profile-info span, .balance-info span { font-size: 12px; color: var(--muted); }
-  .profile-info strong { font-size: 15px; font-weight: 700; }
-  .header-right { display: flex; align-items: center; gap: 12px; }
-  .balance-info { text-align: right; }
-  .balance-info strong { font-size: 18px; font-weight: 800; }
-  .topup-btn { background: var(--ink); color: #fff; border: 2px solid var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; padding: 8px 14px; border-radius: 6px; box-shadow: 2px 2px 0 var(--amber); }
-  .topup-btn:hover { background: #14253f; }
-  .burger-btn { background: transparent; border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 9px 8px; justify-content: center; align-items: center; }
-  .burger-btn span { display: block; width: 18px; height: 2px; background: var(--ink); }
-
-  .sidebar { position: fixed; top: 0; right: -320px; width: 300px; height: 100vh; background: var(--card); border-left: 2px solid var(--ink); z-index: 200; transition: right .25s ease; display: flex; flex-direction: column; padding: 20px; }
-  .sidebar.active { right: 0; }
-  .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-  .sidebar-header h2 { font-size: 20px; font-weight: 800; }
-  .close-btn { background: transparent; border: none; color: var(--ink); font-size: 30px; cursor: pointer; line-height: 1; }
-  .sidebar-menu { display: flex; flex-direction: column; gap: 6px; }
-  .sidebar-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: transparent; border: 2px solid transparent; color: var(--ink); font-size: 15px; font-weight: 600; border-radius: 6px; cursor: pointer; text-align: left; width: 100%; font-family: inherit; }
-  .sidebar-item:hover { background: var(--bg); }
-  .sidebar-item.active { background: var(--amber); border-color: var(--ink); }
-  .sidebar-item svg { width: 20px; height: 20px; }
-  .sidebar-footer { margin-top: auto; border-top: 2px solid var(--ink); padding-top: 16px; }
-  .logout-btn { width: 100%; background: #fff; color: var(--bad); border: 2px solid var(--bad); font-size: 14px; font-weight: 700; cursor: pointer; padding: 10px; border-radius: 6px; }
-  .logout-btn:hover { background: var(--bad); color: #fff; }
-  .overlay { position: fixed; inset: 0; background: rgba(10,26,47,.5); z-index: 150; opacity: 0; pointer-events: none; transition: opacity .25s; }
-  .overlay.active { opacity: 1; pointer-events: auto; }
-
-  .main-container { flex: 1; display: flex; flex-direction: column; padding: 36px 24px; max-width: 1080px; margin: 0 auto; width: 100%; }
-  #tabContentSettings, #tabContentOrder, #adminTabContentOrder { display: none; }
-  #tabContentDashboard, #adminTabContentDashboard { display: block; }
-  .wrapper-order { display: flex; gap: 48px; align-items: flex-start; justify-content: center; }
-  .info-section { flex: 1; max-width: 440px; padding-top: 12px; }
-  .info-section h1 { font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -.035em; margin-bottom: 14px; }
-  .info-section h1 span { background: linear-gradient(90deg, #3fbfff, #6cd4ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .info-section p { font-size: 17px; color: var(--muted); max-width: 32ch; }
-  .form-section { flex: 1; max-width: 480px; padding: 28px; border-radius: var(--r); background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); }
-
-  .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
-  .catalog-card { background: #fff; border: 2px solid var(--ink); border-radius: var(--r); padding: 16px; cursor: pointer; text-align: center; display: flex; flex-direction: column; align-items: center; }
-  .catalog-card:hover { background: var(--bg); }
-  .catalog-card.active { background: #dcf3ff; box-shadow: var(--hard); }
-  .catalog-card h4 { font-size: 15px; font-weight: 800; }
-  .catalog-card p { font-size: 13px; color: var(--muted); font-weight: 600; }
-  .catalog-card .logo-wrap { width: 100%; height: 84px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
-  .logo-icon { width: 68px; height: 68px; border-radius: 14px; border: 2px solid var(--ink); position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .logo-panel { background: var(--ink); flex-direction: column; gap: 5px; }
-  .logo-panel .srv { position: relative; width: 42px; height: 10px; background: var(--amber); border-radius: 3px; }
-  .logo-panel .srv::after { content: ""; position: absolute; right: 4px; top: 3px; width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
-  .logo-panel .srv::before { content: ""; position: absolute; left: 4px; top: 4px; width: 12px; height: 2px; border-radius: 2px; background: var(--ink); opacity: .5; }
-  .logo-am { background: var(--amber); gap: 4px; }
-  .logo-am .bar { display: block; width: 4px; border-radius: 2px; background: var(--ink); }
-  .logo-am .bar.b1 { height: 14px; opacity: .35; }
-  .logo-am .bar.b2 { height: 22px; opacity: .65; }
-  .logo-am .tri { display: block; width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 21px; border-color: transparent transparent transparent var(--ink); margin-left: 2px; }
-
-  .product-content { display: none; }
-  .product-content.active { display: block; }
-  .tab-menu-inner { display: flex; margin-bottom: 20px; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; }
-  .tab-btn-inner { flex: 1; padding: 10px; background: #fff; border: none; font-weight: 700; font-size: 14px; cursor: pointer; font-family: inherit; }
-  .tab-btn-inner + .tab-btn-inner { border-left: 2px solid var(--ink); }
-  .tab-btn-inner:hover { background: var(--bg); }
-  .tab-btn-inner.active { background: var(--ink); color: #fff; }
-  .input-group { display: flex; align-items: stretch; background: #fff; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; }
-  .input-group input { flex: 1; min-width: 0; border: none; background: transparent; padding: 12px 14px; font-size: 15px; color: var(--ink); outline: none; -webkit-user-select: text; user-select: text; }
-  .input-group .suffix { padding: 0 12px; font-size: 13px; background: var(--bg); border-left: 2px solid var(--ink); display: flex; align-items: center; font-weight: 600; color: var(--muted); }
-
-  .ram-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
-  .ram-item { position: relative; }
-  .ram-item input { position: absolute; opacity: 0; }
-  .ram-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 9px 4px; background: #fff; border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; }
-  .ram-item .ram-name { font-size: 14px; font-weight: 800; }
-  .ram-item .price-new { font-size: 12px; color: var(--muted); font-weight: 600; }
-  .ram-item input:checked + label { background: var(--amber); box-shadow: 2px 2px 0 var(--ink); }
-  .ram-item input:checked + label .price-new { color: var(--ink); }
-  .ram-item input:focus-visible + label { outline: 3px solid var(--amber); outline-offset: 2px; }
-
-  .egg-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-  .egg-item { position: relative; }
-  .egg-item input { position: absolute; opacity: 0; }
-  .egg-item label { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 4px; background: #fff; border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; text-align: center; height: 100%; }
-  .egg-item .egg-name { font-size: 13px; font-weight: 800; line-height: 1.2; }
-  .egg-item .egg-id { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 4px; }
-  .egg-item input:checked + label { background: var(--amber); box-shadow: 2px 2px 0 var(--ink); }
-  .egg-item input:focus-visible + label { outline: 3px solid var(--amber); outline-offset: 2px; }
-
-  .total { margin-top: 20px; padding: 14px 16px; background: var(--bg); border: 2px solid var(--ink); border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
-  .total span:first-child { font-size: 14px; color: var(--muted); font-weight: 600; }
-  .total-price { font-size: 26px; font-weight: 800; }
-
-  .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
-  .dash-card { padding: 22px; border-radius: var(--r); background: var(--card); border: 2px solid var(--ink); }
-  .dash-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .dash-card h3 svg { width: 18px; height: 18px; }
-  .panel-list-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--soft); }
-  .panel-list-item:last-child { border-bottom: none; }
-  .panel-details h4 { font-size: 16px; font-weight: 700; }
-  .panel-details p { font-size: 13px; color: var(--muted); margin-top: 2px; }
-  .panel-actions { display: flex; align-items: center; gap: 10px; }
-  .panel-status { padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 700; border: 2px solid var(--ink); }
-  .status-active { background: #c9f2df; }
-  .status-am { background: var(--amber); }
-  .status-del { background: #fde8e6; border-color: var(--bad); color: #8a1c13; }
-  .btn-manage { background: #fff; color: var(--ink); border: 2px solid var(--ink); padding: 5px 12px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 2px 2px 0 var(--ink); }
-  .btn-manage:hover { background: var(--amber); }
-  .history-item { padding: 12px 0; border-bottom: 1px solid var(--soft); }
-  .history-item:last-child { border-bottom: none; }
-  .history-header { display: flex; justify-content: space-between; margin-bottom: 2px; }
-  .history-header strong { font-size: 15px; }
-  .history-header span { font-size: 14px; font-weight: 700; }
-  .history-details { display: flex; justify-content: space-between; align-items: center; }
-  .history-details p, .history-date { font-size: 13px; color: var(--muted); }
-
-  .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
-  .admin-header h1 { font-size: 28px; font-weight: 800; }
-  .table-card { border-radius: var(--r); padding: 22px; overflow-x: auto; background: var(--card); border: 2px solid var(--ink); }
-  table { width: 100%; border-collapse: collapse; text-align: left; }
-  th { padding: 10px 12px; border-bottom: 2px solid var(--ink); color: var(--muted); font-size: 13px; font-weight: 700; }
-  td { padding: 10px 12px; border-bottom: 1px solid var(--soft); font-size: 14px; }
-  .btn-action { padding: 6px 12px; background: var(--amber); color: var(--ink); border: 2px solid var(--ink); border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 700; box-shadow: 2px 2px 0 var(--ink); }
-
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,26,47,.55); z-index: 3000; align-items: center; justify-content: center; }
-  .modal-overlay.active { display: flex; }
-  .modal-content { padding: 28px; border-radius: var(--r); width: 90%; max-width: 420px; text-align: center; background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); animation: pop .2s ease; }
-  @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  .modal-content h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-  .modal-content p { font-size: 15px; color: var(--muted); margin-bottom: 20px; }
-  .modal-input { width: 100%; padding: 12px; font-size: 16px; background: #fff; color: var(--ink); border: 2px solid var(--ink); border-radius: 6px; outline: none; margin-bottom: 18px; text-align: center; -webkit-user-select: text; user-select: text; }
-  .panel-data-box { background: var(--bg); border: 2px solid var(--ink); border-radius: 6px; padding: 16px; text-align: left; margin-bottom: 16px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; user-select: text; -webkit-user-select: text; }
-  .panel-data-box .row { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; word-break: break-all; }
-  .panel-data-box .label { color: var(--muted); }
-  .panel-data-box .value { font-weight: 700; }
-  .warning-box { background: #dcf3ff; border: 2px solid var(--ink); font-size: 13px; padding: 10px; border-radius: 6px; margin-bottom: 16px; font-weight: 600; }
-  .modal-actions { display: flex; gap: 10px; justify-content: center; margin-top: 8px; }
-  .btn-modal { flex: 1; padding: 11px; border-radius: 6px; font-weight: 700; font-size: 15px; cursor: pointer; border: 2px solid var(--ink); }
-  .btn-cancel { background: #fff; color: var(--ink); }
-  .btn-cancel:hover { background: var(--bg); }
-
-  @media (max-width: 900px) {
-    .auth-brand, .header-right .lang-btn { display: none; }
-    .auth-box { box-shadow: 4px 4px 0 var(--ink); }
-    .top-header { padding: 10px 14px; }
-    .profile-info span, .balance-info span { display: none; }
-    .balance-info strong { font-size: 15px; }
-    .topup-btn { padding: 6px 10px; font-size: 13px; }
-    .main-container { padding: 18px 16px; }
-    .wrapper-order { flex-direction: column; gap: 18px; }
-    .info-section { max-width: none; padding-top: 0; }
-    .info-section h1 { font-size: 34px; }
-    .info-section p { font-size: 15px; }
-    .form-section { width: 100%; padding: 20px 16px; box-shadow: 4px 4px 0 var(--ink); }
-    .dashboard-grid, .catalog-grid { grid-template-columns: 1fr; }
-    .dash-card { padding: 18px 16px; }
-    .catalog-card { flex-direction: row; text-align: left; gap: 14px; padding: 12px; }
-    .catalog-card .logo-wrap { width: 68px; height: 68px; margin: 0; flex-shrink: 0; }
-    .ram-grid { grid-template-columns: repeat(3, 1fr); }
-    .egg-grid { grid-template-columns: 1fr; }
-    .egg-item label { flex-direction: row; justify-content: space-between; padding: 12px; }
-    .panel-list-item { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .panel-actions { width: 100%; justify-content: space-between; }
-    .admin-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-    th, td { font-size: 12px; padding: 8px; }
-    .modal-content { padding: 22px 18px; }
-    .sidebar { width: 100%; right: -100%; padding-bottom: 36px; overflow-y: auto; }
-    .sidebar-footer { margin-top: 36px; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<!-- AUTH SECTION -->
 <div id="authScreen">
-  <button type="button" class="lang-btn auth-lang" onclick="toggleLang()" aria-label="Language"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
-  <div class="auth-container">
-    <div class="auth-brand">
-      <div class="brand-content">
-        <h1>Welcome to <br><span>Gojo Satoru.</span></h1>
-        <p>Produk digital paling terjangkau dan terpercaya di pasaran. "Throughout Heaven and Earth, I alone am the honored one."</p>
+  <button type="button" class="lang-btn auth-lang" onclick="toggleLang()"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
+  <div class="auth-wrap">
+    <div class="auth-hero">
+      <div>
+        <div class="eyebrow">Jujutsu Kaisen · Premium Store</div>
+        <h1>Gojo<br><span class="accent">Satoru.</span></h1>
+        <p class="quote">"Throughout Heaven and Earth, I alone am the honored one."</p>
+      </div>
+      <div class="badges">
+        <span class="badge"><b>∞</b> Unlimited Panel</span>
+        <span class="badge"><b>6</b> Six Eyes</span>
+        <span class="badge"><b>24/7</b> Online</span>
       </div>
     </div>
     <div class="auth-form-area">
-      <div class="auth-box hover-card">
+      <div class="auth-box">
         <div id="loginForm">
           <h2>Sign In</h2>
+          <p class="sub">Masuk untuk mulai pesan produk digital.</p>
           <div class="error-msg" id="loginError"></div>
-          <div class="auth-field"><label>Email</label><input type="text" id="loginEmail" class="glass-input" placeholder="Enter your email"></div>
-          <div class="auth-field"><label>Password</label><input type="password" id="loginPassword" class="glass-input" placeholder="Enter password"></div>
-          <button class="auth-btn" id="btnLogin" onclick="doLogin(event)">Log In</button>
-          <div class="auth-switch">Don't have an account? <a onclick="toggleAuth('register')">Create one</a></div>
+          <div class="field"><label>Email</label><input type="text" id="loginEmail" class="inp" placeholder="kamu@email.com"></div>
+          <div class="field"><label>Password</label><input type="password" id="loginPassword" class="inp" placeholder="••••••••"></div>
+          <button class="btn btn-primary btn-block" id="btnLogin" onclick="doLogin(event)">Log In →</button>
+          <div class="auth-switch">Belum punya akun?<a onclick="toggleAuth('register')">Buat akun</a></div>
         </div>
-        <div id="registerForm" style="display: none;">
+        <div id="registerForm" style="display:none">
           <h2>Create Account</h2>
+          <p class="sub">Daftar gratis, mulai dalam 30 detik.</p>
           <div class="error-msg" id="regError"></div>
-          <div class="auth-field"><label>Email</label><input type="text" id="regEmail" class="glass-input" placeholder="Enter your email"></div>
-          <div class="auth-field"><label>Password</label><input type="password" id="regPassword" class="glass-input" placeholder="Create a password"></div>
-          <div class="auth-field"><label>Confirm Password</label><input type="password" id="regConfirmPassword" class="glass-input" placeholder="Repeat password"></div>
-          <button class="auth-btn" id="btnRegister" onclick="doRegister(event)">Register & Login</button>
-          <div class="auth-switch">Already have an account? <a onclick="toggleAuth('login')">Log in here</a></div>
+          <div class="field"><label>Email</label><input type="text" id="regEmail" class="inp" placeholder="kamu@email.com"></div>
+          <div class="field"><label>Password</label><input type="password" id="regPassword" class="inp" placeholder="Minimal 6 karakter"></div>
+          <div class="field"><label>Confirm Password</label><input type="password" id="regConfirmPassword" class="inp" placeholder="Ulangi password"></div>
+          <button class="btn btn-primary btn-block" id="btnRegister" onclick="doRegister(event)">Register & Login →</button>
+          <div class="auth-switch">Sudah punya akun?<a onclick="toggleAuth('login')">Log in</a></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- MAIN APP (USER) -->
 <div id="mainApp">
   <div class="top-header">
     <div class="profile-card">
       <div class="avatar" id="userAvatar">G</div>
-      <div class="profile-info">
-        <span>Logged in as</span>
-        <strong id="displayUser">User</strong>
-      </div>
+      <div class="profile-info"><span>Logged in as</span><strong id="displayUser">User</strong></div>
     </div>
-
     <div class="header-right">
-      <div class="balance-info">
-        <span>My Balance</span>
-        <strong id="displayBalance">Rp 0</strong>
-      </div>
-      <button type="button" class="lang-btn head-lang" onclick="toggleLang()" aria-label="Language"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
-      <button class="topup-btn" onclick="openTopupModal()">+ Topup</button>
-      
-      <button class="burger-btn" onclick="toggleSidebar(true)">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="balance-info"><span>My Balance</span><strong id="displayBalance">Rp 0</strong></div>
+      <button type="button" class="lang-btn" onclick="toggleLang()"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
+      <button class="icon-btn" onclick="openTopupModal()" title="Topup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></button>
+      <button class="icon-btn burger-btn" onclick="toggleSidebar(true)"><span></span><span></span><span></span></button>
     </div>
   </div>
 
-  <!-- SIDEBAR MENU -->
   <div class="overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
   <div class="sidebar" id="sidebarMenu">
-    <div class="sidebar-header">
-      <h2>Menu</h2>
-      <button class="close-btn" onclick="toggleSidebar(false)">&times;</button>
-    </div>
-    
+    <div class="sidebar-header"><h2>Menu</h2><button class="close-btn" onclick="toggleSidebar(false)">&times;</button></div>
     <div class="sidebar-menu">
-      <button class="sidebar-item active" id="navDash" onclick="switchMainTab('dashboard')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-        Dashboard
-      </button>
-      <button class="sidebar-item" id="navOrder" onclick="switchMainTab('order')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-        Katalog Produk
-      </button>
-      <button class="sidebar-item" id="navSettings" onclick="switchMainTab('settings')">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        Settings
-      </button>
+      <button class="sidebar-item active" id="navDash" onclick="switchMainTab('dashboard')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>Dashboard</button>
+      <button class="sidebar-item" id="navOrder" onclick="switchMainTab('order')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>Katalog Produk</button>
+      <button class="sidebar-item" id="navSettings" onclick="switchMainTab('settings')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Settings</button>
     </div>
-    
     <div class="sidebar-footer">
-      <button type="button" class="lang-btn side-lang" onclick="toggleLang()" aria-label="Language"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
-      <button class="logout-btn" onclick="confirmLogout()">Logout</button>
+      <button type="button" class="lang-btn side-lang" onclick="toggleLang()"><span class="lg" data-l="id">ID</span><span class="lg" data-l="en">EN</span></button>
+      <button class="btn btn-danger btn-block" onclick="confirmLogout()">Logout</button>
     </div>
   </div>
 
   <div class="main-container">
-    
-    <!-- TAB CONTENT: DASHBOARD -->
     <div id="tabContentDashboard">
+      <div class="page-head">
+        <div class="eyebrow">Dashboard</div>
+        <h1>Welcome back, <span class="accent">honored one.</span></h1>
+        <p>Kelola panel dan lihat riwayat transaksi kamu di sini.</p>
+      </div>
       <div class="dashboard-grid">
-        <div class="dash-card hover-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-            Produk Aktif
-          </h3>
-          <div id="listPanelAktif">
-            <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
-            <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
-            <div class="skeleton skeleton-text" style="width: 90%;"></div>
-          </div>
+        <div class="card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Produk Aktif</h3>
+          <div id="listPanelAktif"><div class="skeleton skeleton-text" style="width:80%;margin-bottom:12px"></div><div class="skeleton skeleton-text short" style="margin-bottom:12px"></div><div class="skeleton skeleton-text" style="width:90%"></div></div>
         </div>
-
-        <div class="dash-card hover-card">
-          <h3>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            Riwayat Transaksi
-          </h3>
-          <div id="listRiwayat" style="max-height: 400px; overflow-y: auto; padding-right: 8px;">
-            <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
-            <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
-            <div class="skeleton skeleton-text" style="width: 50%;"></div>
-          </div>
+        <div class="card">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Riwayat Transaksi</h3>
+          <div id="listRiwayat" style="max-height:420px;overflow-y:auto;padding-right:6px"><div class="skeleton skeleton-text" style="width:70%;margin-bottom:12px"></div><div class="skeleton skeleton-text short" style="margin-bottom:12px"></div><div class="skeleton skeleton-text" style="width:50%"></div></div>
         </div>
       </div>
     </div>
 
-    <!-- TAB CONTENT: ORDER -->
     <div id="tabContentOrder">
-      <div class="wrapper-order">
-        <div class="info-section">
-          <h1>Pilih Produk <br><span>Digital Kamu.</span></h1>
-          <p>Pilih dari katalog produk premium kami di bawah ini.</p>
-        </div>
-        <div class="form-section hover-card">
-          
+      <div class="page-head">
+        <div class="eyebrow">Katalog</div>
+        <h1>Pilih <span class="accent">Produk Digital</span> Kamu.</h1>
+        <p>Panel WA Bot dengan RAM unlimited, atau Alight Motion Premium. Harga mulai Rp 300.</p>
+      </div>
+      <div class="order-wrap">
+        <div>
           <div class="catalog-grid">
-            <div class="catalog-card active" id="catWaBot" onclick="switchCatalog('wabot')">
-              <div class="logo-wrap"><div class="logo-icon logo-panel"><span class="srv"></span><span class="srv"></span><span class="srv"></span></div></div>
-              <div>
-                <h4>WA Bot Panel</h4>
-                <p>Mulai Rp 300</p>
+            <div class="catalog-card active" id="catWaBot" onclick="switchCatalog('wabot')"><div class="logo-wrap"><div class="logo-icon logo-panel"><span class="srv"></span><span class="srv"></span><span class="srv"></span></div></div><div><h4>WA Bot Panel</h4><p>Mulai Rp 300</p></div></div>
+            <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')"><div class="logo-wrap"><div class="logo-icon logo-am"><span class="bar b1"></span><span class="bar b2"></span><span class="tri"></span></div></div><div><h4>Alight Motion</h4><p>Rp 5.000 / Tahun</p></div></div>
+          </div>
+          <div class="card">
+            <div id="productWaBot" class="product-content active">
+              <div class="tab-menu-inner">
+                <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
+                <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
               </div>
+              <form id="orderForm" novalidate>
+                <div class="field" id="fieldName"><label>Panel Name (No Spaces)</label><input type="text" id="customName" class="inp" placeholder="Ex: BotJuragan" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')"></div>
+                <div class="field" id="fieldAddUser" style="display:none"><label>Your Panel Username</label><div class="input-group"><input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')"><span class="suffix">@gojomarket.com</span></div></div>
+                <div class="field">
+                  <label>Pilih Tipe Server (Egg)</label>
+                  <div class="egg-grid">
+                    <div class="egg-item"><input type="radio" name="egg" id="egg_15" value="15" data-nest="5" checked><label for="egg_15"><span class="egg-name">Node.js v1</span><span class="egg-id">Egg #15</span></label></div>
+                    <div class="egg-item"><input type="radio" name="egg" id="egg_16" value="16" data-nest="5"><label for="egg_16"><span class="egg-name">Python</span><span class="egg-id">Egg #16</span></label></div>
+                    <div class="egg-item"><input type="radio" name="egg" id="egg_17" value="17" data-nest="5"><label for="egg_17"><span class="egg-name">Node.js v2</span><span class="egg-id">Egg #17</span></label></div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Select RAM Capacity</label>
+                  <div class="ram-grid">
+                    <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="price-new">Rp 750</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="price-new">Rp 900</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
+                    <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
+                  </div>
+                </div>
+                <div class="total"><span>Total Pembayaran</span><span class="total-price" id="totalText">Rp 300</span></div>
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-block" style="margin-top:18px">Beli Panel →</button>
+              </form>
             </div>
-            <div class="catalog-card" id="catAmPremium" onclick="switchCatalog('am')">
-              <div class="logo-wrap"><div class="logo-icon logo-am"><span class="bar b1"></span><span class="bar b2"></span><span class="tri"></span></div></div>
-              <div>
-                <h4>Alight Motion</h4>
-                <p>Rp 5.000 / Tahun</p>
+            <div id="productAm" class="product-content">
+              <div id="amStep1">
+                <div class="field"><label>Email Alight Motion Kamu</label><input type="email" id="amEmail" class="inp" placeholder="contoh@gmail.com"></div>
+                <button type="button" class="btn btn-primary btn-block" onclick="sendAmLink(event)">Kirim Link Verifikasi</button>
+                <button type="button" id="amSkipBtn" class="btn btn-ghost btn-block" style="display:none;margin-top:10px" onclick="goAmStep2()">Link sudah masuk? Lanjut →</button>
+              </div>
+              <div id="amStep2" style="display:none">
+                <p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6">Cek inbox/spam <b id="amTextEmail"></b>. Copy link verifikasi dari email, paste di bawah.</p>
+                <div class="field"><label>Paste Link Verifikasi</label><textarea id="amLink" class="inp" placeholder="https://alightcreative.app.link/..." rows="3" style="resize:none;font-size:13px"></textarea></div>
+                <button type="button" class="btn btn-success btn-block" id="amBtnActivate" onclick="verifyAmLink(event)">Aktifkan Premium (Rp 5.000)</button>
               </div>
             </div>
           </div>
-
-          <div id="productWaBot" class="product-content active">
-            <div class="tab-menu-inner">
-              <button type="button" class="tab-btn-inner active" id="tabNew" onclick="switchOrderTab('new')">New Panel</button>
-              <button type="button" class="tab-btn-inner" id="tabAdd" onclick="switchOrderTab('addserver')">Add Server</button>
-            </div>
-
-            <form id="orderForm" novalidate>
-              <div class="field" id="fieldName">
-                <label>Panel Name (No Spaces)</label>
-                <input type="text" id="customName" class="glass-input" placeholder="Ex: BotJuragan" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
-              </div>
-
-              <div class="field" id="fieldAddUser" style="display: none;">
-                <label>Your Panel Username</label>
-                <div class="input-group">
-                  <input type="text" id="addUsername" placeholder="Ex: botjuragan" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
-                  <span class="suffix">@gojomarket.com</span>
-                </div>
-              </div>
-
-              <div class="field">
-                <label>Pilih Tipe Server (Egg)</label>
-                <div class="egg-grid">
-                  <div class="egg-item">
-                    <input type="radio" name="egg" id="egg_15" value="15" data-nest="5" checked>
-                    <label for="egg_15">
-                      <span class="egg-name">Node.js v1</span>
-                      <span class="egg-id">Egg ID: 15</span>
-                    </label>
-                  </div>
-                  <div class="egg-item">
-                    <input type="radio" name="egg" id="egg_16" value="16" data-nest="5">
-                    <label for="egg_16">
-                      <span class="egg-name">Python</span>
-                      <span class="egg-id">Egg ID: 16</span>
-                    </label>
-                  </div>
-                  <div class="egg-item">
-                    <input type="radio" name="egg" id="egg_17" value="17" data-nest="5">
-                    <label for="egg_17">
-                      <span class="egg-name">Node.js v2</span>
-                      <span class="egg-id">Egg ID: 17</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="field">
-                <label>Select RAM Capacity</label>
-                <div class="ram-grid">
-                  <div class="ram-item"><input type="radio" name="ram" id="r1" value="1GB" data-harga="300" checked><label for="r1"><span class="ram-name">1 GB</span><span class="price-new">Rp 300</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r2" value="2GB" data-harga="450"><label for="r2"><span class="ram-name">2 GB</span><span class="price-new">Rp 450</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r3" value="3GB" data-harga="600"><label for="r3"><span class="ram-name">3 GB</span><span class="price-new">Rp 600</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r4" value="4GB" data-harga="750"><label for="r4"><span class="ram-name">4 GB</span><span class="price-new">Rp 750</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r5" value="5GB" data-harga="900"><label for="r5"><span class="ram-name">5 GB</span><span class="price-new">Rp 900</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r6" value="6GB" data-harga="1050"><label for="r6"><span class="ram-name">6 GB</span><span class="price-new">Rp 1.050</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r7" value="7GB" data-harga="1200"><label for="r7"><span class="ram-name">7 GB</span><span class="price-new">Rp 1.200</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r8" value="8GB" data-harga="1350"><label for="r8"><span class="ram-name">8 GB</span><span class="price-new">Rp 1.350</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r9" value="9GB" data-harga="1500"><label for="r9"><span class="ram-name">9 GB</span><span class="price-new">Rp 1.500</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="r10" value="10GB" data-harga="1700"><label for="r10"><span class="ram-name">10 GB</span><span class="price-new">Rp 1.700</span></label></div>
-                  <div class="ram-item"><input type="radio" name="ram" id="runli" value="Unlimited" data-harga="2000"><label for="runli"><span class="ram-name">Unli</span><span class="price-new">Rp 2.000</span></label></div>
-                </div>
-              </div>
-              
-              <div class="total">
-                <span>Total Pembayaran</span>
-                <span class="total-price" id="totalText">Rp 300</span>
-              </div>
-              
-              <button type="submit" id="submitBtn" onclick="createRipple(event)">Beli Panel</button>
-            </form>
+        </div>
+        <div class="card" style="padding:32px">
+          <h3 style="font-size:20px;margin-bottom:24px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>Info</h3>
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;gap:14px;align-items:flex-start"><div style="width:34px;height:34px;border-radius:10px;background:rgba(57,214,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--cyan);font-weight:700;font-family:var(--font-h)">∞</div><div><b style="font-family:var(--font-h);font-size:14px">Unlimited Resources</b><p style="font-size:13px;color:var(--muted);margin-top:3px">RAM hingga unlimited, cocok untuk bot WA 24/7.</p></div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><div style="width:34px;height:34px;border-radius:10px;background:rgba(160,107,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--purple);font-weight:700;font-family:var(--font-h)">6</div><div><b style="font-family:var(--font-h);font-size:14px">Six Eyes Uptime</b><p style="font-size:13px;color:var(--muted);margin-top:3px">Server online 24/7 dengan monitoring ketat.</p></div></div>
+            <div style="display:flex;gap:14px;align-items:flex-start"><div style="width:34px;height:34px;border-radius:10px;background:rgba(46,230,160,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--ok);font-weight:700;font-family:var(--font-h)">✓</div><div><b style="font-family:var(--font-h);font-size:14px">Instant Delivery</b><p style="font-size:13px;color:var(--muted);margin-top:3px">Panel langsung aktif setelah pembayaran.</p></div></div>
           </div>
-
-          <div id="productAm" class="product-content">
-            <div id="amStep1">
-              <div class="field">
-                <label>Email Alight Motion Kamu</label>
-                <input type="email" id="amEmail" class="glass-input" placeholder="contoh@gmail.com">
-              </div>
-              <button type="button" class="auth-btn am-btn" onclick="sendAmLink(event)">Kirim Link Verifikasi</button>
-              <button type="button" id="amSkipBtn" class="auth-btn am-btn" style="display:none; background: transparent; border: 1px solid var(--border);" onclick="goAmStep2()">Link sudah masuk di email? Lanjut</button>
-            </div>
-
-            <div id="amStep2" style="display: none;">
-              <p style="font-size: 13px; color: var(--muted); margin-bottom: 10px;">Cek inbox/spam email <b id="amTextEmail"></b>. Copy link verifikasi dari email, lalu paste di bawah ini.</p>
-              <div class="field">
-                <label>Paste Link Verifikasi</label>
-                <textarea id="amLink" class="glass-input" placeholder="https://alightcreative.app.link/..." rows="3" style="resize: none; font-size: 13px;"></textarea>
-              </div>
-              <button type="button" class="auth-btn am-btn" id="amBtnActivate" onclick="verifyAmLink(event)" style="background: var(--success);">Aktifkan Premium (Rp 5.000)</button>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
 
-    <!-- TAB CONTENT: SETTINGS -->
     <div id="tabContentSettings">
-      <div class="wrapper-order">
-        <div class="info-section">
-          <h1>Account <br><span>Settings.</span></h1>
-          <p>Ubah email dan password akun Gojo Store Anda.</p>
+      <div class="page-head"><div class="eyebrow">Account</div><h1>Pengaturan <span class="accent">Akun.</span></h1><p>Ubah email dan password akun Gojo Store Anda.</p></div>
+      <div class="order-wrap">
+        <div class="card">
+          <h3>Email</h3>
+          <div class="field"><label>Email Saat Ini</label><input type="text" id="currentEmailDisplay" class="inp" readonly></div>
+          <div class="field"><label>Password Saat Ini (Wajib)</label><input type="password" id="currentPassEmail" class="inp" placeholder="Masukkan password Anda"></div>
+          <div class="field"><label>Email Baru</label><input type="email" id="newEmail" class="inp" placeholder="Masukkan email baru"></div>
+          <button type="button" class="btn btn-primary btn-block" onclick="changeEmail(event)">Ubah Email</button>
         </div>
-        <div class="form-section hover-card">
-          
-          <div class="field">
-            <label>Email Saat Ini</label>
-            <input type="text" id="currentEmailDisplay" class="glass-input" readonly style="opacity: 0.6; cursor: not-allowed;">
-          </div>
-          <div class="field">
-            <label>Password Saat Ini (Wajib)</label>
-            <input type="password" id="currentPassEmail" class="glass-input" placeholder="Masukkan password Anda">
-          </div>
-          <div class="field">
-            <label>Email Baru</label>
-            <input type="email" id="newEmail" class="glass-input" placeholder="Masukkan email baru">
-          </div>
-          <button type="button" class="auth-btn am-btn" onclick="changeEmail(event)" style="background: var(--neon); margin-bottom: 24px;">Ubah Email</button>
-
-          <hr style="border: 1px solid var(--border); margin: 24px 0;">
-
-          <div class="field">
-            <label>Password Saat Ini (Wajib)</label>
-            <input type="password" id="currentPassPassword" class="glass-input" placeholder="Masukkan password lama Anda">
-          </div>
-          <div class="field">
-            <label>Password Baru</label>
-            <input type="password" id="newPassword" class="glass-input" placeholder="Masukkan password baru">
-          </div>
-          <div class="field">
-            <label>Konfirmasi Password Baru</label>
-            <input type="password" id="confirmNewPassword" class="glass-input" placeholder="Ulangi password baru">
-          </div>
-          <button type="button" class="auth-btn am-btn" onclick="changePassword(event)" style="background: var(--success);">Ubah Password</button>
-          
+        <div class="card">
+          <h3>Password</h3>
+          <div class="field"><label>Password Saat Ini (Wajib)</label><input type="password" id="currentPassPassword" class="inp" placeholder="Masukkan password lama Anda"></div>
+          <div class="field"><label>Password Baru</label><input type="password" id="newPassword" class="inp" placeholder="Masukkan password baru"></div>
+          <div class="field"><label>Konfirmasi Password Baru</label><input type="password" id="confirmNewPassword" class="inp" placeholder="Ulangi password baru"></div>
+          <button type="button" class="btn btn-success btn-block" onclick="changePassword(event)">Ubah Password</button>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ADMIN APP -->
 <div id="adminApp">
   <div class="top-header">
-    <div class="profile-card">
-      <div class="avatar" style="background: var(--bad); color: #fff;">A</div>
-      <div class="profile-info">
-        <span>Logged in as</span>
-        <strong>Administrator</strong>
-      </div>
-    </div>
-    
-    <div class="header-right">
-      <button class="logout-btn" onclick="confirmLogout()" style="width: auto; padding: 8px 14px;">Logout</button>
-    </div>
+    <div class="profile-card"><div class="avatar" style="background:linear-gradient(135deg,#ff4d6d,#a06bff)">A</div><div class="profile-info"><span>Logged in as</span><strong>Administrator</strong></div></div>
+    <div class="header-right"><button class="btn btn-danger" style="padding:8px 16px;font-size:13px" onclick="confirmLogout()">Logout</button></div>
   </div>
-
   <div class="main-container">
     <div id="adminTabContentDashboard">
-      <div class="admin-header">
-        <h1>User Management</h1>
-      </div>
-      <div class="table-card hover-card">
-        <h3>User List</h3>
-        <br>
-        <table>
-          <thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead>
-          <tbody id="userTableBody"></tbody>
-        </table>
-      </div>
+      <div class="admin-header"><div><div style="font-family:var(--font-h);font-size:12px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;font-weight:600;margin-bottom:6px">Admin</div><h1>User Management</h1></div></div>
+      <div class="card table-card"><table><thead><tr><th>Email</th><th>Balance</th><th>Action</th></tr></thead><tbody id="userTableBody"></tbody></table></div>
     </div>
   </div>
 </div>
 
-<!-- MODAL TOPUP -->
 <div id="topupModal" class="modal-overlay">
   <div class="modal-content">
     <h3>Topup Balance</h3>
-    <p>Enter amount (Min. Rp 400), then send message to Admin via WhatsApp.</p>
-    <input type="number" id="topupAmount" class="modal-input" placeholder="Ex: 500" min="400">
-    <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('topupModal').classList.remove('active')">Cancel</button>
-      <button class="btn-modal btn-confirm" onclick="proceedTopup()">Topup via WA</button>
-    </div>
+    <p>Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.</p>
+    <input type="number" id="topupAmount" class="modal-input" placeholder="500" min="400">
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="document.getElementById('topupModal').classList.remove('active')">Batal</button><button class="btn btn-primary" onclick="proceedTopup()">Topup via WA</button></div>
   </div>
 </div>
 
-<!-- MODAL KONFIRMASI -->
 <div id="confirmModal" class="modal-overlay">
   <div class="modal-content">
     <h3>Konfirmasi</h3>
     <p id="confirmText">Apakah anda yakin?</p>
-    <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button>
-      <button class="btn-modal btn-confirm" onclick="runPendingAction()">Ya, Lanjutkan</button>
-    </div>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="document.getElementById('confirmModal').classList.remove('active')">Batal</button><button class="btn btn-primary" onclick="runPendingAction()">Ya, Lanjutkan</button></div>
   </div>
 </div>
 
-<!-- MODAL KONFIRMASI LOGOUT -->
 <div id="logoutModal" class="modal-overlay">
   <div class="modal-content">
-    <h3>Konfirmasi Logout</h3>
+    <h3>Logout</h3>
     <p>Apakah Anda yakin ingin keluar dari akun ini?</p>
-    <div class="modal-actions">
-      <button class="btn-modal btn-cancel" onclick="document.getElementById('logoutModal').classList.remove('active')">Batal</button>
-      <button class="btn-modal btn-confirm" style="background: var(--danger);" onclick="executeLogout()">Ya, Logout</button>
-    </div>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="document.getElementById('logoutModal').classList.remove('active')">Batal</button><button class="btn btn-danger" onclick="executeLogout()">Ya, Logout</button></div>
   </div>
 </div>
 
-<!-- MODAL SUKSES -->
 <div id="successModal" class="modal-overlay">
   <div class="modal-content">
     <h3 id="successTitle">Berhasil!</h3>
     <p id="successDesc">Pesanan diproses.</p>
-    
     <div class="panel-data-box" id="panelDataBox">
-      <div class="row"><span class="label">Link:</span> <span class="value">https://panel-gojopremium.danzzhost.web.id</span></div>
-      <div class="row"><span class="label">Username:</span> <span class="value" id="resUsername">-</span></div>
-      <div class="row" id="rowPassword"><span class="label">Password:</span> <span class="value" id="resPassword">-</span></div>
-      <div class="row" id="rowAmEmail" style="display: none;"><span class="label">Email:</span> <span class="value" id="resAmEmail">-</span></div>
+      <div class="row"><span class="label">Link:</span><span class="value">panel-gojopremium.danzzhost.web.id</span></div>
+      <div class="row"><span class="label">Username:</span><span class="value" id="resUsername">-</span></div>
+      <div class="row" id="rowPassword"><span class="label">Password:</span><span class="value" id="resPassword">-</span></div>
+      <div class="row" id="rowAmEmail" style="display:none"><span class="label">Email:</span><span class="value" id="resAmEmail">-</span></div>
     </div>
-
-    <div class="warning-box" id="warningText">
-      PENTING: Simpan data ini.
-    </div>
-
-    <div class="modal-actions">
-      <button class="btn-modal btn-confirm" id="btnCopyData" style="flex: 2;" onclick="copyPanelData()">Salin Data (Copy)</button>
-      <button class="btn-modal btn-cancel" onclick="closeSuccessModal()">Tutup</button>
-    </div>
+    <div class="warning-box" id="warningText">PENTING: Simpan data ini.</div>
+    <div class="modal-actions"><button class="btn btn-primary" id="btnCopyData" style="flex:2" onclick="copyPanelData()">Salin Data</button><button class="btn btn-ghost" onclick="closeSuccessModal()">Tutup</button></div>
   </div>
 </div>
 
-<!-- CUSTOM ALERT -->
 <div id="customAlert" class="modal-overlay">
-  <div class="modal-content" style="max-width: 360px;">
+  <div class="modal-content" style="max-width:380px">
     <h3 id="alertTitle">Notifikasi</h3>
     <p id="alertMessage">Pesan notifikasi.</p>
-    <div class="modal-actions">
-      <button class="btn-modal btn-confirm" style="flex: 1;" onclick="document.getElementById('customAlert').classList.remove('active')">OK</button>
-    </div>
+    <div class="modal-actions"><button class="btn btn-primary" onclick="document.getElementById('customAlert').classList.remove('active')">OK</button></div>
   </div>
 </div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateEmail, updatePassword, reauthenticateWithCredential, EmailAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCjhtqP_oVnT9C_fgu1FFlKCDxnlEIrWM4",
-    authDomain: "kitzunemarket.firebaseapp.com",
-    projectId: "kitzunemarket",
-    storageBucket: "kitzunemarket.firebasestorage.app",
-    messagingSenderId: "724574775248",
-    appId: "1:724574775248:web:157a2057ff8a31bc74bbd5",
-    measurementId: "G-8LBT3T9Q4S"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyCjhtqP_oVnT9C_fgu1FFlKCDxnlEIrWM4",
+  authDomain: "kitzunemarket.firebaseapp.com",
+  projectId: "kitzunemarket",
+  storageBucket: "kitzunemarket.firebasestorage.app",
+  messagingSenderId: "724574775248",
+  appId: "1:724574775248:web:157a2057ff8a31bc74bbd5",
+  measurementId: "G-8LBT3T9Q4S"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  
-  const ADMIN_EMAIL = "upiljaranmmbu@gmail.com";
-  const ADMIN_WA = "6288906198025";
-  let currentUser = null;
-  let pendingOrder = null;
-  let currentMode = "new"; 
-  let currentCatalog = "wabot";
-  let pendingAmEmail = "";
-  let pendingAction = null;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-  let currentLang = 'id';
-  try { currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'id'; } catch (e) {}
+const ADMIN_EMAIL = "upiljaranmmbu@gmail.com";
+const ADMIN_WA = "6288906198025";
+let currentUser = null;
+let pendingOrder = null;
+let currentMode = "new";
+let currentCatalog = "wabot";
+let pendingAmEmail = "";
+let pendingAction = null;
 
-  const PAIRS = [
-    ["Selamat datang di", "Welcome to"],
-    ["Produk digital paling terjangkau dan terpercaya di pasaran.", "The most affordable and reliable digital products in the market."],
-    ["Masuk", "Sign In"], ["Login", "Log In"],
-    ["Belum punya akun?", "Don't have an account?"], ["Buat akun", "Create one"],
-    ["Buat Akun", "Create Account"], ["Konfirmasi Password", "Confirm Password"],
-    ["Daftar & Masuk", "Register & Login"], ["Sudah punya akun?", "Already have an account?"],
-    ["Masuk di sini", "Log in here"],
-    ["Masukkan email kamu", "Enter your email"], ["Masukkan password", "Enter password"],
-    ["Buat password", "Create a password"], ["Ulangi password", "Repeat password"],
-    ["Masuk sebagai", "Logged in as"], ["Saldo Saya", "My Balance"],
-    ["Katalog Produk", "Product Catalog"], ["Pengaturan", "Settings"], ["Keluar", "Logout"],
-    ["Produk Aktif", "Active Products"], ["Riwayat Transaksi", "Transaction History"],
-    ["Pilih Produk", "Choose Your"], ["Digital Kamu.", "Digital Product."],
-    ["Pilih dari katalog produk premium kami di bawah ini.", "Choose from our premium product catalog below."],
-    ["Mulai Rp 300", "From Rp 300"], ["Rp 5.000 / Tahun", "Rp 5,000 / Year"],
-    ["Panel Baru", "New Panel"], ["Tambah Server", "Add Server"],
-    ["Nama Panel (Tanpa Spasi)", "Panel Name (No Spaces)"], ["Username Panel Kamu", "Your Panel Username"],
-    ["Pilih Tipe Server (Egg)", "Select Server Type (Egg)"],
-    ["Versi Node.js", "Node.js Version"], ["Pilih Kapasitas RAM", "Select RAM Capacity"],
-    ["Total Pembayaran", "Total Payment"], ["Beli Panel", "Buy Panel"],
-    ["Email Alight Motion Kamu", "Your Alight Motion Email"], ["contoh@gmail.com", "example@gmail.com"],
-    ["Kirim Link Verifikasi", "Send Verification Link"],
-    ["Link sudah masuk di email? Lanjut", "Link already in your email? Continue"],
-    ["Cek inbox/spam email", "Check the inbox/spam of"],
-    [". Copy link verifikasi dari email, lalu paste di bawah ini.", ". Copy the verification link from the email, then paste it below."],
-    ["Paste Link Verifikasi", "Paste Verification Link"],
-    ["Aktifkan Premium (Rp 5.000)", "Activate Premium (Rp 5,000)"],
-    ["Akun", "Account"], ["Pengaturan.", "Settings."],
-    ["Ubah email dan password akun Gojo Store Anda.", "Change your Gojo Store account email and password."],
-    ["Email Saat Ini", "Current Email"], ["Password Saat Ini (Wajib)", "Current Password (Required)"],
-    ["Email Baru", "New Email"], ["Ubah Email", "Change Email"],
-    ["Password Baru", "New Password"], ["Konfirmasi Password Baru", "Confirm New Password"],
-    ["Ubah Password", "Change Password"],
-    ["Masukkan password Anda", "Enter your password"], ["Masukkan email baru", "Enter new email"],
-    ["Masukkan password lama Anda", "Enter your old password"], ["Masukkan password baru", "Enter new password"],
-    ["Ulangi password baru", "Repeat new password"],
-    ["Isi Saldo", "Topup Balance"],
-    ["Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.", "Enter amount (Min. Rp 400), then send message to Admin via WhatsApp."],
-    ["Batal", "Cancel"], ["Konfirmasi", "Confirm"], ["Apakah anda yakin?", "Are you sure?"],
-    ["Ya, Lanjutkan", "Yes, Continue"], ["Konfirmasi Logout", "Confirm Logout"],
-    ["Apakah Anda yakin ingin keluar dari akun ini?", "Are you sure you want to log out of this account?"],
-    ["Ya, Keluar", "Yes, Log Out"],
-    ["Berhasil!", "Success!"], ["Berhasil", "Success"], ["Gagal", "Failed"], ["Notifikasi", "Notification"],
-    ["Pesanan diproses.", "Order is being processed."], ["Pesan notifikasi.", "Notification message."],
-    ["PENTING: Simpan data ini.", "IMPORTANT: Save this data."],
-    ["Salin Data (Copy)", "Copy Data"], ["Tutup", "Close"],
-    ["Panel Berhasil Dibuat!", "Panel Created Successfully!"],
-    ["Berikut adalah data login panel Anda.", "Here is your panel login data."],
-    ["PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!", "IMPORTANT: We only send this data ONCE. Please save/copy it now!"],
-    ["Berhasil Disalin!", "Copied!"],
-    ["Mengirim...", "Sending..."], ["Memproses...", "Processing..."], ["Memverifikasi...", "Verifying..."],
-    ["Password tidak cocok!", "Passwords do not match!"], ["Email atau password salah.", "Invalid email or password."],
-    ["Minimal topup Rp 400", "Minimum topup is Rp 400"],
-    ["Isi password saat ini dan email baru!", "Fill in your current password and new email!"],
-    ["Email berhasil diubah! Silakan login ulang.", "Email changed successfully! Please log in again."],
-    ["Password saat ini salah!", "Current password is wrong!"],
-    ["Semua kolom wajib diisi!", "All fields are required!"],
-    ["Konfirmasi password tidak cocok!", "Password confirmation does not match!"],
-    ["Password minimal 6 karakter!", "Password must be at least 6 characters!"],
-    ["Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Password changed successfully! Use your new password next time you log in."],
-    ["Nama panel wajib diisi!", "Panel name is required!"], ["Username wajib diisi!", "Username is required!"],
-    ["Saldo tidak cukup! Silakan topup dulu.", "Insufficient balance! Please top up first."],
-    ["Nominal tidak valid", "Invalid amount"],
-    ["Masukkan email dulu!", "Please enter your email first!"], ["Format email tidak valid!", "Invalid email format!"],
-    ["Link verifikasi dikirim. Cek inbox/spam email kamu.", "Verification link sent. Check your inbox/spam."],
-    ["Paste link verifikasinya dulu!", "Paste the verification link first!"],
-    ["Link verifikasi tidak valid (harus diawali http/https)", "Invalid verification link (must start with http/https)"],
-    ["SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "SUCCESS! Alight Motion Premium has been activated. Please open the Alight Motion app."],
-    ["Yakin aktifkan Alight Motion Premium seharga Rp 5.000?", "Activate Alight Motion Premium for Rp 5,000?"],
-    ["Belum ada produk aktif.", "No active products yet."], ["Belum ada riwayat.", "No history yet."],
-    ["1 Tahun", "1 Year"], ["Aktif", "Active"], ["Dihapus", "Deleted"], ["Dihapus oleh Admin", "Deleted by Admin"],
-    ["Kelola", "Manage"],
-    ["Nama panel hanya boleh huruf & angka (tanpa spasi/simbol)!", "Panel name can only contain letters & numbers (no spaces/symbols)!"],
-    ["Username hanya boleh huruf & angka!", "Username can only contain letters & numbers!"],
-    ["Gagal validasi panel. Coba lagi.", "Failed to validate panel. Try again."],
-    ["Server Berhasil Ditambahkan!", "Server Added Successfully!"],
-    ["Server baru sudah aktif di panel Anda.", "The new server is now active on your panel."],
-    ["Gunakan password panel lama Anda untuk login.", "Use your old panel password to log in."]
-  ];
+let currentLang = 'id';
+try { currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'id'; } catch (e) {}
 
-  const PARTIALS = [
-    ["Gagal Verifikasi: ", "Verification Failed: "],
-    ["Gagal: ", "Failed: "],
-    ["Gagal menyalin: ", "Failed to copy: "],
-    ["Gagal membuat panel.", "Failed to create panel."],
-    ["Verifikasi gagal (HTTP", "Verification failed (HTTP"],
-    [`Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, `If the link is already in your email, click <b>"Link already in your email? Continue"</b>.`]
-  ];
+const PAIRS = [
+  ["Selamat datang di","Welcome to"],
+  ["Produk digital paling terjangkau dan terpercaya di pasaran.","The most affordable and reliable digital products in the market."],
+  ["Masuk","Sign In"],["Login","Log In"],
+  ["Belum punya akun?","Don't have an account?"],["Buat akun","Create one"],
+  ["Buat Akun","Create Account"],["Konfirmasi Password","Confirm Password"],
+  ["Daftar & Masuk","Register & Login"],["Sudah punya akun?","Already have an account?"],
+  ["Masuk di sini","Log in here"],
+  ["Masukkan email kamu","Enter your email"],["Masukkan password","Enter password"],
+  ["Buat password","Create a password"],["Ulangi password","Repeat password"],
+  ["Masuk sebagai","Logged in as"],["Saldo Saya","My Balance"],
+  ["Katalog Produk","Product Catalog"],["Pengaturan","Settings"],["Keluar","Logout"],
+  ["Produk Aktif","Active Products"],["Riwayat Transaksi","Transaction History"],
+  ["Pilih Produk","Choose Your"],["Digital Kamu.","Digital Product."],
+  ["Pilih dari katalog produk premium kami di bawah ini.","Choose from our premium product catalog below."],
+  ["Mulai Rp 300","From Rp 300"],["Rp 5.000 / Tahun","Rp 5,000 / Year"],
+  ["Panel Baru","New Panel"],["Tambah Server","Add Server"],
+  ["Nama Panel (Tanpa Spasi)","Panel Name (No Spaces)"],["Username Panel Kamu","Your Panel Username"],
+  ["Pilih Tipe Server (Egg)","Select Server Type (Egg)"],
+  ["Versi Node.js","Node.js Version"],["Pilih Kapasitas RAM","Select RAM Capacity"],
+  ["Total Pembayaran","Total Payment"],["Beli Panel","Buy Panel"],
+  ["Email Alight Motion Kamu","Your Alight Motion Email"],["contoh@gmail.com","example@gmail.com"],
+  ["Kirim Link Verifikasi","Send Verification Link"],
+  ["Link sudah masuk di email? Lanjut","Link already in your email? Continue"],
+  ["Cek inbox/spam email","Check the inbox/spam of"],
+  [". Copy link verifikasi dari email, lalu paste di bawah ini.",". Copy the verification link from the email, then paste it below."],
+  ["Paste Link Verifikasi","Paste Verification Link"],
+  ["Aktifkan Premium (Rp 5.000)","Activate Premium (Rp 5,000)"],
+  ["Akun","Account"],["Pengaturan.","Settings."],
+  ["Ubah email dan password akun Gojo Store Anda.","Change your Gojo Store account email and password."],
+  ["Email Saat Ini","Current Email"],["Password Saat Ini (Wajib)","Current Password (Required)"],
+  ["Email Baru","New Email"],["Ubah Email","Change Email"],
+  ["Password Baru","New Password"],["Konfirmasi Password Baru","Confirm New Password"],
+  ["Ubah Password","Change Password"],
+  ["Masukkan password Anda","Enter your password"],["Masukkan email baru","Enter new email"],
+  ["Masukkan password lama Anda","Enter your old password"],["Masukkan password baru","Enter new password"],
+  ["Ulangi password baru","Repeat new password"],
+  ["Isi Saldo","Topup Balance"],
+  ["Masukkan nominal (Min. Rp 400), lalu kirim pesan ke Admin via WhatsApp.","Enter amount (Min. Rp 400), then send message to Admin via WhatsApp."],
+  ["Batal","Cancel"],["Konfirmasi","Confirm"],["Apakah anda yakin?","Are you sure?"],
+  ["Ya, Lanjutkan","Yes, Continue"],["Konfirmasi Logout","Confirm Logout"],
+  ["Apakah Anda yakin ingin keluar dari akun ini?","Are you sure you want to log out of this account?"],
+  ["Ya, Keluar","Yes, Log Out"],
+  ["Berhasil!","Success!"],["Berhasil","Success"],["Gagal","Failed"],["Notifikasi","Notification"],
+  ["Pesanan diproses.","Order is being processed."],["Pesan notifikasi.","Notification message."],
+  ["PENTING: Simpan data ini.","IMPORTANT: Save this data."],
+  ["Salin Data (Copy)","Copy Data"],["Tutup","Close"],
+  ["Panel Berhasil Dibuat!","Panel Created Successfully!"],
+  ["Berikut adalah data login panel Anda.","Here is your panel login data."],
+  ["PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!","IMPORTANT: We only send this data ONCE. Please save/copy it now!"],
+  ["Berhasil Disalin!","Copied!"],
+  ["Mengirim...","Sending..."],["Memproses...","Processing..."],["Memverifikasi...","Verifying..."],
+  ["Password tidak cocok!","Passwords do not match!"],["Email atau password salah.","Invalid email or password."],
+  ["Minimal topup Rp 400","Minimum topup is Rp 400"],
+  ["Isi password saat ini dan email baru!","Fill in your current password and new email!"],
+  ["Email berhasil diubah! Silakan login ulang.","Email changed successfully! Please log in again."],
+  ["Password saat ini salah!","Current password is wrong!"],
+  ["Semua kolom wajib diisi!","All fields are required!"],
+  ["Konfirmasi password tidak cocok!","Password confirmation does not match!"],
+  ["Password minimal 6 karakter!","Password must be at least 6 characters!"],
+  ["Password berhasil diubah! Gunakan password baru saat login berikutnya.","Password changed successfully! Use your new password next time you log in."],
+  ["Nama panel wajib diisi!","Panel name is required!"],["Username wajib diisi!","Username is required!"],
+  ["Saldo tidak cukup! Silakan topup dulu.","Insufficient balance! Please top up first."],
+  ["Nominal tidak valid","Invalid amount"],
+  ["Masukkan email dulu!","Please enter your email first!"],["Format email tidak valid!","Invalid email format!"],
+  ["Link verifikasi dikirim. Cek inbox/spam email kamu.","Verification link sent. Check your inbox/spam."],
+  ["Paste link verifikasinya dulu!","Paste the verification link first!"],
+  ["Link verifikasi tidak valid (harus diawali http/https)","Invalid verification link (must start with http/https)"],
+  ["SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.","SUCCESS! Alight Motion Premium has been activated. Please open the Alight Motion app."],
+  ["Yakin aktifkan Alight Motion Premium seharga Rp 5.000?","Activate Alight Motion Premium for Rp 5,000?"],
+  ["Belum ada produk aktif.","No active products yet."],["Belum ada riwayat.","No history yet."],
+  ["1 Tahun","1 Year"],["Aktif","Active"],["Dihapus","Deleted"],["Dihapus oleh Admin","Deleted by Admin"],
+  ["Kelola","Manage"],
+  ["Nama panel hanya boleh huruf & angka (tanpa spasi/simbol)!","Panel name can only contain letters & numbers (no spaces/symbols)!"],
+  ["Username hanya boleh huruf & angka!","Username can only contain letters & numbers!"],
+  ["Gagal validasi panel. Coba lagi.","Failed to validate panel. Try again."],
+  ["Server Berhasil Ditambahkan!","Server Added Successfully!"],
+  ["Server baru sudah aktif di panel Anda.","The new server is now active on your panel."],
+  ["Gunakan password panel lama Anda untuk login.","Use your old panel password to log in."]
+];
 
-  const REV = {};
-  PAIRS.forEach(p => { REV[p[0]] = p; REV[p[1]] = p; });
-  const langIdx = () => (currentLang === 'en' ? 1 : 0);
+const PARTIALS = [
+  ["Gagal Verifikasi: ","Verification Failed: "],
+  ["Gagal: ","Failed: "],
+  ["Gagal menyalin: ","Failed to copy: "],
+  ["Gagal membuat panel.","Failed to create panel."],
+  ["Verifikasi gagal (HTTP","Verification failed (HTTP"],
+  [`Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`,`If the link is already in your email, click <b>"Link already in your email? Continue"</b>.`]
+];
 
-  const tr = (str) => {
-    const e = REV[str];
-    if (e) return e[langIdx()];
-    if (currentLang === 'en' && typeof str === 'string') {
-      for (const [a, b] of PARTIALS) if (str.includes(a)) str = str.split(a).join(b);
-    }
-    return str;
-  };
-
-  function applyLang() {
-    document.documentElement.lang = currentLang;
-    const idx = langIdx();
-
-    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-      acceptNode: (n) => {
-        const p = n.parentElement;
-        if (!p || /^(SCRIPT|STYLE|TEXTAREA)$/.test(p.tagName)) return NodeFilter.FILTER_REJECT;
-        if (p.closest('#listPanelAktif, #listRiwayat, #userTableBody')) return NodeFilter.FILTER_REJECT;
-        return n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-      }
-    });
-    const nodes = [];
-    let n;
-    while ((n = walker.nextNode())) nodes.push(n);
-    nodes.forEach(node => {
-      const raw = node.nodeValue;
-      const key = raw.trim();
-      const e = REV[key];
-      if (e && e[idx] !== key) node.nodeValue = raw.replace(key, () => e[idx]);
-    });
-
-    document.querySelectorAll('[placeholder]').forEach(el => {
-      const e = REV[el.getAttribute('placeholder')];
-      if (e) el.setAttribute('placeholder', e[idx]);
-    });
-
-    document.querySelectorAll('.lang-btn .lg').forEach(sp => sp.classList.toggle('active', sp.dataset.l === currentLang));
-
-    const mainApp = document.getElementById('mainApp');
-    const dash = document.getElementById('tabContentDashboard');
-    if (currentUser && currentUser.email !== ADMIN_EMAIL && mainApp.style.display === 'flex' && dash.style.display !== 'none') {
-      loadUserDashboard();
-    }
+const REV = {};
+PAIRS.forEach(p => { REV[p[0]] = p; REV[p[1]] = p; });
+const langIdx = () => (currentLang === 'en' ? 1 : 0);
+const tr = (str) => {
+  const e = REV[str];
+  if (e) return e[langIdx()];
+  if (currentLang === 'en' && typeof str === 'string') {
+    for (const [a,b] of PARTIALS) if (str.includes(a)) str = str.split(a).join(b);
   }
+  return str;
+};
 
-  window.toggleLang = () => {
-    currentLang = currentLang === 'id' ? 'en' : 'id';
-    try { localStorage.setItem('lang', currentLang); } catch (e) {}
-    applyLang();
-  };
+function applyLang() {
+  document.documentElement.lang = currentLang;
+  const idx = langIdx();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: (n) => {
+      const p = n.parentElement;
+      if (!p || /^(SCRIPT|STYLE|TEXTAREA)$/.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+      if (p.closest('#listPanelAktif, #listRiwayat, #userTableBody')) return NodeFilter.FILTER_REJECT;
+      return n.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  const nodes = []; let n;
+  while ((n = walker.nextNode())) nodes.push(n);
+  nodes.forEach(node => {
+    const raw = node.nodeValue; const key = raw.trim(); const e = REV[key];
+    if (e && e[idx] !== key) node.nodeValue = raw.replace(key, () => e[idx]);
+  });
+  document.querySelectorAll('[placeholder]').forEach(el => {
+    const e = REV[el.getAttribute('placeholder')];
+    if (e) el.setAttribute('placeholder', e[idx]);
+  });
+  document.querySelectorAll('.lang-btn .lg').forEach(sp => sp.classList.toggle('active', sp.dataset.l === currentLang));
+  const mainApp = document.getElementById('mainApp');
+  const dash = document.getElementById('tabContentDashboard');
+  if (currentUser && currentUser.email !== ADMIN_EMAIL && mainApp.style.display === 'flex' && dash.style.display !== 'none') loadUserDashboard();
+}
 
-  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+window.toggleLang = () => { currentLang = currentLang === 'id' ? 'en' : 'id'; try { localStorage.setItem('lang', currentLang); } catch (e) {} applyLang(); };
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-  async function readApiResponse(res) {
-    const raw = await res.text();
-    let data = null;
-    try { data = JSON.parse(raw); } catch (e) {}
-    const success = !!data && (data.ok === true || data.success === true || data.status === "success");
-    const reason = data ? (data.why || data.error || data.message || "") : "";
-    return { raw, data, success, reason, status: res.status, httpOk: res.ok };
+async function readApiResponse(res) {
+  const raw = await res.text(); let data = null;
+  try { data = JSON.parse(raw); } catch (e) {}
+  const success = !!data && (data.ok === true || data.success === true || data.status === "success");
+  const reason = data ? (data.why || data.error || data.message || "") : "";
+  return { raw, data, success, reason, status: res.status, httpOk: res.ok };
+}
+
+window.runPendingAction = () => { document.getElementById("confirmModal").classList.remove("active"); if (typeof pendingAction === "function") pendingAction(); };
+window.showAlert = function(message, title = "Notifikasi") {
+  try { document.getElementById('alertTitle').textContent = tr(title); document.getElementById('alertMessage').innerHTML = tr(message); document.getElementById('customAlert').classList.add('active'); }
+  catch (e) { alert(title + "\n\n" + message); }
+};
+window.toggleSidebar = (show) => {
+  const s = document.getElementById('sidebarMenu'); const o = document.getElementById('sidebarOverlay');
+  if (show) { s.classList.add('active'); o.classList.add('active'); } else { s.classList.remove('active'); o.classList.remove('active'); }
+};
+window.confirmLogout = () => { toggleSidebar(false); document.getElementById('logoutModal').classList.add('active'); };
+window.executeLogout = () => { document.getElementById('logoutModal').classList.remove('active'); signOut(auth); };
+window.createRipple = function() {};
+
+window.toggleAuth = (type) => {
+  document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('regError').style.display = 'none';
+};
+
+window.switchCatalog = (cat) => {
+  currentCatalog = cat;
+  document.querySelectorAll('.catalog-card').forEach(c => c.classList.remove('active'));
+  document.getElementById(cat === 'wabot' ? 'catWaBot' : 'catAmPremium').classList.add('active');
+  document.querySelectorAll('.product-content').forEach(el => el.classList.remove('active'));
+  if (cat === 'wabot') document.getElementById('productWaBot').classList.add('active');
+  else document.getElementById('productAm').classList.add('active');
+};
+
+window.switchMainTab = (tab) => {
+  toggleSidebar(false);
+  document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+  document.getElementById('tabContentDashboard').style.display = 'none';
+  document.getElementById('tabContentOrder').style.display = 'none';
+  document.getElementById('tabContentSettings').style.display = 'none';
+  if (tab === 'dashboard') { document.getElementById('navDash').classList.add('active'); document.getElementById('tabContentDashboard').style.display = 'block'; loadUserDashboard(); }
+  else if (tab === 'order') { document.getElementById('navOrder').classList.add('active'); document.getElementById('tabContentOrder').style.display = 'block'; }
+  else if (tab === 'settings') { document.getElementById('navSettings').classList.add('active'); document.getElementById('tabContentSettings').style.display = 'block'; document.getElementById('currentEmailDisplay').value = currentUser.email; }
+};
+
+window.switchOrderTab = (mode) => {
+  currentMode = mode;
+  if (mode === 'new') {
+    document.getElementById('tabNew').classList.add('active'); document.getElementById('tabAdd').classList.remove('active');
+    document.getElementById('fieldName').style.display = 'block'; document.getElementById('fieldAddUser').style.display = 'none';
+    document.getElementById('submitBtn').textContent = tr("Beli Panel"); document.getElementById('addUsername').value = '';
+  } else {
+    document.getElementById('tabNew').classList.remove('active'); document.getElementById('tabAdd').classList.add('active');
+    document.getElementById('fieldName').style.display = 'none'; document.getElementById('fieldAddUser').style.display = 'block';
+    document.getElementById('submitBtn').textContent = tr("Tambah Server"); document.getElementById('customName').value = '';
   }
+};
 
-  window.runPendingAction = () => {
-    document.getElementById("confirmModal").classList.remove("active");
-    if (typeof pendingAction === "function") pendingAction();
-  };
+window.doRegister = async () => {
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPassword').value;
+  const confirm = document.getElementById('regConfirmPassword').value;
+  const err = document.getElementById('regError');
+  if (pass !== confirm) { err.textContent = tr("Passwords do not match!"); err.style.display = "block"; return; }
+  document.getElementById('btnRegister').disabled = true;
+  try {
+    const uc = await createUserWithEmailAndPassword(auth, email, pass);
+    await setDoc(doc(db, "users", uc.user.uid), { email: email, balance: 0 });
+  } catch (error) { err.textContent = error.message; err.style.display = "block"; document.getElementById('btnRegister').disabled = false; }
+};
 
-  window.showAlert = function(message, title = "Notifikasi") {
-    try {
-      document.getElementById('alertTitle').textContent = tr(title);
-      document.getElementById('alertMessage').innerHTML = tr(message);
-      document.getElementById('customAlert').classList.add('active');
-    } catch (e) {
-      alert(title + "\n\n" + message);
-    }
-  };
+window.doLogin = async () => {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPassword').value;
+  const err = document.getElementById('loginError');
+  document.getElementById('btnLogin').disabled = true;
+  try { await signInWithEmailAndPassword(auth, email, pass); }
+  catch (error) { err.textContent = tr("Invalid email or password."); err.style.display = "block"; document.getElementById('btnLogin').disabled = false; }
+};
 
-  window.toggleSidebar = (show) => {
-    const sidebar = document.getElementById('sidebarMenu');
-    const overlay = document.getElementById('sidebarOverlay');
-    if (show) {
-      sidebar.classList.add('active');
-      overlay.classList.add('active');
-    } else {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-    }
-  };
+window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
+window.proceedTopup = () => {
+  const amount = parseInt(document.getElementById('topupAmount').value);
+  if (isNaN(amount) || amount < 400) { showAlert("Minimal topup Rp 400"); return; }
+  const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${amount.toLocaleString()}\n\nMohon diproses.`;
+  window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
+  document.getElementById('topupModal').classList.remove('active');
+};
 
-  window.confirmLogout = () => {
-    toggleSidebar(false);
-    document.getElementById('logoutModal').classList.add('active');
-  };
-
-  window.executeLogout = () => {
-    document.getElementById('logoutModal').classList.remove('active');
-    signOut(auth);
-  };
-
-  window.createRipple = function(event) { /* dipertahankan kompatibilitas */ };
-
-  window.toggleAuth = (type) => {
-    document.getElementById('loginForm').style.display = type === 'login' ? 'block' : 'none';
-    document.getElementById('registerForm').style.display = type === 'register' ? 'block' : 'none';
-    document.getElementById('loginError').style.display = 'none';
-    document.getElementById('regError').style.display = 'none';
-  };
-
-  window.switchCatalog = (cat) => {
-    currentCatalog = cat;
-    document.querySelectorAll('.catalog-card').forEach(card => card.classList.remove('active'));
-    document.getElementById(cat === 'wabot' ? 'catWaBot' : 'catAmPremium').classList.add('active');
-    document.querySelectorAll('.product-content').forEach(el => el.classList.remove('active'));
-    if (cat === 'wabot') document.getElementById('productWaBot').classList.add('active');
-    else document.getElementById('productAm').classList.add('active');
-  };
-
-  window.switchMainTab = (tab) => {
-    toggleSidebar(false);
-    document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
-    document.getElementById('tabContentDashboard').style.display = 'none';
-    document.getElementById('tabContentOrder').style.display = 'none';
-    document.getElementById('tabContentSettings').style.display = 'none';
-    
-    if (tab === 'dashboard') {
-      document.getElementById('navDash').classList.add('active');
-      document.getElementById('tabContentDashboard').style.display = 'block';
-      loadUserDashboard(); 
-    } else if (tab === 'order') {
-      document.getElementById('navOrder').classList.add('active');
-      document.getElementById('tabContentOrder').style.display = 'block';
-    } else if (tab === 'settings') {
-      document.getElementById('navSettings').classList.add('active');
-      document.getElementById('tabContentSettings').style.display = 'block';
-      document.getElementById('currentEmailDisplay').value = currentUser.email;
-    }
-  };
-
-  window.switchOrderTab = (mode) => {
-    currentMode = mode;
-    if (mode === 'new') {
-      document.getElementById('tabNew').classList.add('active');
-      document.getElementById('tabAdd').classList.remove('active');
-      document.getElementById('fieldName').style.display = 'block';
-      document.getElementById('fieldAddUser').style.display = 'none';
-      document.getElementById('submitBtn').textContent = tr("Beli Panel");
-      document.getElementById('addUsername').value = '';
-    } else {
-      document.getElementById('tabNew').classList.remove('active');
-      document.getElementById('tabAdd').classList.add('active');
-      document.getElementById('fieldName').style.display = 'none';
-      document.getElementById('fieldAddUser').style.display = 'block';
-      document.getElementById('submitBtn').textContent = tr("Tambah Server");
-      document.getElementById('customName').value = '';
-    }
-  };
-
-  window.doRegister = async (event) => {
-    const email = document.getElementById('regEmail').value.trim();
-    const pass = document.getElementById('regPassword').value;
-    const confirm = document.getElementById('regConfirmPassword').value;
-    const err = document.getElementById('regError');
-    if (pass !== confirm) { err.textContent = tr("Passwords do not match!"); err.style.display = "block"; return; }
-    document.getElementById('btnRegister').disabled = true;
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-      await setDoc(doc(db, "users", userCredential.user.uid), { email: email, balance: 0 });
-    } catch (error) {
-      err.textContent = error.message; err.style.display = "block";
-      document.getElementById('btnRegister').disabled = false;
-    }
-  };
-
-  window.doLogin = async (event) => {
-    const email = document.getElementById('loginEmail').value.trim();
-    const pass = document.getElementById('loginPassword').value;
-    const err = document.getElementById('loginError');
-    document.getElementById('btnLogin').disabled = true;
-    try {
-      await signInWithEmailAndPassword(auth, email, pass);
-    } catch (error) {
-      err.textContent = tr("Invalid email or password."); err.style.display = "block";
-      document.getElementById('btnLogin').disabled = false;
-    }
-  };
-
-  window.openTopupModal = () => document.getElementById('topupModal').classList.add('active');
-  
-  window.proceedTopup = () => {
-    const amount = parseInt(document.getElementById('topupAmount').value);
-    if (isNaN(amount) || amount < 400) { showAlert("Minimal topup Rp 400"); return; }
-    const pesan = `*TOPUP REQUEST*\n\nHalo Admin, saya mau topup.\n\n*Username* ${currentUser.email}\n*Nominal* Rp ${amount.toLocaleString()}\n\nMohon diproses.`;
-    window.open(`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pesan)}`, "_blank");
-    document.getElementById('topupModal').classList.remove('active');
-  };
-
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      currentUser = user;
-      document.getElementById('authScreen').style.display = 'none';
-      if (user.email === ADMIN_EMAIL) {
-        document.getElementById('adminApp').style.display = 'flex';
-        document.getElementById('mainApp').style.display = 'none';
-        loadAdminData();
-      } else {
-        document.getElementById('mainApp').style.display = 'flex';
-        document.getElementById('adminApp').style.display = 'none';
-        const username = user.email.split('@')[0];
-        document.getElementById('displayUser').textContent = username;
-        document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
-        await updateUserBalanceUI(user.uid);
-        switchMainTab('dashboard'); 
-      }
-    } else {
-      document.getElementById('authScreen').style.display = 'flex';
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    document.getElementById('authScreen').style.display = 'none';
+    if (user.email === ADMIN_EMAIL) {
+      document.getElementById('adminApp').style.display = 'flex';
       document.getElementById('mainApp').style.display = 'none';
+      loadAdminData();
+    } else {
+      document.getElementById('mainApp').style.display = 'flex';
       document.getElementById('adminApp').style.display = 'none';
-      document.getElementById('btnLogin').disabled = false;
-      document.getElementById('btnRegister').disabled = false;
+      const un = user.email.split('@')[0];
+      document.getElementById('displayUser').textContent = un;
+      document.getElementById('userAvatar').textContent = un.charAt(0).toUpperCase();
+      await updateUserBalanceUI(user.uid);
+      switchMainTab('dashboard');
     }
-  });
-
-  async function updateUserBalanceUI(uid) {
-    const docRef = doc(db, "users", uid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      document.getElementById('displayBalance').textContent = "Rp " + (docSnap.data().balance || 0).toLocaleString();
-    }
+  } else {
+    document.getElementById('authScreen').style.display = 'flex';
+    document.getElementById('mainApp').style.display = 'none';
+    document.getElementById('adminApp').style.display = 'none';
+    document.getElementById('btnLogin').disabled = false;
+    document.getElementById('btnRegister').disabled = false;
   }
+});
 
-  const isWrongPassword = (code) => code === 'auth/wrong-password' || code === 'auth/invalid-credential';
+async function updateUserBalanceUI(uid) {
+  const ds = await getDoc(doc(db, "users", uid));
+  if (ds.exists()) document.getElementById('displayBalance').textContent = "Rp " + (ds.data().balance || 0).toLocaleString();
+}
 
-  window.changeEmail = async (event) => {
-    const oldPass = document.getElementById('currentPassEmail').value;
-    const newEmail = document.getElementById('newEmail').value.trim();
-    if (!oldPass || !newEmail) { showAlert("Isi password saat ini dan email baru!"); return; }
-    const btn = event.currentTarget;
-    btn.disabled = true;
-    btn.textContent = tr("Memproses...");
-    try {
-      const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
-      await reauthenticateWithCredential(currentUser, credential);
-      await updateEmail(currentUser, newEmail);
-      const docRef = doc(db, "users", currentUser.uid);
-      await updateDoc(docRef, { email: newEmail });
-      showAlert("Email berhasil diubah! Silakan login ulang.", "Berhasil");
-      setTimeout(() => signOut(auth), 2000);
-    } catch (error) {
-      if (isWrongPassword(error.code)) showAlert("Password saat ini salah!", "Gagal");
-      else showAlert(esc(error.message), "Gagal");
-    } finally {
-      btn.disabled = false;
-      btn.textContent = tr("Ubah Email");
+const isWrongPassword = (c) => c === 'auth/wrong-password' || c === 'auth/invalid-credential';
+
+window.changeEmail = async (event) => {
+  const oldPass = document.getElementById('currentPassEmail').value;
+  const newEmail = document.getElementById('newEmail').value.trim();
+  if (!oldPass || !newEmail) { showAlert("Isi password saat ini dan email baru!"); return; }
+  const btn = event.currentTarget; btn.disabled = true; btn.textContent = tr("Memproses...");
+  try {
+    const cred = EmailAuthProvider.credential(currentUser.email, oldPass);
+    await reauthenticateWithCredential(currentUser, cred);
+    await updateEmail(currentUser, newEmail);
+    await updateDoc(doc(db, "users", currentUser.uid), { email: newEmail });
+    showAlert("Email berhasil diubah! Silakan login ulang.", "Berhasil");
+    setTimeout(() => signOut(auth), 2000);
+  } catch (error) {
+    if (isWrongPassword(error.code)) showAlert("Password saat ini salah!", "Gagal");
+    else showAlert(esc(error.message), "Gagal");
+  } finally { btn.disabled = false; btn.textContent = tr("Ubah Email"); }
+};
+
+window.changePassword = async (event) => {
+  const oldPass = document.getElementById('currentPassPassword').value;
+  const newPass = document.getElementById('newPassword').value;
+  const confirmPass = document.getElementById('confirmNewPassword').value;
+  if (!oldPass || !newPass || !confirmPass) { showAlert("Semua kolom wajib diisi!"); return; }
+  if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; }
+  if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; }
+  const btn = event.currentTarget; btn.disabled = true; btn.textContent = tr("Memproses...");
+  try {
+    const cred = EmailAuthProvider.credential(currentUser.email, oldPass);
+    await reauthenticateWithCredential(currentUser, cred);
+    await updatePassword(currentUser, newPass);
+    showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
+    document.getElementById('currentPassPassword').value = "";
+    document.getElementById('newPassword').value = "";
+    document.getElementById('confirmNewPassword').value = "";
+  } catch (error) {
+    if (isWrongPassword(error.code)) showAlert("Password saat ini salah!", "Gagal");
+    else showAlert(esc(error.message), "Gagal");
+  } finally { btn.disabled = false; btn.textContent = tr("Ubah Password"); }
+};
+
+async function loadUserDashboard() {
+  if (!currentUser) return;
+  document.getElementById('listPanelAktif').innerHTML = `<div class="skeleton skeleton-text" style="width:80%;margin-bottom:12px"></div><div class="skeleton skeleton-text short" style="margin-bottom:12px"></div><div class="skeleton skeleton-text" style="width:90%"></div>`;
+  document.getElementById('listRiwayat').innerHTML = `<div class="skeleton skeleton-text" style="width:70%;margin-bottom:12px"></div><div class="skeleton skeleton-text short" style="margin-bottom:12px"></div><div class="skeleton skeleton-text" style="width:50%"></div>`;
+  try {
+    const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
+    const snap = await getDocs(q);
+    let htmlRiwayat = ""; let htmlPanel = ""; let totalPanel = 0;
+    let docs = snap.docs.map(d => d.data());
+    docs.sort((a,b) => b.createdAt - a.createdAt);
+    let panelUsernames = docs.filter(d => {
+      if (d.produk !== 'wabot') return false;
+      const days = Math.floor((Date.now() - d.createdAt) / (24*60*60*1000));
+      return (30 - days) > 0;
+    }).map(d => d.namaPanel);
+    let serverStatus = {};
+    if (panelUsernames.length > 0) {
+      try {
+        const cr = await fetch('/api/check-panel', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ users: panelUsernames }) });
+        if (cr.ok) { const cd = await cr.json(); if (cd.success && cd.data) cd.data.forEach(i => { serverStatus[i.username] = i.exists; }); }
+      } catch (err) { console.warn("cek panel:", err); }
     }
-  };
-
-  window.changePassword = async (event) => {
-    const oldPass = document.getElementById('currentPassPassword').value;
-    const newPass = document.getElementById('newPassword').value;
-    const confirmPass = document.getElementById('confirmNewPassword').value;
-    if (!oldPass || !newPass || !confirmPass) { showAlert("Semua kolom wajib diisi!"); return; }
-    if (newPass !== confirmPass) { showAlert("Konfirmasi password tidak cocok!"); return; }
-    if (newPass.length < 6) { showAlert("Password minimal 6 karakter!"); return; }
-    const btn = event.currentTarget;
-    btn.disabled = true;
-    btn.textContent = tr("Memproses...");
-    try {
-      const credential = EmailAuthProvider.credential(currentUser.email, oldPass);
-      await reauthenticateWithCredential(currentUser, credential);
-      await updatePassword(currentUser, newPass);
-      showAlert("Password berhasil diubah! Gunakan password baru saat login berikutnya.", "Berhasil");
-      document.getElementById('currentPassPassword').value = "";
-      document.getElementById('newPassword').value = "";
-      document.getElementById('confirmNewPassword').value = "";
-    } catch (error) {
-      if (isWrongPassword(error.code)) showAlert("Password saat ini salah!", "Gagal");
-      else showAlert(esc(error.message), "Gagal");
-    } finally {
-      btn.disabled = false;
-      btn.textContent = tr("Ubah Password");
-    }
-  };
-
-  async function loadUserDashboard() {
-    if (!currentUser) return;
-    document.getElementById('listPanelAktif').innerHTML = `
-      <div class="skeleton skeleton-text" style="width: 80%; margin-bottom: 12px;"></div>
-      <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
-      <div class="skeleton skeleton-text" style="width: 90%;"></div>
-    `;
-    document.getElementById('listRiwayat').innerHTML = `
-      <div class="skeleton skeleton-text" style="width: 70%; margin-bottom: 12px;"></div>
-      <div class="skeleton skeleton-text short" style="margin-bottom: 12px;"></div>
-      <div class="skeleton skeleton-text" style="width: 50%;"></div>
-    `;
-    try {
-      const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
-      const querySnapshot = await getDocs(q);
-      let htmlRiwayat = "";
-      let htmlPanel = "";
-      let totalPanel = 0;
-      let docs = querySnapshot.docs.map(d => d.data());
-      docs.sort((a, b) => b.createdAt - a.createdAt);
-      let panelUsernames = docs.filter(d => {
-        if(d.produk !== 'wabot') return false;
-        const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
-        return (30 - daysPassed) > 0;
-      }).map(d => d.namaPanel);
-      let serverStatus = {};
-      if (panelUsernames.length > 0) {
-        try {
-          const checkRes = await fetch('/api/check-panel', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ users: panelUsernames })
-          });
-          if (checkRes.ok) {
-            const checkData = await checkRes.json();
-            if (checkData.success && checkData.data) {
-              checkData.data.forEach(item => { serverStatus[item.username] = item.exists; });
-            }
-          }
-        } catch (err) { console.warn("Gagal cek status panel:", err); }
-      }
-      docs.forEach(data => {
-        htmlRiwayat += `
-          <div class="history-item">
-            <div class="history-header">
-              <strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? tr('Panel Baru') : tr('Tambah Server'))}</strong>
-              <span>Rp ${data.harga.toLocaleString()}</span>
-            </div>
-            <div class="history-details">
-              <p>${esc(data.namaPanel)} [${esc(tr(data.ram || '1 Tahun'))}]</p>
-              <span class="history-date">${new Date(data.createdAt).toLocaleDateString(currentLang === 'en' ? 'en-US' : 'id-ID')}</span>
-            </div>
-          </div>
-        `;
-        if (data.produk === 'am') {
-          htmlPanel += `
-            <div class="panel-list-item">
-              <div class="panel-details">
-                <h4>Alight Motion</h4>
-                <p>${tr('1 Tahun')} • ${esc(data.emailAm)}</p>
-              </div>
-              <div class="panel-actions">
-                <div class="panel-status status-am">${tr('Aktif')}</div>
-              </div>
-            </div>
-          `;
+    docs.forEach(data => {
+      htmlRiwayat += `<div class="history-item"><div class="history-header"><strong>${data.produk === 'am' ? 'AM Premium' : (data.mode === 'new' ? tr('Panel Baru') : tr('Tambah Server'))}</strong><span>Rp ${data.harga.toLocaleString()}</span></div><div class="history-details"><p>${esc(data.namaPanel)} [${esc(tr(data.ram || '1 Tahun'))}]</p><span class="history-date">${new Date(data.createdAt).toLocaleDateString(currentLang === 'en' ? 'en-US' : 'id-ID')}</span></div></div>`;
+      if (data.produk === 'am') {
+        htmlPanel += `<div class="panel-list-item"><div class="panel-details"><h4>Alight Motion</h4><p>${tr('1 Tahun')} • ${esc(data.emailAm)}</p></div><div class="panel-actions"><div class="status status-am">${tr('Aktif')}</div></div></div>`;
+        totalPanel++;
+      } else {
+        const days = Math.floor((Date.now() - data.createdAt) / (24*60*60*1000));
+        const left = 30 - days;
+        if (left > 0) {
           totalPanel++;
-        } else {
-          const now = Date.now();
-          const msInDay = 24 * 60 * 60 * 1000;
-          const daysPassed = Math.floor((now - data.createdAt) / msInDay);
-          const daysLeft = 30 - daysPassed;
-          if (daysLeft > 0) {
-            totalPanel++;
-            const isExists = serverStatus[data.namaPanel] !== false; 
-            if (isExists) {
-              htmlPanel += `
-                <div class="panel-list-item">
-                  <div class="panel-details">
-                    <h4>${esc(data.namaPanel)}</h4>
-                    <p>${esc(data.ram)} • ${currentLang === 'en' ? daysLeft + ' days left' : 'Sisa ' + daysLeft + ' Hari'}</p>
-                  </div>
-                  <div class="panel-actions">
-                    <div class="panel-status status-active">${tr('Aktif')}</div>
-                    <button class="btn-manage" onclick="managePanel('wabot', '${esc(data.namaPanel)}')">${tr('Kelola')}</button>
-                  </div>
-                </div>
-              `;
-            } else {
-              htmlPanel += `
-                <div class="panel-list-item" style="opacity: 0.6;">
-                  <div class="panel-details">
-                    <h4 style="text-decoration: line-through;">${esc(data.namaPanel)}</h4>
-                    <p>${esc(data.ram)} • ${tr('Dihapus oleh Admin')}</p>
-                  </div>
-                  <div class="panel-actions">
-                    <div class="panel-status status-del">${tr('Dihapus')}</div>
-                  </div>
-                </div>
-              `;
-            }
+          const isE = serverStatus[data.namaPanel] !== false;
+          if (isE) {
+            htmlPanel += `<div class="panel-list-item"><div class="panel-details"><h4>${esc(data.namaPanel)}</h4><p>${esc(data.ram)} • ${currentLang === 'en' ? left + ' days left' : 'Sisa ' + left + ' Hari'}</p></div><div class="panel-actions"><div class="status status-active">${tr('Aktif')}</div><button class="btn-manage" onclick="managePanel('wabot','${esc(data.namaPanel)}')">${tr('Kelola')}</button></div></div>`;
+          } else {
+            htmlPanel += `<div class="panel-list-item" style="opacity:.6"><div class="panel-details"><h4 style="text-decoration:line-through">${esc(data.namaPanel)}</h4><p>${esc(data.ram)} • ${tr('Dihapus oleh Admin')}</p></div><div class="panel-actions"><div class="status status-del">${tr('Dihapus')}</div></div></div>`;
           }
         }
-      });
-      if (totalPanel === 0) {
-        document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">${tr('Belum ada produk aktif.')}</p>`;
-      } else {
-        document.getElementById('listPanelAktif').innerHTML = htmlPanel;
       }
-      if (docs.length === 0) {
-        document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--muted); text-align:center; padding:20px 0;">${tr('Belum ada riwayat.')}</p>`;
-      } else {
-        document.getElementById('listRiwayat').innerHTML = htmlRiwayat;
-      }
-    } catch (error) {
-      console.error("Error load dashboard:", error);
-      document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
-      document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px; color:var(--bad); text-align:center; padding:20px 0;">Gagal memuat data.</p>`;
-    }
-  }
-
-  window.managePanel = (type, val) => {
-    if (type === 'am') return; 
-    const textToCopy = `${val}@gojomarket.com`;
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      window.open("https://panel-gojopremium.danzzhost.web.id", "_blank");
-    }).catch(err => {
-      window.open("https://panel-gojopremium.danzzhost.web.id", "_blank");
     });
-  };
-
-  async function loadAdminData() {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const tbody = document.getElementById('userTableBody');
-    tbody.innerHTML = '';
-    querySnapshot.forEach((d) => {
-      const data = d.data();
-      const trEl = document.createElement('tr');
-      trEl.innerHTML = `
-        <td>${esc(data.email)}</td>
-        <td>Rp ${(data.balance || 0).toLocaleString()}</td>
-        <td><button class="btn-action" onclick="addBalance('${esc(d.id)}', '${esc(data.email)}')">Add Balance</button></td>
-      `;
-      tbody.appendChild(trEl);
-    });
+    document.getElementById('listPanelAktif').innerHTML = totalPanel === 0 ? `<p style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">${tr('Belum ada produk aktif.')}</p>` : htmlPanel;
+    document.getElementById('listRiwayat').innerHTML = docs.length === 0 ? `<p style="font-size:13px;color:var(--muted);text-align:center;padding:20px 0">${tr('Belum ada riwayat.')}</p>` : htmlRiwayat;
+  } catch (error) {
+    console.error("dash err:", error);
+    document.getElementById('listPanelAktif').innerHTML = `<p style="font-size:13px;color:var(--danger);text-align:center;padding:20px 0">Gagal memuat data.</p>`;
+    document.getElementById('listRiwayat').innerHTML = `<p style="font-size:13px;color:var(--danger);text-align:center;padding:20px 0">Gagal memuat data.</p>`;
   }
+}
 
-  window.addBalance = async (uid, email) => {
-    const amountStr = prompt(`Add balance for ${email} (Enter amount, ex: 2000):`);
-    if (!amountStr) return;
-    const amount = parseInt(amountStr);
-    if (isNaN(amount) || amount <= 0) { showAlert("Nominal tidak valid"); return; }
-    const docRef = doc(db, "users", uid);
-    const docSnap = await getDoc(docRef);
-    const currentBalance = docSnap.data().balance || 0;
-    await updateDoc(docRef, { balance: currentBalance + amount });
-    showAlert(`Berhasil menambahkan Rp ${amount.toLocaleString()} ke ${esc(email)}`);
-    loadAdminData();
-  }
+window.managePanel = (type, val) => {
+  if (type === 'am') return;
+  const txt = `${val}@gojomarket.com`;
+  navigator.clipboard.writeText(txt).then(() => window.open("https://panel-gojopremium.danzzhost.web.id","_blank"))
+    .catch(() => window.open("https://panel-gojopremium.danzzhost.web.id","_blank"));
+};
 
-  const orderForm = document.getElementById("orderForm");
-  const totalText = document.getElementById("totalText");
-  orderForm.addEventListener("change", (e) => {
-    if (e.target.name === "ram") {
-      totalText.textContent = "Rp " + parseInt(e.target.dataset.harga).toLocaleString();
-    }
+async function loadAdminData() {
+  const snap = await getDocs(collection(db, "users"));
+  const tb = document.getElementById('userTableBody'); tb.innerHTML = '';
+  snap.forEach(d => {
+    const data = d.data(); const trEl = document.createElement('tr');
+    trEl.innerHTML = `<td>${esc(data.email)}</td><td>Rp ${(data.balance||0).toLocaleString()}</td><td><button class="btn-action" onclick="addBalance('${esc(d.id)}','${esc(data.email)}')">Add Balance</button></td>`;
+    tb.appendChild(trEl);
   });
+}
 
-  orderForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!currentUser) { showAlert("Kamu belum login. Refresh halaman."); return; }
-    try {
-      let finalUsername = "";
-      let displayConfirm = "";
-      if (currentMode === 'new') {
-        finalUsername = document.getElementById("customName").value.trim();
-        if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
-        if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) { showAlert("Nama panel hanya boleh huruf & angka!"); return; }
-        displayConfirm = currentLang === 'en'
-          ? `Are you sure you want to buy a <b>New Panel</b> named <b>"${esc(finalUsername)}"</b>?`
-          : `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
-      } else {
-        finalUsername = document.getElementById("addUsername").value.trim();
-        if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
-        if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) { showAlert("Username hanya boleh huruf & angka!"); return; }
-        const q = query(collection(db, "transactions"), where("uid", "==", currentUser.uid));
-        const snap = await getDocs(q);
-        const ownedPanels = snap.docs.map(d => d.data())
-          .filter(d => d.produk === "wabot")
-          .filter(d => {
-            const daysPassed = Math.floor((Date.now() - d.createdAt) / (24 * 60 * 60 * 1000));
-            return (30 - daysPassed) > 0;
-          })
-          .map(d => (d.namaPanel || "").toLowerCase());
-        if (!ownedPanels.includes(finalUsername.toLowerCase())) {
-          showAlert(currentLang === 'en'
-            ? `You don't have an active panel named "<b>${esc(finalUsername)}</b>". Please create a new panel first.`
-            : `Kamu tidak punya panel aktif bernama "<b>${esc(finalUsername)}</b>". Buat panel baru dulu.`);
-          return;
-        }
-        displayConfirm = currentLang === 'en'
-          ? `Are you sure you want to <b>Add Server</b> to account <b>"${esc(finalUsername)}@gojomarket.com"</b>?`
-          : `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@gojomarket.com"</b>?`;
-      }
-      const ramEl = orderForm.querySelector('input[name="ram"]:checked');
-      if (!ramEl) { showAlert("Pilih paket RAM dulu!"); return; }
-      const harga = parseInt(ramEl.dataset.harga);
-      const docRef = doc(db, "users", currentUser.uid);
-      const docSnap = await getDoc(docRef);
-      const saldo = docSnap.data()?.balance || 0;
-      if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
-      const eggEl = orderForm.querySelector('input[name="egg"]:checked');
-      const eggId = eggEl ? eggEl.value : "15";
-      const nestId = eggEl ? eggEl.dataset.nest : "5";
-      pendingOrder = {
-        produk: "wabot", mode: currentMode, username: finalUsername,
-        ram: ramEl.value, harga: harga, docRef: docRef, saldo: saldo,
-        egg_id: eggId, nest_id: nestId
-      };
-      pendingAction = executePurchase;
-      document.getElementById("confirmText").innerHTML =
-        (currentLang === 'en'
-          ? `${displayConfirm}<br>RAM package <b>${esc(ramEl.value)}</b> priced at <b>Rp ${harga.toLocaleString()}</b>.`
-          : `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`);
-      document.getElementById("confirmModal").classList.add("active");
-    } catch (err) {
-      console.error("[submit] ERROR:", err);
-      showAlert("Error: " + esc(err.message));
-    }
-  });
+window.addBalance = async (uid, email) => {
+  const amtStr = prompt(`Add balance for ${email} (contoh: 2000):`);
+  if (!amtStr) return;
+  const amt = parseInt(amtStr);
+  if (isNaN(amt) || amt <= 0) { showAlert("Nominal tidak valid"); return; }
+  const dr = doc(db, "users", uid); const ds = await getDoc(dr);
+  const cur = ds.data().balance || 0;
+  await updateDoc(dr, { balance: cur + amt });
+  showAlert(`Berhasil menambahkan Rp ${amt.toLocaleString()} ke ${esc(email)}`);
+  loadAdminData();
+};
 
-  window.goAmStep2 = () => {
-    document.getElementById("amTextEmail").textContent = pendingAmEmail;
-    document.getElementById("amStep1").style.display = "none";
-    document.getElementById("amStep2").style.display = "block";
-  };
+const orderForm = document.getElementById("orderForm");
+const totalText = document.getElementById("totalText");
+orderForm.addEventListener("change", (e) => {
+  if (e.target.name === "ram") totalText.textContent = "Rp " + parseInt(e.target.dataset.harga).toLocaleString();
+});
 
-  window.sendAmLink = async (event) => {
-    const email = document.getElementById("amEmail").value.trim();
-    if (!email) { showAlert("Masukkan email dulu!"); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAlert("Format email tidak valid!"); return; }
-    const btn = event.currentTarget;
-    const skipBtn = document.getElementById("amSkipBtn");
-    btn.disabled = true;
-    btn.textContent = tr("Mengirim...");
-    skipBtn.style.display = "none";
-    pendingAmEmail = email;
-    try {
-      const res = await fetch('/api/am-automation', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'send-link', email })
-      });
-      const r = await readApiResponse(res);
-      if (r.success || (r.httpOk && !r.data)) {
-        goAmStep2();
-        if (!r.success) showAlert("Link verifikasi dikirim. Cek inbox/spam email kamu.", "Info");
+orderForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!currentUser) { showAlert("Kamu belum login. Refresh halaman."); return; }
+  try {
+    let finalUsername = ""; let displayConfirm = "";
+    if (currentMode === 'new') {
+      finalUsername = document.getElementById("customName").value.trim();
+      if (!finalUsername) { showAlert("Nama panel wajib diisi!"); return; }
+      if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) { showAlert("Nama panel hanya boleh huruf & angka!"); return; }
+      displayConfirm = currentLang === 'en' ? `Are you sure you want to buy a <b>New Panel</b> named <b>"${esc(finalUsername)}"</b>?` : `Yakin beli <b>Panel Baru</b> dengan nama <b>"${esc(finalUsername)}"</b>?`;
+    } else {
+      finalUsername = document.getElementById("addUsername").value.trim();
+      if (!finalUsername) { showAlert("Username wajib diisi!"); return; }
+      if (!/^[a-zA-Z0-9]+$/.test(finalUsername)) { showAlert("Username hanya boleh huruf & angka!"); return; }
+      const q = query(collection(db, "transactions"), where("uid","==",currentUser.uid));
+      const sn = await getDocs(q);
+      const owned = sn.docs.map(d => d.data()).filter(d => d.produk === "wabot").filter(d => {
+        const days = Math.floor((Date.now()-d.createdAt)/(24*60*60*1000)); return (30 - days) > 0;
+      }).map(d => (d.namaPanel || "").toLowerCase());
+      if (!owned.includes(finalUsername.toLowerCase())) {
+        showAlert(currentLang === 'en' ? `You don't have an active panel named "<b>${esc(finalUsername)}</b>". Create a new panel first.` : `Kamu tidak punya panel aktif bernama "<b>${esc(finalUsername)}</b>". Buat panel baru dulu.`);
         return;
       }
-      const reason = r.reason || `Server error (HTTP ${r.status})`;
-      showAlert(`Gagal: ${esc(reason)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
-      skipBtn.style.display = "block";
-    } catch (err) {
-      showAlert(`Error: ${esc(err.message)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
-      skipBtn.style.display = "block";
-    } finally {
-      btn.disabled = false;
-      btn.textContent = tr("Kirim Link Verifikasi");
+      displayConfirm = currentLang === 'en' ? `Are you sure you want to <b>Add Server</b> to account <b>"${esc(finalUsername)}@gojomarket.com"</b>?` : `Yakin mau <b>Add Server</b> ke akun <b>"${esc(finalUsername)}@gojomarket.com"</b>?`;
     }
-  };
-
-  window.verifyAmLink = async () => {
-    const linkInput = document.getElementById("amLink").value.trim();
-    if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; }
-    if (!linkInput.startsWith("http")) { showAlert("Link verifikasi tidak valid (harus diawali http/https)"); return; }
-    const docRef = doc(db, "users", currentUser.uid);
-    const docSnap = await getDoc(docRef);
-    const saldo = docSnap.data().balance || 0;
-    const harga = 5000;
+    const ramEl = orderForm.querySelector('input[name="ram"]:checked');
+    if (!ramEl) { showAlert("Pilih paket RAM dulu!"); return; }
+    const harga = parseInt(ramEl.dataset.harga);
+    const dr = doc(db, "users", currentUser.uid); const ds = await getDoc(dr);
+    const saldo = ds.data()?.balance || 0;
     if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
-    pendingAction = async () => {
-      const btn = document.getElementById("amBtnActivate");
-      btn.disabled = true;
-      btn.textContent = tr("Memverifikasi...");
-      try {
-        const res = await fetch('/api/am-automation', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'verify', email: pendingAmEmail, verifyUrl: linkInput })
-        });
-        const r = await readApiResponse(res);
-        if (!r.success) throw new Error(r.reason || `Verifikasi gagal (HTTP ${r.status})`);
-        const fresh = await getDoc(docRef);
-        const saldoNow = fresh.data().balance || 0;
-        await updateDoc(docRef, { balance: saldoNow - harga });
-        await updateUserBalanceUI(currentUser.uid);
-        await setDoc(doc(collection(db, "transactions")), {
-          uid: currentUser.uid, email: currentUser.email, produk: "am", mode: "new",
-          namaPanel: "Alight Motion Premium", emailAm: pendingAmEmail, ram: "1 Tahun",
-          harga: harga, createdAt: Date.now()
-        });
-        document.getElementById("amLink").value = "";
-        document.getElementById("amEmail").value = "";
-        document.getElementById("amStep2").style.display = "none";
-        document.getElementById("amStep1").style.display = "block";
-        document.getElementById("amSkipBtn").style.display = "none";
-        showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "Berhasil!");
-        switchMainTab('dashboard');
-      } catch (err) {
-        showAlert("Gagal Verifikasi: " + esc(err.message), "Gagal");
-      } finally {
-        btn.disabled = false;
-        btn.textContent = tr("Aktifkan Premium (Rp 5.000)");
-      }
-    };
-    document.getElementById("confirmText").innerHTML = tr("Yakin aktifkan Alight Motion Premium seharga Rp 5.000?");
+    const eggEl = orderForm.querySelector('input[name="egg"]:checked');
+    pendingOrder = { produk:"wabot", mode:currentMode, username:finalUsername, ram:ramEl.value, harga:harga, docRef:dr, saldo:saldo, egg_id:eggEl?eggEl.value:"15", nest_id:eggEl?eggEl.dataset.nest:"5" };
+    pendingAction = executePurchase;
+    document.getElementById("confirmText").innerHTML = (currentLang === 'en' ? `${displayConfirm}<br>RAM package <b>${esc(ramEl.value)}</b> priced at <b>Rp ${harga.toLocaleString()}</b>.` : `${displayConfirm}<br>Paket RAM <b>${esc(ramEl.value)}</b> seharga <b>Rp ${harga.toLocaleString()}</b>.`);
     document.getElementById("confirmModal").classList.add("active");
-  };
+  } catch (err) { showAlert("Error: " + esc(err.message)); }
+});
 
-  async function executePurchase() {
-    const btn = document.getElementById("submitBtn");
-    btn.disabled = true;
-    btn.textContent = tr("Memproses...");
-    try {
-      const response = await fetch('/api/create-panel', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          mode: pendingOrder.mode, email: currentUser.email, username: pendingOrder.username,
-          ram: pendingOrder.ram, egg_id: pendingOrder.egg_id, nest_id: pendingOrder.nest_id
-        })
-      });
-      const data = await response.json();
-      if (!data.success) {
-        let errMsg = data.error || "Gagal membuat panel.";
-        if (pendingOrder.mode === 'addserver') {
-          if (/not found|tidak ditemukan|no user/i.test(errMsg)) {
-            errMsg = currentLang === 'en' ? "Panel username not found on server." : "Username panel tidak ditemukan di server.";
-          } else if (/already|sudah ada|exists/i.test(errMsg)) {
-            errMsg = currentLang === 'en' ? "This server already exists." : "Server ini sudah ada.";
-          }
-        }
-        throw new Error(errMsg);
-      }
-      const fresh = await getDoc(pendingOrder.docRef);
-      const saldoNow = fresh.data().balance || 0;
-      await updateDoc(pendingOrder.docRef, { balance: saldoNow - pendingOrder.harga });
-      await updateUserBalanceUI(currentUser.uid);
-      await setDoc(doc(collection(db, "transactions")), {
-        uid: currentUser.uid, email: currentUser.email, produk: "wabot", mode: pendingOrder.mode,
-        namaPanel: pendingOrder.username, ram: pendingOrder.ram, harga: pendingOrder.harga, createdAt: Date.now()
-      });
-      if (pendingOrder.mode === 'addserver') {
-        document.getElementById("resUsername").textContent = data.username || pendingOrder.username;
-        document.getElementById("rowPassword").style.display = "none";
-        document.getElementById("rowAmEmail").style.display = "none";
-        document.getElementById("successTitle").textContent = tr("Server Berhasil Ditambahkan!");
-        document.getElementById("successDesc").textContent = tr("Server baru sudah aktif di panel Anda.");
-        document.getElementById("warningText").textContent = tr("Gunakan password panel lama Anda untuk login.");
-      } else {
-        document.getElementById("resUsername").textContent = data.username;
-        document.getElementById("rowPassword").style.display = "flex";
-        document.getElementById("rowAmEmail").style.display = "none";
-        document.getElementById("resPassword").textContent = data.password;
-        document.getElementById("successTitle").textContent = tr("Panel Berhasil Dibuat!");
-        document.getElementById("successDesc").textContent = tr("Berikut adalah data login panel Anda.");
-        document.getElementById("warningText").textContent = tr("PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!");
-      }
-      document.getElementById("successModal").classList.add("active");
-      loadUserDashboard();
-      switchMainTab('dashboard');
-    } catch (error) {
-      showAlert("Error: " + esc(error.message));
-    } finally {
-      btn.disabled = false;
-      btn.textContent = tr(currentMode === 'new' ? "Beli Panel" : "Tambah Server");
+window.goAmStep2 = () => {
+  document.getElementById("amTextEmail").textContent = pendingAmEmail;
+  document.getElementById("amStep1").style.display = "none";
+  document.getElementById("amStep2").style.display = "block";
+};
+
+window.sendAmLink = async (event) => {
+  const email = document.getElementById("amEmail").value.trim();
+  if (!email) { showAlert("Masukkan email dulu!"); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showAlert("Format email tidak valid!"); return; }
+  const btn = event.currentTarget; const skip = document.getElementById("amSkipBtn");
+  btn.disabled = true; btn.textContent = tr("Mengirim..."); skip.style.display = "none"; pendingAmEmail = email;
+  try {
+    const res = await fetch('/api/am-automation', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'send-link', email }) });
+    const r = await readApiResponse(res);
+    if (r.success || (r.httpOk && !r.data)) {
+      goAmStep2();
+      if (!r.success) showAlert("Link verifikasi dikirim. Cek inbox/spam email kamu.", "Info");
+      return;
     }
-  }
+    const reason = r.reason || `Server error (HTTP ${r.status})`;
+    showAlert(`Gagal: ${esc(reason)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
+    skip.style.display = "block";
+  } catch (err) {
+    showAlert(`Error: ${esc(err.message)}<br><br>Kalau link sudah masuk ke email, klik tombol <b>"Link sudah masuk di email? Lanjut"</b>.`, "Gagal");
+    skip.style.display = "block";
+  } finally { btn.disabled = false; btn.textContent = tr("Kirim Link Verifikasi"); }
+};
 
-  window.copyPanelData = () => {
-    const user = document.getElementById("resUsername").textContent;
-    const pass = document.getElementById("resPassword").textContent;
-    let textToCopy = `Link: https://panel-gojopremium.danzzhost.web.id\nUsername: ${user}`;
-    if (pendingOrder && pendingOrder.mode === 'new') textToCopy += `\nPassword: ${pass}`;
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      const btn = document.getElementById("btnCopyData");
-      const originalText = btn.textContent;
-      btn.textContent = tr("Berhasil Disalin!");
-      btn.style.background = "var(--success)";
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = "var(--neon)";
-      }, 2000);
-    }).catch(err => showAlert("Gagal menyalin: " + esc(err)));
+window.verifyAmLink = async () => {
+  const linkInput = document.getElementById("amLink").value.trim();
+  if (!linkInput) { showAlert("Paste link verifikasinya dulu!"); return; }
+  if (!linkInput.startsWith("http")) { showAlert("Link verifikasi tidak valid (harus diawali http/https)"); return; }
+  const dr = doc(db, "users", currentUser.uid); const ds = await getDoc(dr);
+  const saldo = ds.data().balance || 0; const harga = 5000;
+  if (saldo < harga) { showAlert("Saldo tidak cukup! Silakan topup dulu."); return; }
+  pendingAction = async () => {
+    const btn = document.getElementById("amBtnActivate"); btn.disabled = true; btn.textContent = tr("Memverifikasi...");
+    try {
+      const res = await fetch('/api/am-automation', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'verify', email:pendingAmEmail, verifyUrl:linkInput }) });
+      const r = await readApiResponse(res);
+      if (!r.success) throw new Error(r.reason || `Verifikasi gagal (HTTP ${r.status})`);
+      const fresh = await getDoc(dr); const saldoNow = fresh.data().balance || 0;
+      await updateDoc(dr, { balance: saldoNow - harga });
+      await updateUserBalanceUI(currentUser.uid);
+      await setDoc(doc(collection(db, "transactions")), { uid:currentUser.uid, email:currentUser.email, produk:"am", mode:"new", namaPanel:"Alight Motion Premium", emailAm:pendingAmEmail, ram:"1 Tahun", harga:harga, createdAt:Date.now() });
+      document.getElementById("amLink").value = "";
+      document.getElementById("amEmail").value = "";
+      document.getElementById("amStep2").style.display = "none";
+      document.getElementById("amStep1").style.display = "block";
+      document.getElementById("amSkipBtn").style.display = "none";
+      showAlert("SUKSES! Alight Motion Premium berhasil diaktifkan. Silakan buka aplikasi Alight Motion.", "Berhasil!");
+      switchMainTab('dashboard');
+    } catch (err) { showAlert("Gagal Verifikasi: " + esc(err.message), "Gagal"); }
+    finally { btn.disabled = false; btn.textContent = tr("Aktifkan Premium (Rp 5.000)"); }
   };
+  document.getElementById("confirmText").innerHTML = tr("Yakin aktifkan Alight Motion Premium seharga Rp 5.000?");
+  document.getElementById("confirmModal").classList.add("active");
+};
 
-  window.closeSuccessModal = () => {
-    document.getElementById("successModal").classList.remove("active");
-    document.getElementById("customName").value = "";
-    document.getElementById("addUsername").value = "";
-    document.getElementById("amEmail").value = "";
-    document.getElementById("amLink").value = "";
-  };
+async function executePurchase() {
+  const btn = document.getElementById("submitBtn"); btn.disabled = true; btn.textContent = tr("Memproses...");
+  try {
+    const response = await fetch('/api/create-panel', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ mode:pendingOrder.mode, email:currentUser.email, username:pendingOrder.username, ram:pendingOrder.ram, egg_id:pendingOrder.egg_id, nest_id:pendingOrder.nest_id }) });
+    const data = await response.json();
+    if (!data.success) {
+      let errMsg = data.error || "Gagal membuat panel.";
+      if (pendingOrder.mode === 'addserver') {
+        if (/not found|tidak ditemukan|no user/i.test(errMsg)) errMsg = currentLang === 'en' ? "Panel username not found on server." : "Username panel tidak ditemukan di server.";
+        else if (/already|sudah ada|exists/i.test(errMsg)) errMsg = currentLang === 'en' ? "This server already exists." : "Server ini sudah ada.";
+      }
+      throw new Error(errMsg);
+    }
+    const fresh = await getDoc(pendingOrder.docRef); const saldoNow = fresh.data().balance || 0;
+    await updateDoc(pendingOrder.docRef, { balance: saldoNow - pendingOrder.harga });
+    await updateUserBalanceUI(currentUser.uid);
+    await setDoc(doc(collection(db, "transactions")), { uid:currentUser.uid, email:currentUser.email, produk:"wabot", mode:pendingOrder.mode, namaPanel:pendingOrder.username, ram:pendingOrder.ram, harga:pendingOrder.harga, createdAt:Date.now() });
+    if (pendingOrder.mode === 'addserver') {
+      document.getElementById("resUsername").textContent = data.username || pendingOrder.username;
+      document.getElementById("rowPassword").style.display = "none";
+      document.getElementById("rowAmEmail").style.display = "none";
+      document.getElementById("successTitle").textContent = tr("Server Berhasil Ditambahkan!");
+      document.getElementById("successDesc").textContent = tr("Server baru sudah aktif di panel Anda.");
+      document.getElementById("warningText").textContent = tr("Gunakan password panel lama Anda untuk login.");
+    } else {
+      document.getElementById("resUsername").textContent = data.username;
+      document.getElementById("rowPassword").style.display = "flex";
+      document.getElementById("rowAmEmail").style.display = "none";
+      document.getElementById("resPassword").textContent = data.password;
+      document.getElementById("successTitle").textContent = tr("Panel Berhasil Dibuat!");
+      document.getElementById("successDesc").textContent = tr("Berikut adalah data login panel Anda.");
+      document.getElementById("warningText").textContent = tr("PENTING: Kami hanya mengirimkan data ini 1X. Harap simpan/salin sekarang!");
+    }
+    document.getElementById("successModal").classList.add("active");
+    loadUserDashboard();
+    switchMainTab('dashboard');
+  } catch (error) { showAlert("Error: " + esc(error.message)); }
+  finally { btn.disabled = false; btn.textContent = tr(currentMode === 'new' ? "Beli Panel" : "Tambah Server"); }
+}
 
-  applyLang();
+window.copyPanelData = () => {
+  const user = document.getElementById("resUsername").textContent;
+  const pass = document.getElementById("resPassword").textContent;
+  let txt = `Link: https://panel-gojopremium.danzzhost.web.id\nUsername: ${user}`;
+  if (pendingOrder && pendingOrder.mode === 'new') txt += `\nPassword: ${pass}`;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = document.getElementById("btnCopyData"); const orig = btn.textContent;
+    btn.textContent = tr("Berhasil Disalin!"); btn.style.background = "var(--ok)";
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ""; }, 2000);
+  }).catch(err => showAlert("Gagal menyalin: " + esc(err)));
+};
 
+window.closeSuccessModal = () => {
+  document.getElementById("successModal").classList.remove("active");
+  document.getElementById("customName").value = "";
+  document.getElementById("addUsername").value = "";
+  document.getElementById("amEmail").value = "";
+  document.getElementById("amLink").value = "";
+};
+
+applyLang();
 </script>
 
 </body>
